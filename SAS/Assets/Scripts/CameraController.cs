@@ -20,7 +20,7 @@ public class CameraController : MonoBehaviour {
 		debugLerp = 10;
 		cam = GetComponent<Camera>();
 		shake = false;
-		minZOffset = 18;
+		//minZOffset = 18;
 	}
 	
 	void Update() {
@@ -52,7 +52,7 @@ public class CameraController : MonoBehaviour {
 			}			
 		}
 		//Because this is a horizontal screened game, the camera needs to zoom out more when the y distance is greater than the x distance
-		if (Mathf.Abs(maxDistX) > 3*maxDistY) {
+		/*if (Mathf.Abs(maxDistX) > 3*maxDistY) {
 			if (maxDistX > minZOffset) { 
 				zoffset = -maxDistX;
 			}
@@ -68,11 +68,11 @@ public class CameraController : MonoBehaviour {
 				zoffset = minZOffset;
 			}
 			
-		}
+		}*/
 		x /= players.Length;
 		y /= players.Length;
 		//y += 5;
-		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,-26),Time.deltaTime * debugLerp);
+		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,zoffset),Time.deltaTime * debugLerp);
 		//transform.position = new Vector3(0f,5.5f,-26f);
 		if (shake) {
 			shake = false;
