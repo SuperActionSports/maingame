@@ -11,6 +11,7 @@ public class levelScript : MonoBehaviour {
 	public string level1name;
 	public string level2name;
 	public string level3name;
+	public int numOfPlayers;
 	
 	// Use this for initialization
 	void Start () {
@@ -18,6 +19,7 @@ public class levelScript : MonoBehaviour {
 		l2 = l2.GetComponent<Button> ();
 		l3 = l3.GetComponent<Button> ();
 		backButton = backButton.GetComponent<Button> ();
+		numOfPlayers = PlayerPrefs.GetInt ("numOfPlayers");
 	}
 	
 	public void StartLevel1() {
@@ -34,6 +36,10 @@ public class levelScript : MonoBehaviour {
 	
 	public void MainMenu() {
 		Application.LoadLevel ("TitleScreen");
+	}
+
+	public void Back() {
+		Application.LoadLevel ("PlayerSelectScreen");
 	}
 	
 	// Update is called once per frame

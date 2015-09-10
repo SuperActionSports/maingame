@@ -191,16 +191,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 173120876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 140ad469ea1e15a45b9f2b068e2ce036, type: 3}
+  m_Script: {fileID: 11500000, guid: 4263281da85ca4d15b9bf26953022b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  l1: {fileID: 0}
-  l2: {fileID: 1679244926}
-  l3: {fileID: 222683212}
+  twoPlayers: {fileID: 1679244926}
+  threePlayers: {fileID: 222683212}
+  fourPlayers: {fileID: 1938279169}
   backButton: {fileID: 1586686232}
-  level1name: StandIn
-  level2name: TopDown
-  level3name: 
+  numOfPlayers: 0
 --- !u!1 &222683210
 GameObject:
   m_ObjectHideFlags: 0
@@ -235,7 +233,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
   m_AnchoredPosition: {x: -222.5, y: 5.69999981}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 165, y: 50}
   m_Pivot: {x: 1, y: .5}
 --- !u!114 &222683212
 MonoBehaviour:
@@ -277,7 +275,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 173120881}
-        m_MethodName: StartLevel3
+        m_MethodName: ThreePlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -538,7 +536,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 0}
+  m_TargetGraphic: {fileID: 1586686229}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
@@ -589,7 +587,7 @@ RectTransform:
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: 7.0999999, y: 50.2999992}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 165, y: 50}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &1679244926
 MonoBehaviour:
@@ -631,7 +629,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 173120881}
-        m_MethodName: StartLevel2
+        m_MethodName: TwoPlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -679,7 +677,7 @@ MonoBehaviour:
     m_MaxSize: 40
     m_Alignment: 4
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 2 Players
@@ -918,7 +916,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: .5}
   m_AnchorMax: {x: 1, y: .5}
   m_AnchoredPosition: {x: -225.199997, y: -36}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 165, y: 50}
   m_Pivot: {x: 1, y: .5}
 --- !u!114 &1938279169
 MonoBehaviour:
@@ -960,7 +958,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 173120881}
-        m_MethodName: StartLevel3
+        m_MethodName: FourPlayers
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
