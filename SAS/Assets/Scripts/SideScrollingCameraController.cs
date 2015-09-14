@@ -1,26 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class SideScrollingCameraController : MonoBehaviour {
 	
 	public GameObject[] players;
-	public float zoffset;
-	[Range(1,100)]
+	public Vector3[] positions;
 	public float debugLerp;
+	public float xOffset;
+	public float yOffset;
+	public float zOffset;
+
+	//Camera Shake Variables
 	Camera cam;
-	public float minZOffset;
-	
+	public bool shake;
 	public float length;
 	public float magnitude;
-	public bool shake;
 	
 	void Start () {
 		players = GameObject.FindGameObjectsWithTag("Player");
-		//offset = -18f;
-		debugLerp = 10;
 		cam = GetComponent<Camera>();
+		positions = new Vector3[players.Length];
+		debugLerp = 10;
 		shake = false;
-		//minZOffset = 18;
 	}
 	
 	void Update() {
@@ -28,48 +29,56 @@ public class CameraController : MonoBehaviour {
 			shake = true;
 		}
 	}
+
 	// Update is called once per frame
 	void LateUpdate () {
-		float x = 0;
 		float y = 0;
-		float maxDistX = 0;
-		float maxDistY = 0;
+		float x = 0;
+		float z = 0;
+		float maxDist = 0;
 		
-		//Get the positions of all the players and determine the average of their x and y coordinates
-		//Then find the maximum distance in x and y
-		foreach(GameObject t in players) {
-			x += t.transform.position.x;
-			y += t.transform.position.y;
-			foreach (GameObject d in players) {
-				float xDist = Mathf.Abs(t.transform.position.x - d.transform.position.x);
-				float yDist = Mathf.Abs(t.transform.position.y - d.transform.position.y);
-				if (maxDistX < xDist) {
-					maxDistX = xDist;
-				}
-				if (maxDistY < yDist) {
-					maxDistY = yDist;
-				}
-			}			
+		// Collect current position of each player
+		for (int i = 0; i < players.Length; i++) {
+			GameObject t = players [i];
+			positions [i] = t.transform.position;
 		}
-
+		
+		// Loop through every recorded position to find the average point among them on the X,Z plane
+		for (int i = 0; i < positions.Length; i++) {
+			Vector3 pos = positions [i];
+			
+			// Add position's X and Z to average
+			x += pos.x;
+			y += pos.z;
+		}
+		
+		// Divide average position by player positions
 		x /= players.Length;
 		y /= players.Length;
-		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,zoffset),Time.deltaTime * debugLerp);
+		
+		// Loop through every recorded position to find the furthest point from the average point on th X,Z plane
+		for (int i = 0; i < positions.Length; i++) {
+			Vector3 pos = positions [i];
+			float dist = Mathf.Sqrt(Mathf.Pow(pos.x - x, 2)+Mathf.Pow((2*(pos.y - y)), 2));
+			if (dist > maxDist) { maxDist = dist; }
+		}
+		
+		// Use (x,y) position of camera and furthest player points to set- z distance.
+		z = (Mathf.Tan (Mathf.PI / 3) * maxDist);
+		transform.position = Vector3.Lerp(transform.position,new Vector3(x+xOffset,y+yOffset,-z-zOffset),Time.deltaTime * debugLerp);
 
+		// Camera shake code
 		if (shake) {
 			shake = false;
-			length = 0.15f;
-			magnitude = 3f;
 			PlayShake();
 		}
 	}
-	
-	public void PlayShake()
-	{
+
+	public void PlayShake() {
 		StopAllCoroutines();
 		StartCoroutine("Shake");
 	}	
-	
+
 	IEnumerator Shake() {
 		
 		float duration = 0f;

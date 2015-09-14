@@ -1,26 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CameraController : MonoBehaviour {
+public class CameraShake : MonoBehaviour {
 	
-	public GameObject[] players;
-	public float zoffset;
-	[Range(1,100)]
-	public float debugLerp;
+	//Camera Shake Variables
 	Camera cam;
-	public float minZOffset;
-	
+	public bool shake;
 	public float length;
 	public float magnitude;
-	public bool shake;
+	public float debugLerp;
 	
 	void Start () {
-		players = GameObject.FindGameObjectsWithTag("Player");
-		//offset = -18f;
-		debugLerp = 10;
 		cam = GetComponent<Camera>();
 		shake = false;
-		//minZOffset = 18;
 	}
 	
 	void Update() {
@@ -28,44 +20,16 @@ public class CameraController : MonoBehaviour {
 			shake = true;
 		}
 	}
-	// Update is called once per frame
+
 	void LateUpdate () {
-		float x = 0;
-		float y = 0;
-		float maxDistX = 0;
-		float maxDistY = 0;
-		
-		//Get the positions of all the players and determine the average of their x and y coordinates
-		//Then find the maximum distance in x and y
-		foreach(GameObject t in players) {
-			x += t.transform.position.x;
-			y += t.transform.position.y;
-			foreach (GameObject d in players) {
-				float xDist = Mathf.Abs(t.transform.position.x - d.transform.position.x);
-				float yDist = Mathf.Abs(t.transform.position.y - d.transform.position.y);
-				if (maxDistX < xDist) {
-					maxDistX = xDist;
-				}
-				if (maxDistY < yDist) {
-					maxDistY = yDist;
-				}
-			}			
-		}
-
-		x /= players.Length;
-		y /= players.Length;
-		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,zoffset),Time.deltaTime * debugLerp);
-
+		// Camera shake code
 		if (shake) {
 			shake = false;
-			length = 0.15f;
-			magnitude = 3f;
 			PlayShake();
 		}
 	}
 	
-	public void PlayShake()
-	{
+	public void PlayShake() {
 		StopAllCoroutines();
 		StartCoroutine("Shake");
 	}	
