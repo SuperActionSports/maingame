@@ -17,7 +17,10 @@ public class PlayerController : MonoBehaviour {
 	public bool alive;
 	
 	private Rigidbody rb;
-	private RaycastHit groundHit;
+	public RaycastHit groundHit;
+	public float magSpeedX;
+	public float magSpeedY;
+	public Vector3 speed;
 	
 	[Range(1,20)]
 	public float speedMagnitude;
@@ -37,22 +40,30 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 	if (alive) 
 	{
-			Physics.Raycast(transform.position, Vector3.down,out groundHit, 1.1f);
-	Vector3 speed = new Vector3(0,0,0);
+	Physics.Raycast(transform.position, Vector3.down,out groundHit, 1.1f);
+	//speed = new Vector3(0,4*Physics.gravity.y*Time.deltaTime,0);
+	magSpeedX = 0;
+	magSpeedY = 0;
+	
 		if (Input.GetKey(left)) {
-			speed.x -= speedMagnitude;
+			//speed.x -= speedMagnitude;
+			magSpeedX = -1;
 		}
 		if (Input.GetKey(right)) {
-			speed.x += speedMagnitude;
+			//speed.x += speedMagnitude;
+			magSpeedX = 1;
 		}
 		if (Input.GetKey(up) && groundHit.collider.CompareTag("Stage")) {
-			speed.y += speedMagnitude;
+			//speed.y += speedMagnitude;
+			magSpeedY = 1;
 		}
 		if (Input.GetKey(down)) {
-			speed.y -= speedMagnitude;
+			//speed.y -= speedMagnitude;
+			magSpeedY = -1;
 		}
 		//transform.position += speed*Time.deltaTime;
-		rb.AddForce(new Vector3(speed.x, 0,0), ForceMode.Force);
+			speed = new Vector3(speedMagnitude * magSpeedX, 4*Physics.gravity.y*Time.deltaTime + speedMagnitude * magSpeedY, 0);
+		transform.position = transform.position + new Vector3(speed.x*Time.deltaTime,0,0);
 		rb.AddForce (new Vector3(0,speed.y, 0), ForceMode.VelocityChange);
 		
 		// This can be cut whenever, it changes the colors of the players for easier identification
@@ -73,7 +84,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			if (groundHit.collider.CompareTag("Stage"))
 			{
-				//transform.position = new Vector3(transform.position.x, transform.position.y +1, transform.position.z);
+				//transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 			}
 		}
 		else { //Dead
@@ -92,6 +103,12 @@ public class PlayerController : MonoBehaviour {
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
 		transform.rotation = Quaternion.identity;
+	}
+	
+	private void OnDrawGizmos()
+	{
+		Gizmos.color = Color.yellow;
+		Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z));
 	}
 	
 }

@@ -72,7 +72,7 @@ public class CameraController : MonoBehaviour {
 		x /= players.Length;
 		y /= players.Length;
 		//y += 5;
-		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,zoffset),Time.deltaTime * debugLerp);
+		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y+4.5f,zoffset),Time.deltaTime * debugLerp);
 		//transform.position = new Vector3(0f,5.5f,-26f);
 		if (shake) {
 			shake = false;
