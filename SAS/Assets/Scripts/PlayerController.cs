@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour {
 	private bool complete;
 	private Renderer rend;
 	private float colorLerpT;
+    private bool facingLeft;
 	
 	public KeyCode left;
 	public KeyCode right;
@@ -67,12 +68,17 @@ public class PlayerController : MonoBehaviour {
 		rb.AddForce (new Vector3(0,speed.y, 0), ForceMode.VelocityChange);
         if (speed.x < 0)
             {
-                transform.rotation = new Quaternion(transform.rotation.x, -180f, transform.rotation.z, transform.rotation.w);
+                transform.rotation =  new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
+                //facingLeft = true;
+                Debug.Log("Rotation " + transform.rotation.x + ", "  + transform.rotation.y + ", " + transform.rotation.z + ", " + transform.rotation.w);
             }
-        else if (speed.x > 0 && transform.rotation.y < 0)
+        else if (speed.x > 0 && transform.rotation.y > 0)
             {
-                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+                Debug.Log("Other rotation " + transform.rotation.x + ", " + transform.rotation.y + ", " + transform.rotation.z + ", " + transform.rotation.w);
+                transform.rotation =  new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+                //facingLeft = false;
             }
+        
 		
 		// This can be cut whenever, it changes the colors of the players for easier identification
 		colorLerpT += Time.deltaTime;

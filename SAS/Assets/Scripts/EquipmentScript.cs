@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EquipmentScript : MonoBehaviour {
-
+    /*
 	private GameObject bat;
 	public KeyCode attack;
     Animator anim;
@@ -19,5 +19,5 @@ public class EquipmentScript : MonoBehaviour {
             Debug.Log("Attack!");
             anim.SetTrigger("Attack");
 		}
-	}
+	}*/
 }
