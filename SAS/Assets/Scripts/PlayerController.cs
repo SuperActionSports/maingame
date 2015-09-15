@@ -65,6 +65,14 @@ public class PlayerController : MonoBehaviour {
 			speed = new Vector3(speedMagnitude * magSpeedX, 4*Physics.gravity.y*Time.deltaTime + speedMagnitude * magSpeedY, 0);
 		transform.position = transform.position + new Vector3(speed.x*Time.deltaTime,0,0);
 		rb.AddForce (new Vector3(0,speed.y, 0), ForceMode.VelocityChange);
+        if (speed.x < 0)
+            {
+                transform.rotation = new Quaternion(transform.rotation.x, -180f, transform.rotation.z, transform.rotation.w);
+            }
+        else if (speed.x > 0 && transform.rotation.y < 0)
+            {
+                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+            }
 		
 		// This can be cut whenever, it changes the colors of the players for easier identification
 		colorLerpT += Time.deltaTime;

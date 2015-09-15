@@ -45,7 +45,7 @@ public class PlayerDebug : MonoBehaviour {
 		}
 		x /= players.Length - 1;
 		y /= players.Length - 1;
-		Debug.Log(GetComponentsInChildren<Transform>().Length);
+//		Debug.Log(GetComponentsInChildren<Transform>().Length);
 		ave = new Vector3(x,y,0);
 	}
 	
