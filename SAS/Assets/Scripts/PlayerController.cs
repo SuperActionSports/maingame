@@ -21,7 +21,9 @@ public class PlayerController : MonoBehaviour {
 	public RaycastHit groundHit;
 	public float magSpeedX;
 	public float magSpeedY;
+    public float debugYMod;
 	public Vector3 speed;
+    private bool doubleJumpAllowed;
 	
 	[Range(1,20)]
 	public float speedMagnitude;
@@ -35,48 +37,57 @@ public class PlayerController : MonoBehaviour {
 		colorLerpT = 0;
 		alive = true;
 		ResetRigidBodyConstraints();
-	}
+        doubleJumpAllowed = true;
+    }
+    
 	
 	// Update is called once per frame
 	void Update () {
 	if (alive) 
 	{
-	Physics.Raycast(transform.position, Vector3.down,out groundHit, 1.1f);
-	//speed = new Vector3(0,4*Physics.gravity.y*Time.deltaTime,0);
-	magSpeedX = 0;
-	magSpeedY = 0;
-	
+            Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f);
+            magSpeedX = 0;
+            magSpeedY = 0;
+            float doubleJumpGravityModifier = 1;
 		if (Input.GetKey(left)) {
-			//speed.x -= speedMagnitude;
-			magSpeedX = -1;
+                magSpeedX = -1;
 		}
 		if (Input.GetKey(right)) {
-			//speed.x += speedMagnitude;
-			magSpeedX = 1;
+                magSpeedX = 1;
 		}
-		if (Input.GetKey(up) && groundHit.collider.CompareTag("Stage")) {
-			//speed.y += speedMagnitude;
-			magSpeedY = 1;
-		}
+		if (Input.GetKeyDown(up))
+        {
+                if (doubleJumpAllowed)
+                {
+                    rb.velocity = new Vector3(rb.velocity.x,speedMagnitude*4f,rb.velocity.z);
+                    doubleJumpAllowed = false;
+                    doubleJumpGravityModifier = 0;
+                }
+                else if (groundHit.collider.CompareTag("Stage"))
+                {
+                    doubleJumpAllowed = true;
+                    rb.velocity = new Vector3(rb.velocity.x, speedMagnitude*4f, rb.velocity.z);
+                    doubleJumpGravityModifier = 1;
+                }
+        }
+		
 		if (Input.GetKey(down)) {
-			//speed.y -= speedMagnitude;
-			magSpeedY = -1;
+                rb.velocity -= new Vector3 (0, speedMagnitude * Time.deltaTime, 0);
 		}
-		//transform.position += speed*Time.deltaTime;
-			speed = new Vector3(speedMagnitude * magSpeedX, 4*Physics.gravity.y*Time.deltaTime + speedMagnitude * magSpeedY, 0);
-		transform.position = transform.position + new Vector3(speed.x*Time.deltaTime,0,0);
-		rb.AddForce (new Vector3(0,speed.y, 0), ForceMode.VelocityChange);
+            //transform.position += speed*Time.deltaTime;
+            float xSpeed = speedMagnitude * magSpeedX;
+            //float ySpeed = 4 * (Physics.gravity.y * doubleJumpGravityModifier * Time.deltaTime);
+            //ySpeed += speedMagnitude * magSpeedY * 3;
+            speed = new Vector3(xSpeed, 0, 0);
+            transform.position = transform.position + new Vector3(speed.x * Time.deltaTime, 0, 0);
+            //rb.AddForce(new Vector3(0, speed.y, 0), ForceMode.VelocityChange);
         if (speed.x < 0)
             {
-                transform.rotation =  new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
-                //facingLeft = true;
-                Debug.Log("Rotation " + transform.rotation.x + ", "  + transform.rotation.y + ", " + transform.rotation.z + ", " + transform.rotation.w);
+                transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
             }
         else if (speed.x > 0 && transform.rotation.y > 0)
             {
-                Debug.Log("Other rotation " + transform.rotation.x + ", " + transform.rotation.y + ", " + transform.rotation.z + ", " + transform.rotation.w);
                 transform.rotation =  new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
-                //facingLeft = false;
             }
         
 		
