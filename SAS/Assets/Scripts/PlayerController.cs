@@ -45,7 +45,6 @@ public class PlayerController : MonoBehaviour {
 	void Update () {
 	if (alive) 
 	{
-            Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f);
             magSpeedX = 0;
             magSpeedY = 0;
             float doubleJumpGravityModifier = 1;
@@ -63,11 +62,13 @@ public class PlayerController : MonoBehaviour {
                     doubleJumpAllowed = false;
                     doubleJumpGravityModifier = 0;
                 }
-                else if (groundHit.collider.CompareTag("Stage"))
+				else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
                 {
-                    doubleJumpAllowed = true;
-                    rb.velocity = new Vector3(rb.velocity.x, speedMagnitude*4f, rb.velocity.z);
-                    doubleJumpGravityModifier = 1;
+                	if (groundHit.collider.CompareTag("Stage")) {
+                    	doubleJumpAllowed = true;
+                    	rb.velocity = new Vector3(rb.velocity.x, speedMagnitude*4f, rb.velocity.z);
+                    	doubleJumpGravityModifier = 1;
+                    }
                 }
         }
 		
@@ -98,18 +99,14 @@ public class PlayerController : MonoBehaviour {
 			if (colorLerpT >= 1) {
 				complete = false;
 				colorLerpT = 0;
+					}
 			}
-		}
-		else {
+			else {
 			rend.material.color = Color.Lerp(c1,c2,colorLerpT);
 			if (colorLerpT >= 1) {
 				complete = true;
 				colorLerpT = 0;
 				}
-			}
-			if (groundHit.collider.CompareTag("Stage"))
-			{
-				//transform.position = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
 			}
 		}
 		else { //Dead
