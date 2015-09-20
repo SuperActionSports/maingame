@@ -48,7 +48,11 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\CameraController.cs" />
+<<<<<<< HEAD
      <Compile Include="Assets\Scripts\CameraShake.cs" />
+=======
+     <Compile Include="Assets\Scripts\EquipmentScript.cs" />
+>>>>>>> PlayerMovement
      <Compile Include="Assets\Scripts\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
