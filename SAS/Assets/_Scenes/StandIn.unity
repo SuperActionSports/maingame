@@ -510,7 +510,6 @@ Transform:
   - {fileID: 709239390}
   - {fileID: 1168870759}
   - {fileID: 546305690}
-<<<<<<< HEAD
   - {fileID: 1028962559}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -542,14 +541,12 @@ Transform:
   - {fileID: 1181774549}
   m_Father: {fileID: 936634771}
   m_RootOrder: 3
-=======
   m_Father: {fileID: 0}
   m_RootOrder: 2
 --- !u!4 &1084458160 stripped
 Transform:
   m_PrefabParentObject: {fileID: 452338, guid: b3e05605fbb62a24cac48c96e074477e, type: 2}
   m_PrefabInternal: {fileID: 932717421}
->>>>>>> PlayerMovement
 --- !u!1 &1158309859
 GameObject:
   m_ObjectHideFlags: 0
@@ -614,7 +611,6 @@ Transform:
 Transform:
   m_PrefabParentObject: {fileID: 410416, guid: 8063c59a007d5fc4e910ecf8d89c2878, type: 2}
   m_PrefabInternal: {fileID: 598201824}
-<<<<<<< HEAD
 --- !u!4 &1181774549
 Transform:
   m_ObjectHideFlags: 0
@@ -629,7 +625,6 @@ Transform:
   m_RootOrder: 0
 --- !u!1001 &1319049477
 Prefab:
-=======
 --- !u!4 &1174251209 stripped
 Transform:
   m_PrefabParentObject: {fileID: 452338, guid: b3e05605fbb62a24cac48c96e074477e, type: 2}
@@ -640,7 +635,6 @@ GameObject:
   m_PrefabInternal: {fileID: 1450099053}
 --- !u!65 &1228006492
 BoxCollider:
->>>>>>> PlayerMovement
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
@@ -775,7 +769,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 81465ffd866fe74449707cd9ccee089c, type: 3}
   m_IsPrefabParent: 0
-<<<<<<< HEAD
 --- !u!1 &1742373607
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,9 +785,6 @@ GameObject:
   m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1830577711 stripped
-=======
---- !u!4 &1592007493 stripped
->>>>>>> PlayerMovement
 Transform:
   m_PrefabParentObject: {fileID: 424298, guid: a921e92eee17a7148aa70a38e73771e7, type: 2}
   m_PrefabInternal: {fileID: 69745157}
@@ -953,10 +943,8 @@ MonoBehaviour:
   yOffset: 5
   zOffset: 0
   shake: 0
-<<<<<<< HEAD
   length: .200000003
   magnitude: 5
-=======
 --- !u!1 &2010144262
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,4 +975,5 @@ Transform:
   - {fileID: 1084458160}
   m_Father: {fileID: 0}
   m_RootOrder: 4
->>>>>>> PlayerMovement
+  length: .200000003
+  magnitude: 5
