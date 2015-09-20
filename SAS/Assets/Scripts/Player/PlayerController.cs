@@ -30,12 +30,15 @@ public class PlayerController : MonoBehaviour {
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
 
+    public SideScrollingCameraController cam;
+
     private Animator anim;
 
 	[Range(1,20)]
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
+        cam = Camera.main.GetComponent<SideScrollingCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
@@ -61,45 +64,49 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	if (alive) 
-	{
+        if (alive)
+        {
             magSpeedX = 0;
             magSpeedY = 0;
-		if (Input.GetKey(left)) {
+            if (Input.GetKey(left))
+            {
                 magSpeedX = -1;
-		}
-		if (Input.GetKey(right)) {
+            }
+            if (Input.GetKey(right))
+            {
                 magSpeedX = 1;
-		}
-		if (Input.GetKeyDown(up))
-        {
+            }
+            if (Input.GetKeyDown(up))
+            {
                 if (doubleJumpAllowed)
                 {
-                    rb.velocity = new Vector3(rb.velocity.x,speedMagnitude*4f,rb.velocity.z);
+                    rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
                     doubleJumpAllowed = false;
                 }
-				else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
+                else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
                 {
-                	if (groundHit.collider.CompareTag("Stage")) {
-                    	doubleJumpAllowed = true;
-                    	rb.velocity = new Vector3(rb.velocity.x, speedMagnitude*4f, rb.velocity.z);
+                    if (groundHit.collider.CompareTag("Stage"))
+                    {
+                        doubleJumpAllowed = true;
+                        rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
                     }
                 }
-        }
-		if (Input.GetKey(down)) {
-                rb.velocity -= new Vector3 (0, speedMagnitude * Time.deltaTime, 0);
-		}
+            }
+            if (Input.GetKey(down))
+            {
+                rb.velocity -= new Vector3(0, speedMagnitude * Time.deltaTime, 0);
+            }
 
             float xSpeed = speedMagnitude * magSpeedX;
             speed = new Vector3(xSpeed, 0, 0);
             transform.position = transform.position + new Vector3(speed.x * Time.deltaTime, 0, 0);
-        if (speed.x < 0)
+            if (speed.x < 0)
             {
                 transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
             }
-        else if (speed.x > 0 && transform.rotation.y > 0)
+            else if (speed.x > 0 && transform.rotation.y > 0)
             {
-                transform.rotation =  new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
             }
         }	
 
@@ -107,16 +114,17 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetKeyDown(debugKill))
 		{
-			alive = !alive;
             if (alive)
             {
-                Respawn();
+                MakeDead();
             }
-		}
+            else
+                Respawn();
+        }
 
         if (Input.GetKey(attack))
         {
-            anim.SetTrigger("Attack");
+            Attack();
         }
         if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
         {
@@ -140,28 +148,13 @@ public class PlayerController : MonoBehaviour {
 		Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z));
 	}
 	
-    public void Kill()
+    private void MakeDead()
     {
-        rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+        alive = !alive;
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-       /* foreach (Transform child in transform)
-        {
-            Vector3 t = child.transform.TransformPoint(child.transform.position);
-            child.parent = null;
-            child.transform.position = t;
-
-        }*/
-    }
-
-    public void Kill(Vector3 direction)
-    {
-        
-        rb.AddForce(Vector3.Cross(new Vector3(4, 4, 0), direction), ForceMode.VelocityChange);
-        rb.constraints = RigidbodyConstraints.None;
-        alive = false;
-        anim.SetBool("Alive", false);
+        cam.PlayShake(transform.position);
         /* foreach (Transform child in transform)
          {
              Vector3 t = child.transform.TransformPoint(child.transform.position);
@@ -171,14 +164,42 @@ public class PlayerController : MonoBehaviour {
          }*/
     }
 
+    public void Kill()
+    {
+        //Magic Number
+        rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+        MakeDead();
+    }
+
+    public void Kill(Vector3 direction)
+    {
+        //Magic Number
+        rb.AddForce(Vector3.Cross(new Vector3(4, 4, 0), direction), ForceMode.VelocityChange);
+        MakeDead();    
+    }
+
     public void Respawn()
     {
+        alive = true;
         ResetRigidBodyConstraints();
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
         Debug.Log("Length: " + respawnPoints.Length);
         transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
         colorChangeToUniform = true;
+    }
+
+    private void Attack()
+    {
+        if (equipmentCollider.enabled)
+        {
+            anim.SetTrigger("ComboAttack");
+        }
+        else
+        {
+            anim.SetTrigger("Attack");
+        }
+
     }
 
     private void UpdateColor()
