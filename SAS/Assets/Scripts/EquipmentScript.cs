@@ -2,22 +2,35 @@
 using System.Collections;
 
 public class EquipmentScript : MonoBehaviour {
-    /*
-	private GameObject bat;
-	public KeyCode attack;
-    Animator anim;
+    
+	
+    
 	// Use this for initialization
 	void Start () {
-		bat = GetComponentInChildren<GameObject>();
-        anim = GetComponent<Animator>();
+	
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		if (Input.GetKey(attack))
-		{
-            Debug.Log("Attack!");
-            anim.SetTrigger("Attack");
-		}
-	}*/
+
+	}
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerController disco = other.GetComponent<PlayerController>();
+            if (disco.alive)
+            {
+                disco.Kill(transform.position*-1);
+            }
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.magenta;
+        Vector3 sweet = new Vector3(transform.position.x, transform.localPosition.y, transform.position.z);
+        Gizmos.DrawLine(sweet, transform.forward * 1.5f);
+    }
 }
