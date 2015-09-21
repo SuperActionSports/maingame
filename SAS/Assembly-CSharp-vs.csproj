@@ -46,21 +46,22 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\AngeldCameraController.cs" />
-     <Compile Include="Assets\Scripts\CameraController.cs" />
-     <Compile Include="Assets\Scripts\CameraShake.cs" />
-     <Compile Include="Assets\Scripts\EquipmentScript.cs" />
-     <Compile Include="Assets\Scripts\LoadingScript.cs" />
-     <Compile Include="Assets\Scripts\OverheadCameraController.cs" />
-     <Compile Include="Assets\Scripts\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\Camera\ICamera.cs" />
+     <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
+     <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
+     <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
-     <Compile Include="Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\PlayerDebug.cs" />
-     <Compile Include="Assets\Scripts\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
-     <Compile Include="Assets\Scripts\creditsScript.cs" />
-     <Compile Include="Assets\Scripts\levelScript.cs" />
-     <Compile Include="Assets\Scripts\menuScript.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

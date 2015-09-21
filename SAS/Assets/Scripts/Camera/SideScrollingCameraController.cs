@@ -127,12 +127,12 @@ public class SideScrollingCameraController : MonoBehaviour {
 		while (duration < shakeLength) {
 			//Debug.Log("In Coroutine");
 			duration += Time.deltaTime;
-            Debug.Log("SHAKE SHAKE SHAKE ");        
+                  
             xy = new Vector2(Mathf.PerlinNoise(Time.time*shakeIntensity,0) * shakeMagnitude.x,Mathf.PerlinNoise(0,Time.time*shakeIntensity)*shakeMagnitude.y);
             xy += oldPosition;
             cam.transform.position = new Vector3(xy.x, xy.y, cam.transform.position.z);
 			//Debug.Log("New Pos: " + xy.x + ", " + xy.y);
-			Debug.Log("Duration: " + duration + " -duration: " + -duration + " Perlin Out: " + Mathf.PerlinNoise(0,duration));
+			//Debug.Log("Duration: " + duration + " -duration: " + -duration + " Perlin Out: " + Mathf.PerlinNoise(0,duration));
 			yield return null;
 		}
 		

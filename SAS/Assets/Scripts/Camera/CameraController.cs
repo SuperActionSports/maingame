@@ -83,7 +83,7 @@ public class CameraController : MonoBehaviour {
 			xy = new Vector2(Mathf.PerlinNoise(Random.Range(-magnitude,magnitude),Random.Range(-magnitude,magnitude)),Mathf.PerlinNoise(Random.Range(-magnitude,magnitude),Random.Range(-magnitude,magnitude)));
 			cam.transform.position = new Vector3(xy.x, xy.y, cam.transform.position.z);
 			//Debug.Log("New Pos: " + xy.x + ", " + xy.y);
-			Debug.Log("Duration: " + duration + " -duration: " + -duration + " Perlin Out: " + Mathf.PerlinNoise(0,duration));
+			//Debug.Log("Duration: " + duration + " -duration: " + -duration + " Perlin Out: " + Mathf.PerlinNoise(0,duration));
 			yield return null;
 		}
 		

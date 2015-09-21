@@ -29,6 +29,7 @@ public class PlayerController : MonoBehaviour {
     public GameObject[] respawnPoints;
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
+    public float impactMod;
 
 
     public SideScrollingCameraController cam;
@@ -53,7 +54,7 @@ public class PlayerController : MonoBehaviour {
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
         doubleJumpAllowed = true;
-
+		impactMod = 7.5f;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
      
         if (respawnPoints.Length == 0)
@@ -156,7 +157,6 @@ public class PlayerController : MonoBehaviour {
     {
         alive = !alive;
         //Need the normal of the local x axis of bat
-        rb.AddForce(Vector3.Cross(new Vector3(4, 4, 0), direction), ForceMode.VelocityChange);
         paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
@@ -181,7 +181,7 @@ public class PlayerController : MonoBehaviour {
     public void Kill(Vector3 direction)
     {
         //Magic Number
-        rb.AddForce(Vector3.Cross(new Vector3(4, 4, 0), direction), ForceMode.VelocityChange);
+		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }
 

@@ -17,10 +17,12 @@ public class EquipmentScript : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController disco = other.GetComponent<PlayerController>();
-            if (disco.alive)
+            PlayerController victim = other.GetComponent<PlayerController>();
+            if (victim.alive)
             {
-                disco.Kill(transform.position*-1);
+            	Debug.Log("Hit detected, sending "+ (transform.right*-1));
+                victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
+                //This causes no movement at the center of the field
             }
         }
     }
