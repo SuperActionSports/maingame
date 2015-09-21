@@ -30,7 +30,9 @@ public class PlayerController : MonoBehaviour {
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
 
+
     public SideScrollingCameraController cam;
+	private PaintSplatter paint;
 
     private Animator anim;
 
@@ -59,6 +61,8 @@ public class PlayerController : MonoBehaviour {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
         
+		paint = GetComponent<PaintSplatter>();
+		paint.color = c1;
     }
     
 	
@@ -151,6 +155,9 @@ public class PlayerController : MonoBehaviour {
     private void MakeDead()
     {
         alive = !alive;
+        //Need the normal of the local x axis of bat
+        rb.AddForce(Vector3.Cross(new Vector3(4, 4, 0), direction), ForceMode.VelocityChange);
+        paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);

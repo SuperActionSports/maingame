@@ -21,7 +21,7 @@ public class PaintSplatter : MonoBehaviour {
 	private float maxScale = 2;
 
 	private bool characterHit = false;
-	private Color color;
+	public Color color;
 	private int count;
 	
 	public Material defaultMaterial;
@@ -44,13 +44,14 @@ public class PaintSplatter : MonoBehaviour {
 		{
 			Debug.Log("Missing paintSprite Prefab");
 		}
-		int count = 0;
-		SetCountText ();
+		//int count = 0;
+		//SetCountText ();
 	}
 	
 	// Update is called once per frame
 	void Update () 
 	{
+	//Start Futzing Here
 		if (Input.GetMouseButton (0)) 
 		{
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -129,9 +130,9 @@ public class PaintSplatter : MonoBehaviour {
 
 	void SetCountText()
 	{
-		p1score.text = "Score: " + count.ToString ();
-		p2score.text = "Score: " + count.ToString ();
-		p3score.text = "Score: " + count.ToString ();
-		p4score.text = "Score: " + count.ToString ();
+//		p1score.text = "Score: " + count.ToString ();
+//		p2score.text = "Score: " + count.ToString ();
+//		p3score.text = "Score: " + count.ToString ();
+//		p4score.text = "Score: " + count.ToString ();
 	}
 }

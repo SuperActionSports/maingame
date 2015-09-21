@@ -70,6 +70,7 @@ GameObject:
   - 114: {fileID: 11485022}
   - 54: {fileID: 5416340}
   - 95: {fileID: 9544030}
+  - 114: {fileID: 11485260}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -321,6 +322,24 @@ MonoBehaviour:
   respawnPoints: []
   equipment: {fileID: 182558}
   speedMagnitude: 0
+--- !u!114 &11485260
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 185452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 724426b22431a4f5c86b763ad5e54db5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PaintSprite: {fileID: 426486, guid: d334eee982cce4735929a011e9def078, type: 2}
+  p1score: {fileID: 0}
+  p2score: {fileID: 0}
+  p3score: {fileID: 0}
+  p4score: {fileID: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
+  defaultMaterial: {fileID: 2100000, guid: 3442c11e97a6f2c4d9cacdafdd8774fe, type: 2}
 --- !u!135 &13531498
 SphereCollider:
   m_ObjectHideFlags: 1
