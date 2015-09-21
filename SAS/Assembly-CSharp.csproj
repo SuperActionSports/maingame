@@ -52,9 +52,11 @@
      <Compile Include="Assets\Scripts\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\OverheadCameraController.cs" />
+     <Compile Include="Assets\Scripts\PlayerActivation.cs" />
      <Compile Include="Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Scripts\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+     <Compile Include="Assets\Scripts\PlayerMovementControllerCombination.cs" />
      <Compile Include="Assets\Scripts\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Scripts\creditsScript.cs" />
