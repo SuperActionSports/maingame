@@ -9,7 +9,9 @@ public class EquipmentScript : MonoBehaviour {
 	//public Text winText;
 
 	// Use this for initialization
+	AudioSource sound;
 	void Start () {
+	sound = GetComponentInParent<AudioSource>();
 		//count = 0;
 		SetScoreText ();
 		//winText.text = "";
@@ -26,7 +28,8 @@ public class EquipmentScript : MonoBehaviour {
         {
             PlayerController victim = other.GetComponent<PlayerController>();
             if (victim.alive)
-            {
+            {	
+            	sound.Play();
             	Debug.Log("Hit detected, sending "+ (transform.right*-1));
                 victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
                 //This causes no movement at the center of the field

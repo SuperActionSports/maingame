@@ -162,7 +162,7 @@ public class PlayerController : MonoBehaviour {
     public void Kill(Vector3 direction)
     {
 		//Magic Number
-		sound.Play ();
+	//	sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }

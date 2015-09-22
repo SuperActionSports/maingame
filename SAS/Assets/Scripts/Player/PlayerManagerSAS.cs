@@ -73,6 +73,7 @@ namespace MultiplayerBasicExample
 			foreach (GameObject g in Respawns)
 			{
 				spawnPoints.Add(g.transform.position);
+				Debug.Log("I added " + g.transform.position);
 			}
 			
 		}
