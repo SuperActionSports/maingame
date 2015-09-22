@@ -638,7 +638,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857ef469addbf11469e5fe549bfe46a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNumber: 4
   c1: {r: .0758621693, g: 1, b: 0, a: 0}
   left: 106
   right: 108
@@ -653,6 +652,7 @@ MonoBehaviour:
   speed: {x: 0, y: 0, z: 0}
   respawnPoints: []
   equipment: {fileID: 182558, guid: a921e92eee17a7148aa70a38e73771e7, type: 2}
+  joystickNumber: 4
   speedMagnitude: 0
 --- !u!1 &662353856
 GameObject:
@@ -1113,7 +1113,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857ef469addbf11469e5fe549bfe46a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNumber: 3
   c1: {r: .944827557, g: 1, b: 0, a: 0}
   left: 260
   right: 262
@@ -1128,6 +1127,7 @@ MonoBehaviour:
   speed: {x: 0, y: 0, z: 0}
   respawnPoints: []
   equipment: {fileID: 182558, guid: a921e92eee17a7148aa70a38e73771e7, type: 2}
+  joystickNumber: 3
   speedMagnitude: 0
 --- !u!4 &864577106 stripped
 Transform:
@@ -1344,7 +1344,7 @@ CharacterController:
   m_GameObject: {fileID: 904615224}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: .5
@@ -1411,7 +1411,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857ef469addbf11469e5fe549bfe46a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNumber: 2
   c1: {r: 0, g: .958620548, b: 1, a: 0}
   left: 276
   right: 275
@@ -1426,6 +1425,7 @@ MonoBehaviour:
   speed: {x: 0, y: 0, z: 0}
   respawnPoints: []
   equipment: {fileID: 182558, guid: a921e92eee17a7148aa70a38e73771e7, type: 2}
+  joystickNumber: 2
   speedMagnitude: 0
 --- !u!1001 &932717421
 Prefab:
@@ -1855,7 +1855,7 @@ CharacterController:
   m_GameObject: {fileID: 1278902920}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Height: 2
   m_Radius: .5
@@ -1875,7 +1875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 857ef469addbf11469e5fe549bfe46a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  joystickNumber: 1
   c1: {r: 1, g: 0, b: 0, a: 0}
   left: 97
   right: 100
@@ -1890,6 +1889,7 @@ MonoBehaviour:
   speed: {x: 0, y: 0, z: 0}
   respawnPoints: []
   equipment: {fileID: 182558, guid: a921e92eee17a7148aa70a38e73771e7, type: 2}
+  joystickNumber: 1
   speedMagnitude: 0
 --- !u!1 &1322372373
 GameObject:
@@ -2204,7 +2204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee274ce1f817b4bf0a3a56fc2f31a7d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number_of_players: 3
+  number_of_players: 2
   player_1: {fileID: 1278902920}
   player_1_color: 00000000000000000000000000000000
   player_1_controller_num: 1

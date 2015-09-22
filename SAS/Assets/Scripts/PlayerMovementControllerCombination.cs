@@ -3,13 +3,6 @@ using System.Collections;
 
 public class PlayerMovementControllerCombination : MonoBehaviour {
 
-	private Vector3 movementVector;
-	private CharacterController characterController;
-	private float movementSpeed = 8;
-	private float jumpPower = 15;
-	private float gravity = 40;
-	public int joystickNumber;
-
 	public Color c1;
 	private bool colorChangeToUniform;
 	private Renderer rend;
@@ -38,13 +31,12 @@ public class PlayerMovementControllerCombination : MonoBehaviour {
 	private CapsuleCollider equipmentCollider;
 	
 	private Animator anim;
+	public int joystickNumber;
 	
 	[Range(1,20)]
 	public float speedMagnitude;
-
 	// Use this for initialization
 	void Start () {
-		characterController = GetComponent<CharacterController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent <Animator>();
@@ -75,15 +67,13 @@ public class PlayerMovementControllerCombination : MonoBehaviour {
 		{
 			magSpeedX = 0;
 			magSpeedY = 0;
-			movementVector.x = Input.GetAxis("LeftJoystickX_P" + joystickString) * movementSpeed;
-			movementVector.z = -1*Input.GetAxis("LeftJoystickY_P" + joystickString) * movementSpeed;
 			if (Input.GetKey(left)) {
 				magSpeedX = -1;
 			}
 			if (Input.GetKey(right)) {
 				magSpeedX = 1;
 			}
-			if (Input.GetButtonDown("A_P" + joystickString))
+			if (Input.GetKeyDown(up) || Input.GetButtonDown("A_P" + joystickString))
 			{
 				if (doubleJumpAllowed)
 				{
@@ -126,10 +116,17 @@ public class PlayerMovementControllerCombination : MonoBehaviour {
 			}
 		}
 		
-		if (Input.GetButton("X_P" + joystickString))
+		if (Input.GetKey(attack) || Input.GetButtonDown("X_P" + joystickString))
 		{
-			anim.SetTrigger("Attack");
+			Attack ();
 		}
+
+	}
+
+	private void Attack ()
+	{
+		anim.SetTrigger("Attack");
+
 		if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
 		{
 			equipmentCollider.enabled = true;
@@ -138,17 +135,6 @@ public class PlayerMovementControllerCombination : MonoBehaviour {
 		{
 			equipmentCollider.enabled = false;
 		}
-		if(characterController.isGrounded)
-		{
-			movementVector.y = 0;
-			
-			if(Input.GetButtonDown("A_P" + joystickString))
-			{
-				movementVector.y = jumpPower; 
-			}
-		}
-		movementVector.y -= gravity * Time.deltaTime;
-		characterController.Move(movementVector * Time.deltaTime);
 	}
 	
 	private void ResetRigidBodyConstraints() 
