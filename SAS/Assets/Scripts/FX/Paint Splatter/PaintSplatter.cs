@@ -13,8 +13,8 @@ public class PaintSplatter : MonoBehaviour {
 	public Text p3score;
 	public Text p4score;
 
-	private int minSplash = 0;
-	private int maxSplash = 0;
+	private int minSplash = 2;
+	private int maxSplash = 4;
 	private float splashRange = 2f;
 
 	private float minScale = 0;
@@ -112,7 +112,7 @@ public class PaintSplatter : MonoBehaviour {
 				var rater = Random.Range(0, 180);
 				paintSplat.transform.RotateAround(hit.point, hit.normal, rater);
 
-				Destroy(paintSplat.gameObject, 15000);
+				Destroy(paintSplat.gameObject, 150);
 			}
 		}
 	}
