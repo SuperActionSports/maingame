@@ -4,15 +4,15 @@ using System.Collections;
 
 public class EquipmentScript : MonoBehaviour {
     
-	public Text scoreText;
-	private int count;
-	public Text winText;
+	//public Text scoreText;
+	//private int count;
+	//public Text winText;
 
 	// Use this for initialization
 	void Start () {
-		count = 0;
+		//count = 0;
 		SetScoreText ();
-		winText.text = "";
+		//winText.text = "";
 	}
 	
 	// Update is called once per frame
@@ -30,7 +30,7 @@ public class EquipmentScript : MonoBehaviour {
             	Debug.Log("Hit detected, sending "+ (transform.right*-1));
                 victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
                 //This causes no movement at the center of the field
-				count++;
+			//	count++;
 				SetScoreText();
             }
         }
@@ -45,10 +45,10 @@ public class EquipmentScript : MonoBehaviour {
 
 	void SetScoreText ()
 	{
-		scoreText.text = "Score: " + count.ToString ();
-		if (count >= 3)
-		{
-			winText.text = "Winnner!";
-		}
+		//scoreText.text = "Score: " + count.ToString ();
+	//	if (count >= 3)
+	//	{
+		//	winText.text = "Winnner!";
+	//	}
 	}
 }
