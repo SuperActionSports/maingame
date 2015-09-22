@@ -38,13 +38,14 @@ public class PlayerController : MonoBehaviour {
 
     public SideScrollingCameraController cam;
 	private PaintSplatter paint;
-
+	private AudioSource sound;
     private Animator anim;
 
 	[Range(1,20)]
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
+		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<SideScrollingCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
@@ -160,7 +161,8 @@ public class PlayerController : MonoBehaviour {
 
     public void Kill(Vector3 direction)
     {
-        //Magic Number
+		//Magic Number
+		sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }
