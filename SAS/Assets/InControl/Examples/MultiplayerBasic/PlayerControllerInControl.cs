@@ -10,7 +10,7 @@ namespace MultiplayerBasicExample
 	//
 	// See comments in PlayerManager.cs for more details.
 	//
-	public class Player : MonoBehaviour
+	public class PlayerControllerInControl : MonoBehaviour
 	{
 		public InputDevice Device { get; set; }
 

@@ -29,26 +29,52 @@ namespace MultiplayerBasicExample
 	// just creating a new instance of your action set subclass per player and assigning the
 	// device to its Device property.
 	//
-	public class PlayerManager : MonoBehaviour
+	public class PlayerManagerSAS : MonoBehaviour
 	{
 		public GameObject playerPrefab;
 		
 		const int maxPlayers = 4;
 
-		List<Vector3> playerPositions = new List<Vector3>() {
-			new Vector3( -1, 1, -10 ),
-			new Vector3( 1, 1, -10 ),
-			new Vector3( -1, -1, -10 ),
-			new Vector3( 1, -1, -10 ),
-		};
+		List<Vector3> spawnPoints;
 
 		List<PlayerController> players = new List<PlayerController>( maxPlayers );
 
-
-
+		Color[] playerColors2;
+		Color[] playerColors3;
+		Color[] playerColors4;
+		Color[] playerColors;
+	
+		public GameObject[] Respawns;
+		
+		void Awake()
+		{
+				playerColors = new Color[maxPlayers];
+		}
+		
 		void Start()
 		{
+			playerColors[0] = Color.cyan;
+			playerColors[1] = Color.magenta;
+			playerColors[2] = Color.yellow;
+			playerColors[3] = Color.black;
+			for (int i = 0; i < maxPlayers; i++)
+			{
+				Debug.Log(playerColors[i]);
+			}
 			InputManager.OnDeviceDetached += OnDeviceDetached;
+			spawnPoints = new List<Vector3>();
+			try{
+				Respawns.GetLength(0);
+			}
+			catch (NullReferenceException e)
+			{
+				Debug.Log("You didn't set the Respawns prefab, dingus.");
+			}
+			foreach (GameObject g in Respawns)
+			{
+				spawnPoints.Add(g.transform.position);
+			}
+			
 		}
 
 
@@ -109,13 +135,14 @@ namespace MultiplayerBasicExample
 			if (players.Count < maxPlayers)
 			{
 				// Pop a position off the list. We'll add it back if the player is removed.
-				var playerPosition = playerPositions[0];
-				playerPositions.RemoveAt( 0 );
-
+				var playerPosition = spawnPoints[0];
+				spawnPoints.RemoveAt( 0 );
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
 				var player = gameObject.GetComponent<PlayerController>();
 				player.device = inputDevice;
-				player.c1 = Color.cyan;
+				Debug.Log("Player count: " + players.Count + " color: " + playerColors[players.Count]);
+				player.c1 = playerColors[players.Count];
+				player.transform.parent = this.transform;
 				players.Add( player );
 
 				return player;
@@ -127,7 +154,7 @@ namespace MultiplayerBasicExample
 
 		void RemovePlayer( PlayerController player )
 		{
-			playerPositions.Insert( 0, player.transform.position );
+			spawnPoints.Insert( 0, player.transform.position );
 			//players.Remove( player );
 			player.device = null;
 			Destroy( player.gameObject );

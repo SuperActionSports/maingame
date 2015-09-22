@@ -54,7 +54,7 @@
      <Compile Include="Assets\InControl\Examples\InterfaceMovement\ButtonManager.cs" />
      <Compile Include="Assets\InControl\Examples\KeyboardAndMouseProfile\CubeController.cs" />
      <Compile Include="Assets\InControl\Examples\KeyboardAndMouseProfile\KeyboardAndMouseProfile.cs" />
-     <Compile Include="Assets\InControl\Examples\MultiplayerBasic\Player.cs" />
+     <Compile Include="Assets\InControl\Examples\MultiplayerBasic\PlayerControllerInControl.cs" />
      <Compile Include="Assets\InControl\Examples\MultiplayerBasic\PlayerManager.cs" />
      <Compile Include="Assets\InControl\Examples\MultiplayerWithBindings\Player.cs" />
      <Compile Include="Assets\InControl\Examples\MultiplayerWithBindings\PlayerActions.cs" />
@@ -254,6 +254,7 @@
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <None Include="Assets\InControl\Readme\README.txt" />
