@@ -1,7 +1,7 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{CBC1B4E8-E011-68EC-830B-07B117700DE0}") = "GitMerge for Unity Test", "Assembly-CSharp.csproj", "{70A5E212-EE33-BA26-B42B-5E38AF5963B3}"
+Project("{CBC1B4E8-E011-68EC-830B-07B117700DE0}") = "GitMerge for Unity Test", "Assembly-CSharp-vs.csproj", "{70A5E212-EE33-BA26-B42B-5E38AF5963B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,7 +17,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-												GlobalSection(MonoDevelopProperties) = preSolution
+													GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1

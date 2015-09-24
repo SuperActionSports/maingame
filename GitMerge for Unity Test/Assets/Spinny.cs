@@ -10,6 +10,6 @@ public class Spinny : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        transform.Rotate(Time.deltaTime*50, 0, 0, 0);
+		transform.Rotate(Time.deltaTime*50, 0, Time.deltaTime*-60, 0);
 	}
 }
