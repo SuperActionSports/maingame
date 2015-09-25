@@ -411,6 +411,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -553,6 +554,7 @@ MonoBehaviour:
   magSpeedY: 0
   debugYMod: 0
   speed: {x: 0, y: 0, z: 0}
+  centerStageObject: {fileID: 135918, guid: 789b578304b68d04794b3d13db95403f, type: 2}
   respawnPoints: []
   equipment: {fileID: 182558}
   impactMod: 0
@@ -779,6 +781,10 @@ Prefab:
       propertyPath: playerMaterial
       value: 
       objectReference: {fileID: 2100000, guid: 6070944a637ea494092eabf42c9a411b, type: 2}
+    - target: {fileID: 0}
+      propertyPath: centerStageObject
+      value: 
+      objectReference: {fileID: 135918, guid: 789b578304b68d04794b3d13db95403f, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 185452}
