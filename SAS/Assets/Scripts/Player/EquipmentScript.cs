@@ -39,13 +39,6 @@ public class EquipmentScript : MonoBehaviour {
         }
     }
 
-    void OnDrawGizmos()
-    {
-        Gizmos.color = Color.magenta;
-        Vector3 sweet = new Vector3(transform.position.x, transform.localPosition.y, transform.position.z);
-        Gizmos.DrawLine(sweet, transform.forward * 1.5f);
-    }
-
 	void SetScoreText ()
 	{
 		//scoreText.text = "Score: " + count.ToString ();

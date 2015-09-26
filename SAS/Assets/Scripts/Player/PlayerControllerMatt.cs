@@ -7,7 +7,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public Color color;
 	private Renderer rend;
 	private float colorLerpT;
-    private bool facingLeft;
+    private bool facingRight;
     public Material playerMaterial;
 	
 	//Keyboard Keybinding Stuff
@@ -34,7 +34,7 @@ public class PlayerControllerMatt : MonoBehaviour {
     private Quaternion startingRotation;
 
     public GameObject[] respawnPoints;
-    public GameObject equipment;
+    private GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
 
@@ -56,6 +56,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
+		equipment = getEquipment();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
         
 		speedMagnitude = 10f;
@@ -68,10 +69,12 @@ public class PlayerControllerMatt : MonoBehaviour {
 		if (transform.position.x > 0) 
 		{
 			transform.rotation = new Quaternion(0,180,0,0);
+			facingRight = false;
 			anim.SetBool("FacingRight", false);
 		}
 		else{
 			 transform.rotation = new Quaternion(0,0,0,0);
+			 facingRight = true;
 			anim.SetBool("FacingRight", true);
 		}
 		
@@ -107,19 +110,21 @@ public class PlayerControllerMatt : MonoBehaviour {
             
             float xVel = GetXVelocity();
 			GetYVelocity();
-			Debug.Log(xVel + " + " + transform.position.x);
 			transform.position += new Vector3(xVel,0,0);
-			Debug.Log("New position: " + transform.position);
-			if (xVel < 0)
+			if (xVel < 0 && transform.rotation.y < 0)
 			{
                 transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
                 anim.SetBool("FacingRight", false);
+                Debug.Log("I am facing right? " + facingRight);
+                //facingRight = false;
                 startingRotation = transform.rotation;
             }
 			else if (xVel > 0 && transform.rotation.y > 0)
             {
                 transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 				anim.SetBool("FacingRight", true);
+				Debug.Log("I am facing right? " + facingRight);
+				//facingRight = true;
 				startingRotation = transform.rotation;
             }
             else
@@ -133,6 +138,19 @@ public class PlayerControllerMatt : MonoBehaviour {
 		UpdateColor();
 		
 		GetRespawn();
+	}
+	
+	void OnTriggerStay(Collider other)
+	{
+		if (other.CompareTag("Equipment") && !other.GetComponent<EquipmentThrow>().untouched)
+		{	
+			other.transform.parent = this.transform.FindChild("RapierHand");
+			other.transform.localPosition = new Vector3(0.5f,0,0);
+			other.transform.localRotation = new Quaternion(270,270,0,0);
+			Destroy(other.GetComponent<EquipmentThrow>());
+			Destroy(other.attachedRigidbody);
+			equipment = other.gameObject;
+		}
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -305,15 +323,16 @@ public class PlayerControllerMatt : MonoBehaviour {
 		if (Input.GetKey(left))
 		{
 			magSpeedX = -1;
+			facingRight = false;
 		}
 		if (Input.GetKey(right))
 		{
 			magSpeedX = 1;
+			facingRight = true;
 		}
-		//Debug.Log("Keyboard Input Gotted");
 		if (magSpeedX > 0)
 		{
-			anim.SetTrigger("Right Hop"); 
+			//anim.SetTrigger("Right Hop"); 
 		}
 		return speedMagnitude * magSpeedX * Time.deltaTime;
 	}
@@ -322,32 +341,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	{
 		return speedMagnitude * device.Direction.X * Time.deltaTime;
 	}
-	
-//	private void UpdateColor()
-//	{
-//   	 colorLerpT += Time.deltaTime;
-//    	if (colorChangeToUniform && alive)
-//    	{
-//        	rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
-//        	if (colorLerpT >= 1)
-//        	{
-//                colorChangeToUniform = false;
-//                colorLerpT = 0;
-//        	}
-//    	}
-//    	else
-//    	{
-//        	rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
-//        	if (colorLerpT >= 1)
-//        	{
-//            	if (alive)
-//           	 	{
-//                colorChangeToUniform = true;
-//                colorLerpT = 0;
-//            	}
-//        	}
-//    	}
-//	}
+
 	private void UpdateColor()
 	{
 		colorLerpT += Time.deltaTime;
@@ -364,8 +358,21 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	public void throwEquipment()
 	{
-		equipment.AddComponent<EquipmentThrow>();
+		equipment = transform.FindChild("RapierHand/Rapier").gameObject;
+		Debug.Log(equipment);
+		
+		var equipScript = equipment.AddComponent<EquipmentThrow>();
+		equipScript.directionModifier = facingRight ? 1 : -1;
+		Debug.Log("Equipment is going right? " + equipScript.directionModifier);
+		transform.FindChild("RapierHand/Tip").gameObject.SetActive(false);
+		equipScript.c = color;
 		equipment.transform.parent = null;
+		//equipment.transform.rotation = transform.rotation;
 		
 	} 
+	
+	private GameObject getEquipment()
+	{
+		return transform.FindChild("RapierHand/Rapier").gameObject;
+	}
 }

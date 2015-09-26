@@ -45,37 +45,69 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\InControl\Editor\EditorUtility.cs" />
-     <Compile Include="Assets\InControl\Editor\InControlBuilder.cs" />
-     <Compile Include="Assets\InControl\Editor\InControlInputModuleEditor.cs" />
-     <Compile Include="Assets\InControl\Editor\InControlManagerEditor.cs" />
-     <Compile Include="Assets\InControl\Editor\InputManagerAssetGenerator.cs" />
-     <Compile Include="Assets\InControl\Editor\ProfileListGenerator.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\GenericListAdaptor.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\IReorderableListAdaptor.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\Internal\GUIHelper.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\Internal\ReorderableListResources.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\ReorderableListControl.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\ReorderableListFlags.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\ReorderableListGUI.cs" />
-     <Compile Include="Assets\InControl\Editor\ReorderableList\SerializedPropertyAdaptor.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\ICadePostProcessor.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Elements.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Lexer.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Objects.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Parser.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Sections.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Serializer.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBX\Utils.cs" />
-     <Compile Include="Assets\InControl\Editor\iOS\XCodeAPI\PBXProject.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchBuilder.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchButtonControlEditor.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchControlEditor.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchManagerEditor.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchStickControlEditor.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchSwipeControlEditor.cs" />
-     <Compile Include="Assets\InControl\Source\Touch\Editor\TouchTrackControlEditor.cs" />
-     <None Include="Assets\InControl\Readme\README.txt" />
+     <Compile Include="Assets\Utilities\InControl\Editor\EditorUtility.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\InControlBuilder.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\InControlInputModuleEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\InControlManagerEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\InputManagerAssetGenerator.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ProfileListGenerator.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\GenericListAdaptor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\IReorderableListAdaptor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\Internal\GUIHelper.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\Internal\ReorderableListResources.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\ReorderableListControl.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\ReorderableListFlags.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\ReorderableListGUI.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\ReorderableList\SerializedPropertyAdaptor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\ICadePostProcessor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Elements.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Lexer.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Objects.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Parser.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Sections.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Serializer.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBX\Utils.cs" />
+     <Compile Include="Assets\Utilities\InControl\Editor\iOS\XCodeAPI\PBXProject.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchBuilder.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchButtonControlEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchControlEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchManagerEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchStickControlEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchSwipeControlEditor.cs" />
+     <Compile Include="Assets\Utilities\InControl\Source\Touch\Editor\TouchTrackControlEditor.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\About\Editor\pb_AboutWindow.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Actions\pb_GenerateUV2.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Geometry\pb_ExtrudeElement.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Geometry\pb_FlipNormals.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Geometry\pb_SetPivot.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_CleanLeakedMeshes.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_ForceSceneRefresh.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_RemoveDegenerateTris.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_RepairColors.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_RepairMeshReferences.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_RepairUV.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Repair\pb_ResetEntityMaterials.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Selection\pb_EdgeSelection.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Selection\pb_ExpandSelection.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Selection\pb_InvertSelection.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\MenuItems\Selection\pb_MaterialSelection.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\pb_MenuItems.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\pb_MissingScriptEditor.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\pb_Preferences.cs" />
+     <Compile Include="Assets\Utilities\ProCore\Prototype\Editor\pb_ScenePostProcessor.cs" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
+     <None Include="Assets\Utilities\InControl\Readme\README.txt" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_HideVertices.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
+     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_VertexShader.shader" />
+     <None Include="Assets\Utilities\ProCore\Prototype\readme.txt" />
+     <None Include="Assets\Utilities\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -90,6 +122,18 @@
  </Reference>
  <Reference Include="UnityEditor.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderCore-Unity5">
+ <HintPath>X:/My Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>X:/My Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="KDTree">
+ <HintPath>X:/My Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderEditor-Unity5">
+ <HintPath>X:/My Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
