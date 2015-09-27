@@ -40,6 +40,7 @@ public class PlayerControllerMatt : MonoBehaviour {
     public GameObject[] respawnPoints;
     private GameObject equipment;
     private CapsuleCollider equipmentCollider;
+	private EquipmentThrow equipmentThrow;
     public float impactMod;
 
 
@@ -62,6 +63,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         anim = GetComponent <Animator>();
 		equipment = getEquipment();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
+		equipmentThrow = equipment.GetComponent<EquipmentThrow>();
         armed = true;
 		speedMagnitude = 10f;
 		
@@ -142,21 +144,15 @@ public class PlayerControllerMatt : MonoBehaviour {
 		GetRespawn();
 	}
 	
-	void OnTriggerStay(Collider other)
+	public void PickUp (GameObject rapier)
 	{
-		if (!armed && other.CompareTag("Equipment") && other.GetComponent<RapierOwnership>().Available())
-			{	
-				Debug.Log(transform.FindChild("RapierHand").childCount);
-				other.transform.parent = this.transform.FindChild("RapierHand");
-				other.transform.localPosition = new Vector3(0.5f,0,0);
-				other.transform.localRotation = new Quaternion(270,270,0,0);
-				Destroy(other.GetComponent<EquipmentThrow>());
-				Destroy(other.attachedRigidbody);
-				equipment = other.gameObject;
-				transform.FindChild("RapierHand/Tip").gameObject.SetActive(true);
-				transform.FindChild("RapierHand/Tip").gameObject.GetComponent<SetColorToParent>().ResetColor();
-				armed = true;
-			}
+		Debug.Log(transform.FindChild("RapierHand").childCount);
+		rapier.transform.parent = this.transform.FindChild("RapierHand");
+		rapier.transform.localPosition = new Vector3(0.5f,0,0);
+		rapier.transform.localRotation = new Quaternion(270,270,0,0);
+		equipment = rapier.gameObject;
+		equipmentThrow.PickUp();
+		armed = true;
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -186,11 +182,14 @@ public class PlayerControllerMatt : MonoBehaviour {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-        paint.Paint(transform.position,paint.color);
+        //paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        cam.PlayShake(transform.position);
+        //cam.PlayShake(transform.position);
+        gameObject.SetActive(false);
+        //equipment.transform.parent = null;
+        equipmentThrow.Drop();
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -366,15 +365,13 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public void throwEquipment()
 	{
 		equipment = transform.FindChild("RapierHand/Rapier").gameObject;
-		Debug.Log(equipment);
-		
-		var equipScript = equipment.AddComponent<EquipmentThrow>();
-		equipScript.directionModifier = facingRight ? 1 : -1;
-		transform.FindChild("RapierHand/Tip").gameObject.SetActive(false);
-		equipScript.c = color;
-		equipment.transform.parent = null;
-		//equipment.transform.rotation = transform.rotation;
-		
+		if (equipmentThrow == null)
+		{
+			Debug.Log("Equipment " + equipment + " has no EquipmentThrow script.");
+		}
+		equipmentThrow.directionModifier = facingRight ? 1 : -1;
+		equipmentThrow.c = color;
+		equipmentThrow.Throw();		
 	} 
 	
 	private GameObject getEquipment()
