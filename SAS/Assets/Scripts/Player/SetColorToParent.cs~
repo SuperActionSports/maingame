@@ -18,10 +18,17 @@ public class SetColorToParent : MonoBehaviour {
 		}
 	}
 	
-	void ResetColor()
+	public void ResetColor()
 	{
 		Renderer r = GetComponent<Renderer>();
-		Renderer rp = transform.parent.GetComponent<Renderer>();
-		r.material.color = Color.Lerp(Color.black,rp.material.color,t);
+		if (transform.parent != null)
+		{
+			
+			Renderer rp = transform.parent.GetComponent<Renderer>();
+			r.material.color = Color.Lerp(Color.black,rp.material.color,t);
+		}
+		else{
+			r.material.color = Color.Lerp(r.material.color,Color.black,t);
+		}
 	}
 }

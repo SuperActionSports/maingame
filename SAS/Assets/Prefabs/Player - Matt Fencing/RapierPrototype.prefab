@@ -15,6 +15,8 @@ GameObject:
   - 64: {fileID: 6441202}
   - 136: {fileID: 13619398}
   - 114: {fileID: 11431150}
+  - 114: {fileID: 11459958}
+  - 114: {fileID: 11484238}
   m_Layer: 0
   m_Name: RapierPrototype
   m_TagString: Equipment
@@ -4860,6 +4862,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _entityType: 0
+--- !u!114 &11459958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c19a1566bf8bd941b109124d9adc062, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owned: 0
+  available: 0
+  untouched: 0
+--- !u!114 &11484238
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e31edd128de6748af6c54e0f8e1d1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!135 &13589704
 SphereCollider:
   m_ObjectHideFlags: 1

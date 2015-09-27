@@ -64,7 +64,9 @@
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
+     <Compile Include="Assets\Scripts\Player\RapierOwnership.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
+     <Compile Include="Assets\Scripts\Player\SetTrailRenderToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />

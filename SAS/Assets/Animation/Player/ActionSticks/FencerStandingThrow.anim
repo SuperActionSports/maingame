@@ -344,18 +344,18 @@ AnimationClip:
         tangentMode: 0
       - time: .216666669
         value: {x: 1.60599995, y: .925999999, z: -.0199999996}
-        inSlope: {x: 24.3543205, y: -10.3840485, z: -2.98023252e-07}
-        outSlope: {x: 24.3543205, y: -10.3840485, z: -2.98023252e-07}
+        inSlope: {x: 24.3543205, y: -57.7300072, z: -2.98023252e-07}
+        outSlope: {x: 24.3543205, y: -57.7300072, z: -2.98023252e-07}
         tangentMode: 0
       - time: .222222224
-        value: {x: 1.65293682, y: .875066161, z: -.0200000033}
-        inSlope: {x: 2.63610268, y: -8.43184376, z: -3.18512349e-07}
-        outSlope: {x: 2.63610268, y: -8.43184376, z: -3.18512349e-07}
+        value: {x: 1.65293682, y: .349000007, z: -.0200000033}
+        inSlope: {x: 2.63610268, y: -53.4105034, z: -3.18512349e-07}
+        outSlope: {x: 2.63610268, y: -53.4105034, z: -3.18512349e-07}
         tangentMode: 0
       - time: .333333343
         value: {x: 1.29999995, y: .0199999809, z: -.0199999996}
-        inSlope: {x: -3.17643166, y: -7.69559526, z: 3.35276091e-08}
-        outSlope: {x: -3.17643166, y: -7.69559526, z: 3.35276091e-08}
+        inSlope: {x: -3.17643166, y: -2.96099997, z: 3.35276091e-08}
+        outSlope: {x: -3.17643166, y: -2.96099997, z: 3.35276091e-08}
         tangentMode: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -477,18 +477,18 @@ AnimationClip:
         tangentMode: 10
       - time: .216666669
         value: .925999999
-        inSlope: -10.3840485
-        outSlope: -10.3840485
+        inSlope: -57.7300072
+        outSlope: -57.7300072
         tangentMode: 10
       - time: .222222224
-        value: .875066161
-        inSlope: -8.43184376
-        outSlope: -8.43184376
+        value: .349000007
+        inSlope: -53.4105034
+        outSlope: -53.4105034
         tangentMode: 10
       - time: .333333343
         value: .0199999809
-        inSlope: -7.69559526
-        outSlope: -7.69559526
+        inSlope: -2.96099997
+        outSlope: -2.96099997
         tangentMode: 10
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -1883,7 +1883,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
   m_Events:
-  - time: .222222224
+  - time: .227777779
     functionName: throwEquipment
     data: 
     objectReferenceParameter: {fileID: 0}

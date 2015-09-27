@@ -11,20 +11,37 @@ public class EquipmentThrow : MonoBehaviour {
 	private float spawnTime;
 	public bool untouched;
 	public float directionModifier;
+	private MeshCollider frame;
+	private RapierOwnership owner;
 	// Use this for initialization
 	void Start () {
 		Debug.Log(directionModifier);
-		GameObject tip = transform.FindChild("Tip").gameObject;
+		//GameObject tip = transform.FindChild("Tip").gameObject;
 		untouched = true;
-		tip.SetActive(true);
-		tip.GetComponent<Renderer>().material.color = c;
-		transform.rotation = new Quaternion(0,0,-directionModifier,directionModifier);
+		//tip.SetActive(true);
+		//tip.GetComponent<Renderer>().material.color = c;
+		frame = GetComponent<MeshCollider>();
+		owner = GetComponent<RapierOwnership>();
+		owner.hasHit = false;
+		GetComponent<EquipmentScript>().setArmed(true);
+		frame.enabled = true;
+		z = -directionModifier;
+		w = directionModifier;
+		transform.rotation = new Quaternion(0,0,-directionModifier,1);
 		GetComponent<MeshCollider>().enabled = true;
 		rb = gameObject.AddComponent<Rigidbody>();
 		rb.useGravity = false;
 		rb.constraints = RigidbodyConstraints.FreezePositionZ;
 		rb.mass = 3;
-		rb.AddForce(transform.up * 60f*directionModifier,ForceMode.VelocityChange);
+		if (directionModifier > 0)
+		{
+			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
+		}
+		else 
+		{
+			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
+		}
+		rb.AddTorque(0,0,-1000f);
 		speed = 40;
 		spawnTime = Time.time;
 		timeTilGravity = 0.4f;
@@ -36,15 +53,8 @@ public class EquipmentThrow : MonoBehaviour {
 		if (Time.time >= spawnTime + timeTilGravity)
 		{
 			rb.useGravity = true;
-		}
-	}
-	
-	void OnTriggerEnter(Collider other)
-	{
-		if(other.CompareTag("Stage") || other.CompareTag("Player"))
-		{
-			untouched = false;
-			GetComponent<Renderer>().material.color = Color.black;
+			GetComponent<RapierOwnership>().resetOwnership();
+			
 		}
 	}
 }

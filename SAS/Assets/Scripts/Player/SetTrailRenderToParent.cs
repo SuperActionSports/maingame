@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SetColorToParent : MonoBehaviour {
-	
+public class SetTrailRenderToParent : MonoBehaviour {
+
 	private float t;
+	private TrailRenderer tr;
 	// Use this for initialization
 	void Start () {
-	ResetColor();
+		tr = GetComponent<TrailRenderer>();
+		ResetColor();
 	}
 	
 	// Update is called once per frame
@@ -21,14 +23,6 @@ public class SetColorToParent : MonoBehaviour {
 	public void ResetColor()
 	{
 		Renderer r = GetComponent<Renderer>();
-		if (transform.parent != null)
-		{
-			
-			Renderer rp = transform.parent.GetComponent<Renderer>();
-			r.material.color = Color.Lerp(Color.black,rp.material.color,t);
-		}
-		else{
-			r.material.color = Color.Lerp(r.material.color,Color.black,t);
-		}
+		tr.material.color = r.material.color;
 	}
 }

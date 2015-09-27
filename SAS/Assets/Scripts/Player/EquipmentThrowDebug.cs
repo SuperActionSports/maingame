@@ -20,6 +20,7 @@ public class EquipmentThrowDebug : MonoBehaviour {
 		transform.rotation = new Quaternion(x,y,z,w);
 		GetComponent<MeshCollider>().enabled = true;
 		rb = gameObject.AddComponent<Rigidbody>();
+		gameObject.AddComponent<EquipmentScript>();
 		rb.useGravity = false;
 		rb.constraints = RigidbodyConstraints.FreezePositionZ;
 		rb.mass = 3;

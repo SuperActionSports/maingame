@@ -9,6 +9,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private float colorLerpT;
     private bool facingRight;
     public Material playerMaterial;
+    public bool armed;
 	
 	//Keyboard Keybinding Stuff
 	public KeyCode left;
@@ -17,6 +18,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public KeyCode down;
     public KeyCode attack;
     public KeyCode debugKill;
+    public KeyCode jab;
+	public KeyCode throwEquip;
+	public KeyCode counter;
 	
 	public InputDevice device {get; set;}
 
@@ -58,7 +62,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         anim = GetComponent <Animator>();
 		equipment = getEquipment();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
-        
+        armed = true;
 		speedMagnitude = 10f;
 		
 		colorLerpT = 0;
@@ -93,8 +97,8 @@ public class PlayerControllerMatt : MonoBehaviour {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
         
-		paint = GetComponent<PaintSplatter>();
-		paint.color = color;
+//		paint = GetComponent<PaintSplatter>();
+//		paint.color = color;
 		
 		repeatKeyDelay = 0.093f;
 		timeSinceKeyPress = repeatKeyDelay;
@@ -115,7 +119,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 			{
                 transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
                 anim.SetBool("FacingRight", false);
-                Debug.Log("I am facing right? " + facingRight);
                 //facingRight = false;
                 startingRotation = transform.rotation;
             }
@@ -123,7 +126,6 @@ public class PlayerControllerMatt : MonoBehaviour {
             {
                 transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 				anim.SetBool("FacingRight", true);
-				Debug.Log("I am facing right? " + facingRight);
 				//facingRight = true;
 				startingRotation = transform.rotation;
             }
@@ -142,15 +144,19 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	void OnTriggerStay(Collider other)
 	{
-		if (other.CompareTag("Equipment") && !other.GetComponent<EquipmentThrow>().untouched)
-		{	
-			other.transform.parent = this.transform.FindChild("RapierHand");
-			other.transform.localPosition = new Vector3(0.5f,0,0);
-			other.transform.localRotation = new Quaternion(270,270,0,0);
-			Destroy(other.GetComponent<EquipmentThrow>());
-			Destroy(other.attachedRigidbody);
-			equipment = other.gameObject;
-		}
+		if (!armed && other.CompareTag("Equipment") && other.GetComponent<RapierOwnership>().Available())
+			{	
+				Debug.Log(transform.FindChild("RapierHand").childCount);
+				other.transform.parent = this.transform.FindChild("RapierHand");
+				other.transform.localPosition = new Vector3(0.5f,0,0);
+				other.transform.localRotation = new Quaternion(270,270,0,0);
+				Destroy(other.GetComponent<EquipmentThrow>());
+				Destroy(other.attachedRigidbody);
+				equipment = other.gameObject;
+				transform.FindChild("RapierHand/Tip").gameObject.SetActive(true);
+				transform.FindChild("RapierHand/Tip").gameObject.GetComponent<SetColorToParent>().ResetColor();
+				armed = true;
+			}
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -229,9 +235,10 @@ public class PlayerControllerMatt : MonoBehaviour {
 		{
 			Attack ();
 		}
-		else if (Input.GetKeyDown(KeyCode.T))
+		else if (Input.GetKeyDown(throwEquip))
 		{
 			anim.SetTrigger("Throw");
+			armed = false;
 		}
 		else if (Input.GetKey(attack))
 		{
@@ -363,7 +370,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 		
 		var equipScript = equipment.AddComponent<EquipmentThrow>();
 		equipScript.directionModifier = facingRight ? 1 : -1;
-		Debug.Log("Equipment is going right? " + equipScript.directionModifier);
 		transform.FindChild("RapierHand/Tip").gameObject.SetActive(false);
 		equipScript.c = color;
 		equipment.transform.parent = null;
@@ -374,5 +380,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private GameObject getEquipment()
 	{
 		return transform.FindChild("RapierHand/Rapier").gameObject;
+
 	}
 }
