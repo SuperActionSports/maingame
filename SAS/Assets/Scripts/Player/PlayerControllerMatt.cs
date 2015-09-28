@@ -34,8 +34,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public Vector3 speed;
     private bool doubleJumpAllowed;
     public GameObject centerStageObject;
-    private Vector3 centerStage;
-    private Quaternion startingRotation;
+    //private Vector3 centerStage;
 
     public GameObject[] respawnPoints;
     private GameObject equipment;
@@ -74,39 +73,40 @@ public class PlayerControllerMatt : MonoBehaviour {
 		//SetColorForChildren();
 		alive = true;
         anim.SetBool("Alive", true);
-        centerStage = centerStageObject.transform.position;
+		ResetRigidBodyConstraints();
+        Debug.Log(gameObject.name + " is at " + transform.position.x + ". ");
 		if (transform.position.x > 0) 
 		{
+			Debug.Log(" So it will face left.");
 			transform.eulerAngles = new Vector3(0,180,0);
 			facingRight = false;
 			anim.SetBool("FacingRight", false);
+			
 		}
 		else{
+			Debug.Log(" So it will face right.");
 			transform.eulerAngles = new Vector3(0,0,0);
 			 facingRight = true;
 			anim.SetBool("FacingRight", true);
 		}
-		
-        startingRotation = transform.rotation;
-        
-        
-		ResetRigidBodyConstraints();
+		Debug.Log (" So after all that, I face " + transform.eulerAngles);        
 		
         doubleJumpAllowed = true;
 		impactMod = 7.5f;
 		
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-     
+   
         if (respawnPoints.Length == 0)
         {
-            //Debug.Log("There aren't any respawn points, you catastrophic dingus.");
-        }
+//            //Debug.Log("There aren't any respawn points, you catastrophic dingus.");
+       }
         
 //		paint = GetComponent<PaintSplatter>();
 //		paint.color = color;
 		
 		repeatKeyDelay = 0.093f;
 		timeSinceKeyPress = repeatKeyDelay;
+		Debug.Log("At the end of update " + gameObject.name + " is rotated " + transform.eulerAngles + " or " + transform.rotation);
     }
     
 	
@@ -123,21 +123,17 @@ public class PlayerControllerMatt : MonoBehaviour {
 			Debug.Log("xVel: " + xVel + " transform.rotation: " + transform.eulerAngles);
 			if (xVel < 0 && transform.eulerAngles.y < 180)
 			{
-                transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
+				Debug.Log(" so I will face to the left");
+               transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
                 anim.SetBool("FacingRight", false);
                 //facingRight = false;
-                startingRotation = transform.rotation;
             }
 			else if (xVel > 0 && transform.eulerAngles.y > 0)
             {
-                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+				Debug.Log(" so I will face to the right");
+            	transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 				anim.SetBool("FacingRight", true);
 				//facingRight = true;
-				startingRotation = transform.rotation;
-            }
-            else
-            {
-            	//transform.rotation = startingRotation;
             }
             GetAttacking();
 		}	
