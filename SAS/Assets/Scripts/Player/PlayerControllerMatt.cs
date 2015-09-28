@@ -50,7 +50,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
     
-    private bool attacking;
     private float timeSinceKeyPress;
     public float repeatKeyDelay;
 
@@ -58,7 +57,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
-		attacking = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<SideScrollingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -122,7 +120,8 @@ public class PlayerControllerMatt : MonoBehaviour {
             float xVel = GetXVelocity();
 			GetYVelocity();
 			transform.position += new Vector3(xVel,0,0);
-			if (xVel < 0 && transform.rotation.y < 0)
+			Debug.Log("xVel: " + xVel + " transform.rotation: " + transform.eulerAngles);
+			if (xVel < 0 && transform.eulerAngles.y < 180)
 			{
                 transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
                 anim.SetBool("FacingRight", false);
@@ -251,7 +250,6 @@ public class PlayerControllerMatt : MonoBehaviour {
     {
         anim.SetTrigger("Attack");
         rapierScript.Attack();
-        attacking = true;
     }
     
     private float GetXVelocity()
