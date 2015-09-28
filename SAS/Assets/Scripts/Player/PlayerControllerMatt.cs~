@@ -128,7 +128,7 @@ public class PlayerControllerMatt : MonoBehaviour {
                 //facingRight = false;
                 startingRotation = transform.rotation;
             }
-			else if (xVel > 0 && transform.rotation.y > 0)
+			else if (xVel > 0 && transform.eulerAngles.y > 0)
             {
                 transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 				anim.SetBool("FacingRight", true);

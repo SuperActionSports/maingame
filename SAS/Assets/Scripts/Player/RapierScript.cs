@@ -40,7 +40,11 @@ public class RapierScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		available = !owned && hasHit;
+		if (transform.position.y < -10)
+		{
+			transform.position = new Vector3 (transform.position.x, 0.5f, transform.position.z);
+		}
+		
 	}
 	
 	public void setArmed(bool armed)
