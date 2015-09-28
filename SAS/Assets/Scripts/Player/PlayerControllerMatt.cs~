@@ -77,12 +77,12 @@ public class PlayerControllerMatt : MonoBehaviour {
         centerStage = centerStageObject.transform.position;
 		if (transform.position.x > 0) 
 		{
-			transform.rotation = new Quaternion(0,180,0,0);
+			transform.eulerAngles = new Vector3(0,180,0);
 			facingRight = false;
 			anim.SetBool("FacingRight", false);
 		}
 		else{
-			 transform.rotation = new Quaternion(0,0,0,0);
+			transform.eulerAngles = new Vector3(0,0,0);
 			 facingRight = true;
 			anim.SetBool("FacingRight", true);
 		}
