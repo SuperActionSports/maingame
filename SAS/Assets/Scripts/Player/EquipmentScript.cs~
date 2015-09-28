@@ -10,12 +10,12 @@ public class EquipmentScript : MonoBehaviour {
 
 	// Use this for initialization
 	AudioSource sound;
-	RapierOwnership owner;
+	RapierScript owner;
 	void Start () {
 	sound = GetComponentInParent<AudioSource>();
 		//count = 0;
 		SetScoreText ();
-		owner = GetComponent<RapierOwnership>();
+		owner = GetComponent<RapierScript>();
 	//winText.text = "";
 	}
 	
@@ -28,23 +28,6 @@ public class EquipmentScript : MonoBehaviour {
 	{
 		GetComponent<CapsuleCollider>().enabled = armed;
 	}
-
-    void OnTriggerEnter(Collider other)
-    {/*
-		Debug.Log("About to pick up. Availability: owned: " + !owner.owned + ", hasHit: " + owner.hasHit + ", " + owner.transform.parent);
-        if (other.CompareTag("Player") && !owner.Available())
-        {
-            PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
-            if (victim.alive && GetComponent<RapierOwnership>().hasHit)
-            {	
-            	sound.Play();
-                victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
-			//	count++;
-				SetScoreText();
-            }
-        }
-        */
-    }
 
 	void SetScoreText ()
 	{

@@ -41,6 +41,7 @@ public class PlayerControllerMatt : MonoBehaviour {
     private GameObject equipment;
     private CapsuleCollider equipmentCollider;
 	private EquipmentThrow equipmentThrow;
+	private RapierScript rapierScript;
     public float impactMod;
 
 
@@ -49,6 +50,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
     
+    private bool attacking;
     private float timeSinceKeyPress;
     public float repeatKeyDelay;
 
@@ -56,6 +58,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
+		attacking = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<SideScrollingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -64,6 +67,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 		equipment = getEquipment();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		equipmentThrow = equipment.GetComponent<EquipmentThrow>();
+		rapierScript = equipment.GetComponent<RapierScript>();
+		rapierScript.c = color;
         armed = true;
 		speedMagnitude = 10f;
 		
@@ -96,7 +101,7 @@ public class PlayerControllerMatt : MonoBehaviour {
      
         if (respawnPoints.Length == 0)
         {
-            Debug.Log("There aren't any respawn points, you catastrophic dingus.");
+            //Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
         
 //		paint = GetComponent<PaintSplatter>();
@@ -136,7 +141,6 @@ public class PlayerControllerMatt : MonoBehaviour {
             	//transform.rotation = startingRotation;
             }
             GetAttacking();
-			CheckAnimStateForAttacking();
 		}	
 		
 		UpdateColor();
@@ -146,11 +150,11 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	public void PickUp (GameObject rapier)
 	{
-		Debug.Log(transform.FindChild("RapierHand").childCount);
 		rapier.transform.parent = this.transform.FindChild("RapierHand");
 		rapier.transform.localPosition = new Vector3(0.5f,0,0);
 		rapier.transform.localRotation = new Quaternion(270,270,0,0);
 		equipment = rapier.gameObject;
+		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
 		equipmentThrow.PickUp();
 		armed = true;
 	}
@@ -191,17 +195,15 @@ public class PlayerControllerMatt : MonoBehaviour {
         //equipment.transform.parent = null;
         equipmentThrow.Drop();
     }
-	
-	private void CheckAnimStateForAttacking()
+
+	public void AttackStart()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-		{
-			equipmentCollider.enabled = true;
-		}
-		else if (equipmentCollider.enabled)
-		{
-			equipmentCollider.enabled = false;
-		}
+		rapierScript.Attack();
+	}
+	
+	public void AttackEnd()
+	{
+		rapierScript.StopAttack();
 	}
 	
 	public void Kill()
@@ -239,7 +241,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 			anim.SetTrigger("Throw");
 			armed = false;
 		}
-		else if (Input.GetKey(attack))
+		else if (Input.GetKeyDown(attack))
 		{
 			Attack();
 		}
@@ -247,17 +249,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	private void Attack()
     {
-    	timeSinceKeyPress += Time.deltaTime;
-        if (equipmentCollider.enabled)
-        {
-            //anim.SetTrigger("ComboAttack");
-        }
-        else if (timeSinceKeyPress > repeatKeyDelay)
-        {
-            anim.SetTrigger("Attack");
-            timeSinceKeyPress = 0;
-        }
-
+        anim.SetTrigger("Attack");
+        rapierScript.Attack();
+        attacking = true;
     }
     
     private float GetXVelocity()
@@ -364,14 +358,14 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	public void throwEquipment()
 	{
-		equipment = transform.FindChild("RapierHand/Rapier").gameObject;
 		if (equipmentThrow == null)
 		{
 			Debug.Log("Equipment " + equipment + " has no EquipmentThrow script.");
 		}
 		equipmentThrow.directionModifier = facingRight ? 1 : -1;
 		equipmentThrow.c = color;
-		equipmentThrow.Throw();		
+		equipmentThrow.Throw();
+		rapierScript.Attack();		
 	} 
 	
 	private GameObject getEquipment()

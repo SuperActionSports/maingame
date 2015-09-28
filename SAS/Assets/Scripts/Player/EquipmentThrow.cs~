@@ -11,12 +11,16 @@ public class EquipmentThrow : MonoBehaviour {
 	public bool untouched;
 	public float directionModifier;
 	private MeshCollider frame;
-	private RapierOwnership owner;
+	private RapierScript rapierScript;
+	
 	private bool thrown;
 	// Use this for initialization
 	void Start () {
 		PickUp();
 		frame = GetComponent<MeshCollider>();
+		rb = gameObject.AddComponent<Rigidbody>();
+		DeactivateRigidbody();
+		
 	}
 	
 	// Update is called once per frame
@@ -24,13 +28,20 @@ public class EquipmentThrow : MonoBehaviour {
 		if (thrown && Time.time >= spawnTime + timeTilGravity)
 		{
 			rb.useGravity = true;
-			GetComponent<RapierOwnership>().resetOwnership();
+			GetComponent<RapierScript>().resetOwnership();
 		}
+	}
+	
+	private void DeactivateRigidbody()
+	{
+		rb.isKinematic = true;
+		rb.detectCollisions = false;
 	}
 	
 	private void ActivateRigidbody(bool useGravity)
 	{
-		rb = gameObject.AddComponent<Rigidbody>();
+		rb.detectCollisions = true;
+		rb.isKinematic = false;	
 		rb.useGravity = useGravity;
 		rb.constraints = RigidbodyConstraints.FreezePositionZ;
 		rb.mass = 3;
@@ -40,7 +51,7 @@ public class EquipmentThrow : MonoBehaviour {
 	{
 		ActivateRigidbody(true);
 		frame.enabled = true;
-		owner.resetOwnership();
+		rapierScript.resetOwnership();
 	}
 	
 	public void Throw()
@@ -48,11 +59,11 @@ public class EquipmentThrow : MonoBehaviour {
 		transform.parent = null;
 		ActivateRigidbody(false);
 		untouched = true;
-		Debug.Log("I am a rapier and I am owned by " + owner);
-		owner.hasHit = false;
+		rapierScript.Attack();
+		//owner.hasHit = false;
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
-		owner.setArmed(true);
+		rapierScript.setArmed(true);
 		if (directionModifier > 0)
 		{
 			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
@@ -63,17 +74,17 @@ public class EquipmentThrow : MonoBehaviour {
 		}
 		spawnTime = Time.time;
 		thrown = true;
-		//owner.resetOwnership();
 	}	
 	
 	public void PickUp()
 	{
+		rb = transform.GetComponent<Rigidbody>();
 		if (rb != null)
-		{
-			Destroy (rb);
+		{	
+			DeactivateRigidbody();
 		}
-		owner = GetComponent<RapierOwnership>();
-		thrown = false;
+		rapierScript = GetComponent<RapierScript>();
+		rapierScript.owned = true;
 		timeTilGravity = 0.4f;
 		spawnTime = Time.time;
 		thrown = false;	

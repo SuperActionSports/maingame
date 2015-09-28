@@ -31,4 +31,10 @@ public class SetColorToParent : MonoBehaviour {
 			r.material.color = Color.Lerp(r.material.color,Color.black,t);
 		}
 	}
+	
+	public void ResetColor(Color c)
+	{
+		Renderer r = GetComponent<Renderer>();
+		r.material.color = Color.Lerp(Color.black,c,t);
+	}
 }

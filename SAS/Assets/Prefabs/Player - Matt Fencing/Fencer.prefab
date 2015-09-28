@@ -391,7 +391,7 @@ TrailRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: 753a8b87c4e09d147880bdcf4050b035, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -5132,13 +5132,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 162344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c19a1566bf8bd941b109124d9adc062, type: 3}
+  m_Script: {fileID: 11500000, guid: e3c2db3ea4dc6c149af6d85446b81417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owned: 0
   available: 0
   hasHit: 0
   parent: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11464014
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5150,6 +5151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 946b405c7430f5444b1738bb4be7ccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11485022
 MonoBehaviour:
   m_ObjectHideFlags: 1

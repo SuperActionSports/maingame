@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\BasicXFollowCamera.cs" />
+     <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
@@ -64,7 +65,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
-     <Compile Include="Assets\Scripts\Player\RapierOwnership.cs" />
+     <Compile Include="Assets\Scripts\Player\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\Player\SetTrailRenderToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
@@ -276,17 +277,11 @@
      <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\Utilities\ProCore\Prototype\readme.txt" />
      <None Include="Assets\Utilities\ProCore\Prototype\About\Credits.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>X:/My Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
