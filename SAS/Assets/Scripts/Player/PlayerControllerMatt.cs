@@ -68,28 +68,29 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rapierScript.c = color;
         armed = true;
 		speedMagnitude = 10f;
+		rapierScript.ResetColor();
 		
 		colorLerpT = 0;
 		//SetColorForChildren();
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-        Debug.Log(gameObject.name + " is at " + transform.position.x + ". ");
+//        Debug.Log(gameObject.name + " is at " + transform.position.x + ". ");
 		if (transform.position.x > 0) 
 		{
-			Debug.Log(" So it will face left.");
+			//Debug.Log(" So it will face left.");
 			transform.eulerAngles = new Vector3(0,180,0);
 			facingRight = false;
 			anim.SetBool("FacingRight", false);
 			
 		}
 		else{
-			Debug.Log(" So it will face right.");
+		//	Debug.Log(" So it will face right.");
 			transform.eulerAngles = new Vector3(0,0,0);
 			 facingRight = true;
 			anim.SetBool("FacingRight", true);
 		}
-		Debug.Log (" So after all that, I face " + transform.eulerAngles);        
+		//Debug.Log (" So after all that, I face " + transform.eulerAngles);        
 		
         doubleJumpAllowed = true;
 		impactMod = 7.5f;
@@ -106,7 +107,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		
 		repeatKeyDelay = 0.093f;
 		timeSinceKeyPress = repeatKeyDelay;
-		Debug.Log("At the end of update " + gameObject.name + " is rotated " + transform.eulerAngles + " or " + transform.rotation);
+//		Debug.Log("At the end of update " + gameObject.name + " is rotated " + transform.eulerAngles + " or " + transform.rotation);
     }
     
 	
@@ -120,17 +121,17 @@ public class PlayerControllerMatt : MonoBehaviour {
             float xVel = GetXVelocity();
 			GetYVelocity();
 			transform.position += new Vector3(xVel,0,0);
-			Debug.Log("xVel: " + xVel + " transform.rotation: " + transform.eulerAngles);
+			//Debug.Log("xVel: " + xVel + " transform.rotation: " + transform.eulerAngles);
 			if (xVel < 0 && transform.eulerAngles.y < 180)
 			{
-				Debug.Log(" so I will face to the left");
+				//Debug.Log(" so I will face to the left");
                transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
                 anim.SetBool("FacingRight", false);
                 //facingRight = false;
             }
 			else if (xVel > 0 && transform.eulerAngles.y > 0)
             {
-				Debug.Log(" so I will face to the right");
+				//Debug.Log(" so I will face to the right");
             	transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 				anim.SetBool("FacingRight", true);
 				//facingRight = true;
@@ -238,7 +239,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		}
 		else if (Input.GetKeyDown(attack))
 		{
-			Attack();
+			//Attack();
 		}
 	}
 	

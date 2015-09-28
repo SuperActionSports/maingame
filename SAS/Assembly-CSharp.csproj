@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
+     <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrowDebug.cs" />
@@ -68,7 +69,6 @@
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
-     <Compile Include="Assets\Scripts\Player\SetTrailRenderToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />

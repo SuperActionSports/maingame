@@ -34,8 +34,7 @@ public class RapierScript : MonoBehaviour {
 		attackCollider = GetComponent<CapsuleCollider>();
 		pickUpCollider.enabled = false;
 		colorScript = GetComponent<SetColorToParent>();
-		colorScript.ResetColor(c);
-		GetComponent<SetTrailRenderToParent>().ResetColor(c);
+		ResetColor();
 	}
 	
 	// Update is called once per frame
@@ -73,7 +72,7 @@ public class RapierScript : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
-		Debug.Log("Trigger is on! I've hit " + other.gameObject);
+		//Debug.Log("Trigger is on! I've hit " + other.gameObject);
 		if (other.CompareTag("Player") && owned)
 		{
 			//Attacking rapier is about to make swiss cheese of a player
@@ -94,7 +93,7 @@ public class RapierScript : MonoBehaviour {
 			GetComponent<Renderer>().material.color = Color.black;
 			GetComponent<CapsuleCollider>().enabled = false;
 			pickUpCollider.enabled = true;
-			Debug.Log("Hit stage 1");
+			//Debug.Log("Hit stage 1");
 		}
 		else if (hasHit && other.CompareTag("Player") && !other.GetComponent<PlayerControllerMatt>().armed)
 		{
@@ -103,7 +102,7 @@ public class RapierScript : MonoBehaviour {
 			pickUpCollider.enabled = false;
 			colorScript.ResetColor();
 		}
-		Debug.Log("That didn't work, so now I'm going to try to see if " + other.tag + " is \"Player\" and if I'm owned: " + owned);
+		//Debug.Log("That didn't work, so now I'm going to try to see if " + other.tag + " is \"Player\" and if I'm owned: " + owned);
 	}
 	
 	public void resetOwnership()
@@ -122,9 +121,14 @@ public class RapierScript : MonoBehaviour {
 		{
 			transform.parent = null;
 			owned = false;
-			GetComponent<SetColorToParent>().ResetColor();
-			GetComponent<SetTrailRenderToParent>().ResetColor();
+			ResetColor();
 		}
+	}
+	
+	public void ResetColor()
+	{
+		GetComponent<AccessoryColor>().ResetColor();
+		GetComponent<AccessoryColor>().ResetColor(c);
 	}
 	
 }

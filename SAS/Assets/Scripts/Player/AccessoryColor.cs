@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SetTrailRenderToParent : MonoBehaviour {
+public class AccessoryColor : MonoBehaviour {
 
 	private float t;
 	private TrailRenderer tr;
@@ -9,6 +9,7 @@ public class SetTrailRenderToParent : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		tr = GetComponent<TrailRenderer>();
+		
 		ResetColor();
 	}
 	
@@ -26,18 +27,21 @@ public class SetTrailRenderToParent : MonoBehaviour {
 		Renderer r = GetComponent<Renderer>();
 		if (transform.parent != null)
 		{
+			//Debug.Log("Trail has parent");
 			Renderer rp = transform.parent.GetComponent<Renderer>();
 			color = rp.material.color;
 		}
 		else{
-			color = Color.black;
+			color = Color.gray;
 		}
 		r.material.color = color;
 	}
 	
 	public void ResetColor(Color c)
 	{
-		Renderer r = GetComponent<Renderer>();
-		r.material.color = Color.Lerp(Color.black,c,t);
+		Debug.Log(transform.gameObject.name + " is resetting color to " + c);
+		Renderer r = tr.GetComponent<Renderer>();
+		//r.material.color = Color.Lerp(Color.black,c,t);
+		tr.material.color = c;
 	}
 }
