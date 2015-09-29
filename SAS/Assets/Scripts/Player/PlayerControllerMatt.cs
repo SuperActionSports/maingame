@@ -37,12 +37,13 @@ public class PlayerControllerMatt : MonoBehaviour {
     //private Vector3 centerStage;
 
     public GameObject[] respawnPoints;
+    
     private GameObject equipment;
     private CapsuleCollider equipmentCollider;
 	private EquipmentThrow equipmentThrow;
 	private RapierScript rapierScript;
     public float impactMod;
-
+    private GameObject shield;
 
     public SideScrollingCameraController cam;
 	private PaintSplatter paint;
@@ -61,6 +62,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
+        shield = transform.FindChild("Shield").gameObject;
 		equipment = getEquipment();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		equipmentThrow = equipment.GetComponent<EquipmentThrow>();
@@ -136,7 +138,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 				anim.SetBool("FacingRight", true);
 				//facingRight = true;
             }
-            GetAttacking();
+           // 
+           GetCounter();
+		GetAttacking();
 		}	
 		
 		UpdateColor();
@@ -225,6 +229,24 @@ public class PlayerControllerMatt : MonoBehaviour {
         anim.SetBool("Alive", true);
         transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
     }
+    
+    private void GetCounter()
+    {
+    	if (Input.GetKeyDown(counter))
+    	{
+    		anim.SetTrigger("Counter");
+    	}
+    }
+    
+	public void ShieldOn()
+	{
+		shield.GetComponent<ShieldController>().Activate();
+	}
+	
+	public void ShieldOff()
+	{
+		shield.GetComponent<ShieldController>().Deactivate();
+	}
 	
 	private void GetAttacking()
 	{

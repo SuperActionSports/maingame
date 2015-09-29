@@ -70,6 +70,12 @@ public class RapierScript : MonoBehaviour {
 		Debug.Log(transform.gameObject.name + " stopped attacking!");
 	}
 	
+	public void Stop()
+	{
+		GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
+		equipmentThrow.Drop();
+	}
+	
 	void OnTriggerEnter(Collider other)
 	{
 		//Debug.Log("Trigger is on! I've hit " + other.gameObject);
@@ -81,7 +87,6 @@ public class RapierScript : MonoBehaviour {
 			{	
 				sound.Play();
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
-				GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
 				
 			}
 		}
