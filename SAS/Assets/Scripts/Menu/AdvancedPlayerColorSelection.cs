@@ -15,17 +15,16 @@ public class AdvancedPlayerColorSelection : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		skip.onClick.AddListener(() => LoadLevelSelection ());
-		back.onClick.AddListener(() => Back ());
+
 	}
 
-	void LoadLevelSelection() {
-		Debug.Log ("Game is loading the Level Selection Screen");
+	public void LoadLevelSelection() {
+		//Debug.Log ("Game is loading the Level Selection Screen");
 		Application.LoadLevel ("AdvancedLevelSelection");
 	}
 
-	void Back() {
-		Debug.Log ("<<---Back--->>");
+	public void Back() {
+		//Debug.Log ("<<---Back--->>");
 		Application.LoadLevel ("AdvancedPlayerSelection");
 	}
 }

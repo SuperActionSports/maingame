@@ -15,23 +15,21 @@ public class AdvancedMainMenu : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		playButton.onClick.AddListener(() => Play ());
-		quitButton.onClick.AddListener(() => Quit ());
-		creditsButton.onClick.AddListener(() => Credits ());
+
 	}
 	
-	void Play () {
-		Debug.Log ("Game is loading the Player Selection Screen");
+	public void Play () {
+		//Debug.Log ("Game is loading the Player Selection Screen");
 		Application.LoadLevel ("AdvancedPlayerSelection");
 	}
 
-	void Quit() {
-		Debug.Log ("Game is Quitting");
+	public void Quit() {
+		//Debug.Log ("Game is Quitting");
 		Application.Quit ();
 	}	
 
-	void Credits () {
-		Debug.Log ("Game is loading the Credits Screen");
+	public void Credits () {
+		//Debug.Log ("Game is loading the Credits Screen");
 		Application.LoadLevel ("AdvancedCredits");
 	}
 }

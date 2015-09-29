@@ -12,11 +12,11 @@ public class AdvancedCredits : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		back.onClick.AddListener(() => Back ());
+
 	}
 
-	void Back() {
-		Debug.Log ("<<---Back--->>");
+	public void Back() {
+		//Debug.Log ("<<---Back--->>");
 		Application.LoadLevel ("AdvancedMainMenu");
 	}
 }
