@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -24,7 +24,7 @@ public class EquipmentScript : MonoBehaviour {
     {
         if (other.CompareTag("Player"))
         {
-            PlayerController victim = other.GetComponent<PlayerController>();
+            GolfPlayerController victim = other.GetComponent<GolfPlayerController>();
             if (victim.alive)
             {
             	Debug.Log("Hit detected, sending "+ (transform.right*-1));

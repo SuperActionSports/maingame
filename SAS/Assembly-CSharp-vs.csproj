@@ -252,7 +252,7 @@
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\Player\GolfPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
