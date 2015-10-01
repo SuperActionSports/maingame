@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Camera\ICamera.cs" />
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
+     <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
@@ -69,6 +70,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
+     <Compile Include="Assets\Scripts\Player\ShieldScript.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />
