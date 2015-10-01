@@ -110,7 +110,6 @@
      <None Include="Assets\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\ProCore\Prototype\readme.txt" />
      <None Include="Assets\Shaders\SolidColor.shader" />
-     <None Include="Assets\readme.txt" />
      <None Include="Assets\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
@@ -126,6 +125,18 @@
  </Reference>
  <Reference Include="UnityEditor.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderCore-Unity5">
+ <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderMeshOps-Unity5">
+ <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ </Reference>
+ <Reference Include="KDTree">
+ <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ </Reference>
+ <Reference Include="ProBuilderEditor-Unity5">
+ <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.Graphs">
  <HintPath>/Applications/Unity/Unity.app/Contents/Frameworks/Managed/UnityEditor.Graphs.dll</HintPath>
@@ -153,18 +164,6 @@
  </Reference>
  <Reference Include="UnityEditor.OSXStandalone.Extensions">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.OSXStandalone.Extensions.dll</HintPath>
- </Reference>
- <Reference Include="KDTree">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderCore-Unity5">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderEditor-Unity5">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/ProCore/Prototype/Editor/ProBuilderEditor-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
