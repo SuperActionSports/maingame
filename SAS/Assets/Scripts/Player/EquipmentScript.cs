@@ -11,7 +11,7 @@ public class EquipmentScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		count = 0;
-		SetScoreText ();
+		//SetScoreText ();
 		winText.text = "";
 	}
 	
@@ -31,7 +31,7 @@ public class EquipmentScript : MonoBehaviour {
                 victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
                 //This causes no movement at the center of the field
 				count++;
-				SetScoreText();
+				//SetScoreText();
             }
         }
     }
@@ -42,13 +42,4 @@ public class EquipmentScript : MonoBehaviour {
         Vector3 sweet = new Vector3(transform.position.x, transform.localPosition.y, transform.position.z);
         Gizmos.DrawLine(sweet, transform.forward * 1.5f);
     }
-
-	void SetScoreText ()
-	{
-		scoreText.text = "Score: " + count.ToString ();
-		if (count >= 3)
-		{
-			winText.text = "Winnner!";
-		}
-	}
 }

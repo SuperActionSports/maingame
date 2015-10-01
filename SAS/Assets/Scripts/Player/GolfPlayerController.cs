@@ -27,6 +27,7 @@ public class GolfPlayerController : MonoBehaviour {
 	public float magSpeedX;
 	public float magSpeedZ;
 	public Vector3 speed;
+	public bool putting;
 
     public GameObject[] respawnPoints;
     public GameObject equipment;
@@ -43,6 +44,7 @@ public class GolfPlayerController : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
+		putting = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
 		rend = GetComponent<Renderer>();
@@ -71,28 +73,25 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
         if (alive)
         {
             magSpeedX = 0;
             magSpeedZ = 0;
             
+
+			// Move Character
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			transform.position = transform.position + new Vector3(xVel,0,zVel);
-			if (xVel < 0)
-			{
-                transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
-            }
-			else if (xVel > 0 && transform.rotation.y > 0)
-            {
-                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
-            }
+			Vector3 newPosition = new Vector3(xVel,0,zVel);
+			if (!putting) { transform.position = transform.position + newPosition; }
+			// If input has been given change to face new input direction
+			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
             GetAttacking();
 			CheckAnimStateForAttacking();
 		}	
 		
 		UpdateColor();
-		
 		GetRespawn();
 	}
 	
@@ -127,7 +126,7 @@ public class GolfPlayerController : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        cam.PlayShake(transform.position);
+        //cam.PlayShake(transform.position);
         /* foreach (Transform child in transform)
          {
              Vector3 t = child.transform.TransformPoint(child.transform.position);
@@ -215,11 +214,11 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		if (Input.GetKey(up))
 		{
-			magSpeedX = -1;
+			magSpeedZ = 1;
 		}
 		if (Input.GetKey(down))
 		{
-			magSpeedX = 1;
+			magSpeedZ = -1;
 		}
 		return speedMagnitude * magSpeedZ * Time.deltaTime;
 	}
