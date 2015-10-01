@@ -377,10 +377,15 @@ public class PlayerControllerMatt : MonoBehaviour {
 		{
 			Debug.Log("Equipment " + equipment + " has no EquipmentThrow script.");
 		}
-		equipmentThrow.directionModifier = facingRight ? 1 : -1;
-		equipmentThrow.c = color;
-		equipmentThrow.Throw();
-		rapierScript.Attack();		
+		else
+		{
+			equipmentThrow.directionModifier = facingRight ? 1 : -1;
+			equipmentThrow.c = color;
+			equipmentThrow.Throw();
+			equipment = null;
+			equipmentThrow = null;
+			rapierScript.Attack();		
+		}
 	} 
 	
 	private GameObject getEquipment()
