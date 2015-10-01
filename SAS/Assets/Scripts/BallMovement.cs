@@ -12,8 +12,13 @@ public class BallMovement : MonoBehaviour {
 		position = transform.position;
 		rb = GetComponent<Rigidbody> ();
 		rb.useGravity = true;
-		rb.AddForce (transform.forward * 5000);
+		Quaternion dir = Quaternion.AngleAxis (30.0f, Vector3.forward);
+		rb.AddForce (dir * transform.forward * 1500);
 		collider = GetComponent<SphereCollider> ();
+	}
+
+	void Update(){
+
 	}
 
 	void OnCollisionEnter(Collision collision)
@@ -23,12 +28,12 @@ public class BallMovement : MonoBehaviour {
 			Debug.Log ("Hit player :(");
 		}
 		if (collision.gameObject.tag == "BackWall") {
-			rb.AddForce(transform.forward * -1000);
 			Debug.Log ("Hit back wall");
+			Destroy(transform.gameObject);
 		}
 		if (collision.gameObject.tag == "FrontWall") {
-			rb.AddForce(transform.forward * 1000);
 			Debug.Log ("Hit front wall");
+			Destroy(transform.gameObject);
 		}
 	}
 }
