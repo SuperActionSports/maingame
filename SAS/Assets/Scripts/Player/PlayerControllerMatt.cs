@@ -42,7 +42,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private EquipmentThrow equipmentThrow;
 	private RapierScript rapierScript;
     public float impactMod;
-
+    private GameObject shield;
 
     public SideScrollingCameraController cam;
 	private PaintSplatter paint;
@@ -65,6 +65,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		equipmentThrow = equipment.GetComponent<EquipmentThrow>();
 		rapierScript = equipment.GetComponent<RapierScript>();
+		shield = transform.FindChild("Shield").gameObject;
 		rapierScript.c = color;
         armed = true;
 		speedMagnitude = 10f;
@@ -107,7 +108,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		
 		repeatKeyDelay = 0.093f;
 		timeSinceKeyPress = repeatKeyDelay;
-//		Debug.Log("At the end of update " + gameObject.name + " is rotated " + transform.eulerAngles + " or " + transform.rotation);
+
     }
     
 	
@@ -137,6 +138,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 				//facingRight = true;
             }
             GetAttacking();
+            GetCounter();
 		}	
 		
 		UpdateColor();
@@ -200,6 +202,24 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public void AttackEnd()
 	{
 		rapierScript.StopAttack();
+	}
+	
+	private void GetCounter()
+	{
+		if (Input.GetKeyDown(counter))
+		{
+			anim.SetTrigger("Counter");
+		}
+	}
+	
+	public void ShieldOn()
+	{
+		shield.GetComponent<ShieldScript>().Activate();	
+	}
+	
+	public void ShieldOff()
+	{
+		shield.GetComponent<ShieldScript>().Deactivate();
 	}
 	
 	public void Kill()

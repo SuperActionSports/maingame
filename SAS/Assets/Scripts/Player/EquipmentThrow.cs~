@@ -13,7 +13,7 @@ public class EquipmentThrow : MonoBehaviour {
 	private MeshCollider frame;
 	private RapierScript rapierScript;
 	
-	private bool thrown;
+	public bool thrown;
 	// Use this for initialization
 	void Start () {
 		PickUp();

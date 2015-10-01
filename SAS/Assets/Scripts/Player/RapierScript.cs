@@ -12,6 +12,7 @@ public class RapierScript : MonoBehaviour {
 	private CapsuleCollider attackCollider;
 	private SetColorToParent colorScript;
 	private EquipmentThrow equipmentThrow;
+	private Rigidbody rb;
 	public Color c;
 	public string trueName;
 	AudioSource sound;
@@ -34,6 +35,7 @@ public class RapierScript : MonoBehaviour {
 		attackCollider = GetComponent<CapsuleCollider>();
 		pickUpCollider.enabled = false;
 		colorScript = GetComponent<SetColorToParent>();
+		rb = GetComponent<Rigidbody>();
 		ResetColor();
 	}
 	
@@ -59,15 +61,32 @@ public class RapierScript : MonoBehaviour {
 	public void Attack()
 	{
 		attackCollider.enabled = true;
-		GetComponent<Rigidbody>().detectCollisions = true;
+		rb.detectCollisions = true;
 		Debug.Log(transform.gameObject.name + " is attacking!");		
 	}
 	
 	public void StopAttack()
 	{
-		attackCollider.enabled = false;
-		GetComponent<Rigidbody>().detectCollisions = false;
-		Debug.Log(transform.gameObject.name + " stopped attacking!");
+		if (owned)
+		{
+			attackCollider.enabled = false;
+			rb.detectCollisions = false;
+			Debug.Log(transform.gameObject.name + " stopped attacking!");
+		}
+	}
+	
+	private void StopMoving()
+	{
+		rb.velocity = new Vector3(0,0,0);
+	}
+	
+	private void Parry()
+	{
+		hasHit = true;
+		setArmed(false);
+		GetComponent<Renderer>().material.color = Color.black;
+		GetComponent<CapsuleCollider>().enabled = false;
+		pickUpCollider.enabled = true;
 	}
 	
 	void OnTriggerEnter(Collider other)
@@ -81,19 +100,22 @@ public class RapierScript : MonoBehaviour {
 			{	
 				sound.Play();
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
-				GetComponent<Rigidbody>().velocity = new Vector3(0,0,0);
-				
+				StopMoving();
 			}
+		}
+		if (other.CompareTag("Shield"))
+		{
+			if (owned)
+			{
+				if (!equipmentThrow.thrown)  transform.parent.transform.parent.GetComponent<PlayerControllerMatt>().armed = false;
+				equipmentThrow.Drop();
+			}
+			Parry ();
+			StopMoving();
 		}
 		else if(hasHit == false && (other.CompareTag("Stage") || other.CompareTag("Player")) && other.gameObject != parent)
 		{
-			//Thrown rapier is about to make a player-kebab 
-			hasHit = true;
-			setArmed(false);
-			GetComponent<Renderer>().material.color = Color.black;
-			GetComponent<CapsuleCollider>().enabled = false;
-			pickUpCollider.enabled = true;
-			//Debug.Log("Hit stage 1");
+			Parry ();
 		}
 		else if (hasHit && other.CompareTag("Player") && !other.GetComponent<PlayerControllerMatt>().armed)
 		{
