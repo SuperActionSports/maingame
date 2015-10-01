@@ -7,6 +7,8 @@ TagManager:
   - Stage
   - RespawnPoint
   - Equipment
+  - BackWall
+  - FrontWall
   layers:
   - Default
   - TransparentFX
