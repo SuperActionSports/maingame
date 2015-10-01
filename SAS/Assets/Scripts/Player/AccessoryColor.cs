@@ -4,7 +4,7 @@ using System.Collections;
 public class AccessoryColor : MonoBehaviour {
 
 	private float t;
-	public TrailRenderer tr;
+	private TrailRenderer tr;
 	public Color color;
 	// Use this for initialization
 	void Start () {
@@ -39,7 +39,7 @@ public class AccessoryColor : MonoBehaviour {
 	
 	public void ResetColor(Color c)
 	{
-		tr = GetComponent<TrailRenderer>();
+		Debug.Log(transform.gameObject.name + " is resetting color to " + c);
 		Renderer r = tr.GetComponent<Renderer>();
 		//r.material.color = Color.Lerp(Color.black,c,t);
 		tr.material.color = c;
