@@ -206,7 +206,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	private void GetCounter()
 	{
-		if (Input.GetKeyDown(counter))
+		if (armed && Input.GetKeyDown(counter))
 		{
 			anim.SetTrigger("Counter");
 		}
