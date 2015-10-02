@@ -61,6 +61,7 @@
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
      <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
+     <Compile Include="Assets\Scripts\Player\DieScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrowDebug.cs" />

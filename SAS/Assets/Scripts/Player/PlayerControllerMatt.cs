@@ -25,6 +25,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public InputDevice device {get; set;}
 
 	public bool alive;
+	private DieScript die;
 	
 	private Rigidbody rb;
 	public RaycastHit groundHit;
@@ -75,6 +76,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 		//SetColorForChildren();
 		alive = true;
         anim.SetBool("Alive", true);
+        die = GetComponent<DieScript>();
+        
+        
 		ResetRigidBodyConstraints();
 //        Debug.Log(gameObject.name + " is at " + transform.position.x + ". ");
 		if (transform.position.x > 0) 
@@ -189,9 +193,10 @@ public class PlayerControllerMatt : MonoBehaviour {
         alive = false;
         anim.SetBool("Alive", false);
         //cam.PlayShake(transform.position);
-        gameObject.SetActive(false);
         //equipment.transform.parent = null;
         equipmentThrow.Drop();
+        die.Party();
+		GetComponent<MeshRenderer>().enabled = false;
     }
 
 	public void AttackStart()
