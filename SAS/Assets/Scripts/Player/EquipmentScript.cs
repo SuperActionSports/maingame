@@ -11,8 +11,8 @@ public class EquipmentScript : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		count = 0;
-		SetScoreText ();
-		winText.text = "";
+		//SetScoreText ();
+		//winText.text = "";
 	}
 	
 	// Update is called once per frame
@@ -31,7 +31,7 @@ public class EquipmentScript : MonoBehaviour {
                 victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
                 //This causes no movement at the center of the field
 				count++;
-				SetScoreText();
+				//SetScoreText();
             }
         }
     }
@@ -43,12 +43,12 @@ public class EquipmentScript : MonoBehaviour {
         Gizmos.DrawLine(sweet, transform.forward * 1.5f);
     }
 
-	void SetScoreText ()
+	/*void SetScoreText ()
 	{
 		scoreText.text = "Score: " + count.ToString ();
 		if (count >= 3)
 		{
 			winText.text = "Winnner!";
 		}
-	}
+	}*/
 }
