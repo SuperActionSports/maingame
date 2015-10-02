@@ -255,8 +255,10 @@
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
+     <Compile Include="Assets\Scripts\Player\TennisPlayerController1.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\TennisAction.cs" />
+     <Compile Include="Assets\Scripts\TennisController.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <None Include="Assets\InControl\Readme\README.txt" />
  <Reference Include="UnityEngine.UI">
