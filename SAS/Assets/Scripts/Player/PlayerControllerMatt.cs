@@ -18,7 +18,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public KeyCode down;
     public KeyCode attack;
     public KeyCode debugKill;
-    public KeyCode jab;
 	public KeyCode throwEquip;
 	public KeyCode counter;
 	
@@ -33,14 +32,13 @@ public class PlayerControllerMatt : MonoBehaviour {
     public float debugYMod;
 	public Vector3 speed;
     private bool doubleJumpAllowed;
-    public GameObject centerStageObject;
-    //private Vector3 centerStage;
 
     public GameObject[] respawnPoints;
     private GameObject equipment;
     private CapsuleCollider equipmentCollider;
 	private EquipmentThrow equipmentThrow;
 	private RapierScript rapierScript;
+	private ConfettiScript deathScript;
     public float impactMod;
     private GameObject shield;
 
@@ -65,6 +63,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		equipmentThrow = equipment.GetComponent<EquipmentThrow>();
 		rapierScript = equipment.GetComponent<RapierScript>();
+		deathScript = transform.GetComponentInChildren<ConfettiScript>();
 		shield = transform.FindChild("Shield").gameObject;
 		rapierScript.c = color;
         armed = true;
@@ -108,7 +107,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		
 		repeatKeyDelay = 0.093f;
 		timeSinceKeyPress = repeatKeyDelay;
-
+		UpdateColor();
     }
     
 	
@@ -141,7 +140,7 @@ public class PlayerControllerMatt : MonoBehaviour {
             GetCounter();
 		}	
 		
-		UpdateColor();
+		//UpdateColor();
 		
 		GetRespawn();
 	}
@@ -182,6 +181,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	
 	private void MakeDead()
 	{
+		deathScript.Party();
 		alive = false;
 		//Need the normal of the local x axis of bat
         //paint.Paint(transform.position,paint.color);
@@ -359,7 +359,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 
 	private void UpdateColor()
 	{
-		colorLerpT += Time.deltaTime;
+		/*colorLerpT += Time.deltaTime;
 		if (alive && colorLerpT < 1)
 		{
 			rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), color, colorLerpT);
@@ -368,7 +368,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 		{
 			rend.material.color = Color.Lerp(color, new Color(0, 0, 0, 0), colorLerpT);
 
-		}
+		}*/
+		rend.material.color = color;
 	}
 	
 	public void throwEquipment()
