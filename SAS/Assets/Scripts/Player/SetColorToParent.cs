@@ -36,7 +36,7 @@ public class SetColorToParent : MonoBehaviour {
 		TrailRenderer tr = GetComponent<TrailRenderer>();
 		if (tr != null) 
 		{
-			Debug.Log("Trail is now " + r.material.color); 
+			//Debug.Log("Trail is now " + r.material.color); 
 			tr.material.color = r.material.color;
 			trc = tr.material.color;
 		}

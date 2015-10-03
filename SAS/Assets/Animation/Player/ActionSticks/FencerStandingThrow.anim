@@ -362,16 +362,7 @@ AnimationClip:
     path: RapierHand
   m_ScaleCurves: []
   m_FloatCurves: []
-  m_PPtrCurves:
-  - curve:
-    - time: 0
-      value: {fileID: 0}
-    - time: .355555564
-      value: {fileID: 0}
-    attribute: equipment
-    path: 
-    classID: 114
-    script: {fileID: 11500000, guid: 54bb6117bef602541836f03a6b995be1, type: 3}
+  m_PPtrCurves: []
   m_SampleRate: 180
   m_WrapMode: 0
   m_Bounds:
@@ -391,19 +382,11 @@ AnimationClip:
       classID: 4
       customType: 0
       isPPtrCurve: 0
-    - path: 0
-      attribute: 3543717251
-      script: {fileID: 11500000, guid: 54bb6117bef602541836f03a6b995be1, type: 3}
-      classID: 114
-      customType: 0
-      isPPtrCurve: 1
-    pptrCurveMapping:
-    - {fileID: 0}
-    - {fileID: 0}
+    pptrCurveMapping: []
   m_AnimationClipSettings:
     serializedVersion: 2
     m_StartTime: 0
-    m_StopTime: .361111134
+    m_StopTime: .333333343
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1884,7 +1867,7 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: .222222224
-    functionName: throwEquipment
+    functionName: ThrowEquipment
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

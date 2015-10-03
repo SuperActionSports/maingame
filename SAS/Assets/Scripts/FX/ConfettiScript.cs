@@ -15,14 +15,12 @@ public class ConfettiScript : MonoBehaviour {
 		parts = GetComponentsInChildren<ParticleSystem>();
 		partRends = GetComponentsInChildren<ParticleSystemRenderer>();
 		c = GetComponentInParent<PlayerControllerMatt>().color;
-		Debug.Log(parts[0]);
 		countdown = 10;
 		played = false;
 		//ParticleAnimator particleAnimator = transform.GetComponentInChildren<ParticleAnimator>();
 		//Color[] modifiedColors = particleAnimator.colorAnimation;
 		//modifiedColors[2] = Color.yellow;
 		//particleAnimator.colorAnimation = modifiedColors;
-		Debug.Log("Same length? " + (parts.Length == partRends.Length));
 		for(int i = 0; i < parts.Length; i++)
 		{
 			partRends[i].material.color = c;

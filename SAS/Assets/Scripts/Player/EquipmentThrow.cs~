@@ -18,7 +18,8 @@ public class EquipmentThrow : MonoBehaviour {
 	void Start () {
 		PickUp();
 		frame = GetComponent<MeshCollider>();
-		rb = gameObject.AddComponent<Rigidbody>();
+		rb = GetComponent<Rigidbody>();
+//		Debug.Log("Is rb a thing? " + rb);
 		DeactivateRigidbody();
 		
 	}

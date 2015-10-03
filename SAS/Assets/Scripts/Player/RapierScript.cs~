@@ -36,6 +36,7 @@ public class RapierScript : MonoBehaviour {
 		pickUpCollider.enabled = false;
 		colorScript = GetComponent<SetColorToParent>();
 		rb = GetComponent<Rigidbody>();
+//		Debug.Log("Is rb a thing to RapierScript? " + rb);
 		ResetColor();
 	}
 	
@@ -62,7 +63,7 @@ public class RapierScript : MonoBehaviour {
 	{
 		attackCollider.enabled = true;
 		rb.detectCollisions = true;
-		Debug.Log(transform.gameObject.name + " is attacking!");		
+		//Debug.Log(transform.gameObject.name + " is attacking!");		
 	}
 	
 	public void StopAttack()
@@ -71,7 +72,7 @@ public class RapierScript : MonoBehaviour {
 		{
 			attackCollider.enabled = false;
 			rb.detectCollisions = false;
-			Debug.Log(transform.gameObject.name + " stopped attacking!");
+			//Debug.Log(transform.gameObject.name + " stopped attacking!");
 		}
 	}
 	
