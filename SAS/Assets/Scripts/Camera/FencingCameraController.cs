@@ -144,4 +144,10 @@ public class FencingCameraController : MonoBehaviour {
 		cam.transform.position = Vector3.Lerp(cam.transform.position,oldPosition,Time.deltaTime * debugLerp);
 		
 	}
+	
+	void OnGizmosDraw()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z +zOffset),1);;
+	}
 }

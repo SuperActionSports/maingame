@@ -1117,8 +1117,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1303153488}
-  m_RootOrder: 9
+  m_Father: {fileID: 1667884684}
+  m_RootOrder: 0
 --- !u!114 &713514929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1686,7 +1686,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1303153488}
-  - 114: {fileID: 1303153489}
   m_Layer: 0
   m_Name: Stage
   m_TagString: Untagged
@@ -1713,27 +1712,8 @@ Transform:
   - {fileID: 932553027}
   - {fileID: 1579103778}
   - {fileID: 1805725782}
-  - {fileID: 713514928}
   m_Father: {fileID: 0}
   m_RootOrder: 4
---- !u!114 &1303153489
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1303153487}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0773991ca86c8b4db742d6a3160eb80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
-  cam: {fileID: 1838761211}
-  Respawns:
-  - {fileID: 686087513}
-  - {fileID: 1693775101}
-  - {fileID: 268335827}
-  - {fileID: 1615797908}
 --- !u!1001 &1376520792
 Prefab:
   m_ObjectHideFlags: 0
@@ -6988,6 +6968,65 @@ MeshRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
+--- !u!1 &1667884682
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1667884684}
+  - 114: {fileID: 1667884683}
+  - 114: {fileID: 1667884685}
+  m_Layer: 0
+  m_Name: FencingGameWizard
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1667884683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667884682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0773991ca86c8b4db742d6a3160eb80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerPrefab: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
+  cam: {fileID: 1838761211}
+  Respawns:
+  - {fileID: 686087513}
+  - {fileID: 1693775101}
+  - {fileID: 268335827}
+  - {fileID: 1615797908}
+--- !u!4 &1667884684
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667884682}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 713514928}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+--- !u!114 &1667884685
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1667884682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17b96f631d015d24991c88b61ec76078, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1693775101 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 178838, guid: 34b7a66bbb91fc74cb7a824dff7b383a, type: 2}
