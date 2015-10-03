@@ -59,7 +59,7 @@ public class GolfPlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
-		//rend.material.color = c;
+		rend.material.color = c1;
 		speedMagnitude = 10f;
 		colorChangeToUniform = false;
 		colorLerpT = 0;
@@ -110,9 +110,8 @@ public class GolfPlayerController : MonoBehaviour {
 				}
 			}
 			else {
-				if (!swinging) { transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+10*zVel); }
+				if (!swinging) { transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+-10*zVel); }
 			}
-
 			
 			GetAttacking(putting, canHitBall);
 			CheckAnimStateForAttacking();
