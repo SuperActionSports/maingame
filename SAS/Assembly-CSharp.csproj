@@ -52,6 +52,7 @@
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\GoalScored.cs" />
      <Compile Include="Assets\Scripts\InGameMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedLevelSelection.cs" />

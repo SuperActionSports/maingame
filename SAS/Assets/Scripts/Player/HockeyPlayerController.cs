@@ -26,7 +26,9 @@ public class HockeyPlayerController : MonoBehaviour {
 	public RaycastHit groundHit;
 	public float magSpeedX;
 	public float magSpeedZ;
-	public Vector3 speed;
+	public float momentumX;
+	public float momentumZ;
+	public float maxSpeed;
 	public bool putting;
 
     public GameObject[] respawnPoints;
@@ -83,7 +85,13 @@ public class HockeyPlayerController : MonoBehaviour {
 			// Move Character
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			Vector3 newPosition = new Vector3(xVel,0,zVel);
+			momentumX = momentumX + xVel;
+			momentumZ = momentumZ + zVel;
+			if(momentumX > maxSpeed) {momentumX = maxSpeed;}
+			if(momentumX < 0) {if (momentumX < (-1)*maxSpeed){momentumX = (-1)*maxSpeed;}}
+			if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
+			if(momentumZ < 0) {if (momentumZ < (-1)*maxSpeed){momentumZ = (-1)*maxSpeed;}}
+			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
 			if (!putting) { transform.position = transform.position + newPosition; }
 			// If input has been given change to face new input direction
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
