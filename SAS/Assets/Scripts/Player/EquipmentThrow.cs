@@ -12,10 +12,14 @@ public class EquipmentThrow : MonoBehaviour {
 	public float directionModifier;
 	private MeshCollider frame;
 	private RapierScript rapierScript;
+	private float normalThrowForce;
+	private float runThrowForce;
 	
 	public bool thrown;
 	// Use this for initialization
 	void Start () {
+		normalThrowForce = 60;
+		runThrowForce = 80;
 		PickUp();
 		frame = GetComponent<MeshCollider>();
 		rb = GetComponent<Rigidbody>();
@@ -55,7 +59,7 @@ public class EquipmentThrow : MonoBehaviour {
 		rapierScript.resetOwnership();
 	}
 	
-	public void Throw()
+	public void Throw(bool runThrow)
 	{
 		transform.parent = null;
 		ActivateRigidbody(false);
@@ -65,14 +69,16 @@ public class EquipmentThrow : MonoBehaviour {
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
 		rapierScript.setArmed(true);
-		if (directionModifier > 0)
-		{
-			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
-		}
-		else 
-		{
-			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
-		}
+//		if (directionModifier > 0)
+//		{
+//			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
+//		}
+//		else 
+//		{
+//			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
+//		}
+		Vector3 force = runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce;
+		rb.AddForce(force,ForceMode.VelocityChange);
 		spawnTime = Time.time;
 		thrown = true;
 	}	

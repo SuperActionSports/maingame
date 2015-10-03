@@ -10,6 +10,7 @@ public class PlayerControllerMatt : MonoBehaviour {
     public bool armed;
 	public bool alive;	
 	public float impactMod;
+	public bool previousFacingRight;
 	
 	private Rigidbody rb;
 
@@ -21,7 +22,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private EquipmentThrow equipmentThrow;
 	private RapierScript rapierScript;
 	private ConfettiScript deathScript;
-    public SideScrollingCameraController cam;
+    public FencingCameraController cam;
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
@@ -30,7 +31,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		sound =  GetComponent<AudioSource>();
-        cam = Camera.main.GetComponent<SideScrollingCameraController>();
+        cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
@@ -77,6 +78,23 @@ public class PlayerControllerMatt : MonoBehaviour {
 		}	
 	}
 	
+	public void setRun(float vel)
+	{
+		anim.SetFloat("Run",vel);
+	}
+	
+	public void SetRotation(bool currentFacingRight)
+	{
+		if (currentFacingRight)
+		{
+			anim.rootRotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
+		}
+		else
+		{
+			anim.rootRotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+		}
+	}
+	
 	public void Attack()
 	{
 		anim.SetTrigger("Attack");
@@ -93,7 +111,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        //cam.PlayShake(transform.position);
+        cam.PlayShake(transform.position);
         gameObject.SetActive(false);
         equipmentThrow.Drop();
     }
@@ -160,6 +178,11 @@ public class PlayerControllerMatt : MonoBehaviour {
 		armed = true;
 	}
 	
+	public void ThrowRapier()
+	{
+		anim.SetTrigger("Throw");
+	}
+	
 	public void ThrowEquipment()
 	{
 		if (equipmentThrow == null)
@@ -168,11 +191,10 @@ public class PlayerControllerMatt : MonoBehaviour {
 		}
 		else
 		{
-			anim.SetTrigger("Throw");
 			armed = false;
 			equipmentThrow.directionModifier = input.facingRight ? 1 : -1;
 			equipmentThrow.c = color;
-			equipmentThrow.Throw();
+			equipmentThrow.Throw(anim.GetFloat("Run") > 17);
 			equipment = null;
 			equipmentThrow = null;
 			rapierScript.Attack();		

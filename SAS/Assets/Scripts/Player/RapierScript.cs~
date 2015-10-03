@@ -63,7 +63,7 @@ public class RapierScript : MonoBehaviour {
 	{
 		attackCollider.enabled = true;
 		rb.detectCollisions = true;
-		//Debug.Log(transform.gameObject.name + " is attacking!");		
+		Debug.Log(transform.gameObject.name + " is attacking!");		
 	}
 	
 	public void StopAttack()
@@ -72,7 +72,7 @@ public class RapierScript : MonoBehaviour {
 		{
 			attackCollider.enabled = false;
 			rb.detectCollisions = false;
-			//Debug.Log(transform.gameObject.name + " stopped attacking!");
+			Debug.Log(transform.gameObject.name + " stopped attacking!");
 		}
 	}
 	
@@ -97,8 +97,9 @@ public class RapierScript : MonoBehaviour {
 		{
 			//Attacking rapier is about to make swiss cheese of a player
 			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
-			if (victim.alive)
+			if (victim.alive && other.gameObject != parent)
 			{	
+				Debug.Log("I'm gonna hit " + other.transform.gameObject.name + " and my parent is " + parent.gameObject.name);
 				sound.Play();
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
 				StopMoving();
@@ -133,12 +134,13 @@ public class RapierScript : MonoBehaviour {
 		if (!owned && transform.parent != null)
 		{
 			owned = true;
-			Transform grand = transform.parent;
-			while (grand.transform.parent!= null && grand.transform.parent.name != "Players")
-			{
-				grand = grand.transform.parent;
-			}
-			parent = grand.transform.gameObject;
+//			Transform grand = transform.parent;
+//			while (grand.transform.parent!= null && grand.transform.parent.name != "Players")
+//			{
+//				grand = grand.transform.parent;
+//			}
+			parent = transform.parent.parent.gameObject;
+			
 		}
 		else
 		{

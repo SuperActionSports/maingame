@@ -24,13 +24,27 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	private bool deviceActive;
 	public bool facingRight;
 	
+	private float doubleTapCooler;
+	private float doubleTapDelay;
+	private int doubleTapCount;
+	private float previousXVel;
+	private float grandPreviousXVel;
+	
 	[Range(1,30)]
 	public float speedMagnitude;
+	public float sprintSpeedMod;
+	[Range(25,46)]
+	public float jumpForce;
 	
 	private float magSpeedX;
 	void Start () {
 		deviceActive = device == null ? false : true;
-		speedMagnitude = 10;
+		speedMagnitude = 20;
+		jumpForce = 32;
+		sprintSpeedMod = 1.1f;
+		doubleTapDelay = 0.5f;
+		previousXVel = 0;
+		
 	}
 	
 	void Update () {
@@ -39,7 +53,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	void Move(float xVel) 
 	{
-		transform.position += new Vector3(xVel,0,0);
+		transform.position += new Vector3(xVel * Time.deltaTime,0,0);
 		if (xVel < 0 && transform.eulerAngles.y < 180)
 		{
 			transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
@@ -51,6 +65,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 			facingRight = true;
 		}
+		control.SetRotation(facingRight);
 	}
 	
 	public void HandleInput()
@@ -70,7 +85,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	private void GetCounter()
 	{
-		if (control.armed && Input.GetKeyDown(counter))
+		if (control.armed && Input.GetKeyDown(counter) || (deviceActive && device.Action3.WasPressed))
 		{
 			control.Counter();
 		}
@@ -86,7 +101,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			}
 			else if (device.LeftTrigger.WasPressed)
 			{
-				control.ThrowEquipment();
+				control.ThrowRapier();
 			}
 		}
 		else if (Input.GetKeyDown(attack))
@@ -106,11 +121,61 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	private float GetXVelocity()
 	{
-		return !deviceActive ? GetKeyboardXInput(): GetControllerXInput();
+		//float vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput();
+		//return xIsDoubleTap(vel) ? vel * speedMagnitude: vel;	
+		float vel;
+		vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput();
+		control.setRun(Mathf.Abs(vel));
+		return vel;
+	}
+	
+	private bool xIsDoubleTap(float xVel)
+	{
+		bool doubleTap = false;
+		if (doubleTapCooler > 0 && doubleTapCount > 1)
+		{
+			doubleTap = true;
+		}
+		else if (Mathf.Abs(previousXVel) < Mathf.Abs(xVel))
+		{
+			if (doubleTapCooler > 0)
+			{
+				if ((xVel < 0 && grandPreviousXVel < 0) || (xVel > 0 && grandPreviousXVel > 0))
+				{
+					doubleTapCount++;
+				}
+			}
+			else
+			{
+				doubleTapCooler = doubleTapDelay;
+			}
+			doubleTapCooler -= Time.deltaTime;
+		}
+		else
+		{
+			doubleTapCooler = 0;
+			doubleTapCount = 0;
+		}
+		
+		if (doubleTapCooler > 0)
+		{
+			if (Mathf.Abs(xVel) < Mathf.Abs(previousXVel))
+			{
+				previousXVel = xVel;
+			}
+		}
+		else 
+		{
+			previousXVel = xVel;		
+			grandPreviousXVel = previousXVel;
+		}
+
+		return doubleTap;
 	}
 	
 	private void GetYVelocity()
 	{
+		
 		if (device == null )
 			GetKeyboardYInput();
 		else 
@@ -126,7 +191,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{
-					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 				}
 			}
 		}
@@ -145,7 +210,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{
-					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 				}
 			}
 		}
@@ -166,11 +231,11 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		{
 			magSpeedX = 1;
 		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
+		return speedMagnitude * magSpeedX;
 	}
 	
 	private float GetControllerXInput()
 	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
+		return speedMagnitude * device.Direction.X;
 	}
 }
