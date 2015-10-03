@@ -247,12 +247,15 @@
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\GolfBall.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
+     <Compile Include="Assets\Scripts\Player\GolfClubScript.cs" />
      <Compile Include="Assets\Scripts\Player\GolfPlayerController.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />

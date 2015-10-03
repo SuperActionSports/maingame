@@ -17,7 +17,15 @@ public class GolfPlayerController : MonoBehaviour {
 	public KeyCode down;
     public KeyCode attack;
     public KeyCode debugKill;
-	
+
+	// Golf
+	public GolfBall ball;
+	public float distanceToBall;
+	public bool canHitBall;
+	public bool putting;
+	public bool swinging;
+	public float swingStrength;
+
 	public InputDevice device {get; set;}
 
 	public bool alive;
@@ -27,7 +35,6 @@ public class GolfPlayerController : MonoBehaviour {
 	public float magSpeedX;
 	public float magSpeedZ;
 	public Vector3 speed;
-	public bool putting;
 
     public GameObject[] respawnPoints;
     public GameObject equipment;
@@ -44,6 +51,7 @@ public class GolfPlayerController : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
+		swinging = false;
 		putting = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
@@ -76,18 +84,37 @@ public class GolfPlayerController : MonoBehaviour {
 
         if (alive)
         {
-            magSpeedX = 0;
-            magSpeedZ = 0;
-            
+			// Update Ball Object Info to See if Close Enough to Putt
+			ball = GolfBall.FindObjectOfType<GolfBall>();
+			if (ball == null) {
+				distanceToBall = 0;
+				canHitBall = false;
+			}
+			else {
+			 distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
+			                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
+			 canHitBall = (distanceToBall < 1.5);
+			}
 
-			// Move Character
+			// Move Character 
+			magSpeedX = 0;
+			magSpeedZ = 0;
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
 			Vector3 newPosition = new Vector3(xVel,0,zVel);
-			if (!putting) { transform.position = transform.position + newPosition; }
-			// If input has been given change to face new input direction
-			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
-            GetAttacking();
+			if (!putting) {
+				transform.position = transform.position + newPosition; 	
+				// If input has been given change to face new input direction
+				if (newPosition != new Vector3(0,0,0)) { 
+					transform.rotation = Quaternion.LookRotation(-newPosition); 
+				}
+			}
+			else {
+				if (!swinging) { transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+10*zVel); }
+			}
+
+			
+			GetAttacking(putting, canHitBall);
 			CheckAnimStateForAttacking();
 		}	
 		
@@ -138,13 +165,14 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	private void CheckAnimStateForAttacking()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-		{
-			equipmentCollider.enabled = true;
-		}
-		else if (equipmentCollider.enabled)
-		{
-			equipmentCollider.enabled = false;
+		// Check Anim State for Putting
+		if (putting) { 
+			anim.SetBool ("Putting", true);
+			if (swinging) { 
+				if (anim.GetBool ("Swing") != true) { anim.SetBool ("BackSwing", true); }
+			}
+		} else {
+			anim.SetBool ("Putting", false);
 		}
 	}
 	
@@ -152,6 +180,11 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		//Magic Number
 		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+		if (putting) {
+			ball.beingHit = false;
+		}
+		putting = false;
+		swinging = false;
         MakeDead();
     }
 
@@ -174,30 +207,76 @@ public class GolfPlayerController : MonoBehaviour {
         colorChangeToUniform = true;
     }
 	
-	private void GetAttacking()
+	private void GetAttacking(bool putting, bool CanHitBall)
 	{
-		if (Input.GetKey(attack) || (device != null && (device.LeftTrigger || device.RightTrigger)))
-		{
-			Attack ();
-		}
-		else if (Input.GetKey(attack))
-		{
-			Attack();
+		if (putting) {
+			if (swinging) {
+				if (Input.GetKey (attack)) {
+					BackSwing ();
+				}
+				if (Input.GetKeyUp (attack)) {
+					Swing ();
+				}
+			}
+			else {
+				if (Input.GetKeyDown (attack)) {
+					BackSwing ();
+				}
+			}
+			return;
+		} else {
+			if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger))) {
+				if (CanHitBall && !ball.beingHit) {
+					StartPutting ();
+					return;
+				} else {
+					Attack ();
+					return;
+				}
+			}
 		}
 	}
 	
 	private void Attack()
     {
-        if (equipmentCollider.enabled)
-        {
-            anim.SetTrigger("ComboAttack");
-        }
-        else
-        {
-            anim.SetTrigger("Attack");
-        }
-
+		anim.SetBool("Attack", true);
+		equipmentCollider.enabled = true;
     }
+
+	private void StopAttack()
+	{
+		anim.SetBool("Attack", false);
+		equipmentCollider.enabled = false;
+	}
+
+	private void StartPutting() {
+		putting = true;
+		transform.LookAt (new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z));
+		(ball as GolfBall).beingHit = true;
+	}
+
+	private void BackSwing() {
+		if (!swinging) {
+			swinging = true;
+			swingStrength = 5f;
+		} else {
+			swingStrength+=0.5f;
+		}
+	}
+
+	private void Swing() {
+		anim.SetBool ("BackSwing", false);
+		anim.SetBool ("Swing", true);
+		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, c1);
+		FinishSwing ();
+	}
+
+	private void FinishSwing() {
+		swinging = false;
+		putting = false;
+		anim.SetBool ("BackSwing", false);
+		anim.SetBool ("Swing", false);
+	}
     
     private float GetXVelocity()
     {
