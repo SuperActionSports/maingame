@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class BaseballController : MonoBehaviour {
 
 	public int playerHit = 0 ;
@@ -26,8 +25,6 @@ public class BaseballController : MonoBehaviour {
 		else if (other.gameObject.tag == "killzone") {
 			Destroy (gameObject);
 			// explosion visual
-			AudioSource audio = GetComponent<AudioSource>() ;
-			audio.Play ();
 		} 
 		else if (other.gameObject.tag == "Equipment") {
 			// set playerHit to player# of player who hit the ball
