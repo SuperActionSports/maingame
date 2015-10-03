@@ -5,21 +5,6 @@ using System.Collections;
 public class BaseballLauncher : MonoBehaviour {
 
 	public Rigidbody ball ;
-	private bool loading ;
-
-
-	void Start () {
-		loading = true ;
-		// play 'charge' here
-		Invoke ("Pitch", 5.4f) ;
-	}
-
-	void Update () {
-		if (!loading) {
-			loading = true ;
-			Invoke ("Pitch", 4.0f) ;
-		}
-	}
 				
 	public void Pitch () {
 		Rigidbody egg = Instantiate(ball, transform.position, Quaternion.identity) as Rigidbody ;
@@ -27,6 +12,5 @@ public class BaseballLauncher : MonoBehaviour {
 		egg.AddForce(pitchPow);
 		AudioSource audio = GetComponent<AudioSource>() ;
 		audio.Play ();
-		loading = false ;
 	}
 }
