@@ -50,6 +50,7 @@
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\Camera\FencingCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\ICamera.cs" />
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
@@ -63,6 +64,7 @@
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrowDebug.cs" />
+     <Compile Include="Assets\Scripts\Player\FencingPlayerManager.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
