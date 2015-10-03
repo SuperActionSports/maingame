@@ -246,7 +246,7 @@
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
-     <Compile Include="Assets\Scripts\GameLogic\StickeggController.cs" />
+     <Compile Include="Assets\Scripts\GameLogic\StickeggRules.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
@@ -260,11 +260,17 @@
      <Compile Include="Assets\Scripts\SportsObjects\BaseballLauncher.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
      <None Include="Assets\InControl\Readme\README.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="Mono.Cecil">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/Mono.Cecil.dll</HintPath>

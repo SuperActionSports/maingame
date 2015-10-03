@@ -11,7 +11,7 @@ public class BaseballLauncher : MonoBehaviour {
 	void Start () {
 		loading = true ;
 		// play 'charge' here
-		Invoke ("Pitch", 4.0f) ;
+		Invoke ("Pitch", 5.4f) ;
 	}
 
 	void Update () {
@@ -21,7 +21,7 @@ public class BaseballLauncher : MonoBehaviour {
 		}
 	}
 				
-	void Pitch () {
+	public void Pitch () {
 		Rigidbody egg = Instantiate(ball, transform.position, Quaternion.identity) as Rigidbody ;
 		Vector3 pitchPow = new Vector3 (Random.Range(-23, -2), 40, 0) ;
 		egg.AddForce(pitchPow);
