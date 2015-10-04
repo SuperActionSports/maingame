@@ -3,12 +3,7 @@ using System.Collections;
 using InControl;
 
 public class PuckMovement : MonoBehaviour {
-
-
-	public KeyCode left;
-	public KeyCode right;
-	public KeyCode up;
-	public KeyCode down;
+	
 	public KeyCode debugKill;
 	public Color c1;
 	private CapsuleCollider puckCollider;
@@ -40,25 +35,6 @@ public class PuckMovement : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if (inplay)
-		{
-			magSpeedX = 0;
-			magSpeedZ = 0;
-			
-			
-			// Move Character
-			float xVel = GetXVelocity();
-			float zVel = GetZVelocity();
-			momentumX = (momentumX + xVel)*friction;
-			momentumZ = (momentumZ + zVel)*friction;
-			if(momentumX > maxSpeed) {momentumX = maxSpeed;}
-			if(momentumX < 0) {if (momentumX < (-1)*maxSpeed){momentumX = (-1)*maxSpeed;}}
-			if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
-			if(momentumZ < 0) {if (momentumZ < (-1)*maxSpeed){momentumZ = (-1)*maxSpeed;}}
-			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
-			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
-		}	
-
 		GetRespawn();
 	}
 	
@@ -74,6 +50,7 @@ public class PuckMovement : MonoBehaviour {
 			if (col.gameObject.name == "Inner West Net" || col.gameObject.name == "Inner East Net") {
 				Debug.Log ("Goal Scored");
 				inplay = false;
+				Respawn();
 			}
 		}
 	}
@@ -100,48 +77,5 @@ public class PuckMovement : MonoBehaviour {
 		inplay = true;
 		rb.velocity = new Vector3(0, 0, 0);
 		transform.position = respawnPoint.transform.position;
-	}
-
-	private float GetKeyboardZInput()
-	{
-		if (Input.GetKey(up))
-		{
-			magSpeedZ = 1;
-		}
-		if (Input.GetKey(down))
-		{
-			magSpeedZ = -1;
-		}
-		return speedMagnitude * magSpeedZ * Time.deltaTime;
-	}
-	
-	private float GetKeyboardXInput()
-	{
-		if (Input.GetKey(left))
-		{
-			magSpeedX = -1;
-		}
-		if (Input.GetKey(right))
-		{
-			magSpeedX = 1;
-		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
-	}
-	private float GetControllerZInput()
-	{
-		return speedMagnitude * device.Direction.Y * Time.deltaTime;
-	}
-	private float GetControllerXInput()
-	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
-	}
-	private float GetXVelocity()
-	{
-		return device == null ? GetKeyboardXInput(): GetControllerXInput();
-	}
-	
-	private float GetZVelocity()
-	{
-		return device == null ? GetKeyboardZInput(): GetControllerZInput();
 	}
 }
