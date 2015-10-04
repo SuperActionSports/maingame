@@ -15,6 +15,7 @@ public class TennisController : MonoBehaviour {
 	public KeyCode right;
 	public KeyCode up;
 	public KeyCode down;
+	public KeyCode swing;
     public KeyCode attack;
     public KeyCode debugKill;
 	
@@ -60,7 +61,7 @@ public class TennisController : MonoBehaviour {
 		ResetRigidBodyConstraints();
 		impactMod = 7.5f;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-     
+		equipmentCollider.enabled = false;
         if (respawnPoints.Length == 0)
         {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
@@ -87,8 +88,9 @@ public class TennisController : MonoBehaviour {
 			if (!putting) { transform.position = transform.position + newPosition; }
 			// If input has been given change to face new input direction
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
+			CheckServe();
+			GetSwinging();
             GetAttacking();
-			CheckAnimStateForAttacking();
 		}	
 		
 		UpdateColor();
@@ -97,7 +99,7 @@ public class TennisController : MonoBehaviour {
 	
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
 	
@@ -116,6 +118,11 @@ public class TennisController : MonoBehaviour {
 			else
 			Respawn();
 		} 
+	}
+
+	private void CheckServe()
+	{
+
 	}
 	
 	private void MakeDead()
@@ -138,14 +145,7 @@ public class TennisController : MonoBehaviour {
 	
 	private void CheckAnimStateForAttacking()
 	{
-		if (anim.GetCurrentAnimatorStateInfo(0).IsTag("Attack"))
-		{
-			equipmentCollider.enabled = true;
-		}
-		else if (equipmentCollider.enabled)
-		{
-			equipmentCollider.enabled = false;
-		}
+
 	}
 	
 	public void Kill()
@@ -158,7 +158,7 @@ public class TennisController : MonoBehaviour {
     public void Kill(Vector3 direction)
     {
 		//Magic Number
-		sound.Play ();
+		//sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }
@@ -173,6 +173,29 @@ public class TennisController : MonoBehaviour {
         transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
         colorChangeToUniform = true;
     }
+
+	private void GetSwinging()
+	{
+		if (Input.GetKey (swing)) 
+		{
+			Swing();
+		}
+	}
+
+	private void Swing()
+	{
+		anim.SetTrigger ("SwingRacquet");
+	}
+
+	private void StartSwing()
+	{
+		equipmentCollider.enabled = true; 
+	}
+
+	private void EndSwing()
+	{
+		equipmentCollider.enabled = false;
+	}
 	
 	private void GetAttacking()
 	{
@@ -185,19 +208,21 @@ public class TennisController : MonoBehaviour {
 			Attack();
 		}
 	}
-	
+
 	private void Attack()
     {
-        if (equipmentCollider.enabled)
-        {
-            anim.SetTrigger("ComboAttack");
-        }
-        else
-        {
-            anim.SetTrigger("Attack");
-        }
-
+		anim.SetTrigger("AttackRacquet");
     }
+
+	private void StartAttack()
+	{
+		equipmentCollider.enabled = true;
+	}
+
+	private void EndAttack()
+	{
+		equipmentCollider.enabled = false;
+	}
     
     private float GetXVelocity()
     {
