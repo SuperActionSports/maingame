@@ -68,7 +68,7 @@ public class HockeyPlayerController : MonoBehaviour {
         }
         
 		paint = GetComponent<PaintSplatter>();
-		paint.color = c1;
+		//paint.color = c1;
     }
     
 	
@@ -84,13 +84,14 @@ public class HockeyPlayerController : MonoBehaviour {
 			// Move Character
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			momentumX = (momentumX + xVel)*friction;
-			momentumZ = (momentumZ + zVel)*friction;
-			if(momentumX > maxSpeed) {momentumX = maxSpeed;}
-			if(momentumX < 0) {if (momentumX < (-1)*maxSpeed){momentumX = (-1)*maxSpeed;}}
-			if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
-			if(momentumZ < 0) {if (momentumZ < (-1)*maxSpeed){momentumZ = (-1)*maxSpeed;}}
-			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
+			//momentumX = (momentumX + xVel)*friction;
+			//momentumZ = (momentumZ + zVel)*friction;
+			//if(momentumX > maxSpeed) {momentumX = maxSpeed;}
+			//if(momentumX < 0) {if (momentumX < (-1)*maxSpeed){momentumX = (-1)*maxSpeed;}}
+			//if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
+			//if(momentumZ < 0) {if (momentumZ < (-1)*maxSpeed){momentumZ = (-1)*maxSpeed;}}
+			//Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
+			Vector3 newPosition = new Vector3(xVel,0,zVel);
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
             GetAttacking();
 			CheckAnimStateForAttacking();

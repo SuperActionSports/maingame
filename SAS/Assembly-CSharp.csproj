@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyPlayerDiskController.cs" />
+     <Compile Include="Assets\Scripts\Player\HockeyTempPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController3D.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
