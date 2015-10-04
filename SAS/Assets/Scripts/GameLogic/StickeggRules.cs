@@ -5,6 +5,7 @@ public class StickeggRules : MonoBehaviour {
 	
 	public BaseballLauncher pitcher ;
 	public AudioClip charge ;
+	public Camera camera ;
 	private float gameTime = 0.0f ;
 	private float gameLength = 60.0f ;
 	private float pitchGap = 3.96f ;
@@ -16,6 +17,7 @@ public class StickeggRules : MonoBehaviour {
 	}
 
 	void Update () {
+		pointAtBall () ;
 		gameTime += Time.deltaTime ;
 		if (gameTime <= gameLength) {
 			if (gameLength - gameTime <= 15.0f && !bottomNinth) {
@@ -28,5 +30,11 @@ public class StickeggRules : MonoBehaviour {
 				pitcher.Pitch () ;
 			}
 		}
+	}
+
+	void pointAtBall () {
+		Vector3 p1 = camera.ViewportToWorldPoint(new Vector3(0.5F, 0.5F, 0)) ;
+		Vector3 p2 = Camera.main.ScreenToWorldPoint(GameObject.FindWithTag("ball").transform.position) ;
+		Debug.Log (p1);
 	}
 }
