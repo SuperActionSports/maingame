@@ -18,6 +18,8 @@ public class GolfClubScript : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider other)
 	{
+		Debug.Log("Golf club hit detected");
+		Debug.Log("I have hit " + other.gameObject.tag);
 		if (other.CompareTag("Player"))
 		{
 			GolfPlayerController victim = other.GetComponent<GolfPlayerController>();

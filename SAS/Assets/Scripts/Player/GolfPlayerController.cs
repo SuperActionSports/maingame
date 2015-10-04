@@ -59,6 +59,7 @@ public class GolfPlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
+        equipmentCollider.enabled = false;
 		rend.material.color = c1;
 		speedMagnitude = 10f;
 		colorChangeToUniform = false;
@@ -74,6 +75,7 @@ public class GolfPlayerController : MonoBehaviour {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
         
+        transform.parent.rotation = transform.rotation;
 		paint = GetComponent<PaintSplatter>();
 		paint.color = c1;
     }
@@ -81,9 +83,10 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		
         if (alive)
         {
+        	rb.velocity = new Vector3(0,0,0);
 			// Update Ball Object Info to See if Close Enough to Putt
 			ball = GolfBall.FindObjectOfType<GolfBall>();
 			if (ball == null) {
@@ -103,14 +106,15 @@ public class GolfPlayerController : MonoBehaviour {
 			float zVel = GetZVelocity();
 			Vector3 newPosition = new Vector3(xVel,0,zVel);
 			if (!putting) {
-				transform.position = transform.position + newPosition; 	
+				transform.parent.transform.position = transform.parent.transform.position + newPosition; 	
 				// If input has been given change to face new input direction
 				if (newPosition != new Vector3(0,0,0)) { 
 					transform.rotation = Quaternion.LookRotation(-newPosition); 
+					transform.eulerAngles = new Vector3(transform.eulerAngles.x,transform.eulerAngles.y + 90, transform.eulerAngles.z);
 				}
 			}
 			else {
-				if (!swinging) { transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+-10*zVel); }
+				if (!swinging) { transform.parent.transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+-10*zVel); }
 			}
 			
 			GetAttacking(putting, canHitBall);
@@ -123,7 +127,7 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
 	
@@ -189,10 +193,13 @@ public class GolfPlayerController : MonoBehaviour {
 
     public void Kill(Vector3 direction)
     {
-		//Magic Number
-		sound.Play ();
-		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
-        MakeDead();    
+		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+		if (putting) {
+			ball.beingHit = false;
+		}
+		putting = false;
+		swinging = false;
+		MakeDead();
     }
 
     public void Respawn()
@@ -238,19 +245,25 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	private void Attack()
     {
-		anim.SetBool("Attack", true);
-		equipmentCollider.enabled = true;
+		anim.SetTrigger("SwingAttack");
+    }
+    
+    private void StartAttacking()
+    {
+    	equipmentCollider.enabled = true;
     }
 
 	private void StopAttack()
 	{
-		anim.SetBool("Attack", false);
 		equipmentCollider.enabled = false;
 	}
 
 	private void StartPutting() {
+		//transform.parent.transform.LookAt (ball.transform.position);
+		transform.parent.transform.position = ball.transform.position;
+		transform.localEulerAngles = new Vector3(0,0,0);
+		transform.localPosition = new Vector3 (-2.51f, transform.localPosition.y, transform.localPosition.z);
 		putting = true;
-		transform.LookAt (new Vector3(ball.transform.position.x, transform.position.y, ball.transform.position.z));
 		(ball as GolfBall).beingHit = true;
 	}
 
