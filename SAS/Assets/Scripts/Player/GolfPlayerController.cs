@@ -96,7 +96,7 @@ public class GolfPlayerController : MonoBehaviour {
 			else {
 			 distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
 			                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
-			 canHitBall = (distanceToBall < 1.5);
+			 canHitBall = (distanceToBall < 2);
 			}
 
 			// Move Character 
@@ -217,9 +217,6 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		if (putting) {
 			if (swinging) {
-				if (Input.GetKey (attack)) {
-					BackSwing ();
-				}
 				if (Input.GetKeyUp (attack)) {
 					Swing ();
 				}
@@ -260,9 +257,22 @@ public class GolfPlayerController : MonoBehaviour {
 
 	private void StartPutting() {
 		//transform.parent.transform.LookAt (ball.transform.position);
-		transform.parent.transform.position = ball.transform.position;
-		transform.localEulerAngles = new Vector3(0,0,0);
-		transform.localPosition = new Vector3 (-2.51f, transform.localPosition.y, transform.localPosition.z);
+		transform.Rotate (new Vector3(0, 90, 0));
+
+		// Set the parents rotation equal to 
+		Transform parent = transform.parent;
+		transform.SetParent (null);
+		parent.transform.localEulerAngles = transform.localEulerAngles;
+		transform.SetParent (parent);
+
+		float rotatedAngle = transform.localEulerAngles.y;
+		float newX = transform.localPosition.x - (Mathf.Cos (rotatedAngle)*2f);
+		float newZ = transform.localPosition.z - (Mathf.Sin (rotatedAngle)*2f);
+		transform.localPosition = new Vector3 (newX, transform.localPosition.y, newZ);
+
+		//transform.localEulerAngles = new Vector3(0,0,0);
+		//transform.localPosition = new Vector3 (-2.51f, transform.localPosition.y, transform.localPosition.z);
+
 		putting = true;
 		(ball as GolfBall).beingHit = true;
 	}
@@ -279,8 +289,6 @@ public class GolfPlayerController : MonoBehaviour {
 	private void Swing() {
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", true);
-		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, c1);
-		FinishSwing ();
 	}
 
 	private void FinishSwing() {
@@ -288,6 +296,7 @@ public class GolfPlayerController : MonoBehaviour {
 		putting = false;
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
+		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, c1);
 	}
     
     private float GetXVelocity()
