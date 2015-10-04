@@ -34,7 +34,7 @@ public class TennisController : MonoBehaviour {
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
-
+	
 
     public OverheadCameraController cam;
 	private PaintSplatter paint;
@@ -79,7 +79,6 @@ public class TennisController : MonoBehaviour {
         {
             magSpeedX = 0;
             magSpeedZ = 0;
-            
 
 			// Move Character
             float xVel = GetXVelocity();
@@ -96,7 +95,55 @@ public class TennisController : MonoBehaviour {
 		UpdateColor();
 		GetRespawn();
 	}
-	
+
+	void OnTriggerStay(Collider other)
+	{
+		if (other.CompareTag ("Ball")) 
+		{
+			Debug.Log ("Ball is in sphere");
+			Rigidbody ballRB = other.GetComponent<Rigidbody>();
+			if(Input.GetKey (swing))
+			{
+				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+				float angle = ballHeightToAngle(other.transform.position.y);
+				float force = playerPositionToForce(transform.position.z);
+				Debug.Log ("Angle: " + angle);
+				Debug.Log ("Force: " + force);
+				Swing ();
+				Quaternion direction = Quaternion.AngleAxis(45.0f, Vector3.right);
+				ballRB.AddForce(direction * -transform.forward * 2000);
+			}
+		}
+	}
+
+	private float ballHeightToAngle(float height)
+	{
+		// The following are just magic numbers that I've been recently testing
+		float angle = 30f;
+		if (height < 0.5) {
+			angle = 30f;
+		} else if (height >= 0.5 && height < 1f) {
+			angle = 20f;
+		} else {
+			angle = 5f;
+		}
+		return angle;
+	}
+
+	private float playerPositionToForce(float position)
+	{
+		// Same as above, magic numbers.
+		float force = 1000;
+		if (Mathf.Abs(position) < 5f) {
+			force = 10;
+		} else if (position >= 5f && position < 8f) {
+			force = 2000;
+		} else {
+			force = 3000;
+		}
+		return force;
+	}
+
 	private void ResetRigidBodyConstraints() 
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
@@ -129,7 +176,7 @@ public class TennisController : MonoBehaviour {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-        paint.Paint(transform.position,paint.color);
+		paint.Paint (transform.position, paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);

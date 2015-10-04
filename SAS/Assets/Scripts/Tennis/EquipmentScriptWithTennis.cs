@@ -37,6 +37,10 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 				SetScoreText();
             }
         }
+    }
+
+	void OnTriggerStay(Collider other)
+	{
 		if (other.CompareTag ("Ball")) 
 		{
 			Debug.Log ("Found ball");
@@ -44,7 +48,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 			Quaternion angle = Quaternion.AngleAxis(45.0f, Vector3.right);
 			rbBall.AddForce(angle * -transform.forward * speed);
 		}
-    }
+	}
 
 	void OnCollisionEnter()
 	{

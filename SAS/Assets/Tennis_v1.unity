@@ -205,6 +205,7 @@ GameObject:
   - 114: {fileID: 195760664}
   - 114: {fileID: 195760667}
   - 114: {fileID: 195760671}
+  - 135: {fileID: 195760672}
   m_Layer: 0
   m_Name: TennisPlayer
   m_TagString: Player
@@ -368,6 +369,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tennisBall: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+--- !u!135 &195760672
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 195760662}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &409646091
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +752,7 @@ GameObject:
   - 95: {fileID: 588736354}
   - 114: {fileID: 588736353}
   - 114: {fileID: 588736352}
+  - 135: {fileID: 588736351}
   m_Layer: 0
   m_Name: TennisPlayer (1)
   m_TagString: Player
@@ -753,13 +767,25 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 588736349}
   m_LocalRotation: {x: 0, y: .70710659, z: 0, w: -.707106948}
-  m_LocalPosition: {x: -3.01999998, y: 1, z: 9.14000034}
+  m_LocalPosition: {x: -3.20000005, y: 1, z: 3.74000001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1529802330}
   - {fileID: 972806513}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!135 &588736351
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 588736349}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &588736352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1576,8 +1602,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 4
-  m_Height: 11
+  m_Radius: 2
+  m_Height: 5
   m_Direction: 1
   m_Center: {x: -.0399999991, y: 2.27999997, z: 0}
 --- !u!114 &1529802332
@@ -2040,8 +2066,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 4
-  m_Height: 11
+  m_Radius: 2
+  m_Height: 4
   m_Direction: 1
   m_Center: {x: -.0399999991, y: 2.27999997, z: 0}
 --- !u!114 &1901176202
