@@ -27,6 +27,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
 	private PlayerInputHandlerMatt input;
+	public FencingGameManager wizard;
 
 	// Use this for initialization
 	void Start () {

@@ -10,6 +10,13 @@ public class FencingCameraController : MonoBehaviour {
 	public float yOffset;
 	public float zOffset;
 	public float zDebugMod;
+	public float minimumZ;
+	
+	public float xWinOffset;
+	public float yWinOffset;
+	public float zWinOffset;
+	private Vector3 winOffset;
+	public bool win;
 	
 	//Camera Shake Variables
 	Camera cam;
@@ -21,7 +28,6 @@ public class FencingCameraController : MonoBehaviour {
 	public float z;
 	
 	private Vector2 oldPosition;
-	private float maxDist;
 	
 	void Start () {
 		RecountPlayers();
@@ -34,6 +40,10 @@ public class FencingCameraController : MonoBehaviour {
 		shakeIntensity = 50f;
 		zOffset = 20f;
 		zDebugMod = 30;
+		minimumZ = -14;
+		yWinOffset = 1.76f;
+		zWinOffset = -7.34f;
+		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
 	}
 	
 	void Update() {
@@ -45,13 +55,20 @@ public class FencingCameraController : MonoBehaviour {
 	// Update is called once per frame
 	void LateUpdate () {
 		z = 0;
-		maxDist = 0;	
-		if (players.Length > 1)
+		if (players.Length > 1 && !win)
 		{
 			Vector2 averagePosition = GetAveragePositions();
-			float zOffsetViaMath = (Mathf.Tan(Mathf.PI / 3) * (maxDist));
-			z = zOffset < zOffsetViaMath ? -zOffset : -zOffsetViaMath;
+			z = GetMaximumDistance();
+			z /= -2.0f;
+			if (z > minimumZ) 
+			{
+				z = minimumZ;
+			}
 			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
+		}
+		else
+		{
+			FollowWinner(players[0]);
 		}
 		
 		// Camera shake code
@@ -68,38 +85,37 @@ public class FencingCameraController : MonoBehaviour {
 		Debug.Log("Player count after: " + players.Length);
 	}
 	
+	private float GetMaximumDistance()
+	{
+		float maxDist = 0;
+		for (int i = 0; i < players.Length; i++) {
+			for (int g = i; g < players.Length; g++)
+			{
+				if (Vector3.Distance(players[i].transform.position,players[g].transform.position) > maxDist)
+				{
+					maxDist = Vector3.Distance(players[i].transform.position,players[g].transform.position);
+				}
+			}
+		}
+		return maxDist;
+	}
+	
 	private Vector2 GetAveragePositions()
 	{
 		float x = 0;
 		float y = 0;
 		Vector3[] positions = new Vector3[players.Length];
-		
-		Debug.Log("About to get average: " + players.Length);
 		for (int i = 0; i < players.Length; i++) {
-			Debug.Log ("I think there are this many players: "+players.Length);
-			Debug.Log("Positions length: " + positions.Length);
 			PlayerControllerMatt p = players[i].GetComponent<PlayerControllerMatt>();
 			if (p.alive)
 			{
-				Debug.Log("I'm dealing with " + i);
 				positions [i] = p.transform.position;
 				x += players[i].transform.position.x;
 				y += players[i].transform.position.y;
 			}
-			Debug.Log("I'm not dealing with " + i + " because he dead.");
-		}
-		for (int i = 0; i < positions.Length; i++) {
-			Vector3 pos = positions [i];
-			float dist = Mathf.Sqrt(Mathf.Pow(pos.x - x, 2)+Mathf.Pow((2*(pos.y - y)), 2));
-			if (dist > maxDist) 
-			{ 
-				maxDist = dist; 
-			}
-		}
-		
+		}		
 		x /= players.Length;
 		y /= players.Length;
-		
 		
 		return new Vector2(x,y);
 	}
@@ -145,9 +161,9 @@ public class FencingCameraController : MonoBehaviour {
 		
 	}
 	
-	void OnGizmosDraw()
+	public void FollowWinner(GameObject winner)
 	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(new Vector3(transform.position.x, transform.position.y, transform.position.z +zOffset),1);;
+		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
+		transform.position = (winner.transform.position + winOffset);
 	}
 }
