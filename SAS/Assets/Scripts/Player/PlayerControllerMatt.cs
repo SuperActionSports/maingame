@@ -26,7 +26,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
-	private PlayerInputHandlerMatt input;
+	public PlayerInputHandlerMatt input;
 	public FencingGameManager wizard;
 
 	// Use this for initialization
@@ -68,6 +68,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 //		paint = GetComponent<PaintSplatter>();
 //		paint.color = color;
 //		
+		wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
 		UpdateColor();
     }
     
@@ -115,6 +116,7 @@ public class PlayerControllerMatt : MonoBehaviour {
         cam.PlayShake(transform.position);
         gameObject.SetActive(false);
         equipmentThrow.Drop();
+        wizard.UpdatePlayerCount();
     }
     
     public void Counter()

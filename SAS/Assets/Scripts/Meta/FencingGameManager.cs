@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
+using InControl;
 
 public class FencingGameManager : MonoBehaviour {
-
+	
 	public GameObject playerPrefab;
 	private GameObject[] players;
 	private PlayerControllerMatt[] controls;
@@ -14,54 +15,65 @@ public class FencingGameManager : MonoBehaviour {
 	private int winner;
 	public GameObject victory;
 	private float victoryDuration;
-	private float victoryWait;
 	private float gameWinTime;
 	private int matchCount;
-	
+	private FencingCameraController cam;
+	private FencingPlayerManager inputManager;
+	private InputDevice[] devices;
 	// Use this for initialization
 	void Start () {
 	/*
 	Get a list of valid players from UserPrefs along with their device
 	Store these players into players[] and their colors into colors[]
 	*/
+		players = GameObject.FindGameObjectsWithTag("Player");
 		if (respawnPoints.Length != 5)
 		{
 			Debug.LogError("Invalid number of respawn points. You need 5, you have " + respawnPoints.Length);
+		}
+		else{
+			respawnPointPositions = new Vector3[respawnPoints.Length];
 		}
 		for (int i = 0; i < respawnPoints.Length; i++)
 		{
 			respawnPointPositions[i] = respawnPoints[i].transform.position;	
 		}
 		winner = 0;
-		totalPlayers = players.Length;
-		controls = new PlayerControllerMatt[totalPlayers];
-		remainingPlayers = totalPlayers;
+		if (players.Length > 0)
+		{
+			totalPlayers = players.Length;
+			controls = new PlayerControllerMatt[totalPlayers];
+			devices = new InputDevice[totalPlayers];
+			remainingPlayers = totalPlayers;
+		}
 		matchCount = 0;
 		victoryDuration = 3;
-		victoryWait = 3;
-		gameWinTime = 0;
+		gameWinTime = -10000;
+		
+		cam = Camera.main.GetComponent<FencingCameraController>();
+		inputManager = GetComponent<FencingPlayerManager>();
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (Time.time < gameWinTime + victoryDuration)
 		{
-			//Do thing
+			cam.FollowWinner(players[winner]);
 			if (Time.time + Time.deltaTime >= gameWinTime + victoryDuration)
 			{
 				ResetPlayers();
-				//Fix camera
 			}
 		}
 	}
 	
 	private void SetPlayers()
 	{
-		
+		// Set players should be SPAWN players. SpawnPlayers should reset the position of the players to one of the given respawn points, set them to active and alive, etc
+		// This should handle the device concern too. 	
 		switch(players.Length)
 		{
 			case(2):
-			if(matchCount < 1 || controls[0].alive) controls[0] = Spawn (respawnPointPositions[0],0);
+			if(matchCount < 1 || controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
 			if(matchCount < 1 || controls[1].alive)controls[1] = Spawn (respawnPointPositions[4],1);
 			break;
 			
@@ -90,16 +102,17 @@ public class FencingGameManager : MonoBehaviour {
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		
 		// Replace this noise with the player prefs file information
-		p.GetComponent<PlayerControllerMatt>().color = Color.black;
-		
+		p.GetComponent<PlayerControllerMatt>().color = colors[playerNumber];
 		p.GetComponent<PlayerControllerMatt>().wizard = this;
 		
 		// Replace this with the device information from userprefs
-		p.GetComponent<PlayerInputHandlerMatt>().device = null; 
+		p.GetComponent<PlayerControllerMatt>().input.device = devices[playerNumber];
+		
+		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return p.GetComponent<PlayerControllerMatt>();
 	}
 	
-	private void UpdatePlayerCount()
+	public void UpdatePlayerCount()
 	{
 		for (int i = 0; i<totalPlayers;i++)
 		{
@@ -112,15 +125,40 @@ public class FencingGameManager : MonoBehaviour {
 		}
 	}
 	
+	public void UpdatePlayerTotal(int newCount)
+	{
+		totalPlayers = newCount;		
+		winner = 0;
+		totalPlayers = players.Length;
+		controls = new PlayerControllerMatt[totalPlayers];
+		remainingPlayers = totalPlayers;
+		players = new GameObject[inputManager.PlayersCount()];
+		players = GameObject.FindGameObjectsWithTag("Player");
+	 	controls = new PlayerControllerMatt[inputManager.PlayersCount()];
+	 	colors = new Color[inputManager.PlayersCount()];
+	 	devices = new InputDevice[inputManager.PlayersCount()];
+	 	for (int c = 0; c < controls.Length; c++)
+	 	{
+	 		controls[c] = players[c].GetComponent<PlayerControllerMatt>();
+			Debug.Log("Devices: " + devices[c] + ", Contols: " + controls[c] + ", Input: " + controls[c].input);
+	 		devices[c] = controls[c].input.device;
+	 		colors[c] = controls[c].color;
+	 	}
+		
+		
+	}
+	
 	private void Victory()
 	{
-		//victory.GetComponent<>().Celebrate(colors[winner]);
+		victory.GetComponent<VictoryScript>().Party (controls[winner].color);
 		gameWinTime = Time.time;
+		cam.won = true;
 	}
 	
 	private void ResetPlayers()
 	{
 		matchCount++;
 		SetPlayers();
+		cam.won = false;
 	}
 }

@@ -14,27 +14,25 @@ public class VictoryScript : MonoBehaviour {
 	void Start () {
 		parts = GetComponentsInChildren<ParticleSystem>();
 		partRends = GetComponentsInChildren<ParticleSystemRenderer>();
-		c = GetComponentInParent<PlayerControllerMatt>().color;
 		countdown = 10;
 		played = false;
-		for(int i = 0; i < parts.Length; i++)
-		{
-			partRends[i].material.color = c;
-			parts[i].startColor = c;
-		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		 if (Input.GetKeyDown(replay))
 		 {
-		 	Party();
+		 	Party(Color.gray);
 		 }
 	}
 	
-	public void Party()
-	{
-		transform.parent = null;
+	public void Party(Color c)
+	{	
+		for(int i = 0; i < parts.Length; i++)
+		{
+			partRends[i].material.color = c;
+			parts[i].startColor = c;
+		}
 		foreach (ParticleSystem p in parts)
 		{
 			p.Play ();

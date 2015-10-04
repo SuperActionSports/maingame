@@ -3,9 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using InControl;
 
-
-namespace MultiplayerBasicExample
-{
 	// This example roughly illustrates the proper way to add multiple players from existing
 	// devices. Notice how InputManager.Devices is not used and no index into it is taken.
 	// Rather a device references are stored in each player and we use InputManager.OnDeviceDetached
@@ -40,6 +37,10 @@ namespace MultiplayerBasicExample
 		List<Vector3> spawnPoints;
 
 		List<PlayerInputHandlerMatt> players = new List<PlayerInputHandlerMatt>( maxPlayers );
+		public int PlayersCount()
+		{
+			return players.Count;
+		}
 
 		Color[] playerColors2;
 		Color[] playerColors3;
@@ -47,6 +48,8 @@ namespace MultiplayerBasicExample
 		Color[] playerColors;
 	
 		public GameObject[] Respawns;
+		
+		private FencingGameManager wizard;
 		
 		void Awake()
 		{
@@ -75,6 +78,7 @@ namespace MultiplayerBasicExample
 			}
 			//cam = Camera.main
 			camScript = cam.GetComponent<FencingCameraController>();
+			wizard = GetComponent<FencingGameManager>();
 		}
 
 
@@ -88,6 +92,7 @@ namespace MultiplayerBasicExample
 				{
 					CreatePlayer( inputDevice );
 					camScript.RecountPlayers();
+					wizard.UpdatePlayerTotal(players.Count);
 				}
 			}
 		}
@@ -177,4 +182,3 @@ namespace MultiplayerBasicExample
 			}
 		}
 	}
-}

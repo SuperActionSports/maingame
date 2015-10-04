@@ -503,7 +503,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -599,7 +598,7 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: .899999976
+  m_Time: .699999988
   m_StartWidth: .400000006
   m_EndWidth: 0
   m_Colors:
@@ -618,7 +617,7 @@ TrailRenderer:
     m_Color[4]:
       serializedVersion: 2
       rgba: 2164260863
-  m_MinVertexDistance: .100000001
+  m_MinVertexDistance: .400000006
   m_Autodestruct: 0
 --- !u!114 &11407522
 MonoBehaviour:
@@ -5285,17 +5284,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bb6117bef602541836f03a6b995be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
+  color: {r: .279411733, g: 0, b: .426470578, a: 0}
   playerMaterial: {fileID: 0}
   armed: 0
   alive: 0
   impactMod: 0
+  previousFacingRight: 0
   respawnPoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   cam: {fileID: 0}
+  wizard: {fileID: 0}
 --- !u!114 &11423236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5401,6 +5402,8 @@ MonoBehaviour:
   control: {fileID: 0}
   facingRight: 0
   speedMagnitude: 0
+  sprintSpeedMod: 0
+  jumpForce: 0
 --- !u!114 &11455934
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -24,6 +24,7 @@ public class FencingCameraController : MonoBehaviour {
 	public float shakeLength;
 	public Vector2 shakeMagnitude;
 	public float shakeIntensity;
+	public bool won;
 	
 	public float z;
 	
@@ -44,6 +45,7 @@ public class FencingCameraController : MonoBehaviour {
 		yWinOffset = 1.76f;
 		zWinOffset = -7.34f;
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
+		won = false;
 	}
 	
 	void Update() {
@@ -54,23 +56,21 @@ public class FencingCameraController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void LateUpdate () {
+	if (!win)
+	{
 		z = 0;
-		if (players.Length > 1 && !win)
+		Vector2 averagePosition = GetAveragePositions();
+		z = GetMaximumDistance();
+		z /= -2.0f;
+		if (z > minimumZ) 
 		{
-			Vector2 averagePosition = GetAveragePositions();
-			z = GetMaximumDistance();
-			z /= -2.0f;
-			if (z > minimumZ) 
-			{
-				z = minimumZ;
-			}
+			z = minimumZ;
+		}
+		if (players.Length > 1)
+		{
 			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
-		}
-		else
-		{
-			FollowWinner(players[0]);
-		}
-		
+		}	
+	}
 		// Camera shake code
 		if (shake) {
 			shake = false;
