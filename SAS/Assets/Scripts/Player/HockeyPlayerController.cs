@@ -102,7 +102,7 @@ public class HockeyPlayerController : MonoBehaviour {
 	
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+		//rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
 	
