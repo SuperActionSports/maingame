@@ -111,7 +111,7 @@ public class TennisController : MonoBehaviour {
 				Debug.Log ("Force: " + force);
 				Swing ();
 				Quaternion direction = Quaternion.AngleAxis(45.0f, Vector3.right);
-				ballRB.AddForce(direction * -transform.forward * 2000);
+				ballRB.AddForce(direction * -transform.forward * force);
 			}
 		}
 	}
@@ -135,11 +135,11 @@ public class TennisController : MonoBehaviour {
 		// Same as above, magic numbers.
 		float force = 1000;
 		if (Mathf.Abs(position) < 5f) {
-			force = 10;
+			force = 1000;
 		} else if (position >= 5f && position < 8f) {
-			force = 2000;
+			force = 1250;
 		} else {
-			force = 3000;
+			force = 1500;
 		}
 		return force;
 	}
