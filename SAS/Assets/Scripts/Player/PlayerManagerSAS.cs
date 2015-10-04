@@ -59,7 +59,7 @@ namespace MultiplayerBasicExample
 			playerColors[3] = Color.black;
 			for (int i = 0; i < maxPlayers; i++)
 			{
-				Debug.Log(playerColors[i]);
+				//Debug.Log(playerColors[i]);
 			}
 			InputManager.OnDeviceDetached += OnDeviceDetached;
 			spawnPoints = new List<Vector3>();

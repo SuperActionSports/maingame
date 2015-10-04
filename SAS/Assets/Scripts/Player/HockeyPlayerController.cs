@@ -29,6 +29,7 @@ public class HockeyPlayerController : MonoBehaviour {
 	public float momentumX;
 	public float momentumZ;
 	public float maxSpeed;
+	public float friction;
 	public bool putting;
 
     public GameObject[] respawnPoints;
@@ -85,8 +86,8 @@ public class HockeyPlayerController : MonoBehaviour {
 			// Move Character
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			momentumX = momentumX + xVel;
-			momentumZ = momentumZ + zVel;
+			momentumX = (momentumX + xVel)*friction;
+			momentumZ = (momentumZ + zVel)*friction;
 			if(momentumX > maxSpeed) {momentumX = maxSpeed;}
 			if(momentumX < 0) {if (momentumX < (-1)*maxSpeed){momentumX = (-1)*maxSpeed;}}
 			if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
@@ -105,7 +106,7 @@ public class HockeyPlayerController : MonoBehaviour {
 	
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;
+		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
 	
