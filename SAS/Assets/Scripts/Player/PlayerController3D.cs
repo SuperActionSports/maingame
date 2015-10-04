@@ -29,7 +29,6 @@ public class PlayerController3D : MonoBehaviour {
 	public float magSpeedZ;
     public float debugYMod;
 	public Vector3 speed;
-    private bool doubleJumpAllowed;
 
     public GameObject[] respawnPoints;
     public GameObject equipment;
@@ -59,7 +58,6 @@ public class PlayerController3D : MonoBehaviour {
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-        doubleJumpAllowed = true;
 		impactMod = 7.5f;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
      

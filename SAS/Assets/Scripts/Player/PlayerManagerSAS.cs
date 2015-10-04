@@ -68,6 +68,7 @@ namespace MultiplayerBasicExample
 			}
 			catch (NullReferenceException e)
 			{
+				string temp = e.ToString();
 				Debug.Log("You didn't set the Respawns prefab, dingus.");
 			}
 			foreach (GameObject g in Respawns)

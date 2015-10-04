@@ -30,7 +30,7 @@ public class HockeyPlayerController : MonoBehaviour {
 	public float momentumZ;
 	public float maxSpeed;
 	public float friction;
-	public bool putting;
+	//public bool putting;
 
     public GameObject[] respawnPoints;
     public GameObject equipment;
@@ -47,14 +47,12 @@ public class HockeyPlayerController : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
-		putting = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
-		//rend.material.color = c;
 		speedMagnitude = 10f;
 		colorChangeToUniform = false;
 		colorLerpT = 0;
@@ -93,8 +91,6 @@ public class HockeyPlayerController : MonoBehaviour {
 			if(momentumZ > maxSpeed) {momentumZ = maxSpeed;}
 			if(momentumZ < 0) {if (momentumZ < (-1)*maxSpeed){momentumZ = (-1)*maxSpeed;}}
 			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
-			if (!putting) { transform.position = transform.position + newPosition; }
-			// If input has been given change to face new input direction
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
             GetAttacking();
 			CheckAnimStateForAttacking();
@@ -130,19 +126,10 @@ public class HockeyPlayerController : MonoBehaviour {
 	private void MakeDead()
 	{
 		alive = false;
-		//Need the normal of the local x axis of bat
         paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        //cam.PlayShake(transform.position);
-        /* foreach (Transform child in transform)
-         {
-             Vector3 t = child.transform.TransformPoint(child.transform.position);
-             child.parent = null;
-             child.transform.position = t;
-
-         }*/
     }
 	
 	private void CheckAnimStateForAttacking()
