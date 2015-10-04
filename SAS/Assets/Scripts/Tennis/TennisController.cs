@@ -22,6 +22,7 @@ public class TennisController : MonoBehaviour {
 	public InputDevice device {get; set;}
 
 	public bool alive;
+	bool isSwinging;
 	
 	private Rigidbody rb;
 	public RaycastHit groundHit;
@@ -100,46 +101,77 @@ public class TennisController : MonoBehaviour {
 	{
 		if (other.CompareTag ("Ball")) 
 		{
-			Debug.Log ("Ball is in sphere");
 			Rigidbody ballRB = other.GetComponent<Rigidbody>();
-			if(Input.GetKey (swing))
+			if(isSwinging)
 			{
+				ballRB.velocity = new Vector3(0,0,0);
 				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
-				float angle = ballHeightToAngle(other.transform.position.y);
-				float force = playerPositionToForce(transform.position.z);
-				Debug.Log ("Angle: " + angle);
+
+				float vertAngle = BallHeightToAngle(other.transform.position.y);
+				float horizAngle = PlayerXPositionToAngle(transform.position.x, transform.position.z);
+				float force = PlayerDepthToForce(transform.position.z);
+
+				Debug.Log ("Vert Angle: " + vertAngle);
+				Debug.Log ("Horiz Angle: " + horizAngle);
 				Debug.Log ("Force: " + force);
-				Swing ();
-				Quaternion direction = Quaternion.AngleAxis(45.0f, Vector3.right);
-				ballRB.AddForce(direction * -transform.forward * force);
+
+				Quaternion horizDirection = Quaternion.AngleAxis(horizAngle, Vector3.up);
+
+				Quaternion vertDirection = Quaternion.AngleAxis(vertAngle, Vector3.right);
+				ballRB.AddForce(vertDirection * horizDirection * -transform.forward * force);
 			}
 		}
 	}
 
-	private float ballHeightToAngle(float height)
+	private float BallHeightToAngle(float height)
 	{
 		// The following are just magic numbers that I've been recently testing
-		float angle = 30f;
-		if (height < 0.5) {
-			angle = 30f;
+		float angle = 35f;
+		if (height < 0.25) {
+			angle = Random.Range (60, 70);
+		} else if (height < 0.5) {
+			angle = Random.Range (35, 40);
 		} else if (height >= 0.5 && height < 1f) {
-			angle = 20f;
+			angle = Random.Range (30, 35);
 		} else {
-			angle = 5f;
+			angle = Random.Range (25, 30);
 		}
 		return angle;
 	}
 
-	private float playerPositionToForce(float position)
+	private float PlayerXPositionToAngle(float positionX, float positionZ)
+	{
+		float angle = 0;
+		if (positionZ > 0) {
+			if (positionX > 1) {
+				angle = Random.Range (0, 30);
+			} else if (positionX < 1) {
+				angle = Random.Range (-30, 0);
+			} else {
+				angle = Random.Range (30, 30);
+			}
+		} else if (positionZ < 0) {
+			if(positionX > 1) {
+				angle = Random.Range (-30, 0);
+			} else if (positionX < 1) {
+				angle = Random.Range (0, 30);
+			} else {
+				angle = Random.Range (30, 30);
+			}
+		}
+		return angle;
+	}
+
+	private float PlayerDepthToForce(float position)
 	{
 		// Same as above, magic numbers.
-		float force = 1000;
+		float force = 1500;
 		if (Mathf.Abs(position) < 5f) {
-			force = 1000;
+			force = Random.Range (1400, 1600);
 		} else if (position >= 5f && position < 8f) {
-			force = 1250;
+			force = Random.Range (1600, 1700);
 		} else {
-			force = 1500;
+			force = Random.Range (1800, 1900);
 		}
 		return force;
 	}
@@ -223,7 +255,7 @@ public class TennisController : MonoBehaviour {
 
 	private void GetSwinging()
 	{
-		if (Input.GetKey (swing)) 
+		if (Input.GetKeyDown (swing)) 
 		{
 			Swing();
 		}
@@ -232,6 +264,7 @@ public class TennisController : MonoBehaviour {
 	private void Swing()
 	{
 		anim.SetTrigger ("SwingRacquet");
+		isSwinging = true;
 	}
 
 	private void StartSwing()
@@ -242,15 +275,16 @@ public class TennisController : MonoBehaviour {
 	private void EndSwing()
 	{
 		equipmentCollider.enabled = false;
+		isSwinging = false;
 	}
 	
 	private void GetAttacking()
 	{
-		if (Input.GetKey(attack) || (device != null && (device.LeftTrigger || device.RightTrigger)))
+		if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger)))
 		{
 			Attack ();
 		}
-		else if (Input.GetKey(attack))
+		else if (Input.GetKeyDown (attack))
 		{
 			Attack();
 		}

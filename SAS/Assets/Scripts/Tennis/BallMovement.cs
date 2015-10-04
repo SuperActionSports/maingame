@@ -7,6 +7,7 @@ public class BallMovement : MonoBehaviour {
 	Rigidbody rb;
 	GameObject[] players;
 	int count;
+	bool hasHitTurf;
 
 	// Use this for initialization
 	void Start () 
@@ -14,47 +15,53 @@ public class BallMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-		rb.AddForce(angle * -transform.forward * 2000);
+		rb.AddForce(angle * -transform.forward * 2500);
+		hasHitTurf = false;
 		count = 0;
 	}
 
 	void Update()
 	{
-		foreach (GameObject player in players) 
-		{
-			//Physics.IgnoreCollision(transform.gameObject.GetComponent<Collider>(), player.GetComponent<Collider>());
-		}
+
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "BackWall") 
-		{
-			//Debug.Log ("Hit back wall");
-			Destroy(transform.gameObject);
-		}
-		if (collision.gameObject.tag == "FrontWall") 
-		{
-			//Debug.Log ("Hit front wall");
-			Destroy(transform.gameObject);
-		}
 		if (collision.gameObject.tag == "Turf") 
 		{
 			count++;
-			if(count >= 10)
+			if(count >= 15)
 			{
 				Destroy(transform.gameObject);
 			}
-		} else {
-			//Debug.Log ("collision: " + collision.gameObject.tag);
-		}
-		if (collision.gameObject.tag == "Player") 
+			//CheckForDoubleBounce();
+		} 
+		else if (collision.gameObject.tag == "BackWall") 
 		{
-			//Debug.Log ("Hit player");
-			//Debug.Log("Hit " + collision.transform.GetChild(0).gameObject.name);
-			//Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-			//rb.AddForce(angle * transform.forward * 2000);
+			hasHitTurf = false;
+			Destroy (transform.gameObject);
+		} 
+		else if (collision.gameObject.tag == "FrontWall") 
+		{
+			hasHitTurf = false;
+			Destroy (transform.gameObject);
+		} 
+		else 
+		{
+			hasHitTurf = false;
 		}
+	}
 
+	void CheckForDoubleBounce()
+	{
+		if (hasHitTurf) 
+		{
+			Debug.Log ("Double bounce");
+			Destroy (transform.gameObject);
+		} 
+		else 
+		{
+			hasHitTurf = true;
+		}
 	}
 }
