@@ -18,7 +18,11 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	public float magSpeedZ;
 	public float momentumX;
 	public float momentumZ;
+
+	[Range(1,2000)]
 	public float maxSpeed;
+
+	[Range(0.7f,1.0f)]
 	public float friction;
 
 	public float floatAbove;
@@ -31,7 +35,8 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		speedMagnitude = 10f;
+		maxSpeed = 200f;
+		speedMagnitude = 100f;
 		alive = true;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
      
