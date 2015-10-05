@@ -20,11 +20,15 @@ public class InGameMenu : MonoBehaviour {
 	}
 
 	public void quitMiniGame() {
-			Application.LoadLevel ("AdvancedMainMenu");
+		Application.LoadLevel ("AdvancedMainMenu");
 	}
 
 	public void resumeMiniGame() {
 		menu.SetActive(false);
 		Time.timeScale = 1.0f;
+	}
+
+	public void toLevelSelect() {
+		Application.LoadLevel ("AdvancedLevelSelection");
 	}
 }
