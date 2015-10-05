@@ -20,10 +20,12 @@ public class EquipmentThrow : MonoBehaviour {
 	void Start () {
 		normalThrowForce = 60;
 		runThrowForce = 80;
-		PickUp();
+		//PickUp();
 		frame = GetComponent<MeshCollider>();
 		rb = GetComponent<Rigidbody>();
 //		Debug.Log("Is rb a thing? " + rb);
+		rapierScript = GetComponent<RapierScript>();
+		rapierScript.owned = true;
 		DeactivateRigidbody();
 		
 	}
@@ -32,6 +34,7 @@ public class EquipmentThrow : MonoBehaviour {
 	void Update () {
 		if (thrown && Time.time >= spawnTime + timeTilGravity)
 		{
+			//Debug.Log("From Throw update");
 			rb.useGravity = true;
 			GetComponent<RapierScript>().resetOwnership();
 		}
@@ -57,6 +60,7 @@ public class EquipmentThrow : MonoBehaviour {
 		ActivateRigidbody(true);
 		frame.enabled = true;
 		rapierScript.resetOwnership();
+		//Debug.Log("From Throw Drop");
 	}
 	
 	public void Throw(bool runThrow)
@@ -65,6 +69,7 @@ public class EquipmentThrow : MonoBehaviour {
 		ActivateRigidbody(false);
 		untouched = true;
 		rapierScript.Attack();
+		rapierScript.parent = null;
 		//owner.hasHit = false;
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
@@ -92,8 +97,11 @@ public class EquipmentThrow : MonoBehaviour {
 		}
 		rapierScript = GetComponent<RapierScript>();
 		rapierScript.owned = true;
+		
 		timeTilGravity = 0.4f;
 		spawnTime = Time.time;
 		thrown = false;	
+		rapierScript.resetOwnership();
+		//Debug.Log("From Pickup");
 	}
 }

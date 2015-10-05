@@ -20,7 +20,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	public Rigidbody rb;
 	public PlayerControllerMatt control;
 	
-	public InputDevice device {get; set;}
+	public InputDevice device;
 	private bool deviceActive;
 	public bool facingRight;
 	

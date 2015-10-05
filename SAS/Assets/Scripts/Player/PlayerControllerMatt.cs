@@ -50,6 +50,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rapierScript.c = color;
         armed = true;
 		rapierScript.ResetColor();
+		rapierScript.parent = gameObject;
 		
 		//SetColorForChildren();
 		alive = true;
@@ -105,7 +106,6 @@ public class PlayerControllerMatt : MonoBehaviour {
 			
 	private void MakeDead()
 	{
-		Debug.Log("Make Dead");
 		deathScript.Party();
 		alive = false;
 		//Need the normal of the local x axis of bat
@@ -117,6 +117,8 @@ public class PlayerControllerMatt : MonoBehaviour {
         gameObject.SetActive(false);
         equipmentThrow.Drop();
         wizard.UpdatePlayerCount();
+        //rend.material.color = Color.black;
+        Destroy(gameObject,3);
     }
     
     public void Counter()
@@ -156,7 +158,6 @@ public class PlayerControllerMatt : MonoBehaviour {
     {
 		//Magic Number
 	//	sound.Play ();
-		Debug.Log("Kill with direction");
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }
@@ -178,6 +179,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 		equipment = rapier.gameObject;
 		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
 		equipmentThrow.PickUp();
+		rapierScript.resetOwnership();
 		armed = true;
 	}
 	

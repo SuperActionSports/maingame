@@ -89,11 +89,14 @@ public class FencingCameraController : MonoBehaviour {
 	{
 		float maxDist = 0;
 		for (int i = 0; i < players.Length; i++) {
-			for (int g = i; g < players.Length; g++)
+			if (players[i].GetComponent<PlayerControllerMatt>().alive)
 			{
-				if (Vector3.Distance(players[i].transform.position,players[g].transform.position) > maxDist)
+				for (int g = i; g < players.Length; g++)
 				{
-					maxDist = Vector3.Distance(players[i].transform.position,players[g].transform.position);
+					if (Vector3.Distance(players[i].transform.position,players[g].transform.position) > maxDist)
+					{
+						maxDist = Vector3.Distance(players[i].transform.position,players[g].transform.position);
+					}
 				}
 			}
 		}
@@ -104,6 +107,7 @@ public class FencingCameraController : MonoBehaviour {
 	{
 		float x = 0;
 		float y = 0;
+		int living = 0;
 		Vector3[] positions = new Vector3[players.Length];
 		for (int i = 0; i < players.Length; i++) {
 			PlayerControllerMatt p = players[i].GetComponent<PlayerControllerMatt>();
@@ -112,10 +116,11 @@ public class FencingCameraController : MonoBehaviour {
 				positions [i] = p.transform.position;
 				x += players[i].transform.position.x;
 				y += players[i].transform.position.y;
-			}
-		}		
-		x /= players.Length;
-		y /= players.Length;
+				living++;
+			}			
+		}	
+		x /= living;
+		y /= living;
 		
 		return new Vector2(x,y);
 	}

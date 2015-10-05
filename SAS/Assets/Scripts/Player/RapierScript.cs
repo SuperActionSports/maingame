@@ -21,15 +21,8 @@ public class RapierScript : MonoBehaviour {
 		sound = GetComponentInParent<AudioSource>();
 		hasHit = false;
 		available = false;
-		owned = false;
-		resetOwnership();
-		/*Transform grand = transform.parent;
-		Debug.Log("Truename is " + trueName);
-		while ((grand != null) && grand.name != trueName)
-		{
-			grand = grand.transform.parent;
-		}
-		parent = grand.transform.gameObject;*/
+		owned = true;
+		//resetOwnership();
 		equipmentThrow = GetComponent<EquipmentThrow>();
 		pickUpCollider = GetComponent<SphereCollider>();
 		attackCollider = GetComponent<CapsuleCollider>();
@@ -63,7 +56,6 @@ public class RapierScript : MonoBehaviour {
 	{
 		attackCollider.enabled = true;
 		rb.detectCollisions = true;
-		Debug.Log(transform.gameObject.name + " is attacking!");		
 	}
 	
 	public void StopAttack()
@@ -72,7 +64,6 @@ public class RapierScript : MonoBehaviour {
 		{
 			attackCollider.enabled = false;
 			rb.detectCollisions = false;
-			Debug.Log(transform.gameObject.name + " stopped attacking!");
 		}
 	}
 	
@@ -99,7 +90,8 @@ public class RapierScript : MonoBehaviour {
 			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
 			if (victim.alive && other.gameObject != parent)
 			{	
-				Debug.Log("I'm gonna hit " + other.transform.gameObject.name + " and my parent is " + parent.gameObject.name);
+				Debug.Log("I'm gonna hit " + other.transform.gameObject.name);
+				//Debug.Log("and my parent is " + parent.gameObject.name);
 				sound.Play();
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
 				StopMoving();
@@ -131,20 +123,17 @@ public class RapierScript : MonoBehaviour {
 	
 	public void resetOwnership()
 	{
+		//Debug.Log("Ownership resetting");
 		if (!owned && transform.parent != null)
 		{
 			owned = true;
-//			Transform grand = transform.parent;
-//			while (grand.transform.parent!= null && grand.transform.parent.name != "Players")
-//			{
-//				grand = grand.transform.parent;
-//			}
+			Debug.Log("Current parent: " + parent);
 			parent = transform.parent.parent.gameObject;
-			
+			Debug.Log("New parent: " + parent);
 		}
 		else
 		{
-			transform.parent = null;
+			//transform.parent = null;
 			owned = false;
 			ResetColor();
 		}

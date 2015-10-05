@@ -73,21 +73,21 @@ public class FencingGameManager : MonoBehaviour {
 		switch(players.Length)
 		{
 			case(2):
-			if(matchCount < 1 || controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
-			if(matchCount < 1 || controls[1].alive)controls[1] = Spawn (respawnPointPositions[4],1);
+			if(matchCount < 1 || !controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
+			if(matchCount < 1 || !controls[1].alive)controls[1] = Spawn (respawnPointPositions[4],1);
 			break;
 			
 			case (3):
-			if(matchCount < 1 || controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
-			if(matchCount < 1 || controls[1].alive)controls[1] = Spawn (respawnPointPositions[2],1);
-			if(matchCount < 1 || controls[2].alive)controls[2] = Spawn (respawnPointPositions[4],2);
+			if(matchCount < 1 || !controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
+			if(matchCount < 1 || !controls[1].alive)controls[1] = Spawn (respawnPointPositions[2],1);
+			if(matchCount < 1 || !controls[2].alive)controls[2] = Spawn (respawnPointPositions[4],2);
 			break;
 			
 			case(4):
-			if(matchCount < 1 || controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
-			if(matchCount < 1 || controls[1].alive)controls[1] = Spawn (respawnPointPositions[1],1);
-			if(matchCount < 1 || controls[2].alive)controls[2] = Spawn (respawnPointPositions[3],2);
-			if(matchCount < 1 || controls[3].alive)controls[3] = Spawn (respawnPointPositions[4],3);
+			if(matchCount < 1 || !controls[0].alive)controls[0] = Spawn (respawnPointPositions[0],0);
+			if(matchCount < 1 || !controls[1].alive)controls[1] = Spawn (respawnPointPositions[1],1);
+			if(matchCount < 1 || !controls[2].alive)controls[2] = Spawn (respawnPointPositions[3],2);
+			if(matchCount < 1 || !controls[3].alive)controls[3] = Spawn (respawnPointPositions[4],3);
 			break;
 			
 			default:
@@ -106,7 +106,7 @@ public class FencingGameManager : MonoBehaviour {
 		p.GetComponent<PlayerControllerMatt>().wizard = this;
 		
 		// Replace this with the device information from userprefs
-		p.GetComponent<PlayerControllerMatt>().input.device = devices[playerNumber];
+		p.GetComponent<PlayerInputHandlerMatt>().device = devices[playerNumber];
 		
 		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return p.GetComponent<PlayerControllerMatt>();
@@ -114,10 +114,16 @@ public class FencingGameManager : MonoBehaviour {
 	
 	public void UpdatePlayerCount()
 	{
-		for (int i = 0; i<totalPlayers;i++)
+		for (int i = 0; i<=totalPlayers;i++)
 		{
-			if (controls[i].alive) {winner = i;}
-			else {remainingPlayers--;}
+			if (controls[i].alive) 
+			{
+				winner = i;
+			}
+			else 
+			{
+				remainingPlayers--;
+			}
 		}
 		if (remainingPlayers <2)
 		{
@@ -140,9 +146,9 @@ public class FencingGameManager : MonoBehaviour {
 	 	for (int c = 0; c < controls.Length; c++)
 	 	{
 	 		controls[c] = players[c].GetComponent<PlayerControllerMatt>();
-			Debug.Log("Devices: " + devices[c] + ", Contols: " + controls[c] + ", Input: " + controls[c].input);
-	 		devices[c] = controls[c].input.device;
+	 		devices[c] = players[c].GetComponent<PlayerInputHandlerMatt>().device;
 	 		colors[c] = controls[c].color;
+		//	Debug.Log("Device: " + devices[c].ToString() + " Color: " + colors[c]);
 	 	}
 		
 		
@@ -150,6 +156,7 @@ public class FencingGameManager : MonoBehaviour {
 	
 	private void Victory()
 	{
+		//Debug.Log("Winner: " + winner);
 		victory.GetComponent<VictoryScript>().Party (controls[winner].color);
 		gameWinTime = Time.time;
 		cam.won = true;
@@ -158,7 +165,13 @@ public class FencingGameManager : MonoBehaviour {
 	private void ResetPlayers()
 	{
 		matchCount++;
-		SetPlayers();
 		cam.won = false;
+		SetPlayers();
+		cam.RecountPlayers();
+	}
+	
+	private void RespawnPlayers()
+	{
+		
 	}
 }
