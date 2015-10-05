@@ -35,7 +35,7 @@ public class TennisController : MonoBehaviour {
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
-	
+	private float startTime;
 
     public OverheadCameraController cam;
 	private PaintSplatter paint;
@@ -81,6 +81,8 @@ public class TennisController : MonoBehaviour {
             magSpeedX = 0;
             magSpeedZ = 0;
 
+			startTime = Time.time;
+
 			// Move Character
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
@@ -105,7 +107,8 @@ public class TennisController : MonoBehaviour {
 			if(isSwinging)
 			{
 				ballRB.velocity = new Vector3(0,0,0);
-				transform.position = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+				Vector3 endPosition = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+				transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
 
 				float vertAngle = BallHeightToAngle(other.transform.position.y);
 				float horizAngle = PlayerXPositionToAngle(transform.position.x, transform.position.z);
@@ -121,6 +124,14 @@ public class TennisController : MonoBehaviour {
 				ballRB.AddForce(vertDirection * horizDirection * -transform.forward * force);
 			}
 		}
+	}
+
+	private void LookAtNet()
+	{
+		GameObject net = GameObject.Find ("Main Net");
+		Quaternion q = Quaternion.LookRotation (net.transform.position - transform.position);
+		transform.rotation = Quaternion.RotateTowards (transform.rotation, q, Time.time - startTime);
+		Debug.Log ("looked.");
 	}
 
 	private float BallHeightToAngle(float height)
@@ -167,11 +178,11 @@ public class TennisController : MonoBehaviour {
 		// Same as above, magic numbers.
 		float force = 1500;
 		if (Mathf.Abs(position) < 5f) {
-			force = Random.Range (1400, 1600);
+			force = Random.Range (1000, 1100);
 		} else if (position >= 5f && position < 8f) {
-			force = Random.Range (1600, 1700);
+			force = Random.Range (1200, 1300);
 		} else {
-			force = Random.Range (1800, 1900);
+			force = Random.Range (1300, 1400);
 		}
 		return force;
 	}

@@ -15,7 +15,7 @@ public class BallMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-		rb.AddForce(angle * -transform.forward * 2500);
+		rb.AddForce(angle * -transform.forward * 2000);
 		hasHitTurf = false;
 		count = 0;
 	}
