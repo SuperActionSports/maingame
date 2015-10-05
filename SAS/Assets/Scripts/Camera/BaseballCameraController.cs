@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SideScrollingCameraController : MonoBehaviour {
+public class BaseballCameraController : MonoBehaviour {
 	
 	private GameObject[] players;
 	private Vector3[] positions;
@@ -24,9 +24,8 @@ public class SideScrollingCameraController : MonoBehaviour {
     private Vector2 oldPosition;
 	
 	void Start () {
-		players = GameObject.FindGameObjectsWithTag("Player");
 		cam = GetComponent<Camera>();
-		positions = new Vector3[players.Length];
+		positions = new Vector3[6];
 		debugLerp = 10;
 		shake = false;
         shakeLength = 0.1f;
@@ -40,6 +39,7 @@ public class SideScrollingCameraController : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Space)) {
 			shake = true;
 		}
+		players = GameObject.FindGameObjectsWithTag("Player");
 	}
 
 	// Update is called once per frame
@@ -58,8 +58,15 @@ public class SideScrollingCameraController : MonoBehaviour {
                 positions[i] = t.transform.position;
             }
 		}
-		
-		// Loop through every recorded position to find the average point among them on the X,Z plane
+		GameObject ball = GameObject.FindGameObjectWithTag("ball");
+		if (ball != null) {
+			positions [5] = ball.transform.position;
+		} 
+		else {
+			positions [5] = new Vector3(0, 0, 0) ;
+		}
+			
+			// Loop through every recorded position to find the average point among them on the X,Z plane
 		for (int i = 0; i < positions.Length; i++) {
 			Vector3 pos = positions [i];
 			

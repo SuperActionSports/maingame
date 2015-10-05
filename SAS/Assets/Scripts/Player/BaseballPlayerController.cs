@@ -2,7 +2,7 @@
 using System.Collections;
 using InControl;
 
-public class PlayerController : MonoBehaviour {
+public class BaseballPlayerController : MonoBehaviour {
 
 	public Color c1;
 	public int playerNumber;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
     public float impactMod;
 
 
-    public SideScrollingCameraController cam;
+    public BaseballCameraController cam;
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
@@ -48,8 +48,8 @@ public class PlayerController : MonoBehaviour {
 	public float speedMagnitude;
 	// Use this for initialization
 	void Start () {
-		sound =  GetComponent<AudioSource>();
-        cam = Camera.main.GetComponent<SideScrollingCameraController>();
+	 	sound =  GetComponent<AudioSource>();
+        cam = Camera.main.GetComponent<BaseballCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
@@ -94,7 +94,7 @@ public class PlayerController : MonoBehaviour {
                 transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
             }
             GetAttacking();
-			CheckAnimStateForAttacking();
+			//CheckAnimStateForAttacking();
 		}	
 		
 		UpdateColor();
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour {
 	
 	private void GetAttacking()
 	{
-		if (Input.GetKey(attack) || (device != null && (device.LeftTrigger || device.RightTrigger)))
+		if (Input.GetKey(attack) || (device != null && (device.LeftTrigger.WasPressed || device.RightTrigger.WasPressed)))
 		{
 			Attack ();
 		}
@@ -195,16 +195,18 @@ public class PlayerController : MonoBehaviour {
 	
 	private void Attack()
     {
-        if (equipmentCollider.enabled)
-        {
-            anim.SetTrigger("ComboAttack");
-        }
-        else
-        {
             anim.SetTrigger("Attack");
-        }
-
     }
+
+	public void StartAttack()
+	{
+		equipmentCollider.enabled = true;
+	}
+
+	public void StopAttack()
+	{
+		equipmentCollider.enabled = false;
+	}
     
     private float GetXVelocity()
     {
@@ -230,7 +232,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
 			{
-				if (groundHit.collider.CompareTag("Stage"))
+				if (groundHit.collider.CompareTag("field"))
 				{
 					doubleJumpAllowed = true;
 					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
@@ -255,7 +257,7 @@ public class PlayerController : MonoBehaviour {
 			}
 			else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
 			{
-				if (groundHit.collider.CompareTag("Stage"))
+				if (groundHit.collider.CompareTag("field"))
 				{
 					doubleJumpAllowed = true;
 					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
@@ -273,11 +275,11 @@ public class PlayerController : MonoBehaviour {
 	{
 		if (Input.GetKey(left))
 		{
-			magSpeedX = -1;
+			magSpeedX = -2;
 		}
 		if (Input.GetKey(right))
 		{
-			magSpeedX = 1;
+			magSpeedX = 2;
 		}
 		return speedMagnitude * magSpeedX * Time.deltaTime;
 	}

@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using System.Collections;
 
-public class EquipmentScript : MonoBehaviour {
+public class BaseballEquipmentScript : MonoBehaviour {
     
 //	public Text scoreText;
 	private int count;
@@ -23,7 +23,7 @@ public class EquipmentScript : MonoBehaviour {
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag ("Player")) {
-			PlayerController victim = other.GetComponent<PlayerController> ();
+			BaseballPlayerController victim = other.GetComponent<BaseballPlayerController> ();
 			if (victim.alive) {
 				Debug.Log ("Hit detected, sending " + (transform.right * -1));
 				victim.Kill (new Vector3 (transform.position.x * -1, transform.position.y, transform.position.z));
@@ -33,7 +33,13 @@ public class EquipmentScript : MonoBehaviour {
 			}
 		} else if (other.CompareTag ("ball")) {
 			BaseballController ball = other.GetComponent<BaseballController>() ;
-			PlayerController playerRend = transform.parent.GetComponent<PlayerController>();
+			BaseballPlayerController playerRend = transform.parent.GetComponent<BaseballPlayerController>();
+			int xHit = 20 ;
+			if (playerRend.transform.rotation.y == 180)
+			{
+				xHit = -20;
+			}
+			ball.ChangeOwnership(1, playerRend.c1, new Vector3 (xHit, 20, 0));
 		}
     }
 
