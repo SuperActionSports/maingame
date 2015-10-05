@@ -8,7 +8,7 @@ public class BaseballLauncher : MonoBehaviour {
 				
 	public void Pitch () {
 		Rigidbody egg = Instantiate(ball, transform.position, Quaternion.identity) as Rigidbody ;
-		Vector3 pitchPow = new Vector3 (Random.Range(-23, -2), 40, 0) ;
+		Vector3 pitchPow = new Vector3 (Random.Range(-15, -2), 11, 0) ;
 		egg.AddForce(pitchPow);
 		AudioSource audio = GetComponent<AudioSource>() ;
 		audio.Play ();

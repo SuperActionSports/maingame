@@ -10,6 +10,7 @@ public class BaseballController : MonoBehaviour {
 	private TrailRenderer trail;
 	private ParticleSystem asplode;
 	private int ownNumber;
+	private bool sploded;
 
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
@@ -19,6 +20,7 @@ public class BaseballController : MonoBehaviour {
 		asplode = GetComponent<ParticleSystem> ();
 		//scoreboard = FindObjectOfType ;
 		ownNumber = 0;
+		sploded = false;
 	}
 	
 	// Update is called once per frame
@@ -28,11 +30,21 @@ public class BaseballController : MonoBehaviour {
 
 	void OnCollisionEnter (Collision other)
 	{
-		if (other.gameObject.tag == "field" || other.gameObject.tag == "killzone") {
-			if (ownNumber > 0){
-				Scoresplosion () ;
+		if (other.gameObject.tag == "killzone") {
+			if (ownNumber > 0 && !sploded){
+				moveToBack () ;
 			}
-			Destroy (gameObject);
+			else if (ownNumber == 0){
+				Destroy (gameObject);
+			}
+		}
+		if (other.gameObject.tag == "field") {
+			if (sploded) {
+				rb.velocity = Vector3.zero ;
+			}
+			else if (ownNumber == 0){
+				Destroy (gameObject) ;
+			}
 		}
 	}
 
@@ -40,29 +52,17 @@ public class BaseballController : MonoBehaviour {
 		AudioSource audio = GetComponent<AudioSource>() ;
 		audio.Play ();
 		asplode.Play ();
-		/*
-		switch (ownNumber)
-		{
-			case 1:
-				scoreboard.p1Score += 4;
-				break ;
-			case 2:
-				scoreboard.p2Score += 4;
-				break ;
-			case 3:
-				scoreboard.p3Score += 4;
-				break ;
-			case 4:
-				scoreboard.p4Score += 4;
-				break ;
-			default:
-				break ;
-		}
-		*/
+	}
+
+	private void moveToBack() {
+		sploded = true;
+		transform.tag = "deadball";
+		rb.AddForce(new Vector3(0, 0, 2));
 	}
 
 	public void ChangeOwnership (int hitter, Color hitColor, Vector3 hitForce)
 	{
+		Scoresplosion();
 		ownNumber = hitter;
 		rend.material.color = hitColor;
 		trail.material.color = hitColor;

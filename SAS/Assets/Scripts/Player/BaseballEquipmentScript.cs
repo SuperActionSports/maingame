@@ -6,6 +6,7 @@ public class BaseballEquipmentScript : MonoBehaviour {
     
 //	public Text scoreText;
 	private int count;
+	private BaseballPlayerController player;
 	public Text winText;
 
 	// Use this for initialization
@@ -17,14 +18,14 @@ public class BaseballEquipmentScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		player = transform.parent.GetComponent<BaseballPlayerController>();
 	}
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag ("Player")) {
 			BaseballPlayerController victim = other.GetComponent<BaseballPlayerController> ();
-			if (victim.alive) {
+			if (victim.alive && player.alive) {
 				Debug.Log ("Hit detected, sending " + (transform.right * -1));
 				victim.Kill (new Vector3 (transform.position.x * -1, transform.position.y, transform.position.z));
 				//This causes no movement at the center of the field
@@ -33,13 +34,12 @@ public class BaseballEquipmentScript : MonoBehaviour {
 			}
 		} else if (other.CompareTag ("ball")) {
 			BaseballController ball = other.GetComponent<BaseballController>() ;
-			BaseballPlayerController playerRend = transform.parent.GetComponent<BaseballPlayerController>();
 			int xHit = 20 ;
-			if (playerRend.transform.rotation.y == 180)
+			if (player.transform.position.x > transform.position.x)
 			{
 				xHit = -20;
 			}
-			ball.ChangeOwnership(1, playerRend.c1, new Vector3 (xHit, 20, 0));
+			ball.ChangeOwnership(1, player.c1, new Vector3 (xHit, 10, 0));
 		}
     }
 

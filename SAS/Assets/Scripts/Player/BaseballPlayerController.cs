@@ -286,7 +286,7 @@ public class BaseballPlayerController : MonoBehaviour {
 	
 	private float GetControllerXInput()
 	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
+		return speedMagnitude * device.Direction.X * Time.deltaTime * 2;
 	}
 	
     private void UpdateColor()
