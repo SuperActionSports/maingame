@@ -10,8 +10,8 @@ public class AdvancedPlayerColorHueSelection : MonoBehaviour {
 	public float playerG;
 	public float playerB;
 	public float sliderVal;
-	public int times;
-	public float remainder;
+	private int times;
+	private float remainder;
 	public int player_num;
 	// Use this for initialization
 	void Start () {
