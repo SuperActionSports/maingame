@@ -15,6 +15,10 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	public KeyCode up;
 	public KeyCode down;
     public KeyCode debugKill;
+	public KeyCode Lookleft;
+	public KeyCode Lookright;
+	public KeyCode Lookup;
+	public KeyCode Lookdown;
 
 	public bool alive;
 	
@@ -25,7 +29,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	public float momentumZ;
 	[Range(1,2000)]
 	public float maxSpeed;
-	[Range(0.7f,1.0f)]
+	[Range(0.9f,1.0f)]
 	public float friction;
 	public float floatAbove;
     public GameObject[] respawnPoints;
@@ -36,6 +40,9 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	public InputDevice device {get; set;}
 	private PaintSplatter paint;
 
+	public float clockwise = 1000.0f;
+	public float counterClockwise = -5.0f;
+	public GameObject capsule;
 
 	// Use this for initialization
 	void Start () {
@@ -54,6 +61,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
 		transform.position = new Vector3(transform.position.x, 6.25f, transform.position.z);
+		capsule = transform.FindChild ("Capsule").gameObject;
 
     }
     
@@ -96,10 +104,6 @@ public class HockeyTempPlayerController : MonoBehaviour {
 			rb.velocity = newPosition;
 		}	
 		GetRespawn();
-//		foreach (Transform child in transform)
-//		{
-//			child.transform.position = transform.parent.transform.position;
-//		}
 	}
 	
 	private void GetRespawn()
@@ -174,28 +178,47 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		return speedMagnitude * magSpeedZ * Time.deltaTime;
 	}
 	private void UpdateColor() {
-//		colorLerpT += Time.deltaTime;
-//		if (colorChangeToUniform && alive)
-//		{
-//			rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
-//			if (colorLerpT >= 1)
-//			{
-//				colorChangeToUniform = false;
-//				colorLerpT = 0;
-//			}
-//		}
-//		else
-//		{
-//			rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
-//			if (colorLerpT >= 1)
-//			{
-//				if (alive)
-//				{
-//					colorChangeToUniform = true;
-//					colorLerpT = 0;
-//				}
-//			}
-//		}
 		rend.material.color = c1;
 	}
+
+	/*--------------------------------------------------------------------------*/
+	/*--------------------------------------------------------------------------*/
+	/*--------------------------------------------------------------------------*/
+	private float GetXLook() {
+		return device == null ? GetKeyboardXLookInput(): GetControllerXLookInput();
+	}
+	
+	private float GetZLook() {
+		return device == null ? GetKeyboardZLookInput(): GetControllerZLookInput();
+	}
+	private float GetControllerXLookInput() {
+		return 0;
+	}
+	private float GetControllerZLookInput() {
+		return 0;
+	}
+	private float GetKeyboardXLookInput() {
+		if (Input.GetKey(Lookleft))
+		{
+			capsule.transform.Rotate(0, Time.deltaTime * counterClockwise, 0);
+		}
+		if (Input.GetKey(Lookright))
+		{
+			capsule.transform.Rotate(0, Time.deltaTime * clockwise, 0);
+		}
+		return speedMagnitude * magSpeedX * Time.deltaTime;
+	}
+	private float GetKeyboardZLookInput()
+	{
+		if (Input.GetKey(Lookup))
+		{
+			capsule.transform.Rotate(0, Time.deltaTime * counterClockwise, 0);
+		}
+		if (Input.GetKey(Lookdown))
+		{
+			capsule.transform.Rotate(0, Time.deltaTime * clockwise, 0);
+		}
+		return speedMagnitude * magSpeedZ * Time.deltaTime;
+	}
+
 }

@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class AdvancedPlayerColorHueSelection : MonoBehaviour {
+public class AdvancedPlayerColorHueSelection2 : MonoBehaviour {
 
 	public Slider player_slider;
 	public Image splat;
@@ -10,14 +11,28 @@ public class AdvancedPlayerColorHueSelection : MonoBehaviour {
 	public float playerG;
 	public float playerB;
 	public float sliderVal;
-	private int times;
-	private float remainder;
+	public int times;
+	public float remainder;
 	public int player_num;
+	public int numOfPlayers;
+	public float sliderPreSet;
 	// Use this for initialization
 	void Start () {
 		player_slider.maxValue = 1785;
 		player_slider.minValue = 0;
 		player_slider.wholeNumbers = true;
+		try {
+			numOfPlayers = PlayerPrefs.GetInt ("numOfPlayers");
+		}
+		catch (Exception e) {
+			Debug.Log("error loading numOfPlayers");
+		}
+		try {
+			LoadPlayerPref();
+		}
+		catch (Exception e) {
+			Debug.Log("error loading player colors");
+		}
 	}
 	
 	// Update is called once per frame
@@ -83,23 +98,57 @@ public class AdvancedPlayerColorHueSelection : MonoBehaviour {
 			PlayerPrefs.SetFloat("player_1_colorR",playerR);
 			PlayerPrefs.SetFloat("player_1_colorG",playerG);
 			PlayerPrefs.SetFloat("player_1_colorB",playerB);
+			PlayerPrefs.SetFloat("player_1_color_SliderVal",sliderVal);
 			break;
 		case 2:
 			PlayerPrefs.SetFloat("player_2_colorR",playerR);
 			PlayerPrefs.SetFloat("player_2_colorG",playerG);
 			PlayerPrefs.SetFloat("player_2_colorB",playerB);
+			PlayerPrefs.SetFloat("player_2_color_SliderVal",sliderVal);
 			break;
 		case 3:
 			PlayerPrefs.SetFloat("player_3_colorR",playerR);
 			PlayerPrefs.SetFloat("player_3_colorG",playerG);
 			PlayerPrefs.SetFloat("player_3_colorB",playerB);
+			PlayerPrefs.SetFloat("player_3_color_SliderVal",sliderVal);
 			break;
 		case 4:
 			PlayerPrefs.SetFloat("player_4_colorR",playerR);
 			PlayerPrefs.SetFloat("player_4_colorG",playerG);
 			PlayerPrefs.SetFloat("player_4_colorB",playerB);
+			PlayerPrefs.SetFloat("player_4_color_SliderVal",sliderVal);
 			break;
 		}
+	}
+
+	public void LoadPlayerPref() {
+		switch(player_num){
+		case 1:
+			sliderVal = PlayerPrefs.GetFloat("player_1_color_SliderVal");
+			playerR = PlayerPrefs.GetFloat("player_1_colorR");
+			playerG = PlayerPrefs.GetFloat("player_1_colorG");
+			playerB = PlayerPrefs.GetFloat("player_1_colorB");
+			break;
+		case 2:
+			sliderVal = PlayerPrefs.GetFloat("player_2_color_SliderVal");
+			playerR = PlayerPrefs.GetFloat("player_2_colorR");
+			playerG = PlayerPrefs.GetFloat("player_2_colorG");
+			playerB = PlayerPrefs.GetFloat("player_2_colorB");
+			break;
+		case 3:
+			sliderVal = PlayerPrefs.GetFloat("player_3_color_SliderVal");
+			playerR = PlayerPrefs.GetFloat("player_3_colorR");
+			playerG = PlayerPrefs.GetFloat("player_3_colorG");
+			playerB = PlayerPrefs.GetFloat("player_3_colorB");
+			break;
+		case 4:
+			sliderVal = PlayerPrefs.GetFloat("player_4_color_SliderVal");
+			playerR = PlayerPrefs.GetFloat("player_4_colorR");
+			playerG = PlayerPrefs.GetFloat("player_4_colorG");
+			playerB = PlayerPrefs.GetFloat("player_4_colorB");
+			break;
+		}
+		player_slider.value = sliderVal;
 	}
 
 

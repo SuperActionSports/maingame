@@ -202,6 +202,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &446498600 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 446498599}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &447847260
 Prefab:
   m_ObjectHideFlags: 0
@@ -312,6 +318,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &447847261 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 447847260}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &839974730 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036,
@@ -461,16 +473,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7466c772f78d4b13a88378b38595806, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level_1: {fileID: 0}
-  level_2: {fileID: 0}
-  level_3: {fileID: 0}
-  level_4: {fileID: 0}
-  level_5: {fileID: 0}
-  back: {fileID: 0}
+  level_1: {fileID: 1498498847}
+  level_2: {fileID: 1336692429}
+  level_3: {fileID: 446498600}
+  level_4: {fileID: 1282653333}
+  level_5: {fileID: 447847261}
+  back: {fileID: 1964252695}
   level_1_string: ActionSticks - Matt
   level_2_string: Tennis_v1
   level_3_string: 
-  level_4_string: 
+  level_4_string: StickEggTesting
   level_5_string: Hockey-Gans
 --- !u!114 &1015957718
 MonoBehaviour:
@@ -664,6 +676,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1282653333 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1282653332}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1 &1286928284
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,6 +851,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1336692429 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1336692428}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &1471591949 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036,
@@ -950,6 +974,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1498498847 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1498498846}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!1001 &1701933096
 Prefab:
   m_ObjectHideFlags: 0
@@ -1233,6 +1263,12 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &1964252695 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036,
+    type: 2}
+  m_PrefabInternal: {fileID: 1964252694}
+  m_Script: {fileID: 1392445389, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
 --- !u!224 &2046270744 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036,
