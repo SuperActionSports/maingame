@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class SideScrollingCameraController : MonoBehaviour {
@@ -50,7 +50,7 @@ public class SideScrollingCameraController : MonoBehaviour {
 		
 		// Collect current position of each player
 		for (int i = 0; i < players.Length; i++) {
-            PlayerController p = players[i].GetComponent<PlayerController>();
+            HockeyTempPlayerController p = players[i].GetComponent<HockeyTempPlayerController>();
             if (p.alive)
             {
                 GameObject t = players[i];

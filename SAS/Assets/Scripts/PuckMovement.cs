@@ -11,22 +11,22 @@ public class PuckMovement : MonoBehaviour {
 	public bool inplay;
 	public GameObject respawnPoint;
 	public InputDevice device {get; set;}
-	public float momentumX;
-	public float momentumZ;
-	[Range(1,200)]
-	public float maxSpeed;
-	[Range(0.7f,1.0f)]
-	public float friction;
-	public float floatAbove;
-	[Range(1,20)]
-	public float speedMagnitude;
+	//public float momentumX;
+	//public float momentumZ;
+	//[Range(1,200)]
+	//public float maxSpeed;
+	//[Range(0.7f,1.0f)]
+	//public float friction;
+	//public float floatAbove;
+	//[Range(1,20)]
+	//public float speedMagnitude;
 
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
-		friction = .97f;
-		maxSpeed = 20;
-		speedMagnitude = 15;
+		//friction = .97f;
+		//maxSpeed = 20;
+		//speedMagnitude = 15;
 		inplay = true;
 		respawnPoint = GameObject.Find("Puck RespawnPoint");
 
@@ -46,45 +46,6 @@ public class PuckMovement : MonoBehaviour {
 			rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 			rb.useGravity = false;
 		}
-		if (inplay)
-		{
-			
-
-			// Move Character
-			float xVel = rb.velocity.x;
-			float zVel = rb.velocity.z;
-			//momentumX = (momentumX + xVel);
-			//momentumZ = (momentumZ + zVel);
-			momentumX = rb.velocity.x;
-			momentumZ = rb.velocity.z;
-			//momentumX = momentumX*friction*speedMagnitude;
-			//momentumZ = momentumZ*friction*speedMagnitude;
-			if(momentumX > maxSpeed) {
-				momentumX = maxSpeed;
-			}
-			if (momentumX < (-1)*maxSpeed) {
-				momentumX = (-1)*maxSpeed;
-			}
-			if(momentumX < 0.1f && momentumX > -0.1f) {
-				momentumX = 0;
-			}
-			if(momentumZ > maxSpeed) {
-				momentumZ = maxSpeed;
-			}
-			if (momentumZ < (-1)*maxSpeed) {
-				momentumZ = (-1)*maxSpeed;
-			}
-			if(momentumZ < 0.1f && momentumZ > -0.1f) {
-				momentumZ = 0;
-			}
-			momentumX = momentumX*friction*speedMagnitude;
-			momentumZ = momentumZ*friction*speedMagnitude;
-			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
-			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
-			transform.position = new Vector3(transform.position.x, floatAbove, transform.position.z);
-			rb.velocity = newPosition;
-		}	
-
 	}
 
 	void OnTriggerEnter (Collider col)
@@ -96,9 +57,11 @@ public class PuckMovement : MonoBehaviour {
 				Respawn();
 			}
 			if (col.gameObject.tag == "Player")
+			{
 				Debug.Log ("player hit puck");
-			Rigidbody playerRB = col.gameObject.GetComponent<Rigidbody>();
-			rb.AddForce (playerRB.velocity);
+				Rigidbody playerRB = col.gameObject.GetComponent<Rigidbody>();
+				rb.AddForce (playerRB.velocity);
+			}
 		}
 	}
 

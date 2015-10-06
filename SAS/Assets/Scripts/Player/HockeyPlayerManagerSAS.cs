@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using InControl;
 
 
-namespace MultiplayerBasicExample
-{
+
 	// This example roughly illustrates the proper way to add multiple players from existing
 	// devices. Notice how InputManager.Devices is not used and no index into it is taken.
 	// Rather a device references are stored in each player and we use InputManager.OnDeviceDetached
@@ -29,7 +28,7 @@ namespace MultiplayerBasicExample
 	// just creating a new instance of your action set subclass per player and assigning the
 	// device to its Device property.
 	//
-	public class PlayerManagerSAS : MonoBehaviour
+	public class HockeyPlayerManagerSAS : MonoBehaviour
 	{
 		public GameObject playerPrefab;
 		
@@ -139,7 +138,7 @@ namespace MultiplayerBasicExample
 				var playerPosition = spawnPoints[0];
 				spawnPoints.RemoveAt( 0 );
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
-				var player = gameObject.GetComponent<HockeyTempPlayerController>();
+				var player = gameObject.transform.GetComponentInChildren<HockeyTempPlayerController>();
 				player.device = inputDevice;
 				Debug.Log("Player count: " + players.Count + " color: " + playerColors[players.Count]);
 				player.c1 = playerColors[players.Count];
@@ -177,4 +176,3 @@ namespace MultiplayerBasicExample
 			}
 		}
 	}
-}

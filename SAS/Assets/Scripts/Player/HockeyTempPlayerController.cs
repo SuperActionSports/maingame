@@ -3,7 +3,12 @@ using System.Collections;
 using InControl;
 
 public class HockeyTempPlayerController : MonoBehaviour {
-	
+
+	public Color c1;
+	private bool colorChangeToUniform;
+	private Renderer rend;
+	private float colorLerpT;
+
 	//Keyboard Keybinding Stuff
 	public KeyCode left;
 	public KeyCode right;
@@ -18,19 +23,19 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	public float magSpeedZ;
 	public float momentumX;
 	public float momentumZ;
-
 	[Range(1,2000)]
 	public float maxSpeed;
-
 	[Range(0.7f,1.0f)]
 	public float friction;
-
 	public float floatAbove;
-
     public GameObject[] respawnPoints;
 
 	[Range(1,2000)]
 	public float speedMagnitude;
+
+	public InputDevice device {get; set;}
+	private PaintSplatter paint;
+
 
 	// Use this for initialization
 	void Start () {
@@ -39,12 +44,17 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		speedMagnitude = 100f;
 		alive = true;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-     
+		rend = GetComponent<Renderer>();
+		colorChangeToUniform = false;
+		colorLerpT = 0;
+		paint = GetComponent<PaintSplatter>();
+//		paint.color = c1;
         if (respawnPoints.Length == 0)
         {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
 		transform.position = new Vector3(transform.position.x, 6.25f, transform.position.z);
+
     }
     
 	
@@ -86,6 +96,10 @@ public class HockeyTempPlayerController : MonoBehaviour {
 			rb.velocity = newPosition;
 		}	
 		GetRespawn();
+//		foreach (Transform child in transform)
+//		{
+//			child.transform.position = transform.parent.transform.position;
+//		}
 	}
 	
 	private void GetRespawn()
@@ -123,23 +137,65 @@ public class HockeyTempPlayerController : MonoBehaviour {
         transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
     }
 
+	private float GetXVelocity() {
+		return device == null ? GetKeyboardXInput(): GetControllerXInput();
+	}
+	
 	private float GetZVelocity() {
-		if (Input.GetKey(up)) {
+		return device == null ? GetKeyboardZInput(): GetControllerZInput();
+	}
+	private float GetControllerXInput() {
+		return speedMagnitude * device.Direction.X * Time.deltaTime;
+	}
+	private float GetControllerZInput() {
+		return speedMagnitude * device.Direction.Y * Time.deltaTime;
+	}
+	private float GetKeyboardXInput() {
+		if (Input.GetKey(left))
+		{
+			magSpeedX = -1;
+		}
+		if (Input.GetKey(right))
+		{
+			magSpeedX = 1;
+		}
+		return speedMagnitude * magSpeedX * Time.deltaTime;
+	}
+	private float GetKeyboardZInput()
+	{
+		if (Input.GetKey(up))
+		{
 			magSpeedZ = 1;
 		}
-		if (Input.GetKey(down)) {
+		if (Input.GetKey(down))
+		{
 			magSpeedZ = -1;
 		}
 		return speedMagnitude * magSpeedZ * Time.deltaTime;
 	}
-	
-	private float GetXVelocity() {
-		if (Input.GetKey(left)) {
-			magSpeedX = -1;
-		}
-		if (Input.GetKey(right)) {
-			magSpeedX = 1;
-		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
+	private void UpdateColor() {
+//		colorLerpT += Time.deltaTime;
+//		if (colorChangeToUniform && alive)
+//		{
+//			rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
+//			if (colorLerpT >= 1)
+//			{
+//				colorChangeToUniform = false;
+//				colorLerpT = 0;
+//			}
+//		}
+//		else
+//		{
+//			rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
+//			if (colorLerpT >= 1)
+//			{
+//				if (alive)
+//				{
+//					colorChangeToUniform = true;
+//					colorLerpT = 0;
+//				}
+//			}
+//		}
+		rend.material.color = c1;
 	}
 }
