@@ -33,7 +33,6 @@ GameObject:
   - 95: {fileID: 9584748}
   - 114: {fileID: 11490760}
   - 114: {fileID: 11459732}
-  - 114: {fileID: 11465798}
   - 135: {fileID: 13534398}
   m_Layer: 0
   m_Name: TennisPlayer
@@ -382,18 +381,6 @@ MonoBehaviour:
   impactMod: 0
   cam: {fileID: 0}
   speedMagnitude: 0
---- !u!114 &11465798
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114932}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66c190e06aba14bcca1de0b0caa0915a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  tennisBall: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
 --- !u!114 &11484530
 MonoBehaviour:
   m_ObjectHideFlags: 1
