@@ -243,7 +243,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 252152051}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 034ef403e667644e28be11fdaf8cb0f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -569,6 +569,10 @@ MonoBehaviour:
   p2Score: 0
   p3Score: 0
   p4Score: 0
+  p1Roster: 40
+  p2Roster: 40
+  p3Roster: 40
+  p4Roster: 40
 --- !u!82 &467903320
 AudioSource:
   m_ObjectHideFlags: 0
@@ -578,9 +582,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 337d1327dae275c458d0d5ce9df9964a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: b79eb5be2ff1d42d190ab7fc3b9cc6b3, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: .5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -699,7 +703,7 @@ BoxCollider:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 700296573}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 034ef403e667644e28be11fdaf8cb0f4, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -1352,7 +1356,6 @@ MonoBehaviour:
   yOffset: 5
   zOffset: 0
   zDebugMod: 0
-  ballFollow: 0
   shake: 0
   shakeLength: 0
   shakeMagnitude: {x: 0, y: 0}

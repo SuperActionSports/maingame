@@ -10,7 +10,6 @@ public class BaseballCameraController : MonoBehaviour {
 	public float yOffset;
 	public float zOffset;
     public float zDebugMod;
-	public bool ballFollow = false;
 
 	//Camera Shake Variables
 	Camera cam;
@@ -22,7 +21,7 @@ public class BaseballCameraController : MonoBehaviour {
     public float z;
 
     private Vector2 oldPosition;
-	
+
 	void Start () {
 		cam = GetComponent<Camera>();
 		positions = new Vector3[6];

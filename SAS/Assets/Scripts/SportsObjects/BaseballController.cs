@@ -5,11 +5,11 @@ using System.Collections;
 public class BaseballController : MonoBehaviour {
 	
 	//public StickeggRules scoreboard;
+	public int ownNumber;
 	private Rigidbody rb;
 	private Renderer rend ;
 	private TrailRenderer trail;
 	private ParticleSystem asplode;
-	private int ownNumber;
 	private bool sploded;
 
 	void Start () {
@@ -34,6 +34,10 @@ public class BaseballController : MonoBehaviour {
 			if (ownNumber > 0 && !sploded){
 				moveToBack () ;
 			}
+			else if (sploded)
+			{
+				rb.velocity = Vector3.zero ;
+			}
 			else if (ownNumber == 0){
 				Destroy (gameObject);
 			}
@@ -49,9 +53,9 @@ public class BaseballController : MonoBehaviour {
 	}
 
 	private void Scoresplosion () {
+		asplode.Play ();
 		AudioSource audio = GetComponent<AudioSource>() ;
 		audio.Play ();
-		asplode.Play ();
 	}
 
 	private void moveToBack() {
@@ -62,11 +66,11 @@ public class BaseballController : MonoBehaviour {
 
 	public void ChangeOwnership (int hitter, Color hitColor, Vector3 hitForce)
 	{
-		Scoresplosion();
 		ownNumber = hitter;
 		rend.material.color = hitColor;
 		trail.material.color = hitColor;
 		asplode.startColor = hitColor;
+		Scoresplosion();
 		rb.velocity = Vector3.zero;
 		rb.AddForce (hitForce);
 	}

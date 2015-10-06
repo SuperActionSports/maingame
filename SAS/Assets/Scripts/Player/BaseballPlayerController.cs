@@ -84,16 +84,23 @@ public class BaseballPlayerController : MonoBehaviour {
             
             float xVel = GetXVelocity();
 			GetYVelocity();
+
 			transform.position = transform.position + new Vector3(xVel,0,0);
 			if (xVel < 0)
 			{
-                transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
+				anim.SetBool("running", true);
+				transform.rotation = new Quaternion(transform.rotation.x, 180f, transform.rotation.z, transform.rotation.w);
             }
 			else if (xVel > 0 && transform.rotation.y > 0)
             {
-                transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
+				anim.SetBool("running", true);
+				transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
             }
-            GetAttacking();
+			else
+			{
+				anim.SetBool ("running", false) ;
+			}
+			GetAttacking();
 			//CheckAnimStateForAttacking();
 		}	
 		
@@ -124,7 +131,7 @@ public class BaseballPlayerController : MonoBehaviour {
 			Respawn();
 		} 
 	}
-	
+
 	private void MakeDead()
 	{
 		alive = false;
@@ -165,13 +172,15 @@ public class BaseballPlayerController : MonoBehaviour {
     public void Kill(Vector3 direction)
     {
 		//Magic Number
-		sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
     }
 
     public void Respawn()
     {
+		ParticleSystem poof = GetComponent<ParticleSystem> ();
+		poof.startColor = c1;
+		poof.Play();
         alive = true;
         ResetRigidBodyConstraints();
         rb.velocity = new Vector3(0, 0, 0);
@@ -195,7 +204,11 @@ public class BaseballPlayerController : MonoBehaviour {
 	
 	private void Attack()
     {
-            anim.SetTrigger("Attack");
+		AudioSource bat = GetComponent<AudioSource> ();
+		if (!bat.isPlaying) {
+			bat.Play ();
+		}
+		anim.SetTrigger("Attack");
     }
 
 	public void StartAttack()
@@ -292,7 +305,10 @@ public class BaseballPlayerController : MonoBehaviour {
     private void UpdateColor()
     {
         colorLerpT += Time.deltaTime;
-        if (colorChangeToUniform && alive)
+		if (!alive) {
+			rend.material.color = c1 ;
+		}
+        else if (colorChangeToUniform && alive)
         {
             rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
             if (colorLerpT >= 1)
@@ -303,7 +319,7 @@ public class BaseballPlayerController : MonoBehaviour {
         }
         else
         {
-            rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
+			rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
             if (colorLerpT >= 1)
             {
                 if (alive)
@@ -313,5 +329,6 @@ public class BaseballPlayerController : MonoBehaviour {
                 }
             }
         }
+
     }
 }

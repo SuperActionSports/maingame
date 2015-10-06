@@ -29,6 +29,8 @@ public class BaseballEquipmentScript : MonoBehaviour {
 				Debug.Log ("Hit detected, sending " + (transform.right * -1));
 				victim.Kill (new Vector3 (transform.position.x * -1, transform.position.y, transform.position.z));
 				//This causes no movement at the center of the field
+				AudioSource hit = GetComponent<AudioSource>() ;
+				hit.Play ();
 				count++;
 //				SetScoreText();
 			}
