@@ -7,6 +7,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 	//public Text scoreText;
 	private int count;
 	public int speed;
+	private TennisController player;
 	//public Text winText;
 
 	// Use this for initialization
@@ -19,27 +20,30 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+		player = GetComponentInParent<TennisController> ();
 	}
 
     void OnTriggerEnter(Collider other)
     {
 		//Debug.Log ("Other tag: " + other.gameObject.tag);
-        if (other.CompareTag("Player"))
-        {
-            TennisController victim = other.GetComponent<TennisController>();
-            if (victim.alive)
-            {
-            	Debug.Log("Hit detected, sending "+ (transform.right*-1));
-                victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
-                //This causes no movement at the center of the field
-				count++;
-				SetScoreText();
-            }
-        }
+		if (other.CompareTag("Player"))
+		{
+			if(player.isAttacking)
+			{
+				TennisController victim = other.GetComponent<TennisController>();
+				if (victim.alive)
+				{
+					Debug.Log("Hit detected, sending "+ (transform.right*-1));
+					victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
+					//This causes no movement at the center of the field
+					count++;
+					SetScoreText();
+				}
+			}
+		}
     }
 
-	void OnTriggerStay(Collider other)
+	/*void OnTriggerStay(Collider other)
 	{
 		if (other.CompareTag ("Ball")) 
 		{
@@ -48,7 +52,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 			Quaternion angle = Quaternion.AngleAxis(45.0f, Vector3.right);
 			rbBall.AddForce(angle * -transform.forward * speed);
 		}
-	}
+	}*/
 
 	void OnCollisionEnter()
 	{

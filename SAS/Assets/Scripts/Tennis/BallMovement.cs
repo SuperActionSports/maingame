@@ -15,7 +15,7 @@ public class BallMovement : MonoBehaviour {
 		rb = GetComponent<Rigidbody> ();
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-		rb.AddForce(angle * -transform.forward * 2000);
+		rb.AddForce(angle * -transform.forward * 1000);
 		hasHitTurf = false;
 		count = 0;
 	}
@@ -27,25 +27,17 @@ public class BallMovement : MonoBehaviour {
 
 	void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Turf") 
-		{
+		if (collision.gameObject.tag == "Turf") {
 			count++;
-			if(count >= 15)
-			{
-				Destroy(transform.gameObject);
+			if (count >= 25) {
+				Destroy (transform.gameObject);
 			}
 			//CheckForDoubleBounce();
-		} 
-		else if (collision.gameObject.tag == "BackWall") 
+		} else if (collision.gameObject.tag == "Wall") 
 		{
 			hasHitTurf = false;
-			Destroy (transform.gameObject);
-		} 
-		else if (collision.gameObject.tag == "FrontWall") 
-		{
-			hasHitTurf = false;
-			Destroy (transform.gameObject);
-		} 
+			Destroy(transform.gameObject);		
+		}
 		else 
 		{
 			hasHitTurf = false;

@@ -18,11 +18,16 @@ public class TennisController : MonoBehaviour {
 	public KeyCode swing;
     public KeyCode attack;
     public KeyCode debugKill;
+
+	private GameObject[] respawnPointsTeamA;
+	private GameObject[] respawnPointsTeamB;
 	
 	public InputDevice device {get; set;}
 
 	public bool alive;
 	bool isSwinging;
+	bool hasHitBall;
+	public bool isAttacking;
 	
 	private Rigidbody rb;
 	public RaycastHit groundHit;
@@ -68,6 +73,9 @@ public class TennisController : MonoBehaviour {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
         
+		respawnPointsTeamA = GameObject.FindGameObjectsWithTag ("RespawnPointTeamA");
+		respawnPointsTeamB = GameObject.FindGameObjectsWithTag ("RespawnPointTeamB");
+
 		paint = GetComponent<PaintSplatter>();
 		paint.color = c1;
     }
@@ -94,7 +102,7 @@ public class TennisController : MonoBehaviour {
 			GetSwinging();
             GetAttacking();
 		}	
-		
+
 		UpdateColor();
 		GetRespawn();
 	}
@@ -103,35 +111,60 @@ public class TennisController : MonoBehaviour {
 	{
 		if (other.CompareTag ("Ball")) 
 		{
-			Rigidbody ballRB = other.GetComponent<Rigidbody>();
 			if(isSwinging)
 			{
-				ballRB.velocity = new Vector3(0,0,0);
-				Vector3 endPosition = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
-				transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
-
-				float vertAngle = BallHeightToAngle(other.transform.position.y);
-				float horizAngle = PlayerXPositionToAngle(transform.position.x, transform.position.z);
-				float force = PlayerDepthToForce(transform.position.z);
-
-				Debug.Log ("Vert Angle: " + vertAngle);
-				Debug.Log ("Horiz Angle: " + horizAngle);
-				Debug.Log ("Force: " + force);
-
-				Quaternion horizDirection = Quaternion.AngleAxis(horizAngle, Vector3.up);
-
-				Quaternion vertDirection = Quaternion.AngleAxis(vertAngle, Vector3.right);
-				ballRB.AddForce(vertDirection * horizDirection * -transform.forward * force);
+				hasHitBall = BallCollision(other);
+				if(hasHitBall)
+				{
+					isSwinging = false;
+				}
 			}
+		}
+	}
+
+	private bool BallCollision(Collider other)
+	{
+		LookAtNet();
+
+		Rigidbody ballRB = other.GetComponent<Rigidbody>();
+
+		ballRB.velocity = new Vector3(0,0,0);
+		Vector3 endPosition = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+		transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
+		
+		float vertAngle = BallHeightToAngle(other.transform.position.y);
+		float horizAngle = PlayerXPositionToAngle(transform.position.x, transform.position.z);
+		float force = PlayerDepthToForce(transform.position.z, vertAngle);
+		
+		Debug.Log ("Vert Angle: " + vertAngle);
+		Debug.Log ("Horiz Angle: " + horizAngle);
+		Debug.Log ("Force: " + force);
+		
+		Quaternion horizDirection = Quaternion.AngleAxis(horizAngle, Vector3.up);
+		
+		Quaternion vertDirection = Quaternion.AngleAxis(vertAngle, Vector3.right);
+		ballRB.AddForce(vertDirection * horizDirection * -transform.forward * force);
+
+		return true;
+	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if (other.gameObject.tag == "Ball") {
+			hasHitBall = false;
 		}
 	}
 
 	private void LookAtNet()
 	{
-		GameObject net = GameObject.Find ("Main Net");
-		Quaternion q = Quaternion.LookRotation (net.transform.position - transform.position);
-		transform.rotation = Quaternion.RotateTowards (transform.rotation, q, Time.time - startTime);
-		Debug.Log ("looked.");
+		if (transform.position.z > 0) 
+		{
+			transform.eulerAngles = new Vector3(0, 0, 0);
+		}
+		else if (transform.position.z < 0)
+		{
+			transform.eulerAngles = new Vector3(0, 180, 0);
+		}
 	}
 
 	private float BallHeightToAngle(float height)
@@ -139,13 +172,13 @@ public class TennisController : MonoBehaviour {
 		// The following are just magic numbers that I've been recently testing
 		float angle = 35f;
 		if (height < 0.25) {
-			angle = Random.Range (60, 70);
+			angle = Random.Range (65, 75);
 		} else if (height < 0.5) {
-			angle = Random.Range (35, 40);
+			angle = Random.Range (55, 65);
 		} else if (height >= 0.5 && height < 1f) {
-			angle = Random.Range (30, 35);
+			angle = Random.Range (45, 55);
 		} else {
-			angle = Random.Range (25, 30);
+			angle = Random.Range (35, 45);
 		}
 		return angle;
 	}
@@ -155,34 +188,38 @@ public class TennisController : MonoBehaviour {
 		float angle = 0;
 		if (positionZ > 0) {
 			if (positionX > 1) {
-				angle = Random.Range (0, 30);
+				angle = Random.Range (0, 20);
 			} else if (positionX < 1) {
-				angle = Random.Range (-30, 0);
+				angle = Random.Range (-20, 0);
 			} else {
-				angle = Random.Range (30, 30);
+				angle = Random.Range (-20, 20);
 			}
 		} else if (positionZ < 0) {
 			if(positionX > 1) {
-				angle = Random.Range (-30, 0);
+				angle = Random.Range (-20, 0);
 			} else if (positionX < 1) {
-				angle = Random.Range (0, 30);
+				angle = Random.Range (0, 20);
 			} else {
-				angle = Random.Range (30, 30);
+				angle = Random.Range (-20, 20);
 			}
 		}
 		return angle;
 	}
 
-	private float PlayerDepthToForce(float position)
+	private float PlayerDepthToForce(float position, float angle)
 	{
 		// Same as above, magic numbers.
-		float force = 1500;
-		if (Mathf.Abs(position) < 5f) {
-			force = Random.Range (1000, 1100);
-		} else if (position >= 5f && position < 8f) {
-			force = Random.Range (1200, 1300);
+		float force = 1000;
+		if (angle >= 65) {
+			force = 1300;
 		} else {
-			force = Random.Range (1300, 1400);
+			if (Mathf.Abs (position) < 5f) {
+				force = Random.Range (800, 1000);
+			} else if (position >= 5f && position < 8f) {
+				force = Random.Range (1000, 1100);
+			} else {
+				force = Random.Range (1100, 1300);
+			}
 		}
 		return force;
 	}
@@ -260,8 +297,8 @@ public class TennisController : MonoBehaviour {
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
         //Debug.Log("Length: " + respawnPoints.Length);
-        transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
-        colorChangeToUniform = true;
+        transform.position = respawnPointsTeamA[Mathf.FloorToInt(Random.Range(0, respawnPointsTeamA.Length))].transform.position;
+        //colorChangeToUniform = true;
     }
 
 	private void GetSwinging()
@@ -304,6 +341,7 @@ public class TennisController : MonoBehaviour {
 	private void Attack()
     {
 		anim.SetTrigger("AttackRacquet");
+		isAttacking = true;
     }
 
 	private void StartAttack()
@@ -314,6 +352,7 @@ public class TennisController : MonoBehaviour {
 	private void EndAttack()
 	{
 		equipmentCollider.enabled = false;
+		isAttacking = false;
 	}
     
     private float GetXVelocity()

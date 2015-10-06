@@ -11,6 +11,9 @@ TagManager:
   - FrontWall
   - Turf
   - Ball
+  - Wall
+  - RespawnPointTeamA
+  - RespawnPointTeamB
   layers:
   - Default
   - TransparentFX
