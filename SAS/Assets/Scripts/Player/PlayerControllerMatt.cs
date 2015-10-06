@@ -28,6 +28,7 @@ public class PlayerControllerMatt : MonoBehaviour {
     private Animator anim;
 	public PlayerInputHandlerMatt input;
 	public FencingGameManager wizard;
+	public int wizardNumber;
 
 	// Use this for initialization
 	void Start () {
@@ -114,8 +115,8 @@ public class PlayerControllerMatt : MonoBehaviour {
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
+		if (equipmentThrow != null) {equipmentThrow.Drop();}
         gameObject.SetActive(false);
-        equipmentThrow.Drop();
         wizard.UpdatePlayerCount();
         //rend.material.color = Color.black;
         Destroy(gameObject,3);
@@ -179,7 +180,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 		equipment = rapier.gameObject;
 		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
 		equipmentThrow.PickUp();
-		rapierScript.resetOwnership();
+		rapierScript.parent = this.gameObject;
+		rapierScript.ResetOwnership(this.gameObject);
 		armed = true;
 	}
 	

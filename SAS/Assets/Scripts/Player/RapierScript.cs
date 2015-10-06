@@ -54,8 +54,15 @@ public class RapierScript : MonoBehaviour {
 	
 	public void Attack()
 	{
+		Debug.Log("Attacking!");
 		attackCollider.enabled = true;
+		GetComponent<CapsuleCollider>().enabled = true;
 		rb.detectCollisions = true;
+		if (!owned && transform.parent != null)
+		{
+			Debug.Log("And I'm loved!");
+			owned = true;
+		}
 	}
 	
 	public void StopAttack()
@@ -70,6 +77,11 @@ public class RapierScript : MonoBehaviour {
 	private void StopMoving()
 	{
 		rb.velocity = new Vector3(0,0,0);
+		StopAttack();
+		if (equipmentThrow.thrown)
+		{
+			Parry ();
+		}
 	}
 	
 	private void Parry()
@@ -79,11 +91,12 @@ public class RapierScript : MonoBehaviour {
 		GetComponent<Renderer>().material.color = Color.black;
 		GetComponent<CapsuleCollider>().enabled = false;
 		pickUpCollider.enabled = true;
+		equipmentThrow.Drop();
 	}
 	
 	void OnTriggerEnter(Collider other)
 	{
-		//Debug.Log("Trigger is on! I've hit " + other.gameObject);
+		if (other.CompareTag("Player")) Debug.Log("Other: " + other.gameObject.name + " owned: " + owned);
 		if (other.CompareTag("Player") && owned)
 		{
 			//Attacking rapier is about to make swiss cheese of a player
@@ -92,13 +105,19 @@ public class RapierScript : MonoBehaviour {
 			{	
 				Debug.Log("I'm gonna hit " + other.transform.gameObject.name);
 				//Debug.Log("and my parent is " + parent.gameObject.name);
-				sound.Play();
+//				sound.Play();
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
-				StopMoving();
+				if (equipmentThrow.thrown)
+				{ 
+					StopMoving();
+					ResetOwnership();
+				}
+				
 			}
 		}
-		if (other.CompareTag("Shield"))
+		else if (other.CompareTag("Shield"))
 		{
+			Debug.Log("Path of the shield");
 			if (owned)
 			{
 				if (!equipmentThrow.thrown)  transform.parent.transform.parent.GetComponent<PlayerControllerMatt>().armed = false;
@@ -109,10 +128,15 @@ public class RapierScript : MonoBehaviour {
 		}
 		else if(hasHit == false && (other.CompareTag("Stage") || other.CompareTag("Player")) && other.gameObject != parent)
 		{
-			Parry ();
+			Debug.Log("Path of the unhit");
+			Debug.Log("Owned? " + owned + " Thrown? " + equipmentThrow.thrown);
+			if (!owned || equipmentThrow.thrown) {
+				Parry ();
+				}
 		}
 		else if (hasHit && other.CompareTag("Player") && !other.GetComponent<PlayerControllerMatt>().armed)
 		{
+			Debug.Log("Path of the pickup");
 			//Rapier is getting picked up 
 			other.GetComponent<PlayerControllerMatt>().PickUp(this.transform.gameObject);
 			pickUpCollider.enabled = false;
@@ -121,28 +145,55 @@ public class RapierScript : MonoBehaviour {
 		//Debug.Log("That didn't work, so now I'm going to try to see if " + other.tag + " is \"Player\" and if I'm owned: " + owned);
 	}
 	
-	public void resetOwnership()
+	public void ResetOwnership()
 	{
 		//Debug.Log("Ownership resetting");
 		if (!owned && transform.parent != null)
 		{
 			owned = true;
-			Debug.Log("Current parent: " + parent);
-			parent = transform.parent.parent.gameObject;
-			Debug.Log("New parent: " + parent);
+			hasHit = false;
+			equipmentThrow = GetComponent<EquipmentThrow>();
+			pickUpCollider = GetComponent<SphereCollider>();
+			attackCollider = GetComponent<CapsuleCollider>();
 		}
 		else
 		{
-			//transform.parent = null;
-			owned = false;
+			if (transform.parent == null) 
+			{
+				Debug.Log("I have no owner!");
+				owned = false;
+			}
 			ResetColor();
 		}
+	}
+	
+	public void ResetOwnership(GameObject newOwner)
+	{
+		//Debug.Log("Ownership resetting");
+		owned = true;
+		hasHit = false;
+		owner = newOwner;
+		ResetColor();
+		equipmentThrow = GetComponent<EquipmentThrow>();
+		pickUpCollider = GetComponent<SphereCollider>();
+		attackCollider = GetComponent<CapsuleCollider>();
+		
 	}
 	
 	public void ResetColor()
 	{
 		GetComponent<AccessoryColor>().ResetColor();
 		GetComponent<AccessoryColor>().ResetColor(c);
+	}
+	
+	public void MakeDangerous()
+	{
+		attackCollider.enabled = true;
+	}
+	
+	public void MakeSafe()
+	{
+	
 	}
 	
 }

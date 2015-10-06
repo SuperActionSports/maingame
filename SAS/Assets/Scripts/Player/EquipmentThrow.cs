@@ -27,6 +27,7 @@ public class EquipmentThrow : MonoBehaviour {
 		rapierScript = GetComponent<RapierScript>();
 		rapierScript.owned = true;
 		DeactivateRigidbody();
+		timeTilGravity = 0.5f;
 		
 	}
 	
@@ -36,7 +37,7 @@ public class EquipmentThrow : MonoBehaviour {
 		{
 			//Debug.Log("From Throw update");
 			rb.useGravity = true;
-			GetComponent<RapierScript>().resetOwnership();
+			//GetComponent<RapierScript>().resetOwnership();
 		}
 	}
 	
@@ -59,8 +60,8 @@ public class EquipmentThrow : MonoBehaviour {
 	{
 		ActivateRigidbody(true);
 		frame.enabled = true;
-		rapierScript.resetOwnership();
-		//Debug.Log("From Throw Drop");
+		transform.parent = null;
+		rapierScript.ResetOwnership();
 	}
 	
 	public void Throw(bool runThrow)
@@ -68,24 +69,15 @@ public class EquipmentThrow : MonoBehaviour {
 		transform.parent = null;
 		ActivateRigidbody(false);
 		untouched = true;
-		rapierScript.Attack();
+		rapierScript.MakeDangerous();
 		rapierScript.parent = null;
-		//owner.hasHit = false;
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
-		rapierScript.setArmed(true);
-//		if (directionModifier > 0)
-//		{
-//			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
-//		}
-//		else 
-//		{
-//			rb.AddForce(transform.up*60f,ForceMode.VelocityChange);
-//		}
 		Vector3 force = runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce;
 		rb.AddForce(force,ForceMode.VelocityChange);
 		spawnTime = Time.time;
 		thrown = true;
+		
 	}	
 	
 	public void PickUp()
@@ -98,10 +90,10 @@ public class EquipmentThrow : MonoBehaviour {
 		rapierScript = GetComponent<RapierScript>();
 		rapierScript.owned = true;
 		
-		timeTilGravity = 0.4f;
-		spawnTime = Time.time;
+		timeTilGravity = 0.5f;
+		spawnTime = Time.time;//update attack collider and owned
 		thrown = false;	
-		rapierScript.resetOwnership();
+		rapierScript.ResetOwnership(this.gameObject);
 		//Debug.Log("From Pickup");
 	}
 }

@@ -37,6 +37,9 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+--- !u!127 &3
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -65,7 +68,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -2896,7 +2898,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -3008,6 +3009,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   input: {fileID: 0}
   wizard: {fileID: 0}
+  wizardNumber: 0
 --- !u!23 &1424237586
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -10342,18 +10344,21 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1667884682}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0773991ca86c8b4db742d6a3160eb80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
   cam: {fileID: 1838761211}
+  players: []
+  activePlayers: []
   Respawns:
   - {fileID: 686087513}
   - {fileID: 1693775101}
   - {fileID: 268335827}
   - {fileID: 1615797908}
+  frozen: 0
 --- !u!4 &1667884684
 Transform:
   m_ObjectHideFlags: 0
@@ -10385,7 +10390,11 @@ MonoBehaviour:
   - {fileID: 363455025}
   - {fileID: 268335827}
   - {fileID: 1615797908}
+  winnerPlayer: {fileID: 0}
   victory: {fileID: 1623153386}
+  players: []
+  Respawns: []
+  frozen: 0
 --- !u!1 &1693775101 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 178838, guid: 34b7a66bbb91fc74cb7a824dff7b383a, type: 2}
@@ -10658,7 +10667,6 @@ MonoBehaviour:
   xWinOffset: 0
   yWinOffset: 0
   zWinOffset: 0
-  win: 0
   shake: 0
   shakeLength: 0
   shakeMagnitude: {x: 0, y: 0}

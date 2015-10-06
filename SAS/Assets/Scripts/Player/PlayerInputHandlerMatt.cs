@@ -21,7 +21,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	public PlayerControllerMatt control;
 	
 	public InputDevice device;
-	private bool deviceActive;
+	public bool deviceActive;
 	public bool facingRight;
 	
 	private float doubleTapCooler;
@@ -44,7 +44,9 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		sprintSpeedMod = 1.1f;
 		doubleTapDelay = 0.5f;
 		previousXVel = 0;
-		
+		player = gameObject;
+		rb = GetComponent<Rigidbody>();
+		control = GetComponent<PlayerControllerMatt>();
 	}
 	
 	void Update () {

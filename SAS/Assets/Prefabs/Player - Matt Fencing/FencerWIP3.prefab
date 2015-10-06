@@ -5296,7 +5296,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   cam: {fileID: 0}
+  input: {fileID: 0}
   wizard: {fileID: 0}
+  wizardNumber: 0
 --- !u!114 &11423236
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5400,6 +5402,7 @@ MonoBehaviour:
   player: {fileID: 0}
   rb: {fileID: 0}
   control: {fileID: 0}
+  deviceActive: 0
   facingRight: 0
   speedMagnitude: 0
   sprintSpeedMod: 0
@@ -8834,6 +8837,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_TagString
       value: Untagged
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

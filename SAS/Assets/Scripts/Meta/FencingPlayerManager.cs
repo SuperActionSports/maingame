@@ -35,8 +35,9 @@ using InControl;
 		const int maxPlayers = 4;
 
 		List<Vector3> spawnPoints;
-
-		List<PlayerInputHandlerMatt> players = new List<PlayerInputHandlerMatt>( maxPlayers );
+		
+		public List<PlayerInputHandlerMatt> players = new List<PlayerInputHandlerMatt>( maxPlayers );
+		public List<PlayerInputHandlerMatt> activePlayers = new List<PlayerInputHandlerMatt>( maxPlayers );
 		public int PlayersCount()
 		{
 			return players.Count;
@@ -50,6 +51,7 @@ using InControl;
 		public GameObject[] Respawns;
 		
 		private FencingGameManager wizard;
+		public bool frozen;
 		
 		void Awake()
 		{
@@ -58,6 +60,7 @@ using InControl;
 		
 		void Start()
 		{
+			frozen = false;
 			playerColors[0] = Color.cyan;
 			playerColors[1] = Color.magenta;
 			playerColors[2] = Color.yellow;
@@ -92,7 +95,9 @@ using InControl;
 				{
 					CreatePlayer( inputDevice );
 					camScript.RecountPlayers();
+					Debug.Log(this + " player count: " + players.Count);
 					wizard.UpdatePlayerTotal(players.Count);
+					
 				}
 			}
 		}
@@ -100,7 +105,8 @@ using InControl;
 
 		bool JoinButtonWasPressedOnDevice( InputDevice inputDevice )
 		{
-			return inputDevice.Action1.WasPressed || inputDevice.Action2.WasPressed || inputDevice.Action3.WasPressed || inputDevice.Action4.WasPressed;
+			//return inputDevice.Action1.WasPressed || inputDevice.Action2.WasPressed || inputDevice.Action3.WasPressed || inputDevice.Action4.WasPressed;
+			return inputDevice.Command.WasPressed;
 		}
 
 
@@ -110,13 +116,19 @@ using InControl;
 			for (int i = 0; i < playerCount; i++)
 			{
 				var player = players[i];
+				var activePlayer = activePlayers[i];
 				if (player.device == inputDevice)
 				{
 					return player;
 				}
+				else if (activePlayer.device == inputDevice)
+				{
+					return activePlayer;
+				}
 			}
 
 			return null;
+			//wizard needs to talk to input manager to have an identical player list
 		}
 
 
@@ -149,6 +161,7 @@ using InControl;
 				player.GetComponent<PlayerControllerMatt>().color = playerColors[players.Count];
 				player.transform.parent = this.transform;
 				players.Add( player );
+				activePlayers.Add (player);
 
 				return player;
 			}
@@ -164,20 +177,29 @@ using InControl;
 			player.device = null;
 			Destroy( player.gameObject );
 		}
-
-
-		void OnGUI()
+		
+		public void Freeze()
 		{
-			const float h = 22.0f;
-			var y = 10.0f;
-
-			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + players.Count + "/" + maxPlayers );
-			y += h;
-
-			if (players.Count < maxPlayers)
+			if (!frozen)
 			{
-				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button to join!" );
-				y += h;
+			activePlayers = players;
+			frozen = true;
 			}
 		}
+
+
+//		void OnGUI()
+//		{
+//			const float h = 22.0f;
+//			var y = 10.0f;
+//
+//			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + players.Count + "/" + maxPlayers );
+//			y += h;
+//
+//			if (players.Count < maxPlayers)
+//			{
+//				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button to join!" );
+//				y += h;
+//			}
+//		}
 	}
