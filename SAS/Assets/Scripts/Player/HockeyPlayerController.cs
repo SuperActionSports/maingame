@@ -2,7 +2,7 @@
 using System.Collections;
 using InControl;
 
-public class HockeyPlayerController : MonoBehaviour {
+public class HockeyPlayerController : MonoBehaviour {/*
 
 	public Color c1;
 	private bool colorChangeToUniform;
@@ -268,4 +268,4 @@ public class HockeyPlayerController : MonoBehaviour {
             }
         }
     }
-}
+*/}

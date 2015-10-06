@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
 
-public class EquipmentScript : MonoBehaviour {/*
+public class HockeyEquipmentScript : MonoBehaviour {
     
 	public Text scoreText;
 	private int count;

@@ -52,20 +52,23 @@
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
-     <Compile Include="Assets\Scripts\GoalScored.cs" />
-     <Compile Include="Assets\Scripts\InGameMenu.cs" />
+     <Compile Include="Assets\Scripts\Hockey\GoalScored.cs" />
+     <Compile Include="Assets\Scripts\Hockey\NoMove.cs" />
+     <Compile Include="Assets\Scripts\Hockey\PuckMovement.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedLevelSelection.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedMainMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerColorHueSelection2.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerColorSelection2.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerSelection.cs" />
+     <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
-     <Compile Include="Assets\Scripts\NoMove.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
+     <Compile Include="Assets\Scripts\Player\HockeyEquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyPlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyTempPlayerController.cs" />
@@ -73,16 +76,7 @@
      <Compile Include="Assets\Scripts\Player\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerMovementJoy.cs" />
-     <Compile Include="Assets\Scripts\PlayerInfo.cs" />
-     <Compile Include="Assets\Scripts\PuckMovement.cs" />
      <Compile Include="Assets\Scripts\Test.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\ColorHuePicker.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\ColorIndicator.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\ColorSaturationBrightnessPicker.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\Draggable.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\ExampleColorReceiver.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\HSBColor.cs" />
-     <Compile Include="Assets\Utilities\Color Picker\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\BindingsExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\PlayerActions.cs" />
@@ -277,36 +271,15 @@
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeNative.cs" />
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeState.cs" />
      <Compile Include="Assets\Utilities\InControl\Test\TestInputManager.cs" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\changelog.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\Utilities\InControl\Readme\README.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_HideVertices.shader" />
      <None Include="Assets\Shaders\ColorHue.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
      <None Include="Assets\Shaders\ColorSaturationBrightness.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_VertexShader.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\readme.txt" />
      <None Include="Assets\Shaders\SolidColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderCore-Unity5">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="KDTree">
- <HintPath>/Users/Mike/Documents/Ohio State/__AU 15 (Current)/CSE Cpstn/SAS Repository/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
