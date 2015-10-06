@@ -18,6 +18,7 @@ public class TennisController : MonoBehaviour {
 	public KeyCode swing;
     public KeyCode attack;
     public KeyCode debugKill;
+	public GameObject tennisBall;
 
 	private GameObject[] respawnPointsTeamA;
 	private GameObject[] respawnPointsTeamB;
@@ -28,7 +29,7 @@ public class TennisController : MonoBehaviour {
 	bool isSwinging;
 	bool hasHitBall;
 	public bool isAttacking;
-	
+
 	private Rigidbody rb;
 	public RaycastHit groundHit;
 	public float magSpeedX;
@@ -99,6 +100,7 @@ public class TennisController : MonoBehaviour {
 			// If input has been given change to face new input direction
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
 			CheckServe();
+			GetServe();
 			GetSwinging();
             GetAttacking();
 		}	
@@ -301,9 +303,29 @@ public class TennisController : MonoBehaviour {
         //colorChangeToUniform = true;
     }
 
+	private void GetServe()
+	{
+		Serve ();
+	}
+
+	private void Serve()
+	{
+		if (Input.GetKeyDown (KeyCode.Space) || (device != null && device.RightBumper.WasPressed)) {
+			if(transform.position.z < 0)
+			{
+				transform.eulerAngles = new Vector3(0, 180, 0);
+			}
+			else if (transform.position.z > 0)
+			{
+				transform.eulerAngles = new Vector3(0, 0, 0);
+			}
+			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0), transform.rotation);
+		}
+	}
+
 	private void GetSwinging()
 	{
-		if (Input.GetKeyDown (swing)) 
+		if (Input.GetKeyDown (swing) || (device != null && device.RightTrigger.WasPressed)) 
 		{
 			Swing();
 		}
@@ -328,7 +350,7 @@ public class TennisController : MonoBehaviour {
 	
 	private void GetAttacking()
 	{
-		if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger)))
+		if (Input.GetKeyDown (attack) || (device != null && device.LeftTrigger.WasPressed))
 		{
 			Attack ();
 		}
