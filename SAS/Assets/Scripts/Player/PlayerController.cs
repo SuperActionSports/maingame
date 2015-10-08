@@ -5,6 +5,9 @@ using InControl;
 public class PlayerController : MonoBehaviour {
 
 	public Color c1;
+	public int playerNumber;
+	public int runs;
+
 	private bool colorChangeToUniform;
 	private Renderer rend;
 	private float colorLerpT;
