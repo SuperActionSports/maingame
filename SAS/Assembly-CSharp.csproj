@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
      <Compile Include="Assets\Scripts\FX\VictoryScript.cs" />
+     <Compile Include="Assets\Scripts\GolfBall.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
@@ -67,6 +68,8 @@
      <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
+     <Compile Include="Assets\Scripts\Player\GolfClubScript.cs" />
+     <Compile Include="Assets\Scripts\Player\GolfPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInputHandlerMatt.cs" />

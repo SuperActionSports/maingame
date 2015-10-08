@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using InControl;
@@ -42,7 +42,7 @@ namespace MultiplayerBasicExample
 			new Vector3( 1, -1, -10 ),
 		};
 
-		List<PlayerController> players = new List<PlayerController>( maxPlayers );
+		List<GolfPlayerController> players = new List<GolfPlayerController>( maxPlayers );
 
 
 
@@ -72,7 +72,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		PlayerController FindPlayerUsingDevice( InputDevice inputDevice )
+		GolfPlayerController FindPlayerUsingDevice( InputDevice inputDevice )
 		{
 			var playerCount = players.Count;
 			for (int i = 0; i < playerCount; i++)
@@ -104,7 +104,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		PlayerController CreatePlayer( InputDevice inputDevice )
+		GolfPlayerController CreatePlayer( InputDevice inputDevice )
 		{
 			if (players.Count < maxPlayers)
 			{
@@ -113,7 +113,7 @@ namespace MultiplayerBasicExample
 				playerPositions.RemoveAt( 0 );
 
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
-				var player = gameObject.GetComponent<PlayerController>();
+				var player = gameObject.GetComponent<GolfPlayerController>();
 				player.device = inputDevice;
 				player.c1 = Color.cyan;
 				players.Add( player );
@@ -125,7 +125,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		void RemovePlayer( PlayerController player )
+		void RemovePlayer( GolfPlayerController player )
 		{
 			playerPositions.Insert( 0, player.transform.position );
 			//players.Remove( player );
