@@ -71,7 +71,7 @@ public class BaseballPlayerController : MonoBehaviour {
         }
         
 		paint = GetComponent<PaintSplatter>();
-		paint.color = c1;
+		//paint.color = c1;
     }
     
 	
@@ -136,7 +136,7 @@ public class BaseballPlayerController : MonoBehaviour {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-        paint.Paint(transform.position,paint.color);
+       // paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);

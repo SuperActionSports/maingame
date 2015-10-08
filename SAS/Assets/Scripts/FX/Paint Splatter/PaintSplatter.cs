@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class PaintSplatter : MonoBehaviour {/*
+public class PaintSplatter : MonoBehaviour {
 
 	public static PaintSplatter Instance;
 
@@ -65,8 +65,8 @@ public class PaintSplatter : MonoBehaviour {/*
 				if(hits[0].collider.tag == "Player")
 				{
 					GameObject p = hits[0].collider.transform.gameObject;
-					PlayerColorScript pcs = p.GetComponent<PlayerColorScript>();
-					color = pcs.c;
+					//PlayerColorScript pcs = p.GetComponent<PlayerColorScript>();
+					//color = pcs.c;
 					Debug.Log ("Hit the character, color is " + color);
 					characterHit = true;
 				}
@@ -135,4 +135,4 @@ public class PaintSplatter : MonoBehaviour {/*
 //		p3score.text = "Score: " + count.ToString ();
 //		p4score.text = "Score: " + count.ToString ();
 	}
-*/}
+}

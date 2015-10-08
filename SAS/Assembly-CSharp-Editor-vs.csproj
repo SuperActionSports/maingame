@@ -104,10 +104,13 @@
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_HideVertices.shader" />
+     <None Include="Assets\Shaders\ColorHue.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\Shaders\ColorSaturationBrightness.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\readme.txt" />
+     <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
