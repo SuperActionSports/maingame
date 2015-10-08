@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BasicXFollowCamera.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
@@ -68,16 +67,13 @@
      <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
-     <Compile Include="Assets\Scripts\Player\EquipmentThrowDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInputHandlerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
-     <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\BindingsExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\PlayerActions.cs" />
@@ -272,19 +268,19 @@
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeNative.cs" />
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeState.cs" />
      <Compile Include="Assets\Utilities\InControl\Test\TestInputManager.cs" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\changelog.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\changelog.txt" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\Utilities\InControl\Readme\README.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_HideVertices.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\Shader\pb_VertexShader.shader" />
-     <None Include="Assets\Utilities\ProCore\Prototype\readme.txt" />
-     <None Include="Assets\Utilities\ProCore\Prototype\About\Credits.txt" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\UnlitSolidColor.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseTextureBlend.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_HideVertices.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_UnlitVertexColor.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_VertexShader.shader" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\readme.txt" />
+     <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -295,13 +291,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KDTree">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
