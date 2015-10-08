@@ -46,7 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\BasicXFollowCamera.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
@@ -68,16 +67,13 @@
      <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
-     <Compile Include="Assets\Scripts\Player\EquipmentThrowDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
-     <Compile Include="Assets\Scripts\Player\PlayerDebug.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInputHandlerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
-     <Compile Include="Assets\Scripts\Test.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\BindingsExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\PlayerActions.cs" />
