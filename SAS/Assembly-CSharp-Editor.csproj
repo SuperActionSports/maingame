@@ -109,6 +109,9 @@
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_VertexShader.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\readme.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
+	 <None Include="Assets\Shaders\ColorHue.shader" />
+     <None Include="Assets\Shaders\ColorSaturationBrightness.shader" />
+     <None Include="Assets\Shaders\SolidColor.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
@@ -175,8 +178,7 @@
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
  </Reference>
-  </ItemGroup>
-  <ItemGroup>
+   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{32595AC1-684C-73C9-22A2-12C104D8B327}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>

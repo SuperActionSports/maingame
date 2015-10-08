@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
 
-public class PaintSplatter : MonoBehaviour {
+public class PaintSplatter : MonoBehaviour {/*
 
 	public static PaintSplatter Instance;
 
@@ -135,4 +135,4 @@ public class PaintSplatter : MonoBehaviour {
 //		p3score.text = "Score: " + count.ToString ();
 //		p4score.text = "Score: " + count.ToString ();
 	}
-}
+*/}
