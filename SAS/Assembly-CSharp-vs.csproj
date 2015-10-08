@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera\BaseballCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
      <Compile Include="Assets\Scripts\Camera\FencingCameraController.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
      <Compile Include="Assets\Scripts\FX\VictoryScript.cs" />
+     <Compile Include="Assets\Scripts\GameLogic\StickeggRules.cs" />
      <Compile Include="Assets\Scripts\GolfBall.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
@@ -66,6 +68,9 @@
      <Compile Include="Assets\Scripts\Meta\FencingPlayerManager.cs" />
      <Compile Include="Assets\Scripts\Meta\PlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\AccessoryColor.cs" />
+     <Compile Include="Assets\Scripts\Player\BaseballEquipmentScript.cs" />
+     <Compile Include="Assets\Scripts\Player\BaseballPlayerController.cs" />
+     <Compile Include="Assets\Scripts\Player\BaseballPlayerManagerSAS.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
      <Compile Include="Assets\Scripts\Player\GolfClubScript.cs" />
@@ -78,6 +83,8 @@
      <Compile Include="Assets\Scripts\Player\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\PlayerColorScript.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
+     <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
+     <Compile Include="Assets\Scripts\SportsObjects\BaseballLauncher.cs" />
      <Compile Include="Assets\Scripts\Tennis\BallMovement.cs" />
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />

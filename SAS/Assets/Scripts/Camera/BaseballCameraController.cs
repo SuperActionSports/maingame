@@ -57,7 +57,7 @@ public class BaseballCameraController : MonoBehaviour {
                 positions[i] = t.transform.position;
             }
 		}
-		GameObject ball = GameObject.FindGameObjectWithTag("ball");
+		GameObject ball = GameObject.FindGameObjectWithTag("Ball");
 		if (ball != null) {
 			positions [5] = ball.transform.position;
 		} 

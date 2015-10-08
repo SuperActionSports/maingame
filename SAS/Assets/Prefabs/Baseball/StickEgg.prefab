@@ -20,7 +20,7 @@ GameObject:
   - 75: {fileID: 7548226}
   m_Layer: 0
   m_Name: StickEgg
-  m_TagString: ball
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -109,7 +109,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1367,7 +1366,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_TagString
-      value: ball
+      value: Ball
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_StartWidth
