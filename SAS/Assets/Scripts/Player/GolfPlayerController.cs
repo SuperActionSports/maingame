@@ -4,11 +4,11 @@ using InControl;
 
 public class GolfPlayerController : MonoBehaviour {
 
+	// Color variables
 	public Color c1;
+	private Renderer[] renderers;
 	private bool colorChangeToUniform;
-	private Renderer rend;
 	private float colorLerpT;
-    private bool facingLeft;
 	
 	//Keyboard Keybinding Stuff
 	public KeyCode left;
@@ -28,85 +28,81 @@ public class GolfPlayerController : MonoBehaviour {
 
 	public InputDevice device {get; set;}
 
+	// Generla Game Player variables
 	public bool alive;
-	
 	private Rigidbody rb;
-	public RaycastHit groundHit;
-	public float magSpeedX;
-	public float magSpeedZ;
-	public Vector3 speed;
+	public float xDirection;
+	public float zDirection;
+	public float walkSpeed;
 
+	// Game Objects and Components
     public GameObject[] respawnPoints;
-    public GameObject equipment;
-    private CapsuleCollider equipmentCollider;
-    public float impactMod;
-
-
+    public CapsuleCollider equipmentCollider;
     public OverheadCameraController cam;
-	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
 
-	[Range(1,20)]
-	public float speedMagnitude;
-	// Use this for initialization
 	void Start () {
-		swinging = false;
-		putting = false;
+		// Get Components and Game Objects
+		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
+		if (respawnPoints.Length == 0)
+		{
+			Debug.Log("There aren't any respawn points, you catastrophic dingus.");
+		}
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
-		rend = GetComponent<Renderer>();
+		renderers = GetComponentsInChildren<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
-        equipmentCollider = equipment.GetComponent<CapsuleCollider>();
+		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
         equipmentCollider.enabled = false;
-		rend.material.color = c1;
-		speedMagnitude = 10f;
+
+		// Set up color variables
+		foreach (Renderer rend in renderers) {
+			rend.material.color = c1;
+		}
+
 		colorChangeToUniform = false;
 		colorLerpT = 0;
+
+		// Set up general player variables
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		impactMod = 7.5f;
-        respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-     
-        if (respawnPoints.Length == 0)
-        {
-            Debug.Log("There aren't any respawn points, you catastrophic dingus.");
-        }
-        
-        transform.parent.rotation = transform.rotation;
-		paint = GetComponent<PaintSplatter>();
-		paint.color = c1;
+		walkSpeed = 10f;
+
+		// Set up Golf specific variables
+		swinging = false;
+		putting = false;
     }
     
-	
-	// Update is called once per frame
+
 	void Update () {
-		
         if (alive)
         {
+			// Reset velocity to 0
         	rb.velocity = new Vector3(0,0,0);
-			// Update Ball Object Info to See if Close Enough to Putt
+
+			// Update ball object and see if player is close enough to putt
 			ball = GolfBall.FindObjectOfType<GolfBall>();
 			if (ball == null) {
 				distanceToBall = 0;
 				canHitBall = false;
 			}
 			else {
-			 distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
+				distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
 			                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
-			 canHitBall = (distanceToBall < 2);
+				canHitBall = (distanceToBall < 2);
 			}
 
-			// Move Character 
-			magSpeedX = 0;
-			magSpeedZ = 0;
+			// Move player in x and z directions 
+			xDirection = 0;
+			zDirection = 0;
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
 			Vector3 newPosition = new Vector3(xVel,0,zVel);
 			if (!putting) {
-				transform.parent.transform.position = transform.parent.transform.position + newPosition; 	
+				transform.position = transform.position + newPosition; 	
 				// If input has been given change to face new input direction
 				if (newPosition != new Vector3(0,0,0)) { 
 					transform.rotation = Quaternion.LookRotation(-newPosition); 
@@ -114,13 +110,23 @@ public class GolfPlayerController : MonoBehaviour {
 				}
 			}
 			else {
-				if (!swinging) { transform.parent.transform.RotateAround (ball.transform.position, Vector3.up, 10*xVel+-10*zVel); }
+				// If currently aiming a put allow the stick to rotate the character around the ball
+				if (!swinging) 
+				{ 
+					Transform sweetspot = transform.FindChild("Sweetspot");
+					sweetspot.SetParent (null);
+					transform.SetParent (sweetspot);
+					sweetspot.RotateAround (ball.transform.position, Vector3.up, walkSpeed*xVel-walkSpeed*zVel); 
+					transform.SetParent (null);
+					sweetspot.SetParent (this.transform);
+				}
 			}
-			
+			// Check if player is attacking
 			GetAttacking(putting, canHitBall);
 			CheckAnimStateForAttacking();
 		}	
-		
+
+		// Update player color and respawn player if necessary
 		UpdateColor();
 		GetRespawn();
 	}
@@ -129,12 +135,6 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
-	}
-	
-	private void OnDrawGizmos()
-	{
-		Gizmos.color = Color.yellow;
-		Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z));
 	}
 	
 	private void GetRespawn()
@@ -152,18 +152,9 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-        paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        //cam.PlayShake(transform.position);
-        /* foreach (Transform child in transform)
-         {
-             Vector3 t = child.transform.TransformPoint(child.transform.position);
-             child.parent = null;
-             child.transform.position = t;
-
-         }*/
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -216,25 +207,22 @@ public class GolfPlayerController : MonoBehaviour {
 	private void GetAttacking(bool putting, bool CanHitBall)
 	{
 		if (putting) {
-			if (swinging) {
-				if (Input.GetKeyUp (attack)) {
-					Swing ();
-				}
+			if (Input.GetKeyDown (attack) && !swinging) {
+				BackSwing ();
 			}
-			else {
-				if (Input.GetKeyDown (attack)) {
-					BackSwing ();
-				}
+			else if (Input.GetKey (attack) && swinging) {
+				BackSwing ();
 			}
-			return;
-		} else {
+			else if (Input.GetKeyUp (attack) && swinging) {
+				Swing ();
+			}
+		} 
+		else {
 			if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger))) {
 				if (CanHitBall && !ball.beingHit) {
 					StartPutting ();
-					return;
 				} else {
 					Attack ();
-					return;
 				}
 			}
 		}
@@ -242,47 +230,45 @@ public class GolfPlayerController : MonoBehaviour {
 	
 	private void Attack()
     {
-		anim.SetTrigger("SwingAttack");
+		anim.SetBool("Attack", true);
     }
     
     private void StartAttacking()
     {
-    	equipmentCollider.enabled = true;
+		Debug.Log ("start attack");
+		equipmentCollider.enabled = true;
     }
 
 	private void StopAttack()
 	{
+		Debug.Log ("stop attack");
 		equipmentCollider.enabled = false;
+		anim.SetBool("Attack", false);
 	}
 
 	private void StartPutting() {
-		//transform.parent.transform.LookAt (ball.transform.position);
-		transform.Rotate (new Vector3(0, 90, 0));
 
-		// Set the parents rotation equal to 
-		Transform parent = transform.parent;
+		Transform sweetspot = transform.FindChild("Sweetspot");
+		sweetspot.SetParent (null);
+		transform.SetParent (sweetspot);
+		sweetspot.position = ball.transform.position;
 		transform.SetParent (null);
-		parent.transform.localEulerAngles = transform.localEulerAngles;
-		transform.SetParent (parent);
-
-		float rotatedAngle = transform.localEulerAngles.y;
-		float newX = transform.localPosition.x - (Mathf.Cos (rotatedAngle)*2f);
-		float newZ = transform.localPosition.z - (Mathf.Sin (rotatedAngle)*2f);
-		transform.localPosition = new Vector3 (newX, transform.localPosition.y, newZ);
-
-		//transform.localEulerAngles = new Vector3(0,0,0);
-		//transform.localPosition = new Vector3 (-2.51f, transform.localPosition.y, transform.localPosition.z);
+		sweetspot.SetParent (this.transform);
 
 		putting = true;
 		(ball as GolfBall).beingHit = true;
+
 	}
 
 	private void BackSwing() {
+		// Begin swinging when button is pressed
 		if (!swinging) {
 			swinging = true;
 			swingStrength = 5f;
-		} else {
-			swingStrength+=0.5f;
+		}
+		// Increase swing strength while button is held
+		else {
+			swingStrength += 0.25f;
 		}
 	}
 
@@ -314,61 +300,57 @@ public class GolfPlayerController : MonoBehaviour {
 	{
 		if (Input.GetKey(up))
 		{
-			magSpeedZ = 1;
+			zDirection = 1;
 		}
 		if (Input.GetKey(down))
 		{
-			magSpeedZ = -1;
+			zDirection = -1;
 		}
-		return speedMagnitude * magSpeedZ * Time.deltaTime;
+		return walkSpeed * zDirection * Time.deltaTime;
 	}
 	
 	private float GetControllerZInput()
 	{
-		return speedMagnitude * device.Direction.Y * Time.deltaTime;
+		return walkSpeed * device.Direction.Y * Time.deltaTime;
 	}
 	
 	private float GetKeyboardXInput()
 	{
 		if (Input.GetKey(left))
 		{
-			magSpeedX = -1;
+			xDirection = -1;
 		}
 		if (Input.GetKey(right))
 		{
-			magSpeedX = 1;
+			xDirection = 1;
 		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
+		return walkSpeed * xDirection * Time.deltaTime;
 	}
 	
 	private float GetControllerXInput()
 	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
+		return walkSpeed * device.Direction.X * Time.deltaTime;
 	}
 	
     private void UpdateColor()
-    {
-        colorLerpT += Time.deltaTime;
-        if (colorChangeToUniform && alive)
-        {
-            rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                    colorChangeToUniform = false;
-                    colorLerpT = 0;
-            }
-        }
-        else
-        {
-            rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                if (alive)
-                {
-                    colorChangeToUniform = true;
-                    colorLerpT = 0;
-                }
-            }
-        }
+	{
+		colorLerpT += Time.deltaTime;
+		foreach (Renderer rend in renderers) {
+			if (colorChangeToUniform && alive) {
+				rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), c1, colorLerpT);
+				if (colorLerpT >= 1) {
+					colorChangeToUniform = false;
+					colorLerpT = 0;
+				}
+			} else {
+				rend.material.color = Color.Lerp (c1, new Color (0, 0, 0, 0), colorLerpT);
+				if (colorLerpT >= 1) {
+					if (alive) {
+						colorChangeToUniform = true;
+						colorLerpT = 0;
+					}
+				}
+			}
+		}
     }
 }
