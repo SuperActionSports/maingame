@@ -16,7 +16,7 @@ public class StickeggRules : MonoBehaviour {
 	public int p4Roster = 40;
 	private float gameTime = 0.0f ;
 	private float gameLength = 15.0f ;
-	private float pitchGap = 1.5f ;
+	public float pitchGap = 1.5f ;
 	private float lastPitch = 1.8f ;
 	private float finalInning;
 	private bool bottomNinth ;
@@ -32,7 +32,7 @@ public class StickeggRules : MonoBehaviour {
 
 	void Update () {
 //		pointAtBall () ;
-		if (Time.time <= gameLength) {
+		/*if (Time.time <= gameLength) {
 			if (gameLength - Time.time <= finalInning && !bottomNinth) {
 				bottomNinth = true;
 				pitchGap /= 10;
@@ -46,6 +46,10 @@ public class StickeggRules : MonoBehaviour {
 		else if (bottomNinth && Time.time > gameLength + madnessGap){
 			bottomNinth = false;
 			Tally () ;
+		}*/
+		if (Time.time - lastPitch >= pitchGap) {
+			lastPitch += pitchGap;
+			pitcher.Pitch ();
 		}
 	}
 
