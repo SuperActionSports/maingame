@@ -60,7 +60,7 @@ public class BaseballController : MonoBehaviour {
 
 	private void moveToBack() {
 		sploded = true;
-		transform.tag = "deadball";
+		transform.tag = "Deadball";
 		rb.AddForce(new Vector3(0, 0, 2));
 	}
 

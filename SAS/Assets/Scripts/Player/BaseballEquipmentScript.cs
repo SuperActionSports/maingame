@@ -34,7 +34,7 @@ public class BaseballEquipmentScript : MonoBehaviour {
 				count++;
 //				SetScoreText();
 			}
-		} else if (other.CompareTag ("ball")) {
+		} else if (other.CompareTag ("Ball")) {
 			BaseballController ball = other.GetComponent<BaseballController>() ;
 			int xHit = 20 ;
 			if (player.transform.position.x > transform.position.x)
