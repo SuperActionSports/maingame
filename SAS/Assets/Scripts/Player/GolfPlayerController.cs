@@ -59,9 +59,8 @@ public class GolfPlayerController : MonoBehaviour {
 
 		// Set up color variables
 		foreach (Renderer rend in renderers) {
-			rend.material.color = c1;
+			if (rend.material.name == "PlayerMaterial") rend.material.color = c1;
 		}
-
 		colorChangeToUniform = false;
 		colorLerpT = 0;
 
@@ -110,7 +109,7 @@ public class GolfPlayerController : MonoBehaviour {
 				}
 			}
 			else {
-				// If currently aiming a put allow the stick to rotate the character around the ball
+				// If currently aiming a putt allow the stick to rotate the character around the ball
 				if (!swinging) 
 				{ 
 					Transform sweetspot = transform.FindChild("Sweetspot");

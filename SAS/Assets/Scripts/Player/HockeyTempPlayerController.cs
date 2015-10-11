@@ -4,106 +4,118 @@ using InControl;
 
 public class HockeyTempPlayerController : MonoBehaviour {
 
+	// Color variables
 	public Color c1;
+	private Renderer[] renderers;
 	private bool colorChangeToUniform;
-	private Renderer rend;
 	private float colorLerpT;
-
+	
 	//Keyboard Keybinding Stuff
 	public KeyCode left;
 	public KeyCode right;
 	public KeyCode up;
 	public KeyCode down;
-    public KeyCode debugKill;
-	public KeyCode Lookleft;
-	public KeyCode Lookright;
-	public KeyCode Lookup;
-	public KeyCode Lookdown;
-
-	public bool alive;
-	
-	private Rigidbody rb;
-	public float magSpeedX;
-	public float magSpeedZ;
-	public float momentumX;
-	public float momentumZ;
-	[Range(1,2000)]
-	public float maxSpeed;
-	[Range(0.9f,1.0f)]
-	public float friction;
-	public float floatAbove;
-    public GameObject[] respawnPoints;
-
-	[Range(1,2000)]
-	public float speedMagnitude;
-
+	public KeyCode attack;
+	public KeyCode debugKill;
+	public KeyCode lookLeft;
+	public KeyCode lookRight;
+	public KeyCode lookUp;
+	public KeyCode lookDown;
 	public InputDevice device {get; set;}
-	private PaintSplatter paint;
+	
+	// Generla Game Player variables
+	public bool alive;
+	private Rigidbody rb;
+	public float xDirection;
+	public float zDirection;
+	public float xLookDirection;
+	public float zLookDirection;
+	public float walkSpeed;
 
-	public float clockwise = 1000.0f;
-	public float counterClockwise = -5.0f;
-	public GameObject capsule;
+	// Hockey Game Player variables
+	public float maxSpeed;
+	public float friction;
+	
+	// Game Objects and Components
+	public GameObject[] respawnPoints;
+	public CapsuleCollider equipmentCollider;
+	public OverheadCameraController cam;
+	private AudioSource sound;
+	private Animator anim;
 
-	// Use this for initialization
+	//debug
+	public Vector3 vel;
+
 	void Start () {
+		// Get Components and Game Objects
 		rb = GetComponent<Rigidbody>();
-		maxSpeed = 200f;
-		speedMagnitude = 100f;
-		alive = true;
-        respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-		rend = GetComponent<Renderer>();
+		anim = GetComponent<Animator> ();
+		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
+		renderers = GetComponentsInChildren<Renderer>();
 		colorChangeToUniform = false;
 		colorLerpT = 0;
-		paint = GetComponent<PaintSplatter>();
-//		paint.color = c1;
         if (respawnPoints.Length == 0)
         {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
         }
-		transform.position = new Vector3(transform.position.x, 6.25f, transform.position.z);
-		capsule = transform.FindChild ("Capsule").gameObject;
 
+		// Set up color variables
+		foreach (Renderer rend in renderers) {
+			if (rend.material.name == "PlayerMaterial") rend.material.color = c1;
+		}
+		colorChangeToUniform = false;
+		colorLerpT = 0;
+
+		// Set up general player variables
+		alive = true;
+		anim.SetBool("Alive", true);
+		ResetRigidBodyConstraints();
+		walkSpeed = 10f;
+
+		// Set up hockey player variables
+		maxSpeed = 200f;
     }
     
-	
-	// Update is called once per frame
+
 	void Update () {
 
         if (alive)
         {
-            magSpeedX = 0;
-            magSpeedZ = 0;
-            
-
-			// Move Character
-            float xVel = GetXVelocity();
+			// Move player in x and z directions 
+			xDirection = 0;
+			zDirection = 0;
+			float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			momentumX = (momentumX + xVel)*friction;
-			momentumZ = (momentumZ + zVel)*friction;
-			if(momentumX > maxSpeed) {
-				momentumX = maxSpeed;
-			}
-			if (momentumX < (-1)*maxSpeed) {
-				momentumX = (-1)*maxSpeed;
-			}
-			if(momentumX < 0.1f && momentumX > -0.1f) {
-				momentumX = 0;
-			}
-			if(momentumZ > maxSpeed) {
-				momentumZ = maxSpeed;
-			}
-			if (momentumZ < (-1)*maxSpeed) {
-				momentumZ = (-1)*maxSpeed;
-			}
-			if(momentumZ < 0.1f && momentumZ > -0.1f) {
-				momentumZ = 0;
-			}
-			Vector3 newPosition = new Vector3(momentumX,0,momentumZ);
-			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(-newPosition); }
-			transform.position = new Vector3(transform.position.x, floatAbove, transform.position.z);
-			rb.velocity = newPosition;
-		}	
+			rb.AddForce (2*(walkSpeed/Time.deltaTime)*(new Vector3(xVel, 0, zVel)));
+
+			// Look player in x and z directions using second stick
+			xLookDirection = 0;
+			zLookDirection = 0;
+			float xLookVel = GetXLook();
+			float zLookVel = GetZLook();
+			transform.Rotate (Vector3.up, walkSpeed*xLookVel-walkSpeed*zLookVel); 
+			
+			// Cap the max speed
+			if (rb.velocity.x > maxSpeed) { rb.velocity = new Vector3(maxSpeed, 0, rb.velocity.z); }
+			if (rb.velocity.x < -maxSpeed) { rb.velocity = new Vector3(-maxSpeed, 0, rb.velocity.z); }
+			if (rb.velocity.z > maxSpeed) { rb.velocity = new Vector3(rb.velocity.x, 0, maxSpeed); }
+			if (rb.velocity.z < -maxSpeed) { rb.velocity = new Vector3(rb.velocity.x, 0, -maxSpeed); }
+			vel = rb.velocity;
+
+			// Check if Attacking
+			//TODO: Port from golf player minus putting : GetAttacking();
+			//TODO: Port from golf player minus putting: CheckAnimStateForAttacking();
+		}
+
+		// Update constantly updated variables as needed
+		UpdateColor();
 		GetRespawn();
+	}
+
+	private void ResetRigidBodyConstraints() 
+	{
+		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+		transform.rotation = Quaternion.identity;
 	}
 	
 	private void GetRespawn()
@@ -149,41 +161,34 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		return device == null ? GetKeyboardZInput(): GetControllerZInput();
 	}
 	private float GetControllerXInput() {
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
+		return walkSpeed * device.Direction.X * Time.deltaTime;
 	}
 	private float GetControllerZInput() {
-		return speedMagnitude * device.Direction.Y * Time.deltaTime;
+		return walkSpeed * device.Direction.Y * Time.deltaTime;
 	}
 	private float GetKeyboardXInput() {
 		if (Input.GetKey(left))
 		{
-			magSpeedX = -1;
+			xDirection = -1;
 		}
 		if (Input.GetKey(right))
 		{
-			magSpeedX = 1;
+			xDirection = 1;
 		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
+		return walkSpeed * xDirection * Time.deltaTime;
 	}
 	private float GetKeyboardZInput()
 	{
 		if (Input.GetKey(up))
 		{
-			magSpeedZ = 1;
+			zDirection = 1;
 		}
 		if (Input.GetKey(down))
 		{
-			magSpeedZ = -1;
+			zDirection = -1;
 		}
-		return speedMagnitude * magSpeedZ * Time.deltaTime;
+		return walkSpeed * zDirection * Time.deltaTime;
 	}
-	private void UpdateColor() {
-		rend.material.color = c1;
-	}
-
-	/*--------------------------------------------------------------------------*/
-	/*--------------------------------------------------------------------------*/
-	/*--------------------------------------------------------------------------*/
 	private float GetXLook() {
 		return device == null ? GetKeyboardXLookInput(): GetControllerXLookInput();
 	}
@@ -191,34 +196,61 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	private float GetZLook() {
 		return device == null ? GetKeyboardZLookInput(): GetControllerZLookInput();
 	}
+	
 	private float GetControllerXLookInput() {
+		// TODO: Control input for second stick
 		return 0;
 	}
+	
 	private float GetControllerZLookInput() {
+		// TODO: controller input for second stick
 		return 0;
 	}
+	
 	private float GetKeyboardXLookInput() {
-		if (Input.GetKey(Lookleft))
+		if (Input.GetKey(lookLeft))
 		{
-			capsule.transform.Rotate(0, Time.deltaTime * counterClockwise, 0);
+			xLookDirection = -1;
 		}
-		if (Input.GetKey(Lookright))
+		if (Input.GetKey(lookRight))
 		{
-			capsule.transform.Rotate(0, Time.deltaTime * clockwise, 0);
+			xLookDirection = 1;
 		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
+		return walkSpeed * xLookDirection * Time.deltaTime;
 	}
-	private float GetKeyboardZLookInput()
+	
+	private float GetKeyboardZLookInput() {
+		if (Input.GetKey(lookDown))
+		{
+			zLookDirection = -1;
+		}
+		if (Input.GetKey(lookUp))
+		{
+			zLookDirection = 1;
+		}
+		return walkSpeed * zLookDirection * Time.deltaTime;
+	}
+
+	private void UpdateColor()
 	{
-		if (Input.GetKey(Lookup))
-		{
-			capsule.transform.Rotate(0, Time.deltaTime * counterClockwise, 0);
+		colorLerpT += Time.deltaTime;
+		foreach (Renderer rend in renderers) {
+			if (colorChangeToUniform && alive) {
+				rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), c1, colorLerpT);
+				if (colorLerpT >= 1) {
+					colorChangeToUniform = false;
+					colorLerpT = 0;
+				}
+			} else {
+				rend.material.color = Color.Lerp (c1, new Color (0, 0, 0, 0), colorLerpT);
+				if (colorLerpT >= 1) {
+					if (alive) {
+						colorChangeToUniform = true;
+						colorLerpT = 0;
+					}
+				}
+			}
 		}
-		if (Input.GetKey(Lookdown))
-		{
-			capsule.transform.Rotate(0, Time.deltaTime * clockwise, 0);
-		}
-		return speedMagnitude * magSpeedZ * Time.deltaTime;
 	}
 
 }
