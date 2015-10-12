@@ -51,6 +51,8 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
+		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
+		equipmentCollider.enabled = false;
 		renderers = GetComponentsInChildren<Renderer>();
 		colorChangeToUniform = false;
 		colorLerpT = 0;
@@ -75,7 +77,6 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		// Set up hockey player variables
 		maxSpeed = 200f;
     }
-    
 
 	void Update () {
 
@@ -103,7 +104,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
 			vel = rb.velocity;
 
 			// Check if Attacking
-			//TODO: Port from golf player minus putting : GetAttacking();
+			GetAttacking();
 			//TODO: Port from golf player minus putting: CheckAnimStateForAttacking();
 		}
 
@@ -116,6 +117,31 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
+	}
+
+	private void GetAttacking()
+	{
+		if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger))) {
+			Attack ();
+		}
+	}
+	
+	private void Attack()
+	{
+		anim.SetBool("Attack", true);
+	}
+	
+	private void StartAttacking()
+	{
+		Debug.Log ("start attack");
+		equipmentCollider.enabled = true;
+	}
+	
+	private void StopAttack()
+	{
+		Debug.Log ("stop attack");
+		equipmentCollider.enabled = false;
+		anim.SetBool("Attack", false);
 	}
 	
 	private void GetRespawn()
@@ -133,6 +159,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
 	{
 		alive = false;
         rb.constraints = RigidbodyConstraints.None;
+		anim.SetBool ("Alive", false);
     }
 	
 	public void Kill()
@@ -143,12 +170,14 @@ public class HockeyTempPlayerController : MonoBehaviour {
 
     public void Kill(Vector3 direction)
     {
+		rb.AddForce (100f * direction);
         MakeDead();    
     }
 
     public void Respawn()
     {
-        alive = true;
+		alive = true;
+		anim.SetBool ("Alive", true);
         rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
     }

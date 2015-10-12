@@ -183,7 +183,7 @@ public class GolfPlayerController : MonoBehaviour {
 
     public void Kill(Vector3 direction)
     {
-		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+		rb.AddForce(direction);
 		if (putting) {
 			ball.beingHit = false;
 		}
@@ -333,20 +333,22 @@ public class GolfPlayerController : MonoBehaviour {
 	
     private void UpdateColor()
 	{
-		colorLerpT += Time.deltaTime;
-		foreach (Renderer rend in renderers) {
-			if (colorChangeToUniform && alive) {
-				rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), c1, colorLerpT);
-				if (colorLerpT >= 1) {
-					colorChangeToUniform = false;
-					colorLerpT = 0;
-				}
-			} else {
-				rend.material.color = Color.Lerp (c1, new Color (0, 0, 0, 0), colorLerpT);
-				if (colorLerpT >= 1) {
-					if (alive) {
-						colorChangeToUniform = true;
+		if (alive) {
+			colorLerpT += Time.deltaTime;
+			foreach (Renderer rend in renderers) {
+				if (colorChangeToUniform && alive) {
+					rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), c1, colorLerpT);
+					if (colorLerpT >= 1) {
+						colorChangeToUniform = false;
 						colorLerpT = 0;
+					}
+				} else {
+					rend.material.color = Color.Lerp (c1, new Color (0, 0, 0, 0), colorLerpT);
+					if (colorLerpT >= 1) {
+						if (alive) {
+							colorChangeToUniform = true;
+							colorLerpT = 0;
+						}
 					}
 				}
 			}
