@@ -1,9 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Liaison : MonoBehaviour {
-
-	//This script will be the liaison between the Game menu, Incontrol and the individual scenes
+public class PlayerClass : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,4 +12,6 @@ public class Liaison : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
 }
