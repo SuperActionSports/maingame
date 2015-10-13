@@ -11,7 +11,7 @@ public class BaseballController : MonoBehaviour {
 	private TrailRenderer trail;
 	private ParticleSystem asplode;
 	private bool sploded;
-
+	public ConfettiScript victoryEffect;
 	void Start () {
 		rb = GetComponent<Rigidbody> ();
 		rend = GetComponent<Renderer> ();
@@ -21,6 +21,7 @@ public class BaseballController : MonoBehaviour {
 		//scoreboard = FindObjectOfType ;
 		ownNumber = 0;
 		sploded = false;
+		victoryEffect = GetComponentInChildren<ConfettiScript>();
 	}
 	
 	// Update is called once per frame
@@ -42,13 +43,31 @@ public class BaseballController : MonoBehaviour {
 				Destroy (gameObject);
 			}
 		}
-		if (other.gameObject.tag == "field") {
+		else if (other.gameObject.CompareTag ("Equipment")) {
+			int xHit = Mathf.FloorToInt(Random.Range(10,30));
+			xHit *= other.transform.eulerAngles.y > 0 ? -1 : 1;
+			rb.constraints = RigidbodyConstraints.None;
+			float zForce = 0;
+			while (Mathf.Abs(zForce) < 0.3)
+			{
+				zForce = Random.Range(-3,3);
+			}
+			ChangeOwnership(1, other.transform.parent.GetComponentInParent<BaseballPlayerController>().c1, new Vector3 (xHit, 10, zForce));
+			
+		}
+		else if (other.gameObject.tag == "field") {
+			victoryEffect.Party(rend.material.color);
+			victoryEffect.gameObject.transform.parent = null;
+			gameObject.SetActive(false);
+			/*
 			if (sploded) {
 				rb.velocity = Vector3.zero ;
 			}
+			
 			else if (ownNumber == 0){
 				Destroy (gameObject) ;
 			}
+			*/
 		}
 	}
 
@@ -60,9 +79,10 @@ public class BaseballController : MonoBehaviour {
 
 	private void moveToBack() {
 		sploded = true;
-		transform.tag = "Deadball";
-		rb.AddForce(new Vector3(0, 0, 2));
+		transform.tag = "Deadball";		
 		trail.enabled = false;
+		rb.constraints = RigidbodyConstraints.None;
+		rb.AddForce(new Vector3(0, 0, Random.Range(-2,2) *0.9f));
 	}
 
 	public void ChangeOwnership (int hitter, Color hitColor, Vector3 hitForce)

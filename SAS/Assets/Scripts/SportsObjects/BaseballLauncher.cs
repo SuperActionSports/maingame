@@ -13,9 +13,9 @@ public class BaseballLauncher : MonoBehaviour {
 	void Start()
 	{
 		minXPow = -15;
-		maxXpow = -2;
-		minYPow = 7;
-		maxYPow = 9;
+		maxXpow = -4;
+		minYPow = 6;
+		maxYPow = 8;
 	}				
 				
 	public void Pitch () {

@@ -32,6 +32,7 @@ GameObject:
   - 114: {fileID: 11459046}
   - 136: {fileID: 13676406}
   - 82: {fileID: 8252808}
+  - 54: {fileID: 5458456}
   m_Layer: 0
   m_Name: BatHand
   m_TagString: Equipment
@@ -55,6 +56,7 @@ GameObject:
   - 114: {fileID: 11479586}
   - 95: {fileID: 9560558}
   - 82: {fileID: 8202332}
+  - 136: {fileID: 13625726}
   m_Layer: 0
   m_Name: PlayerBaseball
   m_TagString: Player
@@ -77,10 +79,10 @@ GameObject:
   - 136: {fileID: 13601706}
   m_Layer: 0
   m_Name: BaseballBat
-  m_TagString: Untagged
+  m_TagString: Equipment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 61
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &404632
 Transform:
@@ -269,6 +271,21 @@ Rigidbody:
   m_AngularDrag: .0500000007
   m_UseGravity: 1
   m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!54 &5458456
+Rigidbody:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 150066}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -3507,12 +3524,25 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167632}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: .500000179
   m_Height: 8.43388653
   m_Direction: 1
   m_Center: {x: -1.49011612e-07, y: 3.51622915, z: -1.78813934e-07}
+--- !u!136 &13625726
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 161116}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: .5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!136 &13668704
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -3533,7 +3563,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 150066}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 0
   m_Radius: 1.41999996
   m_Height: 8.42000008

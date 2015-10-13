@@ -109,7 +109,6 @@ public class BaseballPlayerController : MonoBehaviour {
 		GetRespawn();
 		if (transform.position.y > 1.6f)
 		{
-			Debug.Log("Jumping, right?");
 			anim.SetBool("Jumping",true);
 		}
 		else 
