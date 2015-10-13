@@ -1,0 +1,22 @@
+﻿using UnityEngine;
+using System.Collections;
+using UnityEngine.UI;
+
+public class PlayerIconScript : MonoBehaviour {
+	public Transform target;
+	private Camera camera;
+	private Text text;
+	
+	void Start() {
+		camera = Camera.main;
+		text = GetComponent<Text>();
+		text.color = target.GetComponent<BaseballPlayerController>().c1;
+		
+	}
+	
+	void Update() {
+		Vector3 screenPos = camera.WorldToScreenPoint(target.position);
+		screenPos += new Vector3(0,10,0);
+		transform.position = screenPos;
+	}
+}

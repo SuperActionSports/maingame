@@ -3474,7 +3474,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b21451ba1fca420ba9d452b9c800881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c1: {r: 1, g: 0, b: 0, a: 0}
+  c1: {r: 1, g: 0, b: 0, a: 1}
   playerNumber: 0
   runs: 0
   left: 97
@@ -3493,6 +3493,7 @@ MonoBehaviour:
   impactMod: 0
   cam: {fileID: 0}
   speedMagnitude: 2
+  jumpMagnitude: 0
 --- !u!135 &13515932
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3565,7 +3566,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 0
-  m_Radius: 1.41999996
+  m_Radius: 1.01999998
   m_Height: 8.42000008
   m_Direction: 1
   m_Center: {x: 0, y: 4.11000013, z: 0}

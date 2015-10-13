@@ -72,5 +72,6 @@ public class ConfettiScript : MonoBehaviour {
 			
 		}
 		played = true;
+		Destroy(gameObject,10);
 	}
 }

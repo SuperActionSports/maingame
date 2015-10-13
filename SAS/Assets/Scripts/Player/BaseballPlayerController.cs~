@@ -46,6 +46,8 @@ public class BaseballPlayerController : MonoBehaviour {
 
 	[Range(1,20)]
 	public float speedMagnitude;
+	[Range(20,60)]
+	public float jumpMagnitude;
 	// Use this for initialization
 	void Start () {
 	 	sound =  GetComponent<AudioSource>();
@@ -55,7 +57,8 @@ public class BaseballPlayerController : MonoBehaviour {
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		//rend.material.color = c;
-		speedMagnitude = 10f;
+		speedMagnitude = 12f;
+		jumpMagnitude = 40;
 		colorChangeToUniform = false;
 		colorLerpT = 0;
 		alive = true;
@@ -249,7 +252,7 @@ public class BaseballPlayerController : MonoBehaviour {
 			if (doubleJumpAllowed)
 			{
 				anim.SetBool("Jumping", false);
-				rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+				rb.velocity = new Vector3(rb.velocity.x, jumpMagnitude, rb.velocity.z);
 				doubleJumpAllowed = false;
 			}
 			else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
@@ -258,7 +261,7 @@ public class BaseballPlayerController : MonoBehaviour {
 				{
 					doubleJumpAllowed = true;
 					anim.SetBool("Jumping",true);
-					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+					rb.velocity = new Vector3(rb.velocity.x, jumpMagnitude, rb.velocity.z);
 				}
 			}
 		}
@@ -276,7 +279,7 @@ public class BaseballPlayerController : MonoBehaviour {
 			if (doubleJumpAllowed)
 			{
 //				anim.SetBool("Jumping", false);
-				rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+				rb.velocity = new Vector3(rb.velocity.x, jumpMagnitude, rb.velocity.z);
 				doubleJumpAllowed = false;
 			}
 			else if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
@@ -285,7 +288,7 @@ public class BaseballPlayerController : MonoBehaviour {
 				{
 					doubleJumpAllowed = true;
 					anim.SetBool("Jumping",true);
-					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
+					rb.velocity = new Vector3(rb.velocity.x, jumpMagnitude, rb.velocity.z);
 				}
 			}
 		}
