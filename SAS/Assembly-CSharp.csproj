@@ -45,6 +45,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GameControlDemo.cs" />
      <Compile Include="Assets\GameControlWizard.cs" />
      <Compile Include="Assets\LiaisonClass.cs" />
      <Compile Include="Assets\PlayerClass.cs" />
