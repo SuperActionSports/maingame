@@ -107,6 +107,15 @@ public class BaseballPlayerController : MonoBehaviour {
 		UpdateColor();
 		
 		GetRespawn();
+		if (transform.position.y > 1.6f)
+		{
+			Debug.Log("Jumping, right?");
+			anim.SetBool("Jumping",true);
+		}
+		else 
+		{
+			anim.SetBool("Jumping",false);
+		}
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -240,6 +249,7 @@ public class BaseballPlayerController : MonoBehaviour {
 		{
 			if (doubleJumpAllowed)
 			{
+				anim.SetBool("Jumping", false);
 				rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
 				doubleJumpAllowed = false;
 			}
@@ -248,6 +258,7 @@ public class BaseballPlayerController : MonoBehaviour {
 				if (groundHit.collider.CompareTag("field"))
 				{
 					doubleJumpAllowed = true;
+					anim.SetBool("Jumping",true);
 					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
 				}
 			}
@@ -261,10 +272,11 @@ public class BaseballPlayerController : MonoBehaviour {
 	
 	private void GetControllerYInput()
 	{
-		if (device.Action1 || device.Direction.Y > 0.9)
+		if (device.Action1.WasPressed || device.Direction.Y > 0.9)
 		{
 			if (doubleJumpAllowed)
 			{
+//				anim.SetBool("Jumping", false);
 				rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
 				doubleJumpAllowed = false;
 			}
@@ -273,6 +285,7 @@ public class BaseballPlayerController : MonoBehaviour {
 				if (groundHit.collider.CompareTag("field"))
 				{
 					doubleJumpAllowed = true;
+					anim.SetBool("Jumping",true);
 					rb.velocity = new Vector3(rb.velocity.x, speedMagnitude * 4f, rb.velocity.z);
 				}
 			}
