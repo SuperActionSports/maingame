@@ -6,15 +6,13 @@ using InControl;
 using System;
 
 public class GameControlWizard : MonoBehaviour {
-
-	//Singlton design pattern
+	
 	public static GameControlWizard control;
-
-	public float health;
-	public float exp;
 
 	public int number_of_players;
 	public GameObject Player_Prefab;
+	public Boolean tournament_mode;
+	public Boolean team_mode;
 
 	public float[] player_1_color;
 	public float[] player_2_color;
@@ -42,8 +40,23 @@ public class GameControlWizard : MonoBehaviour {
 	public Vector3[] home_team_respawn_points;
 	public Vector3[] away_team_respawn_points;
 
+	public int player_1_score;
+	public int player_2_score;
+	public int player_3_score;
+	public int player_4_score;
+	public int home_team_score;
+	public int away_team_score;
+
+	public int player_1_tournament_score;
+	public int player_2_tournament_score;
+	public int player_3_tournament_score;
+	public int player_4_tournament_score;
+	public int home_team_tournament_score;
+	public int away_team_tournament_score;
+
 	// Use this for code that will execute before Start ()
 	void Awake () { 
+		//Singlton design pattern
 		if (control == null) {
 			DontDestroyOnLoad (gameObject);
 			control = this;
@@ -81,6 +94,7 @@ public class GameControlWizard : MonoBehaviour {
 		Application.LoadLevel (tennis_filename);
 		//Load Respawn Points
 		GameObject.Find (""); //Insert Respond Points Text
+		//Get Team Assignments
 
 	}
 
@@ -108,17 +122,57 @@ public class GameControlWizard : MonoBehaviour {
 		return null;
 	}
 
+	public void SetPlayerController(int player_number) {
 
+	}
 
+	public void SetAllPlayerController() {
+		
+	}
 
+	public InputDevice GetPlayerController(int player_number) {
+		return null;
+	}
+	
+	public InputDevice[] GetAllPlayerController() {
+		return null;
+	}
 
+	public void SetPlayerRespawnPoints(int player_number, Vector3[] respawn_points) {
+		
+	}
+	
+	public void SetAllPlayerRespawnPoints(Vector3[] respawn_points) {
+		
+	}
 
+	public void SetHomeTeamRespawnPoints(Vector3[] respawn_points) {
+		
+	}
+	
+	public void SetAwayTeamRespawnPoints(Vector3[] respawn_points) {
+		
+	}	
 
+	public Vector3[] GetPlayerRespawnPoints(int player_number) {
+		return null;
+	}
+	
+	public Vector3[] GetAllPlayerRespawnPoints() {
+		return null;
+	}
 
+	public Vector3[] GetHomeTeamRespawnPoints() {
+		return null;
+	}
 
+	public Vector3[] GetAwayTeamRespawnPoints() {
+		return null;
+	}
 
-
-
+	public void SetPlayerTeam(int player_number, int team_number) {
+		// 0 - Home | 1 - nuetral/no team | 2 - Away
+	}
 
 
 
@@ -131,8 +185,8 @@ public class GameControlWizard : MonoBehaviour {
 		FileStream file = File.Create (Application.persistentDataPath + "/playerInfo.dat");
 
 		PlayerData data = new PlayerData ();
-		data.health = health;
-		data.exp = exp;
+		//data.health = health;
+		//data.exp = exp;
 
 		bf.Serialize (file, data);
 		file.Close ();
@@ -145,8 +199,8 @@ public class GameControlWizard : MonoBehaviour {
 			PlayerData data = (PlayerData)bf.Deserialize(file);
 			file.Close();
 
-			health = data.health;
-			exp = data.exp;
+			//health = data.health;
+			//exp = data.exp;
 		}
 	}
 }
@@ -158,9 +212,18 @@ class GameData {
 }
 
 [Serializable]
+class Team {
+	public int team;
+	public Player[] team_members;
+	public float[] team_color;
+	public Vector3[] respawn_points;
+}
+
+[Serializable]
 class Player {
 	public int number;
 	public float[] color;
 	public InputDevice controller;
 	public Vector3[] respawn_points;
+	public Team team;
 }
