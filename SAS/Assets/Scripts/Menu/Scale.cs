@@ -23,12 +23,12 @@ using InControl;
 			if (device == null)
 			{
 				// If no controller exists for this cube, just make it translucent.
-				cachedRenderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
+				//cachedRenderer.material.color = new Color( 1.0f, 1.0f, 1.0f, 0.2f );
 			}
 			else
 			{
 				// Set object material color.
-				cachedRenderer.material.color = GetColorFromInput();
+				//cachedRenderer.material.color = GetColorFromInput();
 
 				// Rotate target object.
 				transform.Rotate( Vector3.down, 500.0f * Time.deltaTime * device.Direction.X, Space.World );

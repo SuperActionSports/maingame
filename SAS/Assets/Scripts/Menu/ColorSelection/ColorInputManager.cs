@@ -26,17 +26,17 @@ using InControl;
 	// just creating a new instance of your action set subclass per player and assigning the
 	// device to its Device property.
 	//
-	public class ScaleManager : MonoBehaviour
+	public class ColorInputManager : MonoBehaviour
 	{
-		public GameObject scalePrefab;
+		public GameObject colorSelectionManagerPrefab;
 		
-		const int maxScales = 4;
+		const int maxColorSelectors = 4;
 
 		List<Vector3> spawnPoints;
 
-		List<Scale> scales = new List<Scale>( maxScales );
+		List<ColorSelectionButtonManager> colorSelectionManagers = new List<ColorSelectionButtonManager>( maxColorSelectors );
 
-		public GameObject[] Respawns;
+		public ColorSelectionButton[] colorStarts;
 	
 		void Start()
 		{
@@ -44,15 +44,15 @@ using InControl;
 
 			spawnPoints = new List<Vector3>();
 			try{
-				Respawns.GetLength(0);
+				colorStarts.GetLength(0);
 			}
 			catch (NullReferenceException e)
 			{
 				Debug.Log("You didn't set the Respawns prefab, dingus.");
 			}
-			foreach (GameObject g in Respawns)
+			foreach (ColorSelectionButton c in colorStarts)
 			{
-				spawnPoints.Add(g.transform.position);
+				spawnPoints.Add(c.transform.position);
 			}
 		}
 
@@ -64,7 +64,7 @@ using InControl;
 			{
 				if (ThereIsNoPlayerUsingDevice( inputDevice ))
 				{
-					CreateScale( inputDevice );
+					CreateButton( inputDevice );
 				}
 			}
 		}
@@ -76,15 +76,15 @@ using InControl;
 		}
 
 
-		Scale FindPlayerUsingDevice( InputDevice inputDevice )
+		ColorSelectionButtonManager FindPlayerUsingDevice( InputDevice inputDevice )
 		{
-			var scaleCount = scales.Count;
-			for (int i = 0; i < scaleCount; i++)
+			var btnCount = colorSelectionManagers.Count;
+			for (int i = 0; i < btnCount; i++)
 			{
-				var scale = scales[i];
-				if (scale.device == inputDevice)
+				var btn = colorSelectionManagers[i];
+				if (btn.device == inputDevice)
 				{
-					return scale;
+					return btn;
 				}
 			}
 
@@ -108,33 +108,33 @@ using InControl;
 		}
 
 
-		Scale CreateScale( InputDevice inputDevice )
+		ColorSelectionButtonManager CreateButton( InputDevice inputDevice )
 		{
-			if (scales.Count < maxScales)
+			if (colorSelectionManagers.Count < maxColorSelectors)
 			{
 				// Pop a position off the list. We'll add it back if the player is removed.
 				var playerPosition = spawnPoints[0];
 				spawnPoints.RemoveAt( 0 );
 
-				var gameObject = (GameObject) Instantiate( scalePrefab, playerPosition, Quaternion.identity );
-				var scale = gameObject.GetComponent<Scale>();
-				scale.device = inputDevice;
+				var gameObject = (GameObject) Instantiate( colorSelectionManagerPrefab, playerPosition, Quaternion.identity );
+				var buttonManager = gameObject.GetComponent<ColorSelectionButtonManager>();
+				buttonManager.device = inputDevice;
 				//scale.c1 = Color.cyan;
-				scales.Add( scale );
+				colorSelectionManagers.Add( buttonManager );
 
-				return scale;
+				return buttonManager;
 			}
 
 			return null;
 		}
 
 
-		void RemovePlayer( GolfPlayerController player )
+		void Remove( ColorSelectionButtonManager c )
 		{
-			spawnPoints.Insert( 0, player.transform.position );
+			spawnPoints.Insert( 0, c.transform.position );
 			//players.Remove( player );
-			player.device = null;
-			Destroy( player.gameObject );
+			c.device = null;
+			Destroy( c.gameObject );
 		}
 
 
@@ -143,10 +143,10 @@ using InControl;
 			const float h = 22.0f;
 			var y = 10.0f;
 
-			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + scales.Count + "/" + maxScales );
+			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + colorSelectionManagers.Count + "/" + maxColorSelectors );
 			y += h;
 
-			if (scales.Count < maxScales)
+			if (colorSelectionManagers.Count < maxColorSelectors)
 			{
 				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button to join!" );
 				y += h;
