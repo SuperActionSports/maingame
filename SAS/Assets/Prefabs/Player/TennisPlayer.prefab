@@ -340,7 +340,7 @@ Animator:
   m_GameObject: {fileID: 114932}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0e381209a34c27f47b7c592e90c8d211, type: 2}
+  m_Controller: {fileID: 9100000, guid: 38054c6eccf7e7549af82f897e214ef2, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -510,10 +510,6 @@ Prefab:
       propertyPath: tennisBall
       value: 
       objectReference: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
-    - target: {fileID: 0}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 0e381209a34c27f47b7c592e90c8d211, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114932}
