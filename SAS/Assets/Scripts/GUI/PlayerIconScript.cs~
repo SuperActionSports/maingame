@@ -13,7 +13,9 @@ public class PlayerIconScript : MonoBehaviour {
 	void Start() {
 		camera = Camera.main;
 		text = GetComponent<Text>();
+		var icon = GetComponentInChildren<Image>();
 		text.color = color;
+		icon.color = color;
 	}
 	
 	void Update() {
