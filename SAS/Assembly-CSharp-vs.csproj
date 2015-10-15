@@ -58,6 +58,9 @@
      <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
      <Compile Include="Assets\Scripts\FX\VictoryScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\Countdown.cs" />
+     <Compile Include="Assets\Scripts\GUI\PlayerIconScript.cs" />
+     <Compile Include="Assets\Scripts\GUI\ResetPlayerGUIs.cs" />
      <Compile Include="Assets\Scripts\GameLogic\StickeggRules.cs" />
      <Compile Include="Assets\Scripts\Garbage\GARBAGEMOVE.cs" />
      <Compile Include="Assets\Scripts\GolfBall.cs" />

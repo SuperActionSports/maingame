@@ -72,10 +72,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
 		alive = true;
 		anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		walkSpeed = 10f;
 
-		// Set up hockey player variables
-		maxSpeed = 200f;
     }
 
 	void Update () {
@@ -94,7 +91,7 @@ public class HockeyTempPlayerController : MonoBehaviour {
 			zLookDirection = 0;
 			float xLookVel = GetXLook();
 			float zLookVel = GetZLook();
-			transform.Rotate (Vector3.up, walkSpeed*xLookVel-walkSpeed*zLookVel); 
+			transform.Rotate (Vector3.up, walkSpeed*2*xLookVel-walkSpeed*2*zLookVel); 
 			
 			// Cap the max speed
 			if (rb.velocity.x > maxSpeed) { rb.velocity = new Vector3(maxSpeed, 0, rb.velocity.z); }
