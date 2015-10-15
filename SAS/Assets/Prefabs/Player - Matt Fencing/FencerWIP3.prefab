@@ -175,7 +175,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &170626
 GameObject:
   m_ObjectHideFlags: 1
@@ -5307,9 +5307,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 116136}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e31edd128de6748af6c54e0f8e1d1e, type: 3}
+  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trc: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11430018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5374,10 +5375,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f73cafd0bc0dad478b36d3d3feae88f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c: {r: 0, g: 0, b: 0, a: 0}
   speed: 0
   timeTilGravity: 0
-  untouched: 0
   directionModifier: 0
   thrown: 0
 --- !u!114 &11454024
@@ -5391,11 +5390,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0268ee30d9a599642afad416690d8815, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: 0
-  right: 0
-  up: 0
-  down: 0
-  attack: 0
+  left: 276
+  right: 275
+  up: 273
+  down: 274
+  attack: 32
   debugKill: 0
   throwEquip: 0
   counter: 0
@@ -5430,11 +5429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c2db3ea4dc6c149af6d85446b81417, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  owned: 0
   owner: {fileID: 0}
-  available: 0
   hasHit: 0
-  parent: {fileID: 0}
+  pickUpCollider: {fileID: 0}
+  attackCollider: {fileID: 0}
   c: {r: 0, g: 0, b: 0, a: 0}
   trueName: 
 --- !u!114 &11471284
@@ -8841,6 +8839,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: left
+      value: 276
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: right
+      value: 275
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: up
+      value: 273
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: down
+      value: 274
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attack
+      value: 32
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

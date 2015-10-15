@@ -18,10 +18,10 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	public GameObject player;
 	public Rigidbody rb;
-	public PlayerControllerMatt control;
+	public PlayerControllerMatt control;  // Layla
 	
-	public InputDevice device;
-	public bool deviceActive;
+	public InputDevice device; // Layla
+	public bool deviceActive; // Deprecated after Layla is implemented
 	public bool facingRight;
 	
 	private float doubleTapCooler;
@@ -37,7 +37,9 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	public float jumpForce;
 	
 	private float magSpeedX;
+
 	void Start () {
+		facingRight = true;
 		deviceActive = device == null ? false : true;
 		speedMagnitude = 20;
 		jumpForce = 32;
@@ -48,11 +50,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		control = GetComponent<PlayerControllerMatt>();
 	}
-	
-	void Update () {
-	
-	}
-	
+
 	void Move(float xVel) 
 	{
 		transform.position += new Vector3(xVel * Time.deltaTime,0,0);
@@ -67,11 +65,12 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 			facingRight = true;
 		}
-		control.SetRotation(facingRight);
+		//control.SetRotation(facingRight);
 	}
 	
 	public void HandleInput()
 	{
+		magSpeedX = 0;
 		Move(GetXVelocity());
 		GetYVelocity();
 		GetCounter();
@@ -103,22 +102,27 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			}
 			else if (device.LeftTrigger.WasPressed)
 			{
-				control.ThrowRapier();
+				ThrowRapier();
 			}
 		}
 		else if (Input.GetKeyDown(attack))
 		{
-			control.Attack();
+				Attack();
 		}
 		else if (Input.GetKeyDown(throwEquip))
 		{
-			control.ThrowEquipment();
+			ThrowRapier();
 		}
 	}
 	
 	private void Attack()
 	{
 		control.Attack();
+	}
+
+	private void ThrowRapier()
+	{
+		control.ThrowRapier();
 	}
 	
 	private float GetXVelocity()
@@ -189,7 +193,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		if (Input.GetKeyDown(up))
 		{
 			//anim.SetTrigger("Jump");
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{
@@ -208,7 +212,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	{
 		if (device.Action1 || device.Direction.Y > 0.9)
 		{
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{

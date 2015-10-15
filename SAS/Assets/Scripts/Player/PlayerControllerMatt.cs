@@ -26,8 +26,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
-	public PlayerInputHandlerMatt input;
-	public FencingGameManager wizard;
+	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla
+	public FencingGameManager wizard; // Game Wizard, handled by game
 	public int wizardNumber;
 
 	// Use this for initialization
@@ -51,13 +51,12 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rapierScript.c = color;
         armed = true;
 		rapierScript.ResetColor();
-		rapierScript.parent = gameObject;
 		
 		//SetColorForChildren();
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		ResetRotation(); 
+		//ResetRotation(); 
 		impactMod = 7.5f;
 		
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
@@ -72,6 +71,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 //		
 		wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
 		UpdateColor();
+		
+		//rapierScript.parent = this.gameObject;
+		rapierScript.ResetOwnership(this.gameObject);
     }
     
 	// Update is called once per frame
@@ -102,23 +104,19 @@ public class PlayerControllerMatt : MonoBehaviour {
 	public void Attack()
 	{
 		anim.SetTrigger("Attack");
-		rapierScript.Attack();
+		//rapierScript.Attack();
 	}
 			
 	private void MakeDead()
 	{
 		deathScript.Party();
-		alive = false;
-		//Need the normal of the local x axis of bat
-        //paint.Paint(transform.position,paint.color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
-		if (equipmentThrow != null) {equipmentThrow.Drop();}
+		if (rapierScript != null) { rapierScript.Parry();}
         gameObject.SetActive(false);
         wizard.UpdatePlayerCount();
-        //rend.material.color = Color.black;
         Destroy(gameObject,3);
     }
     
@@ -179,8 +177,9 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rapier.transform.localRotation = new Quaternion(270,270,0,0);
 		equipment = rapier.gameObject;
 		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
-		equipmentThrow.PickUp();
-		rapierScript.parent = this.gameObject;
+		equipmentThrow.PickUp(this.gameObject);
+		rapierScript = rapier.GetComponent<RapierScript> ();
+		rapierScript.c = color;
 		rapierScript.ResetOwnership(this.gameObject);
 		armed = true;
 	}
@@ -199,15 +198,15 @@ public class PlayerControllerMatt : MonoBehaviour {
 		else
 		{
 			armed = false;
+			rapierScript.Attack();	
 			equipmentThrow.directionModifier = input.facingRight ? 1 : -1;
-			equipmentThrow.c = color;
 			equipmentThrow.Throw(anim.GetFloat("Run") > 17);
 			equipment = null;
-			equipmentThrow = null;
-			rapierScript.Attack();		
+			equipmentThrow = null;	
+			rapierScript = null;
 		}
-	} 
-	
+	}
+
 	private void ResetRigidBodyConstraints() 
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionZ;

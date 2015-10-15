@@ -38,71 +38,71 @@ public class BaseballCameraController : MonoBehaviour {
 		if (Input.GetKey (KeyCode.Space)) {
 			shake = true;
 		}
-		players = GameObject.FindGameObjectsWithTag("Player");
+		//players = GameObject.FindGameObjectsWithTag("Player");
 	}
 
 	// Update is called once per frame
-	void LateUpdate () {
-		float y = 0;
-		float x = 0;
-		 z = 0;
-		float maxDist = 0;
-		
-		// Collect current position of each player
-		for (int i = 0; i < players.Length; i++) {
-            BaseballPlayerController p = players[i].GetComponent<BaseballPlayerController>();
-            if (p.alive)
-            {
-                GameObject t = players[i];
-                positions[i] = t.transform.position;
-            }
-		}
-		GameObject ball = GameObject.FindGameObjectWithTag("Ball");
-		if (ball != null) {
-			positions [5] = ball.transform.position;
-		} 
-		else {
-			positions [5] = new Vector3(0, 0, 0) ;
-		}
-			
-			// Loop through every recorded position to find the average point among them on the X,Z plane
-		for (int i = 0; i < positions.Length; i++) {
-			Vector3 pos = positions [i];
-			
-			// Add position's X and Z to average
-			x += pos.x;
-			y += pos.y;
-		}
-		
-		// Divide average position by player positions
-		x /= players.Length;
-		y /= players.Length;
-		
-		// Loop through every recorded position to find the furthest point from the average point on th X,Y plane
-		for (int i = 0; i < positions.Length; i++) {
-			Vector3 pos = positions [i];
-			float dist = Mathf.Sqrt(Mathf.Pow(pos.x - x, 2)+Mathf.Pow((2*(pos.y - y)), 2));
-			if (dist > maxDist) { maxDist = dist; }
-		}
-
-        // Use (x,y) position of camera and furthest player points to set- z distance.
-        float zOffsetViaMath = (Mathf.Tan(Mathf.PI / 3) * (maxDist));
-        if (zOffsetViaMath > zOffset)
-        {
-            z = -zOffsetViaMath;
-        }
-        else
-        {
-            z = -zOffset;
-        }
-		transform.position = Vector3.Lerp(transform.position,new Vector3(x+xOffset,y+yOffset,z),Time.deltaTime * debugLerp);
-
-		// Camera shake code
-		if (shake) {
-			shake = false;
-			PlayShake();
-		}
-	}
+//	void LateUpdate () {
+//		float y = 0;
+//		float x = 0;
+//		 z = 0;
+//		float maxDist = 0;
+//		
+//		// Collect current position of each player
+//		for (int i = 0; i < players.Length; i++) {
+//            BaseballPlayerController p = players[i].GetComponent<BaseballPlayerController>();
+//            if (p.alive)
+//            {
+//                GameObject t = players[i];
+//                positions[i] = t.transform.position;
+//            }
+//		}
+//		GameObject ball = GameObject.FindGameObjectWithTag("Ball");
+//		if (ball != null) {
+//			positions [5] = ball.transform.position;
+//		} 
+//		else {
+//			positions [5] = new Vector3(0, 0, 0) ;
+//		}
+//			
+//			// Loop through every recorded position to find the average point among them on the X,Z plane
+//		for (int i = 0; i < positions.Length; i++) {
+//			Vector3 pos = positions [i];
+//			
+//			// Add position's X and Z to average
+//			x += pos.x;
+//			y += pos.y;
+//		}
+//		
+//		// Divide average position by player positions
+//		x /= players.Length;
+//		y /= players.Length;
+//		
+//		// Loop through every recorded position to find the furthest point from the average point on th X,Y plane
+//		for (int i = 0; i < positions.Length; i++) {
+//			Vector3 pos = positions [i];
+//			float dist = Mathf.Sqrt(Mathf.Pow(pos.x - x, 2)+Mathf.Pow((2*(pos.y - y)), 2));
+//			if (dist > maxDist) { maxDist = dist; }
+//		}
+//
+//        // Use (x,y) position of camera and furthest player points to set- z distance.
+//        float zOffsetViaMath = (Mathf.Tan(Mathf.PI / 3) * (maxDist));
+//        if (zOffsetViaMath > zOffset)
+//        {
+//            z = -zOffsetViaMath;
+//        }
+//        else
+//        {
+//            z = -zOffset;
+//        }
+//		transform.position = Vector3.Lerp(transform.position,new Vector3(x+xOffset,y+yOffset,z),Time.deltaTime * debugLerp);
+//
+//		// Camera shake code
+//		if (shake) {
+//			shake = false;
+//			PlayShake();
+//		}
+//	}
 
 	public void PlayShake() {
         oldPosition = new Vector2(transform.position.x, transform.position.y);
