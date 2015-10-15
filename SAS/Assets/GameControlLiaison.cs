@@ -5,9 +5,9 @@ using System.IO;
 using InControl;
 using System;
 
-public class GameControlWizard : MonoBehaviour {
-	/*
-	public static GameControlWizard control;
+public class GameControlLiaison : MonoBehaviour {
+	
+	public static GameControlLiaison liaison;
 
 	public int number_of_players;
 	public GameObject Player_Prefab;
@@ -18,11 +18,18 @@ public class GameControlWizard : MonoBehaviour {
 	public float[] player_2_color;
 	public float[] player_3_color;
 	public float[] player_4_color;
+	public float[] home_team_color;
+	public float[] away_team_color;
 
 	public InputDevice player_1_controller;
 	public InputDevice player_2_controller;
 	public InputDevice player_3_controller;
 	public InputDevice player_4_controller;
+
+	public int player_1_team;
+	public int player_2_team;
+	public int player_3_team;
+	public int player_4_team;
 
 	public Vector3[] player_1_respawnpoints;
 	public Vector3[] player_2_respawnpoints;
@@ -57,10 +64,10 @@ public class GameControlWizard : MonoBehaviour {
 	// Use this for code that will execute before Start ()
 	void Awake () { 
 		//Singlton design pattern
-		if (control == null) {
+		if (liaison == null) {
 			DontDestroyOnLoad (gameObject);
-			control = this;
-		} else if (control != this){
+			liaison = this;
+		} else if (liaison != this){
 			Destroy(gameObject);
 		} 
 	}
@@ -323,19 +330,61 @@ public class GameControlWizard : MonoBehaviour {
 
 	public void SetPlayerTeam(int player_number, int team_number) {
 		// 0 - Home | 1 - nuetral/no team | 2 - Away
+		if (team_number >= 0 && team_number < 3) {
+			switch (player_number) {
+			case 1:
+				player_1_team = team_number;
+				break;
+			case 2:
+				player_2_team = team_number;
+				break;		
+			case 3:
+				player_3_team = team_number;
+				break;		
+			case 4:
+				player_4_team = team_number;
+				break;
+			}
+		}
 	}
 
-	public void GetPlayerTeam(int player_number) {
+	public int GetPlayerTeam(int player_number) {
 		// 0 - Home | 1 - nuetral/no team | 2 - Away
+		switch (player_number) {
+		case 1:
+			return player_1_team;
+		case 2:
+			return player_2_team;
+		case 3:
+			return player_3_team;
+		case 4:
+			return player_4_team;
+		default:
+			return -1;
+		}
 	}
 
-	public void SetTeamColor() {
-
+	public void SetTeamColor(int team, float[] team_color) {
+		switch (team) {
+		case 0:
+			home_team_color = team_color;
+			break;
+		case 2:
+			away_team_color = team_color;
+			break;
+		}
 	}
 
-	public void GetTeamColor() {
-
-	}
+	public float[] GetTeamColor(int team) {
+			switch (team) {
+			case 0:
+				return home_team_color;
+			case 2:
+				return away_team_color;
+			default:
+				return null;
+			}
+		}
 
 
 
@@ -361,11 +410,11 @@ public class GameControlWizard : MonoBehaviour {
 			//health = data.health;
 			//exp = data.exp;
 		}
-	}*/
+	}
 }
 
 [Serializable]
-class DumpleTeam {
+class Team {
 	public int team;
 	public Player[] team_members;
 	public float[] team_color;
@@ -373,7 +422,7 @@ class DumpleTeam {
 }
 
 [Serializable]
-class DumplePlayer {
+class Player {
 	public int number;
 	public float[] color;
 	public InputDevice controller;
