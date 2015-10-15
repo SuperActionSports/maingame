@@ -26,8 +26,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
-	public PlayerInputHandlerMatt input;
-	public FencingGameManager wizard;
+	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla
+	public FencingGameManager wizard; // Game Wizard, handled by game
 	public int wizardNumber;
 
 	// Use this for initialization

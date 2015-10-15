@@ -18,10 +18,10 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	public GameObject player;
 	public Rigidbody rb;
-	public PlayerControllerMatt control;
+	public PlayerControllerMatt control;  // Layla
 	
-	public InputDevice device;
-	public bool deviceActive;
+	public InputDevice device; // Layla
+	public bool deviceActive; // Deprecated after Layla is implemented
 	public bool facingRight;
 	
 	private float doubleTapCooler;
@@ -189,7 +189,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		if (Input.GetKeyDown(up))
 		{
 			//anim.SetTrigger("Jump");
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{
@@ -208,7 +208,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	{
 		if (device.Action1 || device.Direction.Y > 0.9)
 		{
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1.1f))
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
 				if (groundHit.collider.CompareTag("Stage"))
 				{

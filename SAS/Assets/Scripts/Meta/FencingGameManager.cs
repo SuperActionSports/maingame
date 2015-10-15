@@ -5,24 +5,24 @@ using InControl;
 
 public class FencingGameManager : MonoBehaviour {
 	
-	public GameObject playerPrefab;
+	public GameObject playerPrefab; 		//Provided by game
 	//private GameObject[] players;
-	private PlayerControllerMatt[] controls;
-	private Color[] colors;
-	private Vector3[] respawnPointPositions;
-	public GameObject[] respawnPoints;
-	private int totalPlayers;
-	private int remainingPlayers;
-	private int winner;
-	public GameObject winnerPlayer;
-	public GameObject victory;
-	private float victoryDuration;
-	private float gameWinTime;
-	private int matchCount;
-	private FencingCameraController cam;
-	private FencingPlayerManager inputManager;
-	private InputDevice[] devices;
-	private FencingCameraController camScript;
+	private PlayerControllerMatt[] controls; // Provided by Game
+	private Color[] colors;					 // Layla
+	private Vector3[] respawnPointPositions; // Game
+	public GameObject[] respawnPoints;		// Game
+	private int totalPlayers;				 // Layla
+	private int remainingPlayers;			// Game 
+	private int winner;						// Shared
+	public GameObject winnerPlayer;			// Game, private
+	public GameObject victory;				// Game, private
+	private float victoryDuration;			// Game, private
+	private float gameWinTime;				// Layla, customized games
+	private int matchCount;					// Layla, customized games
+	private FencingCameraController cam;	// Game
+	private FencingPlayerManager inputManager;	// Layla
+	private InputDevice[] devices;				// Layla
+	private FencingCameraController camScript;	// Game
 	
 	const int maxPlayers = 4;
 	
