@@ -48,6 +48,7 @@
      <Compile Include="Assets\GameControlDemo.cs" />
      <Compile Include="Assets\GameControlLiaison.cs" />
      <Compile Include="Assets\GameControlWizard.cs" />
+     <Compile Include="Assets\Interfaces.cs" />
      <Compile Include="Assets\LiaisonClass.cs" />
      <Compile Include="Assets\PlayerClass.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
