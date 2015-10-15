@@ -47,12 +47,6 @@ public class FencingCameraController : MonoBehaviour {
 		won = false;
 	}
 	
-	void Update() {
-		if (Input.GetKey (KeyCode.Space)) {
-			shake = true;
-		}
-	}
-	
 	// Update is called once per frame
 	void LateUpdate () {
 	if (!won)

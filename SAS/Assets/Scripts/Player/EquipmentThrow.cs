@@ -2,13 +2,11 @@
 using System.Collections;
 
 public class EquipmentThrow : MonoBehaviour {
-	
-	public Color c;
+
 	public float speed; 
 	private Rigidbody rb; 
 	public float timeTilGravity;
 	private float spawnTime;
-	public bool untouched;
 	public float directionModifier;
 	private MeshCollider frame;
 	private RapierScript rapierScript;
@@ -23,12 +21,10 @@ public class EquipmentThrow : MonoBehaviour {
 		//PickUp();
 		frame = GetComponent<MeshCollider>();
 		rb = GetComponent<Rigidbody>();
-//		Debug.Log("Is rb a thing? " + rb);
 		rapierScript = GetComponent<RapierScript>();
-		rapierScript.owned = true;
 		DeactivateRigidbody();
 		timeTilGravity = 0.5f;
-		
+		thrown = false;
 	}
 	
 	// Update is called once per frame
@@ -41,13 +37,13 @@ public class EquipmentThrow : MonoBehaviour {
 		}
 	}
 	
-	private void DeactivateRigidbody()
+	public void DeactivateRigidbody()
 	{
 		rb.isKinematic = true;
 		rb.detectCollisions = false;
 	}
 	
-	private void ActivateRigidbody(bool useGravity)
+	public void ActivateRigidbody(bool useGravity)
 	{
 		rb.detectCollisions = true;
 		rb.isKinematic = false;	
@@ -61,18 +57,18 @@ public class EquipmentThrow : MonoBehaviour {
 		ActivateRigidbody(true);
 		frame.enabled = true;
 		transform.parent = null;
-		rapierScript.ResetOwnership();
 	}
 	
 	public void Throw(bool runThrow)
 	{
 		transform.parent = null;
 		ActivateRigidbody(false);
-		untouched = true;
-		rapierScript.MakeDangerous();
-		rapierScript.parent = null;
+		rapierScript.Attack();
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
+		if (runThrow) {
+			transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
+		}
 		Vector3 force = runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce;
 		rb.AddForce(force,ForceMode.VelocityChange);
 		spawnTime = Time.time;
@@ -80,20 +76,14 @@ public class EquipmentThrow : MonoBehaviour {
 		
 	}	
 	
-	public void PickUp()
+	public void PickUp(GameObject newOwner)
 	{
 		rb = transform.GetComponent<Rigidbody>();
-		if (rb != null)
-		{	
-			DeactivateRigidbody();
-		}
-		rapierScript = GetComponent<RapierScript>();
-		rapierScript.owned = true;
+		DeactivateRigidbody();
 		
 		timeTilGravity = 0.5f;
 		spawnTime = Time.time;//update attack collider and owned
 		thrown = false;	
-		rapierScript.ResetOwnership(this.gameObject);
-		//Debug.Log("From Pickup");
+		rapierScript.ResetOwnership(newOwner);
 	}
 }

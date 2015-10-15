@@ -37,7 +37,9 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	public float jumpForce;
 	
 	private float magSpeedX;
+
 	void Start () {
+		facingRight = true;
 		deviceActive = device == null ? false : true;
 		speedMagnitude = 20;
 		jumpForce = 32;
@@ -48,11 +50,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		control = GetComponent<PlayerControllerMatt>();
 	}
-	
-	void Update () {
-	
-	}
-	
+
 	void Move(float xVel) 
 	{
 		transform.position += new Vector3(xVel * Time.deltaTime,0,0);
@@ -67,11 +65,12 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			transform.rotation = new Quaternion(transform.rotation.x, 0f, transform.rotation.z, transform.rotation.w);
 			facingRight = true;
 		}
-		control.SetRotation(facingRight);
+		//control.SetRotation(facingRight);
 	}
 	
 	public void HandleInput()
 	{
+		magSpeedX = 0;
 		Move(GetXVelocity());
 		GetYVelocity();
 		GetCounter();
@@ -103,22 +102,27 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 			}
 			else if (device.LeftTrigger.WasPressed)
 			{
-				control.ThrowRapier();
+				ThrowRapier();
 			}
 		}
 		else if (Input.GetKeyDown(attack))
 		{
-			control.Attack();
+				Attack();
 		}
 		else if (Input.GetKeyDown(throwEquip))
 		{
-			control.ThrowEquipment();
+			ThrowRapier();
 		}
 	}
 	
 	private void Attack()
 	{
 		control.Attack();
+	}
+
+	private void ThrowRapier()
+	{
+		control.ThrowRapier();
 	}
 	
 	private float GetXVelocity()
