@@ -20,7 +20,7 @@ public class GameControlLiaison : MonoBehaviour {
 	public float[] player_4_color;
 	public float[] home_team_color;
 	public float[] away_team_color;
-
+	
 	public InputDevice player_1_controller;
 	public InputDevice player_2_controller;
 	public InputDevice player_3_controller;
@@ -61,6 +61,13 @@ public class GameControlLiaison : MonoBehaviour {
 	public int home_team_tournament_score;
 	public int away_team_tournament_score;
 
+	public int winner;
+	public float game_win_time;
+	public int match_count;
+
+	public IInputHandler input_manager;
+	public InputDevice[] player_controllers;
+
 	// Use this for code that will execute before Start ()
 	void Awake () { 
 		//Singlton design pattern
@@ -72,7 +79,7 @@ public class GameControlLiaison : MonoBehaviour {
 		} 
 	}
 	
-	public void LoadFencing() {
+	/*public void LoadFencing() {
 		//Load Level
 		Application.LoadLevel (fensing_filename);
 		//Load Respawn Points
@@ -112,7 +119,7 @@ public class GameControlLiaison : MonoBehaviour {
 		//Load Respawn Points
 		GameObject.Find (""); //Insert Respond Points Text
 
-	}
+	}*/
 
 	public void SetNumberOfPlayers(int num) 	{ number_of_players = num; }
 
@@ -386,6 +393,17 @@ public class GameControlLiaison : MonoBehaviour {
 			}
 		}
 
+	public void SetWinner(int player_number)		{	winner = player_number;	}
+
+	public int GetWinner()							{	return winner;	}
+
+	public void SetGameWinTime(float gameWinTime)	{	game_win_time = gameWinTime;	}
+
+	public float GetGameWinTime()					{	return game_win_time;	}
+
+	public void SetMatchCount(int count)			{	match_count = count;	}
+
+	public int GetMatchCount()						{	return match_count;	}
 
 
 	public void Save() {
