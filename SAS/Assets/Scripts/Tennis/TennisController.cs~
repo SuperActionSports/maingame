@@ -311,16 +311,17 @@ public class TennisController : MonoBehaviour {
 
 	private void Serve()
 	{
+	//This needs to be much more complicated than it currently is
 		if (Input.GetKeyDown (KeyCode.Space) || (device != null && device.RightBumper.WasPressed)) {
 			if(transform.position.z < 0)
 			{
-				transform.eulerAngles = new Vector3(0, 180, 0);
+				//transform.eulerAngles = new Vector3(0, 90, 0);
 			}
 			else if (transform.position.z > 0)
 			{
-				transform.eulerAngles = new Vector3(0, 0, 0);
+				//transform.eulerAngles = new Vector3(0, -90, 0);
 			}
-			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0), transform.rotation);
+			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0),transform.rotation);
 		}
 	}
 
