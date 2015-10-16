@@ -67,6 +67,12 @@
      <Compile Include="Assets\Scripts\Hockey\GoalScored.cs" />
      <Compile Include="Assets\Scripts\Hockey\NoMove.cs" />
      <Compile Include="Assets\Scripts\Hockey\PuckMovement.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\GameControlDemo.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\GameControlLiaison.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\GameControlWizard.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\Interfaces.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\LiaisonClass.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\PlayerClass.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedLevelSelection.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedMainMenu.cs" />
