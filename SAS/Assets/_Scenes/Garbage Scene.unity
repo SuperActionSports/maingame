@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
@@ -253,6 +251,52 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!1001 &224307936
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -4.86025572
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.94128132
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 5.68993568
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 410284, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 109490, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 22f0264e3710c439ba4e4612b863afe5, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &284391101
 GameObject:
   m_ObjectHideFlags: 0
