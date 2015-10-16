@@ -1,4 +1,3 @@
-
 <?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
@@ -74,9 +73,29 @@
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerColorHueSelection2.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerColorSelection2.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedPlayerSelection.cs" />
+     <Compile Include="Assets\Scripts\Menu\AdvancedTeamSelection.cs" />
+     <Compile Include="Assets\Scripts\Menu\AdvancedTeamSelectionSlider.cs" />
+     <Compile Include="Assets\Scripts\Menu\ColorSelection\ColorInputManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\ColorSelection\ColorSelectionButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\ColorSelection\ColorSelectionButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\ColorSelection\ColorSelectionButtonManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\Credits\CreditsButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\LoadingScript.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerInfo.cs" />
+     <Compile Include="Assets\Scripts\Menu\PlayerSelection\PlayerSelectionButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\PlayerSelection\PlayerSelectionButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\PlayerSelection\PlayerSelectionButtonManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\Scale.cs" />
+     <Compile Include="Assets\Scripts\Menu\ScaleManager.cs" />
      <Compile Include="Assets\Scripts\Menu\creditsScript.cs" />
      <Compile Include="Assets\Scripts\Menu\levelScript.cs" />
      <Compile Include="Assets\Scripts\Menu\menuScript.cs" />
