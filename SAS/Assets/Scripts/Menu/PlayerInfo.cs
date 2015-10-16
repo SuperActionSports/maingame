@@ -49,4 +49,6 @@ public class PlayerInfo : MonoBehaviour {
 	void Update () {
 	
 	}
+
+
 }
