@@ -29,7 +29,7 @@ public class TennisController : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
     
-    public Vector3 hitForce;
+    public float hitForce;
     
     private Rigidbody rb;
     
@@ -61,7 +61,7 @@ public class TennisController : MonoBehaviour {
 
 		paint = GetComponent<PaintSplatter>();
 		paint.color = c1;
-		hitForce = new Vector3(0,15,20);
+		hitForce = 10;
     }
     
 	
@@ -115,7 +115,10 @@ public class TennisController : MonoBehaviour {
 		//Vector3 force = transform.forward*10;
 		//force.y *= 2;
 		//force = new Vector3(0,30,60);
-		ballRB.AddForce(hitForce,ForceMode.VelocityChange);
+		Vector2 swingForce = input.GetStickForSwing();
+		float xForce = swingForce.x * hitForce;
+		float yForce = swingForce.y * hitForce;
+		ballRB.AddForce(xForce,10,yForce,ForceMode.VelocityChange);
 		
 		other.GetComponent<BallMovement>().ResetCount();
 		other.GetComponent<BallMovement>().Hit(c1);

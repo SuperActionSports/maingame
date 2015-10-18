@@ -70,6 +70,6 @@ public class BallMovement : MonoBehaviour {
 	
 	public void Hit(Color c)
 	{
-		indicator.GetComponent<SetColorToOther>().ResetColor(c);
+		//indicator.GetComponent<SetColorToOther>().ResetColor(c);
 	}
 }

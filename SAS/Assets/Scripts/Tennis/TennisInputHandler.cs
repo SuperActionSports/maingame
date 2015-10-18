@@ -189,4 +189,9 @@ public class TennisInputHandler : MonoBehaviour {
 			}
 		}
 	}
+	
+	public Vector2 GetStickForSwing()
+	{
+		return new Vector2 (device.Direction.X, device.Direction.Y);
+	}
 }
