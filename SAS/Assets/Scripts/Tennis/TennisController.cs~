@@ -18,6 +18,7 @@ public class TennisController : MonoBehaviour {
 	public KeyCode swing;
     public KeyCode attack;
     public KeyCode debugKill;
+    public KeyCode jump;
 	public GameObject tennisBall;
 
 	private GameObject[] respawnPointsTeamA;
@@ -47,6 +48,9 @@ public class TennisController : MonoBehaviour {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
+    private float jumpForce = 25;
+    
+    public Vector3 hitForce;
 
 	[Range(1,20)]
 	public float speedMagnitude;
@@ -79,6 +83,7 @@ public class TennisController : MonoBehaviour {
 
 		paint = GetComponent<PaintSplatter>();
 		paint.color = c1;
+		hitForce = new Vector3(0,15,20);
     }
     
 	
@@ -96,6 +101,8 @@ public class TennisController : MonoBehaviour {
             float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
 			Vector3 newPosition = new Vector3(xVel,0,zVel);
+			GetYVelocity();
+			//Debug.Log("Applied: " + rb.velocity);
 			if (!putting) { transform.position = transform.position + newPosition; }
 			// If input has been given change to face new input direction
 			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(newPosition); }
@@ -114,6 +121,7 @@ public class TennisController : MonoBehaviour {
 	{
 		if (other.CompareTag ("Ball")) 
 		{
+			Debug.Log("Ball!");
 			if(isSwinging)
 			{
 				hasHitBall = BallCollision(other);
@@ -127,12 +135,12 @@ public class TennisController : MonoBehaviour {
 
 	private bool BallCollision(Collider other)
 	{
-		LookAtNet();
+		//LookAtNet();
 
 		Rigidbody ballRB = other.GetComponent<Rigidbody>();
 
 		ballRB.velocity = new Vector3(0,0,0);
-		Vector3 endPosition = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
+		/*Vector3 endPosition = new Vector3(other.transform.position.x, transform.position.y, transform.position.z);
 		transform.position = Vector3.Lerp(transform.position, endPosition, Time.deltaTime);
 		
 		float vertAngle = BallHeightToAngle(other.transform.position.y);
@@ -146,7 +154,13 @@ public class TennisController : MonoBehaviour {
 		Quaternion horizDirection = Quaternion.AngleAxis(horizAngle, Vector3.up);
 		
 		Quaternion vertDirection = Quaternion.AngleAxis(vertAngle, Vector3.right);
-		ballRB.AddForce(vertDirection * horizDirection * -transform.forward * force);
+		*/
+		//Vector3 force = transform.forward*10;
+		//force.y *= 2;
+		//force = new Vector3(0,30,60);
+		ballRB.AddForce(hitForce,ForceMode.VelocityChange);
+		
+		other.GetComponent<BallMovement>().ResetCount();
 
 		return true;
 	}
@@ -229,7 +243,7 @@ public class TennisController : MonoBehaviour {
 
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
+		rb.constraints = RigidbodyConstraints.FreezeRotation;
 		transform.rotation = Quaternion.identity;
 	}
 	
@@ -321,7 +335,7 @@ public class TennisController : MonoBehaviour {
 			{
 				//transform.eulerAngles = new Vector3(0, -90, 0);
 			}
-			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0),transform.rotation);
+			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0),Quaternion.identity);
 		}
 	}
 
@@ -419,6 +433,50 @@ public class TennisController : MonoBehaviour {
 			magSpeedX = 1;
 		}
 		return speedMagnitude * magSpeedX * Time.deltaTime;
+	}
+	
+	private void GetYVelocity()
+	{
+		
+		if (device == null )
+			GetKeyboardYInput();
+		else 
+			GetControllerYInput();
+	}
+	
+	private void GetKeyboardYInput()
+	{
+		
+		if (Input.GetKeyDown(jump))
+		{
+			Debug.Log("Jumping?");
+			//anim.SetTrigger("Jump");
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
+			{
+				Debug.Log("YES.");
+				if (groundHit.collider.CompareTag("Turf"))
+				{
+					Debug.Log("YESSSS.");
+					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+					Debug.Log("Rb vel: " + rb.velocity + " Y should be " + jumpForce);
+				}
+			}
+		}
+		
+	}
+	
+	private void GetControllerYInput()
+	{
+		if (device.Action1)
+		{
+			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
+			{
+				if (groundHit.collider.CompareTag("Turf"))
+				{
+					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+				}
+			}
+		}		
 	}
 	
 	private float GetControllerXInput()
