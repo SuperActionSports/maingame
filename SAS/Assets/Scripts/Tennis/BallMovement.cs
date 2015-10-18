@@ -10,6 +10,8 @@ public class BallMovement : MonoBehaviour {
 	bool hasHitTurf;
 	public int bounces;
 	public Vector3 vel;
+	public bool hit;
+	public ParticleSystem indicator;
 
 	// Use this for initialization
 	void Start () 
@@ -21,6 +23,7 @@ public class BallMovement : MonoBehaviour {
 		hasHitTurf = false;
 		count = 0;
 		bounces = 30;
+		hit = false;
 	}
 
 	void Update()
@@ -63,5 +66,10 @@ public class BallMovement : MonoBehaviour {
 	public void ResetCount()
 	{
 		count = 0;
+	}
+	
+	public void Hit(Color c)
+	{
+		indicator.GetComponent<SetColorToOther>().ResetColor(c);
 	}
 }

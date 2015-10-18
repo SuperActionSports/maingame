@@ -5,24 +5,11 @@ using InControl;
 public class TennisController : MonoBehaviour {
 
 	public Color c1;
-	private bool colorChangeToUniform;
 	private Renderer rend;
-	private float colorLerpT;
-    private bool facingLeft;
 	
-	//Keyboard Keybinding Stuff
-	public KeyCode left;
-	public KeyCode right;
-	public KeyCode up;
-	public KeyCode down;
-	public KeyCode swing;
-    public KeyCode attack;
-    public KeyCode debugKill;
-    public KeyCode jump;
-	public GameObject tennisBall;
-
 	private GameObject[] respawnPointsTeamA;
 	private GameObject[] respawnPointsTeamB;
+	public GameObject tennisBall;
 	
 	public InputDevice device {get; set;}
 
@@ -30,13 +17,6 @@ public class TennisController : MonoBehaviour {
 	bool isSwinging;
 	bool hasHitBall;
 	public bool isAttacking;
-
-	private Rigidbody rb;
-	public RaycastHit groundHit;
-	public float magSpeedX;
-	public float magSpeedZ;
-	public Vector3 speed;
-	public bool putting;
 
     public GameObject[] respawnPoints;
     public GameObject equipment;
@@ -48,28 +28,26 @@ public class TennisController : MonoBehaviour {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
-    private float jumpForce = 25;
     
     public Vector3 hitForce;
-
-	[Range(1,20)]
-	public float speedMagnitude;
+    
+    private Rigidbody rb;
+    
+    private TennisInputHandler input;
+	
 	// Use this for initialization
 	void Start () {
-		putting = false;
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
 		rend = GetComponent<Renderer>();
-		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
-		//rend.material.color = c;
-		speedMagnitude = 10f;
-		colorChangeToUniform = false;
-		colorLerpT = 0;
+        input = GetComponent<TennisInputHandler>();
+        input.control = this;
+        rb = GetComponent<Rigidbody>();
+		rend.material.color = c1;
 		alive = true;
         anim.SetBool("Alive", true);
-		ResetRigidBodyConstraints();
 		impactMod = 7.5f;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
 		equipmentCollider.enabled = false;
@@ -92,29 +70,8 @@ public class TennisController : MonoBehaviour {
 
         if (alive)
         {
-            magSpeedX = 0;
-            magSpeedZ = 0;
-
-			startTime = Time.time;
-
-			// Move Character
-            float xVel = GetXVelocity();
-			float zVel = GetZVelocity();
-			Vector3 newPosition = new Vector3(xVel,0,zVel);
-			GetYVelocity();
-			//Debug.Log("Applied: " + rb.velocity);
-			if (!putting) { transform.position = transform.position + newPosition; }
-			// If input has been given change to face new input direction
-			if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(newPosition); }
-			CheckServe();
-			GetServe();
-			GetSwinging();
-            GetAttacking();
-            
+        	input.CheckInput();
 		}	
-
-		UpdateColor();
-		GetRespawn();
 	}
 
 	void OnTriggerStay(Collider other)
@@ -161,6 +118,7 @@ public class TennisController : MonoBehaviour {
 		ballRB.AddForce(hitForce,ForceMode.VelocityChange);
 		
 		other.GetComponent<BallMovement>().ResetCount();
+		other.GetComponent<BallMovement>().Hit(c1);
 
 		return true;
 	}
@@ -240,12 +198,6 @@ public class TennisController : MonoBehaviour {
 		}
 		return force;
 	}
-
-	private void ResetRigidBodyConstraints() 
-	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation;
-		transform.rotation = Quaternion.identity;
-	}
 	
 	private void OnDrawGizmos()
 	{
@@ -253,28 +205,12 @@ public class TennisController : MonoBehaviour {
 		Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z));
 	}
 	
-	private void GetRespawn()
-	{
-		if (Input.GetKeyDown(debugKill) || (device!= null && device.Command.WasPressed))
-		{
-			if (alive)
-			MakeDead();
-			else
-			Respawn();
-		} 
-	}
-
-	private void CheckServe()
-	{
-
-	}
-	
-	private void MakeDead()
+	public void MakeDead()
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
 		paint.Paint (transform.position, paint.color);
-        rb.constraints = RigidbodyConstraints.None;
+        GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
         //cam.PlayShake(transform.position);
@@ -286,11 +222,6 @@ public class TennisController : MonoBehaviour {
 
          }*/
     }
-	
-	private void CheckAnimStateForAttacking()
-	{
-
-	}
 	
 	public void Kill()
 	{
@@ -307,47 +238,21 @@ public class TennisController : MonoBehaviour {
         MakeDead();    
     }
 
-    public void Respawn()
-    {
-        alive = true;
-        ResetRigidBodyConstraints();
-        rb.velocity = new Vector3(0, 0, 0);
-        anim.SetBool("Alive", true);
-        //Debug.Log("Length: " + respawnPoints.Length);
-        transform.position = respawnPointsTeamA[Mathf.FloorToInt(Random.Range(0, respawnPointsTeamA.Length))].transform.position;
-        //colorChangeToUniform = true;
-    }
-
-	private void GetServe()
+	public void Serve()
 	{
-		Serve ();
+		Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0),Quaternion.identity);
+	}
+	
+	public void Respawn()
+	{
+		alive = true;
+		rb.velocity = new Vector3(0, 0, 0);
+		anim.SetBool("control.alive", true);
+		//Debug.Log("Length: " + respawnPoints.Length);
+		transform.position = respawnPointsTeamA[Mathf.FloorToInt(Random.Range(0, respawnPointsTeamA.Length))].transform.position;
 	}
 
-	private void Serve()
-	{
-	//This needs to be much more complicated than it currently is
-		if (Input.GetKeyDown (KeyCode.Space) || (device != null && device.RightBumper.WasPressed)) {
-			if(transform.position.z < 0)
-			{
-				//transform.eulerAngles = new Vector3(0, 90, 0);
-			}
-			else if (transform.position.z > 0)
-			{
-				//transform.eulerAngles = new Vector3(0, -90, 0);
-			}
-			Instantiate(tennisBall, transform.position + new Vector3(0, 2f, 0),Quaternion.identity);
-		}
-	}
-
-	private void GetSwinging()
-	{
-		if (Input.GetKeyDown (swing) || (device != null && device.RightTrigger.WasPressed)) 
-		{
-			Swing();
-		}
-	}
-
-	private void Swing()
+	public void Swing()
 	{
 		anim.SetTrigger ("SwingRacquet");
 		isSwinging = true;
@@ -364,19 +269,7 @@ public class TennisController : MonoBehaviour {
 		isSwinging = false;
 	}
 	
-	private void GetAttacking()
-	{
-		if (Input.GetKeyDown (attack) || (device != null && device.LeftTrigger.WasPressed))
-		{
-			Attack ();
-		}
-		else if (Input.GetKeyDown (attack))
-		{
-			Attack();
-		}
-	}
-
-	private void Attack()
+	public void Attack()
     {
 		anim.SetTrigger("AttackRacquet");
 		isAttacking = true;
@@ -392,121 +285,4 @@ public class TennisController : MonoBehaviour {
 		equipmentCollider.enabled = false;
 		isAttacking = false;
 	}
-    
-    private float GetXVelocity()
-    {
-    	return device == null ? GetKeyboardXInput(): GetControllerXInput();
-    }
-	
-	private float GetZVelocity()
-	{
-		return device == null ? GetKeyboardZInput(): GetControllerZInput();
-	}
-	
-	
-	private float GetKeyboardZInput()
-	{
-		if (Input.GetKey(up))
-		{
-			magSpeedZ = 1;
-		}
-		if (Input.GetKey(down))
-		{
-			magSpeedZ = -1;
-		}
-		return speedMagnitude * magSpeedZ * Time.deltaTime;
-	}
-	
-	private float GetControllerZInput()
-	{
-		return speedMagnitude * device.Direction.Y * Time.deltaTime;
-	}
-	
-	private float GetKeyboardXInput()
-	{
-		if (Input.GetKey(left))
-		{
-			magSpeedX = -1;
-		}
-		if (Input.GetKey(right))
-		{
-			magSpeedX = 1;
-		}
-		return speedMagnitude * magSpeedX * Time.deltaTime;
-	}
-	
-	private void GetYVelocity()
-	{
-		
-		if (device == null )
-			GetKeyboardYInput();
-		else 
-			GetControllerYInput();
-	}
-	
-	private void GetKeyboardYInput()
-	{
-		
-		if (Input.GetKeyDown(jump))
-		{
-			Debug.Log("Jumping?");
-			//anim.SetTrigger("Jump");
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
-			{
-				Debug.Log("YES.");
-				if (groundHit.collider.CompareTag("Turf"))
-				{
-					Debug.Log("YESSSS.");
-					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-					Debug.Log("Rb vel: " + rb.velocity + " Y should be " + jumpForce);
-				}
-			}
-		}
-		
-	}
-	
-	private void GetControllerYInput()
-	{
-		if (device.Action1)
-		{
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
-			{
-				if (groundHit.collider.CompareTag("Turf"))
-				{
-					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-				}
-			}
-		}		
-	}
-	
-	private float GetControllerXInput()
-	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime;
-	}
-	
-    private void UpdateColor()
-    {
-        colorLerpT += Time.deltaTime;
-        if (colorChangeToUniform && alive)
-        {
-            rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                    colorChangeToUniform = false;
-                    colorLerpT = 0;
-            }
-        }
-        else
-        {
-            rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                if (alive)
-                {
-                    colorChangeToUniform = true;
-                    colorLerpT = 0;
-                }
-            }
-        }
-    }
 }
