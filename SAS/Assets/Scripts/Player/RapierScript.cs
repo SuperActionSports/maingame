@@ -46,7 +46,7 @@ public class RapierScript : MonoBehaviour {
 	public void Attack()
 	{
 		attackCollider.enabled = true;
-		equipmentThrow.ActivateRigidbody (false);
+		if (equipmentThrow.thrown) { equipmentThrow.ActivateRigidbody (false); }
 	}
 	
 	public void StopAttack()
@@ -84,7 +84,7 @@ public class RapierScript : MonoBehaviour {
 	{
 		Debug.Log ("LOGGING3");
 		Debug.Log ("I have collided with " + other.gameObject.name);
-		if (other.CompareTag("Player") && owner != null)
+		if (other.CompareTag("Fencer") && owner != null)
 		{
 			//Attacking rapier is about to make swiss cheese of a player
 			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
@@ -114,7 +114,7 @@ public class RapierScript : MonoBehaviour {
 				Parry ();
 			}
 		}
-		else if (hasHit && other.CompareTag("Player") && !other.GetComponent<PlayerControllerMatt>().armed)
+		else if (hasHit && other.CompareTag("Fencer") && !other.GetComponent<PlayerControllerMatt>().armed)
 		{
 			//Rapier is getting picked up 
 			other.GetComponent<PlayerControllerMatt>().PickUp(this.transform.gameObject);

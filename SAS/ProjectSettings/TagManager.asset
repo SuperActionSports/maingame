@@ -12,15 +12,22 @@ TagManager:
   - killzone
   - field
   - Deadball
+  - Turf
+  - RespawnPointTeamA
+  - Wall
+  - RespawnPointTeamB
+  - Goal
+  - Fencer
+  - Player1
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Balls
+  - 
   - Water
   - UI
-  - NERD
-  - Ball
+  - 
+  - 
   - Baseballs
   - Biscuits
   - God please

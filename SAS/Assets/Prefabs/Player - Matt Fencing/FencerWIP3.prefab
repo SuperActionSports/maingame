@@ -11,7 +11,6 @@ GameObject:
   - 33: {fileID: 3366306}
   - 135: {fileID: 13595352}
   - 23: {fileID: 2368694}
-  - 114: {fileID: 11423236}
   - 114: {fileID: 11438326}
   - 136: {fileID: 13600454}
   m_Layer: 0
@@ -73,11 +72,8 @@ GameObject:
   - 136: {fileID: 13616874}
   - 135: {fileID: 13586004}
   - 114: {fileID: 11461864}
-  - 114: {fileID: 11414304}
-  - 114: {fileID: 11430018}
   - 114: {fileID: 11452246}
   - 96: {fileID: 9660398}
-  - 114: {fileID: 11408952}
   - 54: {fileID: 5475662}
   m_Layer: 0
   m_Name: Rapier
@@ -171,11 +167,11 @@ GameObject:
   - 114: {fileID: 11454024}
   m_Layer: 0
   m_Name: FencerWIP3
-  m_TagString: Player
+  m_TagString: Fencer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &170626
 GameObject:
   m_ObjectHideFlags: 1
@@ -212,7 +208,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -41.3638382, y: 32.7700005, z: -.816293716}
+  m_LocalPosition: {x: -41.8300018, y: 32.7700005, z: -.816293716}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 447596}
@@ -503,6 +499,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -5250,29 +5247,6 @@ MonoBehaviour:
   isSelectable: 1
   _name: Cylinder
   dontDestroyMeshOnDelete: 0
---- !u!114 &11408952
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8d34527627b6ec44afabc52034883b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  color: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &11414304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e31edd128de6748af6c54e0f8e1d1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11415088
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5284,7 +5258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54bb6117bef602541836f03a6b995be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: .279411733, g: 0, b: .426470578, a: 0}
+  color: {r: 0, g: .66896534, b: 1, a: 1}
   playerMaterial: {fileID: 0}
   armed: 0
   alive: 0
@@ -5299,30 +5273,6 @@ MonoBehaviour:
   input: {fileID: 0}
   wizard: {fileID: 0}
   wizardNumber: 0
---- !u!114 &11423236
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 116136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trc: {r: 0, g: 0, b: 0, a: 0}
---- !u!114 &11430018
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 144718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  trc: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11430570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5396,7 +5346,7 @@ MonoBehaviour:
   down: 274
   attack: 32
   debugKill: 0
-  throwEquip: 0
+  throwEquip: 122
   counter: 0
   player: {fileID: 0}
   rb: {fileID: 0}
@@ -5458,7 +5408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9745de2373181c747a1d322d8f8f7f6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  replay: 32
+  replay: 112
   c: {r: 0, g: 1, b: .710344791, a: 1}
   parts: []
   partAnimators: []

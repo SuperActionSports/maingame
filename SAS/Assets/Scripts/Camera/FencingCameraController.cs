@@ -61,6 +61,8 @@ public class FencingCameraController : MonoBehaviour {
 		}
 		if (players.Length > 1)
 		{
+			//Delete this
+			averagePosition = new Vector2(0,0);
 			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
 		}	
 	}
@@ -74,7 +76,7 @@ public class FencingCameraController : MonoBehaviour {
 	public void RecountPlayers()
 	{
 		Debug.Log("Player count before: " + players.Length);
-		players = GameObject.FindGameObjectsWithTag("Player");
+		players = GameObject.FindGameObjectsWithTag("Fencer");
 		Debug.Log("Player count after: " + players.Length);
 	}
 	
@@ -82,7 +84,9 @@ public class FencingCameraController : MonoBehaviour {
 	{
 		float maxDist = 0;
 		for (int i = 0; i < players.Length; i++) {
-			if (players[i].GetComponent<PlayerControllerMatt>().alive)
+		Debug.Log("Players length: " + players.Length);
+			if (players[i] != null && 
+				players[i].GetComponent<PlayerControllerMatt>().alive)
 			{
 				for (int g = i; g < players.Length; g++)
 				{

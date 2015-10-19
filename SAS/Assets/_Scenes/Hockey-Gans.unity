@@ -65,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -84,9 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!1 &9761445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1424,7 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82237ecddc45e4652b24ca3cc230b377, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerPrefab: {fileID: 129100, guid: c063217e20d964bd689f9d9869a22330, type: 2}
+  playerPrefab: {fileID: 141112, guid: c063217e20d964bd689f9d9869a22330, type: 2}
   Respawns:
   - {fileID: 11949341}
   - {fileID: 396292616}

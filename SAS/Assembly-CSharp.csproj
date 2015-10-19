@@ -56,7 +56,9 @@
      <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
+     <Compile Include="Assets\Scripts\FX\FreezeRotationAndY.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\FX\SetColorToOther.cs" />
      <Compile Include="Assets\Scripts\FX\VictoryScript.cs" />
      <Compile Include="Assets\Scripts\GUI\Countdown.cs" />
      <Compile Include="Assets\Scripts\GUI\PlayerIconScript.cs" />
@@ -134,6 +136,7 @@
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisController.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisInputHandler.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Basic\BasicExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\BindingsExample.cs" />
      <Compile Include="Assets\Utilities\InControl\Examples\Bindings\PlayerActions.cs" />

@@ -16,7 +16,6 @@ public class FencingCameraController : MonoBehaviour {
 	public float yWinOffset;
 	public float zWinOffset;
 	private Vector3 winOffset;
-	public bool win;
 	
 	//Camera Shake Variables
 	Camera cam;
@@ -48,15 +47,9 @@ public class FencingCameraController : MonoBehaviour {
 		won = false;
 	}
 	
-	void Update() {
-		if (Input.GetKey (KeyCode.Space)) {
-			shake = true;
-		}
-	}
-	
 	// Update is called once per frame
 	void LateUpdate () {
-	if (!win)
+	if (!won)
 	{
 		z = 0;
 		Vector2 averagePosition = GetAveragePositions();
@@ -68,6 +61,8 @@ public class FencingCameraController : MonoBehaviour {
 		}
 		if (players.Length > 1)
 		{
+			//Delete this
+			averagePosition = new Vector2(0,0);
 			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
 		}	
 	}
@@ -81,7 +76,7 @@ public class FencingCameraController : MonoBehaviour {
 	public void RecountPlayers()
 	{
 		Debug.Log("Player count before: " + players.Length);
-		players = GameObject.FindGameObjectsWithTag("Player");
+		players = GameObject.FindGameObjectsWithTag("Fencer");
 		Debug.Log("Player count after: " + players.Length);
 	}
 	
@@ -89,7 +84,9 @@ public class FencingCameraController : MonoBehaviour {
 	{
 		float maxDist = 0;
 		for (int i = 0; i < players.Length; i++) {
-			if (players[i].GetComponent<PlayerControllerMatt>().alive)
+		Debug.Log("Players length: " + players.Length);
+			if (players[i] != null && 
+				players[i].GetComponent<PlayerControllerMatt>().alive)
 			{
 				for (int g = i; g < players.Length; g++)
 				{
@@ -110,13 +107,19 @@ public class FencingCameraController : MonoBehaviour {
 		int living = 0;
 		Vector3[] positions = new Vector3[players.Length];
 		for (int i = 0; i < players.Length; i++) {
-			PlayerControllerMatt p = players[i].GetComponent<PlayerControllerMatt>();
-			if (p.alive)
+			if (players[i].GetComponent<PlayerControllerMatt>() == null)
 			{
-				positions [i] = p.transform.position;
-				x += players[i].transform.position.x;
-				y += players[i].transform.position.y;
-				living++;
+				Debug.Log(players[i].gameObject.name + " has no Controller Component!" );
+			}
+			else {
+				PlayerControllerMatt p = players[i].GetComponent<PlayerControllerMatt>();
+				if (p.alive)
+				{
+					positions [i] = p.transform.position;
+					x += players[i].transform.position.x;
+					y += players[i].transform.position.y;
+					living++;
+				}
 			}			
 		}	
 		x /= living;
@@ -168,7 +171,9 @@ public class FencingCameraController : MonoBehaviour {
 	
 	public void FollowWinner(GameObject winner)
 	{
+	/*
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
 		transform.position = (winner.transform.position + winOffset);
+		*/
 	}
 }
