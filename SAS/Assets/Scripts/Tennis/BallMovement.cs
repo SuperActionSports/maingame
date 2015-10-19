@@ -6,6 +6,7 @@ public class BallMovement : MonoBehaviour {
 	Vector3 position;
 	Rigidbody rb;
 	GameObject[] players;
+	GameObject lastHitBy;
 	int count;
 	bool hasHitTurf;
 	public int bounces;
@@ -13,9 +14,11 @@ public class BallMovement : MonoBehaviour {
 	public bool hit;
 	public ParticleSystem indicator;
 
+	private Renderer tr;
 	// Use this for initialization
 	void Start () 
 	{
+		tr = GetComponent<TrailRenderer>().GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody> ();
 		players = GameObject.FindGameObjectsWithTag ("Player");
 		Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
@@ -68,8 +71,11 @@ public class BallMovement : MonoBehaviour {
 		count = 0;
 	}
 	
-	public void Hit(Color c)
+	public void Hit(GameObject hittee)
 	{
-		//indicator.GetComponent<SetColorToOther>().ResetColor(c);
+		lastHitBy = hittee;
+		tr.material.color = hittee.GetComponent<TennisController>().c1;
+		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisController>().c1;
+		
 	}
 }

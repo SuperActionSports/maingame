@@ -26,6 +26,8 @@ public class TennisInputHandler : MonoBehaviour {
 	
 	public TennisController control;
 	
+	public float swingForce;
+	
 	// Use this for initialization
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -36,12 +38,17 @@ public class TennisInputHandler : MonoBehaviour {
 	
 	// Update is called once per frame
 	public void CheckInput () {
+		float moveMod = 1;
+		if (WindingUp()) 
+		{
+			moveMod = 0.5f;
+		}
 		magSpeedX = 0;
 		magSpeedZ = 0;
 		// Move Character
 		float xVel = GetXVelocity();
 		float zVel = GetZVelocity();
-		Vector3 newPosition = new Vector3(xVel,0,zVel);
+		Vector3 newPosition = new Vector3(xVel*moveMod,0,zVel*moveMod);
 		transform.position += newPosition;
 		GetYVelocity();
 		//Debug.Log("Applied: " + rb.velocity);
@@ -49,10 +56,30 @@ public class TennisInputHandler : MonoBehaviour {
 		// If input has been given change to face new input direction
 		if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(newPosition); }
 		CheckServe();
-		GetSwinging();
+		//GetSwinging();
 		GetAttacking();
 		
 	}
+	
+	private bool WindingUp()
+	{
+		if (device != null && device.RightTrigger.IsPressed)
+		{
+			swingForce += Time.deltaTime * 25f;
+			return true;
+		}
+		else if (swingForce > 0)
+		{
+			control.Swing(swingForce);
+			swingForce = 0;
+			return false;
+		}
+		else 
+		{
+			swingForce = 0;
+			return false;	
+		}
+	}	
 	
 	private void CheckServe()
 	{
@@ -83,13 +110,13 @@ public class TennisInputHandler : MonoBehaviour {
 		}
 	}
 	
-	private void GetSwinging()
-	{
-		if (Input.GetKeyDown (swing) || (device != null && device.RightTrigger.WasPressed)) 
-		{
-			control.Swing();
-		}
-	}
+//	private void GetSwinging()
+//	{
+//		if (Input.GetKeyDown (swing) || (device != null && device.RightTrigger.WasPressed)) 
+//		{
+//			control.Swing();
+//		}
+//	}
 	
 	private void GetAttacking()
 	{
