@@ -46,6 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Liaison Test Materials\CubeController.cs" />
+     <Compile Include="Assets\Liaison Test Materials\LTMPlayerManager.cs" />
+     <Compile Include="Assets\Liaison Test Materials\LiaisonTestPlayerController.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera\BaseballCameraController.cs" />
