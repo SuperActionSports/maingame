@@ -36,7 +36,7 @@ using InControl;
 
 		List<ColorSelectionButtonManager> colorSelectionManagers = new List<ColorSelectionButtonManager>( maxColorSelectors );
 
-		public ColorSelectionButton[] colorStarts;
+		public List<ColorSelectionButton> colorStarts;
 	
 		void Start()
 		{
@@ -44,7 +44,7 @@ using InControl;
 
 			spawnPoints = new List<Vector3>();
 			try{
-				colorStarts.GetLength(0);
+				int sizeOfBtns = colorStarts.Count;
 			}
 			catch (NullReferenceException e)
 			{
@@ -113,14 +113,17 @@ using InControl;
 			if (colorSelectionManagers.Count < maxColorSelectors)
 			{
 				// Pop a position off the list. We'll add it back if the player is removed.
-				var playerPosition = spawnPoints[0];
-				spawnPoints.RemoveAt( 0 );
+				//var playerPosition = spawnPoints[0];
+				//spawnPoints.RemoveAt( 0 );
 
-				var gameObject = (GameObject) Instantiate( colorSelectionManagerPrefab, playerPosition, Quaternion.identity );
+				var gameObject = (GameObject) Instantiate( colorSelectionManagerPrefab, new Vector3(0,0,0), Quaternion.identity );
+				gameObject.transform.SetParent(GameObject.Find("ColorInputManager").transform);
 				var buttonManager = gameObject.GetComponent<ColorSelectionButtonManager>();
 				buttonManager.device = inputDevice;
 				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
+
+				Debug.Log("btn manager position: " + buttonManager.transform.position);
 
 				return buttonManager;
 			}

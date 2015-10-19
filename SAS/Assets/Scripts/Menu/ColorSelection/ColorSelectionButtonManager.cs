@@ -1,4 +1,7 @@
+using System;
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections;
 using InControl;
 
 public class ColorSelectionButtonManager : MonoBehaviour
@@ -12,6 +15,16 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	{
 		filteredDirection = new TwoAxisInputControl();
 		filteredDirection.StateThreshold = 0.5f;
+	}
+
+	void Start()
+	{
+		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
+		ColorInputManager colorInputManagerScript = playerInputManager.GetComponent<ColorInputManager> ();
+		transform.position = new Vector3 (0, 0, 0);
+		Debug.Log ("COlor Button Manager Position: " + transform.position);
+		focusedButton = colorInputManagerScript.colorStarts [0];
+		colorInputManagerScript.colorStarts.RemoveAt (0);
 	}
 
 	void Update()
@@ -44,6 +57,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			
 		if (filteredDirection.Right.WasPressed)
 		{
+			Debug.Log ("moved right.");
 			MoveFocusTo( focusedButton.right );
 		}
 			
@@ -65,6 +79,8 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		
 	void MoveFocusTo( ColorSelectionButton newFocusedButton )
 	{
+		Debug.Log ("newFocusedButton Position: " + newFocusedButton.transform.localPosition);
+		Debug.Log ("newFocusedButton: " + newFocusedButton);
 		if (newFocusedButton != null)
 		{
 			focusedButton = newFocusedButton;

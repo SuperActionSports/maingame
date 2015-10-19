@@ -21,8 +21,10 @@ using InControl;
 		void Update()
 		{
 			// Find out if we're the focused button.
-			bool hasFocus = transform.parent.GetComponent<ColorSelectionButtonManager>().focusedButton == this;
-
+			GameObject colorSelection = GameObject.Find ("ColorSelectionManager(Clone)");
+			if (colorSelection != null) {
+				bool hasFocus = colorSelection.GetComponent<ColorSelectionButtonManager> ().focusedButton == this;
+			}
 			// Fade alpha in and out depending on focus.
 			//var color = cachedRenderer.material.color;
 			//color.a = Mathf.MoveTowards( color.a, hasFocus ? 1.0f : 0.5f, Time.deltaTime * 3.0f );
