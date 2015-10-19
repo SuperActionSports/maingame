@@ -67,7 +67,7 @@ public class EquipmentThrow : MonoBehaviour {
 		frame.enabled = true;
 		transform.rotation = new Quaternion(0,0,-directionModifier,1);
 		if (runThrow) {
-			transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
+			//transform.position = new Vector3 (transform.position.x, transform.position.y, 0);
 		}
 		Vector3 force = runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce;
 		rb.AddForce(force,ForceMode.VelocityChange);

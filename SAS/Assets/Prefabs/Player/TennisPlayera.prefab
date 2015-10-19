@@ -36,7 +36,7 @@ GameObject:
   - 135: {fileID: 13534398}
   - 114: {fileID: 11469442}
   m_Layer: 0
-  m_Name: TennisPlayer
+  m_Name: TennisPlayera
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -397,6 +397,7 @@ MonoBehaviour:
   speedMagnitude: 0
   jumpForce: 0
   control: {fileID: 0}
+  swingForce: 0
 --- !u!114 &11484530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -526,6 +527,10 @@ Prefab:
       propertyPath: tennisBall
       value: 
       objectReference: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114932}
