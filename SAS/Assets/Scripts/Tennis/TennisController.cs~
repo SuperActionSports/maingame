@@ -152,7 +152,12 @@ public class TennisController : MonoBehaviour {
 		//sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
-    }
+	}
+	
+	public void WhatIsWindUp()
+	{
+		Debug.Log(input.GetSwingForce());
+	}
 
 	public void Serve()
 	{
@@ -170,9 +175,15 @@ public class TennisController : MonoBehaviour {
 
 	public void Swing(float swingForce)
 	{
-		hitForce = Mathf.Clamp(swingForce, 10,40);
+		hitForce = Mathf.Clamp(swingForce, 20,40);
 		anim.SetTrigger ("SwingRacquet");
+		anim.SetFloat("WindingUp",0);
 		isSwinging = true;
+	}
+	
+	public void WindUp()
+	{
+		anim.SetFloat("WindingUp",input.GetSwingForce());
 	}
 
 	private void StartSwing()
@@ -183,6 +194,7 @@ public class TennisController : MonoBehaviour {
 	private void EndSwing()
 	{
 		equipmentCollider.enabled = false;
+		anim.SetFloat("WindingUp",0);
 		isSwinging = false;
 	}
 	

@@ -66,6 +66,7 @@ public class TennisInputHandler : MonoBehaviour {
 		if (device != null && device.RightTrigger.IsPressed)
 		{
 			swingForce += Time.deltaTime * 25f;
+			control.WindUp();
 			return true;
 		}
 		else if (swingForce > 0)
@@ -80,6 +81,11 @@ public class TennisInputHandler : MonoBehaviour {
 			return false;	
 		}
 	}	
+	
+	public float GetSwingForce()
+	{
+		return swingForce;
+	}
 	
 	private void CheckServe()
 	{
