@@ -5,11 +5,11 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Menu/TitleScreen.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Menu/LevelScreen.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/Menu/CreditsScreen.unity
   - enabled: 1
     path: Assets/_Scenes/StandIn.unity
@@ -25,3 +25,15 @@ EditorBuildSettings:
     path: Assets/_Scenes/Menu/AdvancedPlayerSelection.unity
   - enabled: 1
     path: Assets/_Scenes/Menu/AdvancedCredits.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/AdvancedMainMenuControl.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/CreditsWithController.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/LevelSelectionWithController.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/PlayerSelectionWithController.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/P1ColorSelectionWIthController.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/P2ColorSelectionWIthController.unity
