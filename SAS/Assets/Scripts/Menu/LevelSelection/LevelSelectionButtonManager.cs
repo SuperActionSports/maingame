@@ -86,7 +86,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		}
 		if (focusedButton.name == "Back") 
 		{
-			Application.LoadLevel("AdvancedPlayerColorSelection");
+			Application.LoadLevel("ColorSelection");
 		}
 	}
 		

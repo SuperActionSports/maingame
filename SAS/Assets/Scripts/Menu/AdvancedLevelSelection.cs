@@ -54,6 +54,6 @@ public class AdvancedLevelSelection : MonoBehaviour {
 
 	public void Back() {
 		Debug.Log ("<<---Back--->>");
-		Application.LoadLevel ("AdvancedPlayerColorSelection");
+		Application.LoadLevel ("ColorSelection");
 	}
 }

@@ -43,11 +43,15 @@ public class LiaisonTestPlayerController : MonoBehaviour {
 		alive = true;
 		ResetRigidBodyConstraints();
 		walkSpeed = 10f;
-
+		GetComponent<Renderer>().material.color = c1;
     }
     
 
 	void Update () {
+//		Debug.Log("I have a device! " + (device != null));
+//		Debug.Log("Name: " + device.Name);		
+//		Debug.Log("Device x: " + device.Direction.X);
+//		Debug.Log("Device y: " + device.Direction.Y);
         if (alive)
         {
 			// Reset velocity to 0
@@ -67,7 +71,6 @@ public class LiaisonTestPlayerController : MonoBehaviour {
 	
 	private void ResetRigidBodyConstraints() 
 	{
-		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
 	

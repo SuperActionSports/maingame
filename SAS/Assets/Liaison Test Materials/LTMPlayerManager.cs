@@ -3,64 +3,63 @@ using UnityEngine;
 using System.Collections.Generic;
 using InControl;
 
-
-namespace MultiplayerBasicExample
-{
-	// This example roughly illustrates the proper way to add multiple players from existing
-	// devices. Notice how InputManager.Devices is not used and no index into it is taken.
-	// Rather a device references are stored in each player and we use InputManager.OnDeviceDetached
-	// to know when one is detached.
-	//
-	// InputManager.Devices should be considered a pool from which devices may be chosen,
-	// not a player list. It could contain non-responsive or unsupported controllers, or there could
-	// be more connected controllers than your game supports, so that isn't a good strategy.
-	//
-	// To detect a joining player, we just check the current active device (which is the last
-	// device to provide input) for a relevant button press, check that it isn't already assigned
-	// to a player, and then create a new player with it.
-	//
-	// NOTE: Due to how Unity handles joysticks, disconnecting a single device will currently cause
-	// all devices to detach, and the remaining ones to reattach. There is no reliable workaround
-	// for this issue. As a result, a disconnecting controller essentially resets this example.
-	// In a more real world scenario, we might keep the players around and throw up some UI to let
-	// users activate controllers and pick their players again before resuming.
-	//
-	// This example could easily be extended to use bindings. The process would be very similar,
-	// just creating a new instance of your action set subclass per player and assigning the
-	// device to its Device property.
-	//
 	public class LTMPlayerManager : MonoBehaviour
 	{
 		public GameObject playerPrefab;
 		
 		const int maxPlayers = 4;
+		
+		private bool ready = false;
 
 		List<Vector3> playerPositions = new List<Vector3>() {
-			new Vector3( -1, 1, -10 ),
-			new Vector3( 1, 1, -10 ),
-			new Vector3( -1, -1, -10 ),
-			new Vector3( 1, -1, -10 ),
+			new Vector3( 0, 0.5f, 0 ),
+			new Vector3( 0,0.5f,0 ),
+		new Vector3( 0,0.5f,0 ),
+		new Vector3( 0, 0.5f, 0 ),
 		};
 
-		List<GolfPlayerController> players = new List<GolfPlayerController>( maxPlayers );
+		List<LiaisonTestPlayerController> players = new List<LiaisonTestPlayerController>( maxPlayers );
 
-
-
+		public GameObject layla;
+		public GameControlLiaison liaison;
 		void Start()
 		{
-			InputManager.OnDeviceDetached += OnDeviceDetached;
+			//InputManager.OnDeviceDetached += OnDeviceDetached;
+			layla = GameObject.Find("Layla");
+			liaison = layla.GetComponent<GameControlLiaison>();
+			if (liaison.numberOfActivePlayers > 0)
+			{
+				Debug.Log(InputManager.Devices);
+				PullPlayersFromLiaison();
+				ready = true;
+			}
 		}
 
+		void PullPlayersFromLiaison()
+		{
+			Player p = new Player();
+			for (int i = 0; i < liaison.numberOfActivePlayers; i++)
+			{
+				
+				var gameObject = (GameObject) Instantiate( playerPrefab, playerPositions[0], Quaternion.identity );
+				var player = gameObject.GetComponent<LiaisonTestPlayerController>();
+				player.c1 = liaison.players[i].color;
+				player.device = liaison.players[i].device;
+			}
+		}
 
 		void Update()
 		{
-			var inputDevice = InputManager.ActiveDevice;
-
-			if (JoinButtonWasPressedOnDevice( inputDevice ))
+			if (!ready)
 			{
-				if (ThereIsNoPlayerUsingDevice( inputDevice ))
+				var inputDevice = InputManager.ActiveDevice;
+	
+				if (JoinButtonWasPressedOnDevice( inputDevice ))
 				{
-					CreatePlayer( inputDevice );
+					if (ThereIsNoPlayerUsingDevice( inputDevice ))
+					{
+						CreatePlayer( inputDevice );
+					}
 				}
 			}
 		}
@@ -72,7 +71,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		GolfPlayerController FindPlayerUsingDevice( InputDevice inputDevice )
+		LiaisonTestPlayerController FindPlayerUsingDevice( InputDevice inputDevice )
 		{
 			var playerCount = players.Count;
 			for (int i = 0; i < playerCount; i++)
@@ -104,7 +103,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		GolfPlayerController CreatePlayer( InputDevice inputDevice )
+		LiaisonTestPlayerController CreatePlayer( InputDevice inputDevice )
 		{
 			if (players.Count < maxPlayers)
 			{
@@ -113,7 +112,7 @@ namespace MultiplayerBasicExample
 				playerPositions.RemoveAt( 0 );
 
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
-				var player = gameObject.GetComponent<GolfPlayerController>();
+				var player = gameObject.GetComponent<LiaisonTestPlayerController>();
 				player.device = inputDevice;
 				player.c1 = Color.cyan;
 				players.Add( player );
@@ -125,7 +124,7 @@ namespace MultiplayerBasicExample
 		}
 
 
-		void RemovePlayer( GolfPlayerController player )
+		void RemovePlayer( LiaisonTestPlayerController player )
 		{
 			playerPositions.Insert( 0, player.transform.position );
 			//players.Remove( player );
@@ -133,20 +132,4 @@ namespace MultiplayerBasicExample
 			Destroy( player.gameObject );
 		}
 
-
-		void OnGUI()
-		{
-			const float h = 22.0f;
-			var y = 10.0f;
-
-			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + players.Count + "/" + maxPlayers );
-			y += h;
-
-			if (players.Count < maxPlayers)
-			{
-				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button to join!" );
-				y += h;
-			}
-		}
 	}
-}

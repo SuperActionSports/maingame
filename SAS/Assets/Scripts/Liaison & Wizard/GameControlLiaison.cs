@@ -9,7 +9,10 @@ public class GameControlLiaison : MonoBehaviour {
 	
 	public static GameControlLiaison liaison;
 
+	public Player[] players;
+
 	public int number_of_players;
+	public int numberOfActivePlayers;
 	public GameObject Player_Prefab;
 	public Boolean tournament_mode;
 	public Boolean team_mode;
@@ -67,6 +70,8 @@ public class GameControlLiaison : MonoBehaviour {
 
 	public IInputHandler input_manager;
 	public InputDevice[] player_controllers;
+	
+	public InputDevice only;
 
 	// Use this for code that will execute before Start ()
 	void Awake () { 
@@ -77,7 +82,20 @@ public class GameControlLiaison : MonoBehaviour {
 		} else if (liaison != this){
 			Destroy(gameObject);
 		} 
+		Debug.Log("Layla awake");
 	}
+	
+	void Start()
+	{
+		players = new Player[4];
+		Debug.Log("Layla start");
+		number_of_players = 0;
+		if (players[0] != null)
+		{
+			Debug.Log(players[0].device.Name);
+		}
+	}
+	
 	
 	/*public void LoadFencing() {
 		//Load Level
@@ -120,7 +138,31 @@ public class GameControlLiaison : MonoBehaviour {
 		GameObject.Find (""); //Insert Respond Points Text
 
 	}*/
-
+	void Update()
+	{
+		if (only.Action2.WasPressed)
+		{
+			Debug.Log ("I'm lonely out here.");
+		}
+	}
+	
+	
+	public void CreatePlayer(InputDevice device)
+	{
+		Debug.Log("Device: " + device);
+		Debug.Log("Player at " + number_of_players + " " + players[number_of_players]);
+		players[number_of_players] = new Player();
+		players[number_of_players].device = device;
+		only = device;
+		number_of_players++;
+	
+	}
+	
+	public bool AllPlayersActive()
+	{
+		return number_of_players == numberOfActivePlayers;
+	}
+	
 	public void SetNumberOfPlayers(int num) 	{ number_of_players = num; }
 
 	public int GetNumberOfPlayers() 			{ return number_of_players; }
@@ -151,6 +193,36 @@ public class GameControlLiaison : MonoBehaviour {
 			}
 		}
 	}
+	
+	public void SetPlayerColor(InputDevice device, Color player_color) {
+			if (FindPlayerWithDevice(device).color == new Color(0,0,0,0) )
+			{
+				numberOfActivePlayers++;
+			}
+			FindPlayerWithDevice(device).color = player_color;
+			
+		}
+		
+	public void ErasePlayerColor(InputDevice device)
+	{
+		if (FindPlayerWithDevice(device).color != new Color(0,0,0,0) )
+		{
+			numberOfActivePlayers--;
+		}
+		FindPlayerWithDevice(device).color = new Color(0,0,0,0);
+		
+	}
+	
+	public Player FindPlayerWithDevice(InputDevice device)
+	{
+		int x = 0;
+		while (players[x].device != device)
+		{
+			x++;
+		}
+		return players[x];
+	}
+	
 
 	public void SetAllPlayerColor(float[] player_color) {
 		if (!team_mode && player_color.Length == 12) {
@@ -432,18 +504,18 @@ public class GameControlLiaison : MonoBehaviour {
 }
 
 [Serializable]
-class Team {
+public class Team {
 	public int team;
-	public Player[] team_members;
+	//public Player[] team_members;
 	public float[] team_color;
 	public Vector3[] respawn_points;
 }
 
 [Serializable]
-class Player {
+public class Player {
 	public int number;
-	public float[] color;
-	public InputDevice controller;
+	public Color color;
+	public InputDevice device;
 	public Vector3[] respawn_points;
 	public Team team;
 }

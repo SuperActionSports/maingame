@@ -20,7 +20,7 @@ public class AdvancedMainMenu : MonoBehaviour {
 	
 	public void Play () {
 		//Debug.Log ("Game is loading the Player Selection Screen");
-		Application.LoadLevel ("AdvancedPlayerSelection");
+		Application.LoadLevel ("ColorSelection");
 	}
 
 	public void Quit() {
@@ -30,6 +30,6 @@ public class AdvancedMainMenu : MonoBehaviour {
 
 	public void Credits () {
 		//Debug.Log ("Game is loading the Credits Screen");
-		Application.LoadLevel ("AdvancedCredits");
+		Application.LoadLevel ("Credits");
 	}
 }

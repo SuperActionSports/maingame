@@ -26,14 +26,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Menu/AdvancedCredits.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/AdvancedMainMenuControl.unity
+    path: Assets/_Scenes/MenuWithController/MainMenu.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/CreditsWithController.unity
+    path: Assets/_Scenes/MenuWithController/Credits.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/LevelSelectionWithController.unity
+    path: Assets/_Scenes/MenuWithController/LevelSelection.unity
   - enabled: 1
     path: Assets/_Scenes/MenuWithController/PlayerSelectionWithController.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MenuWithController/P1ColorSelectionWIthController.unity
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Scenes/MenuWithController/P2ColorSelectionWIthController.unity
+  - enabled: 1
+    path: Assets/Liaison Test Materials/LTM.unity
+  - enabled: 1
+    path: Assets/_Scenes/MenuWithController/ColorSelection.unity

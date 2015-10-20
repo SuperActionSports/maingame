@@ -57,7 +57,7 @@ public class MainMenuButtonManager : MonoBehaviour
 		Debug.Log ("Btn: " + focusedButton.name);
 		if (focusedButton.name == "Play") 
 		{
-			Application.LoadLevel ("PlayerSelectionWithController");
+			Application.LoadLevel ("ColorSelection");
 		}
 		if (focusedButton.name == "Quit") 
 		{
@@ -65,7 +65,7 @@ public class MainMenuButtonManager : MonoBehaviour
 		}
 		if (focusedButton.name == "Credits") 
 		{
-			Application.LoadLevel("CreditsWithController");
+			Application.LoadLevel("Credits");
 		}
 	}
 		

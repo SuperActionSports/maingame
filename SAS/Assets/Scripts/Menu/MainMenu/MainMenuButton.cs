@@ -21,7 +21,10 @@ using InControl;
 		void Update()
 		{
 			// Find out if we're the focused button.
-			bool hasFocus = transform.parent.GetComponent<MainMenuButtonManager>().focusedButton == this;
+			if (transform.parent.GetComponent<MainMenuButton>() != null)
+			{
+				bool hasFocus = transform.parent.GetComponent<MainMenuButtonManager>().focusedButton == this;
+			}
 
 			// Fade alpha in and out depending on focus.
 			//var color = cachedRenderer.material.color;

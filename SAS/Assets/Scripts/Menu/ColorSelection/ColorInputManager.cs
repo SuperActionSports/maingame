@@ -33,6 +33,8 @@ using InControl;
 		const int maxColorSelectors = 4;
 
 		List<Vector3> spawnPoints;
+		
+		public GameObject layla;
 
 		List<ColorSelectionButtonManager> colorSelectionManagers = new List<ColorSelectionButtonManager>( maxColorSelectors );
 
@@ -54,6 +56,9 @@ using InControl;
 			{
 				spawnPoints.Add(c.transform.position);
 			}
+			layla = GameObject.Find("Layla");
+			
+		
 		}
 
 		void Update()
@@ -64,7 +69,7 @@ using InControl;
 			{
 				if (ThereIsNoPlayerUsingDevice( inputDevice ))
 				{
-					CreateButton( inputDevice );
+					CreateButton(inputDevice );
 				}
 			}
 		}
@@ -118,13 +123,16 @@ using InControl;
 
 				var gameObject = (GameObject) Instantiate( colorSelectionManagerPrefab, new Vector3(0,0,0), Quaternion.identity );
 				gameObject.transform.SetParent(GameObject.Find("ColorInputManager").transform);
+				gameObject.transform.localPosition = new Vector3(0,0,0);
+				gameObject.transform.localScale = new Vector3(1,1,1);
 				var buttonManager = gameObject.GetComponent<ColorSelectionButtonManager>();
 				buttonManager.device = inputDevice;
+				buttonManager.liaison = layla;
 				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
 
 				Debug.Log("btn manager position: " + buttonManager.transform.position);
-
+				layla.GetComponent<GameControlLiaison>().CreatePlayer(inputDevice);
 				return buttonManager;
 			}
 

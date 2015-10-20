@@ -165,7 +165,7 @@ MonoBehaviour:
   focusedButton: {fileID: 864728341}
   actionSticksName: 
   actionStickEggName: 
-  actionFuzzyEggName: 
+  actionFuzzyEggName: LTM
   hockeyName: 
   actionTinyEggName: 
 --- !u!1001 &446498599
@@ -498,6 +498,10 @@ Prefab:
     - target: {fileID: 451414, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}
       propertyPath: m_RootOrder
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 132968, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}

@@ -10,11 +10,17 @@ using InControl;
 		public ColorSelectionButton down = null;
 		public ColorSelectionButton left = null;
 		public ColorSelectionButton right = null;
-
+		
+		public bool focusedUponTheNightWhenTheHorsesAreFree = false;
+		
+		public bool isColor = true;
+		
+		public String levelToLoad;
 
 		void Start()
 		{
 			cachedRenderer = GetComponent<Renderer>();
+			focusedUponTheNightWhenTheHorsesAreFree = false;
 		}
 
 

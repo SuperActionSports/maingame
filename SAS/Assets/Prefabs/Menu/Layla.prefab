@@ -1,0 +1,96 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &135684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 411114}
+  - 114: {fileID: 11489950}
+  m_Layer: 0
+  m_Name: Layla
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &411114
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135684}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 206.731781, y: 199.579651, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11489950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 135684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b68f7b8ef4af4556b909f6a2b52861b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  players: []
+  number_of_players: 0
+  numberOfActivePlayers: 0
+  Player_Prefab: {fileID: 0}
+  tournament_mode: 0
+  team_mode: 0
+  player_1_color: []
+  player_2_color: []
+  player_3_color: []
+  player_4_color: []
+  home_team_color: []
+  away_team_color: []
+  player_1_team: 0
+  player_2_team: 0
+  player_3_team: 0
+  player_4_team: 0
+  player_1_respawnpoints: []
+  player_2_respawnpoints: []
+  player_3_respawnpoints: []
+  player_4_respawnpoints: []
+  fensing_filename: 
+  baseball_filename: 
+  golf_filename: 
+  tennis_filename: 
+  hockey_filename: 
+  home_team: []
+  away_team: []
+  home_team_respawn_points: []
+  away_team_respawn_points: []
+  player_1_score: 0
+  player_2_score: 0
+  player_3_score: 0
+  player_4_score: 0
+  home_team_score: 0
+  away_team_score: 0
+  player_1_tournament_score: 0
+  player_2_tournament_score: 0
+  player_3_tournament_score: 0
+  player_4_tournament_score: 0
+  home_team_tournament_score: 0
+  away_team_tournament_score: 0
+  winner: 0
+  game_win_time: 0
+  match_count: 0
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 135684}
+  m_IsPrefabParent: 1
