@@ -138,14 +138,7 @@ public class GameControlLiaison : MonoBehaviour {
 		GameObject.Find (""); //Insert Respond Points Text
 
 	}*/
-	void Update()
-	{
-		if (only.Action2.WasPressed)
-		{
-			Debug.Log ("I'm lonely out here.");
-		}
-	}
-	
+
 	
 	public void CreatePlayer(InputDevice device)
 	{

@@ -46,27 +46,24 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Liaison Test Materials\CubeController.cs" />
-     <Compile Include="Assets\Liaison Test Materials\LTMPlayerManager.cs" />
-     <Compile Include="Assets\Liaison Test Materials\LiaisonTestPlayerController.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
-     <Compile Include="Assets\Scripts\Camera\AngeldCameraController.cs" />
-     <Compile Include="Assets\Scripts\Camera\BaseballCameraController.cs" />
-     <Compile Include="Assets\Scripts\Camera\CameraController.cs" />
-     <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
-     <Compile Include="Assets\Scripts\Camera\FencingCameraController.cs" />
-     <Compile Include="Assets\Scripts\Camera\ICamera.cs" />
-     <Compile Include="Assets\Scripts\Camera\OverheadCameraController.cs" />
-     <Compile Include="Assets\Scripts\Camera\SideScrollingCameraController.cs" />
-     <Compile Include="Assets\Scripts\FX\ConfettiScript.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\AngeldCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\BaseballCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\CameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\CameraShake.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\FencingCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\ICamera.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\OverheadCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\SideScrollingCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\FreezeRotationAndY.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
+     <Compile Include="Assets\Scripts\FX\Particle Systems\ConfettiScript.cs" />
+     <Compile Include="Assets\Scripts\FX\Particle Systems\VictoryScript.cs" />
      <Compile Include="Assets\Scripts\FX\SetColorToOther.cs" />
-     <Compile Include="Assets\Scripts\FX\VictoryScript.cs" />
-     <Compile Include="Assets\Scripts\GUI\Countdown.cs" />
-     <Compile Include="Assets\Scripts\GUI\PlayerIconScript.cs" />
-     <Compile Include="Assets\Scripts\GUI\ResetPlayerGUIs.cs" />
-     <Compile Include="Assets\Scripts\GameLogic\StickeggRules.cs" />
+     <Compile Include="Assets\Scripts\Game GUI\Countdown.cs" />
+     <Compile Include="Assets\Scripts\Game GUI\PlayerIconScript.cs" />
+     <Compile Include="Assets\Scripts\Game GUI\ResetPlayerGUIs.cs" />
+     <Compile Include="Assets\Scripts\GameLogic (Deprecated)\StickeggRules.cs" />
      <Compile Include="Assets\Scripts\Garbage\CUBERTDANCE.cs" />
      <Compile Include="Assets\Scripts\Garbage\GARBAGEMOVE.cs" />
      <Compile Include="Assets\Scripts\GolfBall.cs" />
@@ -335,6 +332,9 @@
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeNative.cs" />
      <Compile Include="Assets\Utilities\InControl\Source\iCade\ICadeState.cs" />
      <Compile Include="Assets\Utilities\InControl\Test\TestInputManager.cs" />
+     <Compile Include="Assets\_Scenes\Testing Scenes\Liaison Test Materials\CubeController.cs" />
+     <Compile Include="Assets\_Scenes\Testing Scenes\Liaison Test Materials\LTMPlayerManager.cs" />
+     <Compile Include="Assets\_Scenes\Testing Scenes\Liaison Test Materials\LiaisonTestPlayerController.cs" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\changelog.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />

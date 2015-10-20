@@ -12,7 +12,7 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/_Scenes/Menu/CreditsScreen.unity
   - enabled: 1
-    path: Assets/_Scenes/StandIn.unity
+    path: Assets/_Scenes/Testing Scenes/StandIn.unity
   - enabled: 1
     path: Assets/_Scenes/TopDown.unity
   - enabled: 1
@@ -26,18 +26,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Menu/AdvancedCredits.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/MainMenu.unity
+    path: Assets/_Scenes/Menu/MainMenu.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/Credits.unity
+    path: Assets/_Scenes/Menu/Credits.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/LevelSelection.unity
+    path: Assets/_Scenes/Menu/LevelSelection.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/PlayerSelectionWithController.unity
+    path: Assets/_Scenes/Menu/PlayerSelectionWithController.unity
   - enabled: 0
     path: Assets/_Scenes/MenuWithController/P1ColorSelectionWIthController.unity
   - enabled: 0
     path: Assets/_Scenes/MenuWithController/P2ColorSelectionWIthController.unity
   - enabled: 1
-    path: Assets/Liaison Test Materials/LTM.unity
+    path: Assets/_Scenes/Testing Scenes/Liaison Test Materials/LTM.unity
   - enabled: 1
-    path: Assets/_Scenes/MenuWithController/ColorSelection.unity
+    path: Assets/_Scenes/Menu/ColorSelection.unity
