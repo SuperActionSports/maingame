@@ -57,7 +57,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		}
 		if (inputDevice.Action2.WasPressed) 
 		{
-			Application.LoadLevel("AdvancedPlayerColorSelection");
+			//Application.LoadLevel("AdvancedPlayerColorSelection");
 		}
 	}
 

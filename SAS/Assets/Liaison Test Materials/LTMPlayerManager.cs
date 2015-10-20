@@ -37,10 +37,8 @@ using InControl;
 
 		void PullPlayersFromLiaison()
 		{
-			Player p = new Player();
 			for (int i = 0; i < liaison.numberOfActivePlayers; i++)
 			{
-				
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPositions[0], Quaternion.identity );
 				var player = gameObject.GetComponent<LiaisonTestPlayerController>();
 				player.c1 = liaison.players[i].color;
