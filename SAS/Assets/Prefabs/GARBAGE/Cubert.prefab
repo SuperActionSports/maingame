@@ -83,6 +83,7 @@ GameObject:
   - 33: {fileID: 3339678}
   - 65: {fileID: 6592082}
   - 23: {fileID: 2340504}
+  - 114: {fileID: 11499026}
   m_Layer: 0
   m_Name: Cubert
   m_TagString: Untagged
@@ -673,6 +674,18 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11499026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 127468}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53aed170f91a89440a0b759f56edc42f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  height: 2
 --- !u!135 &13505116
 SphereCollider:
   m_ObjectHideFlags: 1
