@@ -5,39 +5,29 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/_Scenes/Menu/TitleScreen.unity
-  - enabled: 0
-    path: Assets/_Scenes/Menu/LevelScreen.unity
-  - enabled: 0
-    path: Assets/_Scenes/Menu/CreditsScreen.unity
-  - enabled: 1
-    path: Assets/_Scenes/Testing Scenes/StandIn.unity
-  - enabled: 1
-    path: Assets/_Scenes/TopDown.unity
-  - enabled: 1
-    path: Assets/_Scenes/Menu/AdvancedLevelSelection.unity
-  - enabled: 1
-    path: Assets/_Scenes/Menu/AdvancedMainMenu.unity
-  - enabled: 1
-    path: Assets/_Scenes/Menu/AdvancedPlayerColorSelection.unity
-  - enabled: 1
-    path: Assets/_Scenes/Menu/AdvancedPlayerSelection.unity
-  - enabled: 1
-    path: Assets/_Scenes/Menu/AdvancedCredits.unity
   - enabled: 1
     path: Assets/_Scenes/Menu/MainMenu.unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/Credits.unity
+    path: Assets/_Scenes/Menu/ColorSelection.unity
   - enabled: 1
     path: Assets/_Scenes/Menu/LevelSelection.unity
   - enabled: 1
     path: Assets/_Scenes/Menu/PlayerSelectionWithController.unity
-  - enabled: 0
-    path: Assets/_Scenes/MenuWithController/P1ColorSelectionWIthController.unity
-  - enabled: 0
-    path: Assets/_Scenes/MenuWithController/P2ColorSelectionWIthController.unity
+  - enabled: 1
+    path: Assets/_Scenes/Menu/Credits.unity
+  - enabled: 1
+    path: Assets/_Scenes/Games/Golf.unity
+  - enabled: 1
+    path: Assets/_Scenes/Games/Baeball.unity
+  - enabled: 1
+    path: Assets/_Scenes/Games/Fencing.unity
+  - enabled: 1
+    path: Assets/_Scenes/Games/Hockey.unity
+  - enabled: 1
+    path: Assets/_Scenes/Games/Tennis.unity
+  - enabled: 1
+    path: Assets/_Scenes/Garbage Scene.unity
   - enabled: 1
     path: Assets/_Scenes/Testing Scenes/Liaison Test Materials/LTM.unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/ColorSelection.unity
+    path: Assets/_Scenes/Testing Scenes/Particle Lab - Matt.unity
