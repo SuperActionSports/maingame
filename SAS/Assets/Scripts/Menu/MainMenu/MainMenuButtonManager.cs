@@ -48,7 +48,6 @@ public class MainMenuButtonManager : MonoBehaviour
 			
 		if (inputDevice.Action1.WasPressed) 
 		{
-			Debug.Log("I was depressed");
 			LoadScene();
 		}
 	}
