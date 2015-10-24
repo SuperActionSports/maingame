@@ -6,7 +6,7 @@ using UnityEngine;
 		GameObject colorSelection;
 		void Start()
 		{
-			Debug.Log ("Position of focus: " + transform.localPosition);
+		//	Debug.Log ("Position of focus: " + transform.localPosition);
 			colorSelection = transform.parent.gameObject;
 		}
 		void Update()

@@ -27,14 +27,22 @@ public class FencingWizard : MonoBehaviour {
 	if (layla == null) { layla = GameObject.Find("Layla");
 	}
 	liaison = layla.GetComponent<GameControlLiaison>();
+	Debug.Log("Liaison's active players: " + liaison.numberOfActivePlayers);
+	players = new Player[liaison.numberOfActivePlayers];
+	Debug.Log("So, naturally, players' length is " + players.Length);
+	for (int p = 0; p < players.Length; p++)
+	{
+		players[p] = liaison.players[p];
+	}
 	respawnPointPositions = new Vector3[respawnPoints.Length];
 	for (int i = 0; i < respawnPoints.Length; i++)
 		{
 			respawnPointPositions[i] = respawnPoints[i].transform.position;
 		}
-	players = liaison.players;
-	
-	
+	//players = liaison.players;
+	Debug.Log("Wizard is setting " + players.Length +" players.");
+	SetPlayers();
+	camScript = Camera.main.GetComponent<FencingCameraController>();
 	}
 	
 	
@@ -44,6 +52,12 @@ public class FencingWizard : MonoBehaviour {
 		// This should handle the device concern too. 	
 		switch(players.Length)
 		{
+		
+		case (1):
+		{
+		Spawn(respawnPointPositions[0],players[0]);
+		break;
+		}
 		case(2):
 			break;
 			

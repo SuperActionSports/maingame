@@ -163,7 +163,7 @@ MonoBehaviour:
   focusedButton: {fileID: 864728341}
   actionSticksName: Fencing
   actionStickEggName: Baeball
-  actionFuzzyEggName: Tennis
+  actionFuzzyEggName: LTM
   hockeyName: Hockey
   actionTinyEggName: Golf
 --- !u!1001 &446498599
@@ -499,7 +499,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 132968, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 11404226, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: cb55c26334eca914a9e4226d4dc6ffbf, type: 2}
