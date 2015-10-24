@@ -43,6 +43,8 @@ public class FencingWizard : MonoBehaviour {
 	Debug.Log("Wizard is setting " + players.Length +" players.");
 	SetPlayers();
 	camScript = Camera.main.GetComponent<FencingCameraController>();
+	gameWinTime = -1;
+	victoryDuration = 3;
 	}
 	
 	
@@ -54,17 +56,25 @@ public class FencingWizard : MonoBehaviour {
 		{
 		
 		case (1):
-		{
-		Spawn(respawnPointPositions[0],players[0]);
-		break;
-		}
+			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			break;
 		case(2):
+			Debug.Log("Spawning two");
+			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[4],players[1]);
 			break;
 			
 		case (3):
+			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[2],players[1]);
+			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[4],players[2]);
 			break;
 			
 		case(4):
+			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[1],players[1]);
+			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[3],players[2]);
+			if (ShouldBeSpawned(players[3])) Spawn(respawnPointPositions[4],players[3]);
 			break;
 			
 		default:
@@ -73,11 +83,19 @@ public class FencingWizard : MonoBehaviour {
 		}
 	}
 	
+	private bool ShouldBeSpawned(Player p)
+	{
+		if (p.control == null)
+		{
+			return true;	
+		}
+		else { return !p.control.Alive(); } 
+	}
 	
 	private PlayerControllerMatt Spawn(Vector3 position, Player player)
 	{
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
-		
+		player.gameObject = p;
 		PlayerControllerMatt pController = p.GetComponent<PlayerControllerMatt>();
 		player.control = pController;
 		// Replace this noise with the player prefs file information
@@ -89,20 +107,27 @@ public class FencingWizard : MonoBehaviour {
 		p.GetComponent<PlayerInputHandlerMatt>().device = player.device;
 		//players[playerNumber] = p.GetComponent<PlayerInputHandlerMatt>();
 		
-		
+		remainingPlayers++;
 		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return pController;
 	}
 	// Update is called once per frame
 	void Update () {
-	
+//		Debug.Log("Game win time: " + gameWinTime + " + " + victoryDuration);
+		if (gameWinTime > 0 && gameWinTime + victoryDuration <= Time.time)
+		{
+			SetPlayers();
+			camScript.won = false;
+			camScript.RecountPlayers();
+		}
 	}
 	
 	public void UpdatePlayerCount()
 	{
 		winner = 0;
-		for (int i = 0; i<totalPlayers;i++)
+		for (int i = 0; i<players.Length;i++)
 		{
+			Debug.Log("Player " + i + " is alive? " + players[i].control.Alive());
 			//Debug.Log("Player " + i + " (" + controls[i].color.ToString() + ") is alive? " + controls[i].alive);
 			if (players[i].control.Alive()) 
 			{
@@ -112,6 +137,7 @@ public class FencingWizard : MonoBehaviour {
 			else 
 			{
 				remainingPlayers--;
+				Debug.Log("Remaining players: " + remainingPlayers);
 			}
 		}
 		if (remainingPlayers <2)
@@ -122,11 +148,13 @@ public class FencingWizard : MonoBehaviour {
 	
 	private void Victory()
 	{
-		//Debug.Log("Winner: " + winner);
+		Debug.Log("Winner! Color is " + players[winner].color);
 		victory.GetComponent<VictoryScript>().Party (players[winner].color);
 		gameWinTime = Time.time;
 		camScript.won = true;
 		winnerPlayer = players[winner].gameObject;
+		if (winnerPlayer != null ) {camScript.FollowWinner(winnerPlayer);}
+		else { Debug.Log("Winner Player has no game object"); }
 	}
 	
 	

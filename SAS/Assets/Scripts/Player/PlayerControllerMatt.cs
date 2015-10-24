@@ -119,14 +119,16 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 			
 	private void MakeDead()
 	{
-		deathScript.Party();
+		deathScript.Party(color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
 		if (rapierScript != null) { rapierScript.Parry();}
         gameObject.SetActive(false);
+        Debug.Log("Finna update player count.");
         wizard.UpdatePlayerCount();
+        Debug.Log("Yeah.");
         Destroy(gameObject,3);
     }
     

@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -66,7 +66,8 @@ LightmapSettings:
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
     m_ReflectionCompression: 2
-  m_LightmapSnapshot: {fileID: 0}
+  m_LightmapSnapshot: {fileID: 112000001, guid: 573b0a3f673944b439d028da25433fe8,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &5
 NavMeshSettings:
@@ -734,18 +735,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
-      propertyPath: m_Name
-      value: King Fencer
-      objectReference: {fileID: 0}
-    - target: {fileID: 6463184, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 1229136495}
     - target: {fileID: 3374660, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1229136495}
+    - target: {fileID: 6463184, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1229136495}
+    - target: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
+      propertyPath: m_Name
+      value: King Fencer
+      objectReference: {fileID: 0}
     - target: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
       propertyPath: m_IsActive
       value: 0
@@ -1353,6 +1354,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 31e218c524bfd8840ab20ebf34a2b82b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1466981320 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 168494, guid: 31e218c524bfd8840ab20ebf34a2b82b, type: 2}
+  m_PrefabInternal: {fileID: 1466981319}
 --- !u!1 &1579103777
 GameObject:
   m_ObjectHideFlags: 0
@@ -1451,8 +1456,6 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 1667884684}
-  - 114: {fileID: 1667884683}
-  - 114: {fileID: 1667884685}
   - 114: {fileID: 1667884686}
   m_Layer: 0
   m_Name: FencingGameWizard
@@ -1461,17 +1464,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1667884683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1667884682}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0773991ca86c8b4db742d6a3160eb80, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1667884684
 Transform:
   m_ObjectHideFlags: 0
@@ -1484,17 +1476,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
---- !u!114 &1667884685
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1667884682}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 17b96f631d015d24991c88b61ec76078, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1667884686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1507,7 +1488,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 167704, guid: f5e8c4ff0ce429e448cf525f96cda612, type: 2}
-  players: []
   respawnPoints:
   - {fileID: 686087513}
   - {fileID: 1693775101}
@@ -1515,7 +1495,7 @@ MonoBehaviour:
   - {fileID: 268335827}
   - {fileID: 1615797908}
   winnerPlayer: {fileID: 0}
-  victory: {fileID: 168494, guid: 31e218c524bfd8840ab20ebf34a2b82b, type: 2}
+  victory: {fileID: 1466981320}
   layla: {fileID: 0}
 --- !u!1 &1693775101 stripped
 GameObject:
@@ -1695,6 +1675,7 @@ MonoBehaviour:
   shakeMagnitude: {x: 0, y: 0}
   shakeIntensity: 0
   won: 0
+  winnerPlayer: {fileID: 0}
   z: 0
 --- !u!1 &1912745931
 GameObject:
