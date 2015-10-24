@@ -503,12 +503,3 @@ public class Team {
 	public float[] team_color;
 	public Vector3[] respawn_points;
 }
-
-[Serializable]
-public class Player {
-	public int number;
-	public Color color;
-	public InputDevice device;
-	public Vector3[] respawn_points;
-	public Team team;
-}

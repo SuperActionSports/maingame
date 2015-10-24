@@ -1,14 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControllerMatt : MonoBehaviour {
+public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 
 	public Color color;
 	private Renderer rend;
     public Material playerMaterial;
     
     public bool armed;
-	public bool alive;	
+	public bool alive;
+//	public bool Alive
+//	{
+//		get{
+//		 return alive;
+//		 }
+//	}
+	public bool Alive()
+	{
+		return alive;	
+	}	
 	public float impactMod;
 	public bool previousFacingRight;
 	
@@ -27,7 +37,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
 	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla
-	public FencingGameManager wizard; // Game Wizard, handled by game
+	public FencingWizard wizard; // Game Wizard, handled by game
 	public int wizardNumber;
 
 	// Use this for initialization
@@ -69,7 +79,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 //		paint = GetComponent<PaintSplatter>();
 //		paint.color = color;
 //		
-		wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
+		//wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
 		UpdateColor();
 		
 		//rapierScript.parent = this.gameObject;

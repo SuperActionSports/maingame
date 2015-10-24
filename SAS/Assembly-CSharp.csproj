@@ -59,6 +59,7 @@
      <Compile Include="Assets\Scripts\FX\Particle Systems\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Particle Systems\VictoryScript.cs" />
      <Compile Include="Assets\Scripts\FX\SetColorToOther.cs" />
+     <Compile Include="Assets\Scripts\Fencing\FencingWizard.cs" />
      <Compile Include="Assets\Scripts\Game GUI\Countdown.cs" />
      <Compile Include="Assets\Scripts\Game GUI\PlayerIconScript.cs" />
      <Compile Include="Assets\Scripts\Game GUI\ResetPlayerGUIs.cs" />
@@ -75,6 +76,7 @@
      <Compile Include="Assets\Scripts\Liaison &amp; Wizard\GameControlWizard.cs" />
      <Compile Include="Assets\Scripts\Liaison &amp; Wizard\Interfaces.cs" />
      <Compile Include="Assets\Scripts\Liaison &amp; Wizard\LiaisonClass.cs" />
+     <Compile Include="Assets\Scripts\Liaison &amp; Wizard\Player.cs" />
      <Compile Include="Assets\Scripts\Liaison &amp; Wizard\PlayerClass.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedCredits.cs" />
      <Compile Include="Assets\Scripts\Menu\AdvancedLevelSelection.cs" />
