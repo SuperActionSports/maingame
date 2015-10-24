@@ -5,6 +5,7 @@ using InControl;
 public interface IPlayerController
 {
 	bool Alive();
+	void MovementAllowed(bool val);
 	//Color Color();
 	//IInputHandler InputHandler();
 }

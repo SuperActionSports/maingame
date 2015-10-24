@@ -39,6 +39,7 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla
 	public FencingWizard wizard; // Game Wizard, handled by game
 	public int wizardNumber;
+	public bool movementAllowed;
 
 	// Use this for initialization
 	void Start () {
@@ -84,14 +85,21 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 		
 		//rapierScript.parent = this.gameObject;
 		rapierScript.ResetOwnership(this.gameObject);
+		movementAllowed = true;
     }
     
 	// Update is called once per frame
 	void Update () {
-        if (alive)
+        if (alive && movementAllowed)
         {
             input.HandleInput();            
 		}	
+	}
+	
+	public void MovementAllowed(bool allowed)
+	{
+		movementAllowed = allowed;
+		Debug.Log("From Contrller. Movement is allowed? " + movementAllowed);
 	}
 	
 	public void setRun(float vel)

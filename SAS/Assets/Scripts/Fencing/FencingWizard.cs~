@@ -83,6 +83,23 @@ public class FencingWizard : MonoBehaviour {
 		}
 	}
 	
+	public void DisableMovement()
+	{
+		Debug.Log("Disable From Wizard");
+		for (int i = 0; i < players.Length; i++)
+		{
+			players[i].control.MovementAllowed(false);
+		}	
+	}
+	
+	public void EnableMovement()
+	{
+		for (int i = 0; i < players.Length; i++)
+		{
+			players[i].control.MovementAllowed(true);
+		}	
+	}
+	
 	private bool ShouldBeSpawned(Player p)
 	{
 		if (p.control == null)

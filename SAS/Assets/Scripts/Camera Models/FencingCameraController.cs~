@@ -39,6 +39,7 @@ public class FencingCameraController : MonoBehaviour {
 		shakeLength = 0.1f;
 		shakeMagnitude = new Vector2(3f,3f);
 		shakeIntensity = 50f;
+		yOffset = 5.2f;
 		zOffset = 20f;
 		zDebugMod = 30;
 		minimumZ = -14;
