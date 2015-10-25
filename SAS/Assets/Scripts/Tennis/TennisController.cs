@@ -60,7 +60,7 @@ public class TennisController : MonoBehaviour {
 		respawnPointsTeamB = GameObject.FindGameObjectsWithTag ("RespawnPointTeamB");
 
 		paint = GetComponent<PaintSplatter>();
-		paint.color = c1;
+//		paint.color = c1;
 		hitForce = 25;
     }
     
@@ -125,7 +125,7 @@ public class TennisController : MonoBehaviour {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-		paint.Paint (transform.position, paint.color);
+		//paint.Paint (transform.position, paint.color);
         GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);

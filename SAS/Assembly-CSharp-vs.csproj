@@ -66,6 +66,7 @@
      <Compile Include="Assets\Scripts\GameLogic (Deprecated)\StickeggRules.cs" />
      <Compile Include="Assets\Scripts\Garbage\CUBERTDANCE.cs" />
      <Compile Include="Assets\Scripts\Garbage\GARBAGEMOVE.cs" />
+     <Compile Include="Assets\Scripts\Garbage\GARBAGEVISION.cs" />
      <Compile Include="Assets\Scripts\GolfBall.cs" />
      <Compile Include="Assets\Scripts\Hockey\GoalScored.cs" />
      <Compile Include="Assets\Scripts\Hockey\NoMove.cs" />
@@ -361,13 +362,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KDTree">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

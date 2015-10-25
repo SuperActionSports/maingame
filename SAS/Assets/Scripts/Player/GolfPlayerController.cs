@@ -41,6 +41,7 @@ public class GolfPlayerController : MonoBehaviour {
     public OverheadCameraController cam;
 	private AudioSource sound;
     private Animator anim;
+	private PaintSplatter paint;
 
 	void Start () {
 		// Get Components and Game Objects
@@ -56,7 +57,8 @@ public class GolfPlayerController : MonoBehaviour {
         anim = GetComponent <Animator>();
 		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
         equipmentCollider.enabled = false;
-
+		paint = GetComponent<PaintSplatter> ();
+		paint.c = c1;
 		// Set up color variables
 		foreach (Renderer rend in renderers) {
 			if (rend.material.name == "PlayerMaterial") rend.material.color = c1;
@@ -189,6 +191,7 @@ public class GolfPlayerController : MonoBehaviour {
 		}
 		putting = false;
 		swinging = false;
+		paint.Splatter (transform.position, direction);
 		MakeDead();
     }
 
