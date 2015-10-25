@@ -91,7 +91,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 161116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.0552521, y: 1.5, z: -1.39934349}
+  m_LocalPosition: {x: 6.5, y: 1.70000005, z: .0700000003}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 406278}
@@ -466,7 +466,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 150066}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 45ea5b1f35e6347cba39f9b9153af68c, type: 3}
+  m_Script: {fileID: 11500000, guid: 91c7febde935e1541b45616943729063, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   winText: {fileID: 0}
@@ -3477,12 +3477,13 @@ MonoBehaviour:
   color: {r: 0, g: 0, b: 0, a: 0}
   playerNumber: 0
   runs: 0
-  left: 0
-  right: 0
-  up: 0
+  left: 97
+  right: 100
+  up: 119
   down: 0
-  attack: 0
+  attack: 102
   debugKill: 0
+  hasDevice: 0
   alive: 0
   movementAllowed: 0
   magSpeedX: 0

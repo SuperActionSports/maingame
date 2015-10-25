@@ -6,13 +6,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 
 	public Color color;
 	public int playerNumber;
-	public int runs;
-
-	private bool colorChangeToUniform;
-	private Renderer rend;
-	private float colorLerpT;
-    private bool facingLeft;
-	
+		
 	//Keyboard Keybinding Stuff
 	public KeyCode left;
 	public KeyCode right;
@@ -29,6 +23,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	{
 		return alive;
 	}
+	public float respawnTime;
+	private float deathTime;
 	public bool movementAllowed;
 	public void MovementAllowed(bool allowed)
 	{
@@ -47,7 +43,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	public Vector3 speed;
     private bool doubleJumpAllowed;
 
-    public GameObject[] respawnPoints;
+    public Vector3 respawnPoint;
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
@@ -66,7 +62,6 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	void Start () {
 	 	sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<BaseballCameraController>();
-		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
         equipment = transform.FindChild("BatHand").gameObject;
@@ -74,20 +69,12 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		//rend.material.color = c;
 		speedMagnitude = 12f;
 		jumpMagnitude = 40;
-		colorChangeToUniform = false;
-		colorLerpT = 0;
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
         doubleJumpAllowed = true;
 		impactMod = 7.5f;
-        respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-     
-        if (respawnPoints.Length == 0)
-        {
-            Debug.Log("There aren't any respawn points, you catastrophic dingus.");
-        }
-        
+        GetComponent<Renderer>().material.color = color;
 		paint = GetComponent<PaintSplatter>();
 		//paint.color = color;
     }
@@ -96,13 +83,21 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	// Update is called once per frame
 	void Update () {
 		hasDevice = !(device == null);
-        if (alive)
+        if (alive && movementAllowed)
         {
             magSpeedX = 0;
             magSpeedY = 0;
             
             float xVel = GetXVelocity();
 			GetYVelocity();
+			if (transform.position.y > 1.6f)
+			{
+				anim.SetBool("Jumping",true);
+			}
+			else 
+			{
+				anim.SetBool("Jumping",false);
+			}
 			transform.position = transform.position + new Vector3(xVel,0,0);
 			if (xVel < 0)
 			{
@@ -120,19 +115,13 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			}
 			GetAttacking();
 			//CheckAnimStateForAttacking();
-		}	
-		
-		UpdateColor();
+		}
+		else if (Time.time >= deathTime + respawnTime)
+		{
+			Respawn();
+		}
 		
 		GetRespawn();
-		if (transform.position.y > 1.6f)
-		{
-			anim.SetBool("Jumping",true);
-		}
-		else 
-		{
-			anim.SetBool("Jumping",false);
-		}
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -167,13 +156,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
-        /* foreach (Transform child in transform)
-         {
-             Vector3 t = child.transform.TransformPoint(child.transform.position);
-             child.parent = null;
-             child.transform.position = t;
-
-         }*/
+        deathTime = Time.time;
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -204,16 +187,12 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 
     public void Respawn()
     {
-		ParticleSystem poof = GetComponent<ParticleSystem> ();
-		poof.startColor = color;
-		poof.Play();
         alive = true;
         ResetRigidBodyConstraints();
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
         //Debug.Log("Length: " + respawnPoints.Length);
-        transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
-        colorChangeToUniform = true;
+        transform.position = respawnPoint;
     }
 	
 	private void GetAttacking()
@@ -331,34 +310,4 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	{
 		return speedMagnitude * device.Direction.X * Time.deltaTime * 2;
 	}
-	
-    private void UpdateColor()
-    {
-        colorLerpT += Time.deltaTime;
-		if (!alive) {
-			rend.material.color = color ;
-		}
-        else if (colorChangeToUniform && alive)
-        {
-            rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), color, colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                    colorChangeToUniform = false;
-                    colorLerpT = 0;
-            }
-        }
-        else
-        {
-			rend.material.color = Color.Lerp(color, new Color(0, 0, 0, 0), colorLerpT);
-            if (colorLerpT >= 1)
-            {
-                if (alive)
-                {
-                    colorChangeToUniform = true;
-                    colorLerpT = 0;
-                }
-            }
-        }
-
-    }
 }

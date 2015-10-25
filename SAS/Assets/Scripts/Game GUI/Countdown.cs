@@ -4,9 +4,9 @@ using System.Collections;
 public class Countdown : MonoBehaviour {
 
 	// Use this for initialization
-	public FencingWizard wizard;
+	public IWizard wizard;
 	void Start () {
-		
+		wizard = GameObject.FindGameObjectWithTag("Wizard").GetComponent<IWizard>();	
 	}
 	
 	// Update is called once per frame

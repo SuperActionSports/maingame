@@ -1,12 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BaseballWizard : MonoBehaviour {
+public class BaseballWizard : MonoBehaviour, IWizard {
 	
+	public BaseballLauncher pitcher;
+	private float lastPitch;
+	private float pitchGap;
+	private float madnessTime;
+	private float madnessGap;
+	private float madnessMod;
+	private bool madness = false;
 	public GameObject playerPrefab; 		//Provided by game
 	public Player[] players;
 	private Vector3[] respawnPointPositions; // Game
 	public GameObject[] respawnPoints;		// Game
+	public float respawnRate;
 	private int totalPlayers;				 // Layla
 	private int remainingPlayers;			// Game 
 	private int winner;						// Shared
@@ -15,10 +23,6 @@ public class BaseballWizard : MonoBehaviour {
 	//private float victoryDuration;			// Game, private
 	private float gameWinTime;				// Layla, customized games
 	private int matchCount;					// Layla, customized games
-	//private FencingCameraController cam;	// Game
-	//private FencingPlayerManager inputManager;	// Layla
-	//private InputDevice[] devices;				// Layla
-	//private FencingCameraController camScript;	// Game
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	
@@ -41,10 +45,15 @@ public class BaseballWizard : MonoBehaviour {
 		}
 		//players = liaison.players;
 		Debug.Log("Wizard is setting " + players.Length +" players.");
+		respawnRate = 2.5f;
 		SetPlayers();
-		
+		//Magic Number
+		pitchGap = 2;
 		gameWinTime = -1;
-		
+		lastPitch = Mathf.Infinity;
+		madnessMod = 5;
+		madnessTime = 57;
+		madnessGap = 5;
 	}
 	
 	
@@ -98,6 +107,7 @@ public class BaseballWizard : MonoBehaviour {
 		{
 			players[i].control.MovementAllowed(true);
 		}	
+		lastPitch = Time.time;
 	}
 	
 	private bool ShouldBeSpawned(Player p)
@@ -115,58 +125,25 @@ public class BaseballWizard : MonoBehaviour {
 		player.gameObject = p;
 		BaseballPlayerController pController = p.GetComponent<BaseballPlayerController>();
 		player.control = pController;
-		// Replace this noise with the player prefs file information
-		p.GetComponent<BaseballPlayerController>().color = player.color;
-		p.GetComponent<BaseballPlayerController>().wizard = this;
-		//		p.GetComponent<BaseballPlayerController>().wizardNumber = playerNumber;
-		
-		// Replace this with the device information from userprefs
+		pController.color = player.color;
+		pController.wizard = this;
+		pController.respawnPoint = position;
+		pController.respawnTime = respawnRate;
 		p.GetComponent<BaseballPlayerController>().device = player.device;
 		//players[playerNumber] = p.GetComponent<PlayerInputHandlerMatt>();
-		
 		remainingPlayers++;
-		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return pController;
 	}
 	// Update is called once per frame
 	void Update () {
-		//		Debug.Log("Game win time: " + gameWinTime + " + " + victoryDuration);
-	}
-	
-//	public void UpdatePlayerCount()
-//	{
-//		winner = 0;
-//		for (int i = 0; i<players.Length;i++)
-//		{
-//			Debug.Log("Player " + i + " is alive? " + players[i].control.Alive());
-//			//Debug.Log("Player " + i + " (" + controls[i].color.ToString() + ") is alive? " + controls[i].alive);
-//			if (players[i].control.Alive()) 
-//			{
-//				winner = i;
-//				Debug.Log("Winner: " + winner);
-//			}
-//			else 
-//			{
-//				remainingPlayers--;
-//				Debug.Log("Remaining players: " + remainingPlayers);
-//			}
-//		}
-//		if (remainingPlayers <2)
-//		{
-//			Victory();
-//		}
-//	}
-//	
-//	private void Victory()
-//	{
-//		Debug.Log("Winner! Color is " + players[winner].color);
-//		victory.GetComponent<VictoryScript>().Party (players[winner].color);
-//		gameWinTime = Time.time;
-//		camScript.won = true;
-//		winnerPlayer = players[winner].gameObject;
-//		if (winnerPlayer != null ) {camScript.FollowWinner(winnerPlayer);}
-//		else { Debug.Log("Winner Player has no game object"); }
-//	}
-	
-	
+		if (Time.time - lastPitch >= pitchGap && (Time.time < madnessTime || Time.time > madnessGap+madnessTime)) {
+			lastPitch += pitchGap;
+			pitcher.Pitch ();
+		}
+		if (madnessTime <= Time.time && !madness)
+		{
+			pitchGap /= madnessMod;
+			madness = true;
+		}
+	}	
 }

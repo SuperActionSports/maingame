@@ -17,7 +17,7 @@ public interface IInputHandler
 	IWizard Wizard();
 }
 
-public interface IWizard
+public interface IWizardDeprecarted
 {
 	Color[] Colors();
 	int TotalPlayers();
@@ -26,4 +26,10 @@ public interface IWizard
 	int MatchCount();
 	IInputHandler InputManager();
 	InputDevice[] Devices();
+}
+
+public interface IWizard
+{
+	void EnableMovement();
+	void DisableMovement();
 }

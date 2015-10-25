@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FencingWizard : MonoBehaviour {
+public class FencingWizard : MonoBehaviour,IWizard {
 
 	public GameObject playerPrefab; 		//Provided by game
 	public Player[] players;
