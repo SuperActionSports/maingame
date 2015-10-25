@@ -1078,7 +1078,7 @@ GameObject:
   - 65: {fileID: 1057508629}
   m_Layer: 0
   m_Name: Floor
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1283,7 +1283,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 451136, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 139654, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
       propertyPath: m_Name
