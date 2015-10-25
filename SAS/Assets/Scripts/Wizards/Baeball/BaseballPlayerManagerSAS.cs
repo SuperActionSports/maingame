@@ -141,7 +141,7 @@ namespace MultiplayerBasicExample
 				var player = gameObject.GetComponent<BaseballPlayerController>();
 				player.device = inputDevice;
 				Debug.Log("Player count: " + players.Count + " color: " + playerColors[players.Count]);
-				player.c1 = playerColors[players.Count];
+				player.color = playerColors[players.Count];
 				player.transform.parent = this.transform;
 				players.Add( player );
 

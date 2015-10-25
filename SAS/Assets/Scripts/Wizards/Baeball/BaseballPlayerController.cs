@@ -2,9 +2,9 @@
 using System.Collections;
 using InControl;
 
-public class BaseballPlayerController : MonoBehaviour {
+public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 
-	public Color c1;
+	public Color color;
 	public int playerNumber;
 	public int runs;
 
@@ -22,8 +22,22 @@ public class BaseballPlayerController : MonoBehaviour {
     public KeyCode debugKill;
 	
 	public InputDevice device {get; set;}
+	public bool hasDevice;	
 
 	public bool alive;
+	public bool Alive()
+	{
+		return alive;
+	}
+	public bool movementAllowed;
+	public void MovementAllowed(bool allowed)
+	{
+		movementAllowed = allowed;
+	}
+	public bool MovementAllowed()
+	{
+		return movementAllowed;
+	}
 	
 	private Rigidbody rb;
 	public RaycastHit groundHit;
@@ -37,7 +51,7 @@ public class BaseballPlayerController : MonoBehaviour {
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
-
+	public BaseballWizard wizard;
 
     public BaseballCameraController cam;
 	private PaintSplatter paint;
@@ -55,6 +69,7 @@ public class BaseballPlayerController : MonoBehaviour {
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
+        equipment = transform.FindChild("BatHand").gameObject;
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		//rend.material.color = c;
 		speedMagnitude = 12f;
@@ -74,12 +89,13 @@ public class BaseballPlayerController : MonoBehaviour {
         }
         
 		paint = GetComponent<PaintSplatter>();
-		//paint.color = c1;
+		//paint.color = color;
     }
     
 	
 	// Update is called once per frame
 	void Update () {
+		hasDevice = !(device == null);
         if (alive)
         {
             magSpeedX = 0;
@@ -87,7 +103,6 @@ public class BaseballPlayerController : MonoBehaviour {
             
             float xVel = GetXVelocity();
 			GetYVelocity();
-
 			transform.position = transform.position + new Vector3(xVel,0,0);
 			if (xVel < 0)
 			{
@@ -190,7 +205,7 @@ public class BaseballPlayerController : MonoBehaviour {
     public void Respawn()
     {
 		ParticleSystem poof = GetComponent<ParticleSystem> ();
-		poof.startColor = c1;
+		poof.startColor = color;
 		poof.Play();
         alive = true;
         ResetRigidBodyConstraints();
@@ -321,11 +336,11 @@ public class BaseballPlayerController : MonoBehaviour {
     {
         colorLerpT += Time.deltaTime;
 		if (!alive) {
-			rend.material.color = c1 ;
+			rend.material.color = color ;
 		}
         else if (colorChangeToUniform && alive)
         {
-            rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), c1, colorLerpT);
+            rend.material.color = Color.Lerp(new Color(0, 0, 0, 0), color, colorLerpT);
             if (colorLerpT >= 1)
             {
                     colorChangeToUniform = false;
@@ -334,7 +349,7 @@ public class BaseballPlayerController : MonoBehaviour {
         }
         else
         {
-			rend.material.color = Color.Lerp(c1, new Color(0, 0, 0, 0), colorLerpT);
+			rend.material.color = Color.Lerp(color, new Color(0, 0, 0, 0), colorLerpT);
             if (colorLerpT >= 1)
             {
                 if (alive)

@@ -28,7 +28,7 @@ public class ResetPlayerGUIs : MonoBehaviour {
 			PlayerIconScript ts = t.GetComponent<PlayerIconScript>();
 			t.GetComponent<Text>().text = "P" + p;
 			ts.target = b.transform;
-			ts.color = b.c1;
+			ts.color = b.color;
 			t.transform.SetParent(transform,false);
 			p++;
 		}

@@ -78,7 +78,9 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			if (focusedButton.isColor) 
 			{	
 			//	Debug.Log("Focused button: " + focusedButton.name);
-				layla.SetPlayerColor(device,focusedButton.GetComponent<Image>().color);
+				Color c = focusedButton.GetComponent<Image>().color;
+				c.a = 1;
+				layla.SetPlayerColor(device,c);
 			}
 			else{
 			LoadScene();

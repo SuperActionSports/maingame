@@ -52,7 +52,7 @@ public class BaseballController : MonoBehaviour {
 			{
 				zForce = Random.Range(-3,3);
 			}
-			ChangeOwnership(1, other.transform.parent.GetComponentInParent<BaseballPlayerController>().c1, new Vector3 (xHit, 10, zForce));
+			ChangeOwnership(1, other.transform.parent.GetComponentInParent<BaseballPlayerController>().color, new Vector3 (xHit, 10, zForce));
 			
 		}
 		else if (other.gameObject.tag == "field") {
