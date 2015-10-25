@@ -7,6 +7,7 @@ public class PaintSplatter : MonoBehaviour {
 	
 	public Transform PaintSprite;
 	public GameObject splatter;
+	public ParticleSystem particles;
 	public Color c;
 	
 	public void Splatter(Vector3 position, Vector3 direction) {	
@@ -35,5 +36,8 @@ public class PaintSplatter : MonoBehaviour {
 			                                               splat.transform.localEulerAngles.y, 
 			                                               Random.Range (0f, 360f));
 		}
+
+		particles.startColor = c;
+		particles.Emit (Mathf.FloorToInt (Random.Range (3f, 8f)));
 	}
 }
