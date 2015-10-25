@@ -24,13 +24,13 @@ public class AdvancedPlayerColorHueSelection2 : MonoBehaviour {
 		try {
 			numOfPlayers = PlayerPrefs.GetInt ("numOfPlayers");
 		}
-		catch (Exception e) {
+		catch {
 			Debug.Log("error loading numOfPlayers");
 		}
 		try {
 			LoadPlayerPref();
 		}
-		catch (Exception e) {
+		catch {
 			Debug.Log("error loading player colors");
 		}
 	}

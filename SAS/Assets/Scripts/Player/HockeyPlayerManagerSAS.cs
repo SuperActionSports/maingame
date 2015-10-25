@@ -65,7 +65,7 @@ using InControl;
 			try{
 				Respawns.GetLength(0);
 			}
-			catch (NullReferenceException e)
+			catch
 			{
 				Debug.Log("You didn't set the Respawns prefab, dingus.");
 			}

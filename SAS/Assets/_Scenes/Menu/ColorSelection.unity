@@ -469,7 +469,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b68f7b8ef4af4556b909f6a2b52861b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  number_of_players: 0
+  number_of_players: 2
   numberOfActivePlayers: 0
   Player_Prefab: {fileID: 0}
   tournament_mode: 0

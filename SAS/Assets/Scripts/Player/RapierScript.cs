@@ -75,7 +75,7 @@ public class RapierScript : MonoBehaviour {
 		ResetColor ();
 		attackCollider.enabled = false;
 		pickUpCollider.enabled = true;
-		Rigidbody rb = GetComponent<Rigidbody> ();
+		//Rigidbody rb = GetComponent<Rigidbody> ();
 		timer = 60f;
 		owner = null;
 	}

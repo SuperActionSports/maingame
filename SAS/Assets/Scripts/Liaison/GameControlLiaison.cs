@@ -450,7 +450,7 @@ public class GameControlLiaison : MonoBehaviour {
 		if (File.Exists (Application.persistentDataPath + "/playerInfo.dat")) {
 			BinaryFormatter bf = new BinaryFormatter();
 			FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-			PlayerData data = (PlayerData)bf.Deserialize(file);
+			//PlayerData data = (PlayerData)bf.Deserialize(file);
 			file.Close();
 
 			//health = data.health;
