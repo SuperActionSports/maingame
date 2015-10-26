@@ -344,6 +344,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11446424, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 19810704, guid: 8c531cb2bacf642a095d1556bc1f531a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
   m_IsPrefabParent: 0
@@ -485,6 +490,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11446424, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 19810704, guid: 8c531cb2bacf642a095d1556bc1f531a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
   m_IsPrefabParent: 0
@@ -575,6 +585,11 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11446424, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 19810704, guid: 8c531cb2bacf642a095d1556bc1f531a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
   m_IsPrefabParent: 0
@@ -768,6 +783,11 @@ Prefab:
       propertyPath: debugKill
       value: 101
       objectReference: {fileID: 0}
+    - target: {fileID: 11446424, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 19810704, guid: 8c531cb2bacf642a095d1556bc1f531a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
   m_IsPrefabParent: 0
@@ -1344,7 +1364,8 @@ Prefab:
     - target: {fileID: 11446424, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
       propertyPath: particles
       value: 
-      objectReference: {fileID: 1533904720}
+      objectReference: {fileID: 19810704, guid: 8c531cb2bacf642a095d1556bc1f531a,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
   m_IsPrefabParent: 0

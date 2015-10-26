@@ -11,7 +11,7 @@ public class GolfClubScript : MonoBehaviour {
 			GolfPlayerController victim = other.GetComponent<GolfPlayerController>();
 			if (victim.alive)
 			{
-				victim.Kill( transform.right*-200f );
+				victim.Kill(transform.right*-200f );
 			}
 		}
 	}
