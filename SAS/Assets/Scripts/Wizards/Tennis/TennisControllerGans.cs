@@ -4,7 +4,7 @@ using InControl;
 
 public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
-	public Color c1;
+	public Color color;
 	private Renderer rend;
 	
 	private GameObject[] respawnPointsTeamA;
@@ -36,8 +36,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
     private TennisInputHandlerGans input;
 
 	public TennisWizard wizard;
-	public Color color;
-	
+
 	// Use this for initialization
 	void Start () {
 		sound =  GetComponent<AudioSource>();
@@ -48,7 +47,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
         input = GetComponent<TennisInputHandlerGans>();
         input.control = this;
         rb = GetComponent<Rigidbody>();
-		rend.material.color = c1;
+		rend.material.color = color;
 		alive = true;
         anim.SetBool("Alive", true);
 		impactMod = 7.5f;
@@ -63,7 +62,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		respawnPointsTeamB = GameObject.FindGameObjectsWithTag ("RespawnPointTeamB");
 
 		paint = GetComponent<PaintSplatter>();
-		paint.color = c1;
+		paint.color = color;
 		hitForce = 25;
     }
     
@@ -74,6 +73,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
         if (alive)
         {
         	input.CheckInput();
+			UpdateColor();
 		}	
 	}
 
@@ -220,12 +220,16 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
 	public bool Alive()
 	{
-		//This is temporary -Gans
-		return false;
+		return alive;
 	}
 
 	public void MovementAllowed(bool val)
 	{
 		//This is temporary -Gans
+	}
+
+	private void UpdateColor()
+	{
+		rend.material.color = color;
 	}
 }

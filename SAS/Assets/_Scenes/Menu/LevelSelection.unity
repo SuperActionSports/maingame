@@ -163,7 +163,7 @@ MonoBehaviour:
   focusedButton: {fileID: 864728341}
   actionSticksName: Fencing
   actionStickEggName: Baeball
-  actionFuzzyEggName: LTM
+  actionFuzzyEggName: Tennis
   hockeyName: Hockey
   actionTinyEggName: Golf
 --- !u!1001 &446498599
@@ -678,7 +678,7 @@ MonoBehaviour:
   level_5: {fileID: 447847261}
   back: {fileID: 1964252695}
   level_1_string: ActionSticks - Matt
-  level_2_string: Tennis_v1
+  level_2_string: nnis
   level_3_string: 
   level_4_string: StickEggTesting
   level_5_string: Hockey-Gans
@@ -1174,7 +1174,8 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: LoadLevel_2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1336692429 stripped
