@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: b3a06638b40a3da4f8d533b01c9b8ea8
+timeCreated: 1445816537
+licenseType: Free
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - playerPrefab: {fileID: 139654, guid: 596cb90036b325a468fd9df6fed2e78a, type: 2}
+  - winnerPlayer: {instanceID: 0}
+  - victory: {instanceID: 0}
+  - layla: {instanceID: 0}
+  - golfBall: {fileID: 153452, guid: 3e0a6d67724128140b8b5f18c0f790ab, type: 2}
+  - hole: {fileID: 154356, guid: 81683b0af31977641b53c110cd63be9d, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

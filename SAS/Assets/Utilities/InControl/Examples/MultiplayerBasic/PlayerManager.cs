@@ -115,7 +115,7 @@ namespace MultiplayerBasicExample
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
 				var player = gameObject.GetComponent<GolfPlayerController>();
 				player.device = inputDevice;
-				player.c1 = Color.cyan;
+				player.color = Color.cyan;
 				players.Add( player );
 
 				return player;

@@ -6,6 +6,7 @@ public class Countdown : MonoBehaviour {
 	// Use this for initialization
 	public IWizard wizard;
 	void Start () {
+	Debug.Log("Wizard: " + GameObject.FindGameObjectWithTag("Wizard"));
 		wizard = GameObject.FindGameObjectWithTag("Wizard").GetComponent<IWizard>();	
 	}
 	

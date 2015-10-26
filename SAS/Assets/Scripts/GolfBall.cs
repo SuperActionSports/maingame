@@ -10,6 +10,7 @@ public class GolfBall : MonoBehaviour {
 	private Rigidbody rb;
 	private Renderer rend;
 	private GameObject playerHitting;
+	public GolfWizard wizard;
 
 	void Start () {
 		rb = GetComponent<Rigidbody>();
@@ -47,6 +48,8 @@ public class GolfBall : MonoBehaviour {
 
 	void OnTriggerEnter(Collider collision) {
 		if (collision.gameObject.tag == "Goal") {
+			wizard.Celebrate(rend.material.color);
+			wizard.ResetBallAndHole();
 			collision.gameObject.transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			rb.velocity = Vector3.zero;

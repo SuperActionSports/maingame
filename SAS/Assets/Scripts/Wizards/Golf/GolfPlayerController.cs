@@ -2,10 +2,10 @@
 using System.Collections;
 using InControl;
 
-public class GolfPlayerController : MonoBehaviour {
+public class GolfPlayerController : MonoBehaviour, IPlayerController {
 
 	// Color variables
-	public Color c1;
+	public Color color;
 	private Renderer[] renderers;
 	private bool colorChangeToUniform;
 	private float colorLerpT;
@@ -30,6 +30,19 @@ public class GolfPlayerController : MonoBehaviour {
 
 	// Generla Game Player variables
 	public bool alive;
+	public bool Alive()
+	{
+		return alive;
+	}
+	private bool movementAllowed;
+	public void MovementAllowed(bool allow)
+	{
+		movementAllowed = allow;
+	}
+	public float respawnTime;
+	private float timeOfDeath;
+	public Vector3 respawnPoint;
+	
 	private Rigidbody rb;
 	public float xDirection;
 	public float zDirection;
@@ -41,6 +54,9 @@ public class GolfPlayerController : MonoBehaviour {
     public OverheadCameraController cam;
 	private AudioSource sound;
     private Animator anim;
+    
+    public GolfWizard wizard;
+
 
 	void Start () {
 		// Get Components and Game Objects
@@ -51,15 +67,17 @@ public class GolfPlayerController : MonoBehaviour {
 		}
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
-		renderers = GetComponentsInChildren<Renderer>();
 		rb = GetComponent<Rigidbody>();
         anim = GetComponent <Animator>();
 		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
         equipmentCollider.enabled = false;
 
 		// Set up color variables
-		foreach (Renderer rend in renderers) {
-			if (rend.material.name == "PlayerMaterial") rend.material.color = c1;
+		GetComponent<Renderer>().material.color = color;
+		SetColorToParent[] kids = GetComponentsInChildren<SetColorToParent>();
+		Debug.Log("Kids length: " + kids.Length);
+		foreach (SetColorToParent s in kids) {
+			s.ResetColor(color);
 		}
 		colorChangeToUniform = false;
 		colorLerpT = 0;
@@ -77,7 +95,7 @@ public class GolfPlayerController : MonoBehaviour {
     
 
 	void Update () {
-        if (alive)
+        if (alive && movementAllowed)
         {
 			// Reset velocity to 0
         	rb.velocity = new Vector3(0,0,0);
@@ -126,7 +144,11 @@ public class GolfPlayerController : MonoBehaviour {
 		}	
 
 		// Update player color and respawn player if necessary
-		UpdateColor();
+		
+		else if (Time.time >= timeOfDeath + respawnTime)
+		{
+			Respawn();
+		}
 		GetRespawn();
 	}
 	
@@ -154,6 +176,8 @@ public class GolfPlayerController : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
+        device.Vibrate(10);
+        timeOfDeath = Time.time;
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -199,25 +223,39 @@ public class GolfPlayerController : MonoBehaviour {
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
         //Debug.Log("Length: " + respawnPoints.Length);
-        transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
-        colorChangeToUniform = true;
+        transform.position = respawnPoint;
     }
+	
+	private bool AttackButtonsDown()
+	{
+		return device == null ? Input.GetKeyDown(attack) : (device.LeftTrigger.WasPressed || device.RightTrigger.WasPressed);
+	}
+	
+	private bool AttackButtonsUp()
+	{
+		return device == null ? Input.GetKeyUp(attack) : (device.LeftTrigger.WasReleased || device.RightTrigger.WasReleased);
+	}
+	
+	private bool AttackButtons()
+	{
+		return device == null ? Input.GetKey(attack) : (device.LeftTrigger || device.RightTrigger);
+	}
 	
 	private void GetAttacking(bool putting, bool CanHitBall)
 	{
 		if (putting) {
-			if (Input.GetKeyDown (attack) && !swinging) {
+			if (AttackButtonsDown() && !swinging) {
 				BackSwing ();
 			}
-			else if (Input.GetKey (attack) && swinging) {
+			else if (AttackButtons() && swinging) {
 				BackSwing ();
 			}
-			else if (Input.GetKeyUp (attack) && swinging) {
+			else if (AttackButtonsUp() && swinging) {
 				Swing ();
 			}
 		} 
 		else {
-			if (Input.GetKeyDown (attack) || (device != null && (device.LeftTrigger || device.RightTrigger))) {
+			if (AttackButtonsDown()) {
 				if (CanHitBall && !ball.beingHit) {
 					StartPutting ();
 				} else {
@@ -281,7 +319,7 @@ public class GolfPlayerController : MonoBehaviour {
 		putting = false;
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
-		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, c1);
+		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, color);
 	}
     
     private float GetXVelocity()
@@ -337,13 +375,13 @@ public class GolfPlayerController : MonoBehaviour {
 			colorLerpT += Time.deltaTime;
 			foreach (Renderer rend in renderers) {
 				if (colorChangeToUniform && alive) {
-					rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), c1, colorLerpT);
+					rend.material.color = Color.Lerp (new Color (0, 0, 0, 0), color, colorLerpT);
 					if (colorLerpT >= 1) {
 						colorChangeToUniform = false;
 						colorLerpT = 0;
 					}
 				} else {
-					rend.material.color = Color.Lerp (c1, new Color (0, 0, 0, 0), colorLerpT);
+					rend.material.color = Color.Lerp (color, new Color (0, 0, 0, 0), colorLerpT);
 					if (colorLerpT >= 1) {
 						if (alive) {
 							colorChangeToUniform = true;

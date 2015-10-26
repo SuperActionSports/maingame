@@ -467,6 +467,7 @@ public class Team {
 	public Vector3[] respawn_points;
 }
 
+[Serializable]
 public class Player
 {
 	public int number;

@@ -24,7 +24,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		return alive;
 	}
 	public float respawnTime;
-	private float deathTime;
+	private float timeOfDeath;
 	public bool movementAllowed;
 	public void MovementAllowed(bool allowed)
 	{
@@ -76,6 +76,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		impactMod = 7.5f;
         GetComponent<Renderer>().material.color = color;
 		paint = GetComponent<PaintSplatter>();
+		
 		//paint.color = color;
     }
     
@@ -116,7 +117,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			GetAttacking();
 			//CheckAnimStateForAttacking();
 		}
-		else if (Time.time >= deathTime + respawnTime)
+		else if (Time.time >= timeOfDeath + respawnTime)
 		{
 			Respawn();
 		}
@@ -156,7 +157,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
-        deathTime = Time.time;
+        timeOfDeath = Time.time;
     }
 	
 	private void CheckAnimStateForAttacking()
