@@ -11,6 +11,7 @@ GameObject:
   - 33: {fileID: 3301926}
   - 136: {fileID: 13675924}
   - 23: {fileID: 2304810}
+  - 114: {fileID: 11484618}
   m_Layer: 0
   m_Name: Body
   m_TagString: Player
@@ -29,6 +30,7 @@ GameObject:
   - 33: {fileID: 3321836}
   - 135: {fileID: 13567492}
   - 23: {fileID: 2303438}
+  - 114: {fileID: 11400078}
   m_Layer: 0
   m_Name: BatHand
   m_TagString: Equipment
@@ -78,7 +80,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &198430
 GameObject:
-  m_ObjectHideFlags: 1
+  m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -87,6 +89,7 @@ GameObject:
   - 33: {fileID: 3323338}
   - 135: {fileID: 13530864}
   - 23: {fileID: 2372406}
+  - 114: {fileID: 11415388}
   m_Layer: 0
   m_Name: Empty Hand
   m_TagString: Untagged
@@ -114,10 +117,10 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 198430}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .949999988, y: -.0257047061, z: -.0260000005}
-  m_LocalScale: {x: .5, y: .5, z: .5}
+  m_LocalPosition: {x: .474999994, y: 2.21227288, z: -.0129999993}
+  m_LocalScale: {x: .25, y: 1.42857146, z: .25}
   m_Children: []
-  m_Father: {fileID: 444074}
+  m_Father: {fileID: 495800}
   m_RootOrder: 1
 --- !u!4 &431166
 Transform:
@@ -142,7 +145,6 @@ Transform:
   m_LocalScale: {x: .5, y: 2.85714293, z: .5}
   m_Children:
   - {fileID: 401896}
-  - {fileID: 415862}
   m_Father: {fileID: 495800}
   m_RootOrder: 0
 --- !u!4 &495800
@@ -152,10 +154,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 17.1000004, y: 2.75999999, z: 0}
+  m_LocalPosition: {x: -64.508194, y: 25.2303181, z: -20.7145786}
   m_LocalScale: {x: 10, y: 1.75, z: 10}
   m_Children:
   - {fileID: 444074}
+  - {fileID: 415862}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!23 &2303438
@@ -357,6 +360,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11400078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 133162}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trc: {r: 0, g: 0, b: 0, a: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11401150
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -368,6 +384,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad513b9f2e8b4dc7ad0dcc1908b8aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11415388
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 198430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trc: {r: 0, g: 0, b: 0, a: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11478544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -376,32 +405,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 141112}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8c039d5cdd8d418c9884c311c02bcf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 349b994ba56fd9d4f8b0ed8151d994a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  c1: {r: .941176474, g: .0276816878, b: .0276816878, a: 0}
-  left: 97
-  right: 100
-  up: 119
-  down: 115
-  attack: 32
-  debugKill: 101
-  lookLeft: 276
-  lookRight: 275
-  lookUp: 273
-  lookDown: 274
+  color: {r: 0, g: 0, b: 0, a: 0}
+  left: 0
+  right: 0
+  up: 0
+  down: 0
+  attack: 0
+  debugKill: 0
+  lookLeft: 0
+  lookRight: 0
+  lookUp: 0
+  lookDown: 0
+  respawnPoint: {x: 0, y: 0, z: 0}
+  respawnTime: 0
   alive: 0
   xDirection: 0
   zDirection: 0
   xLookDirection: 0
   zLookDirection: 0
-  walkSpeed: 6
-  maxSpeed: 60
-  friction: .970000029
+  walkSpeed: 0
+  maxSpeed: 0
+  friction: 0
   respawnPoints: []
   equipmentCollider: {fileID: 0}
   cam: {fileID: 0}
+  wizard: {fileID: 0}
   vel: {x: 0, y: 0, z: 0}
+--- !u!114 &11484618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 116578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19c352e381f6b3d44b354a0e7a899285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trc: {r: 0, g: 0, b: 0, a: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &13530864
 SphereCollider:
   m_ObjectHideFlags: 1

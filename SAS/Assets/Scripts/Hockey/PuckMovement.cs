@@ -11,30 +11,41 @@ public class PuckMovement : MonoBehaviour {
 	public bool inPlay;
 	public GameObject respawnPoint;
 	public InputDevice device {get; set;}
-
+	public FencingWizard wizard;
+	private float timeOfGoal;
+	public float respawnDelay;
+	private bool willRespawn;
+	
 	// Use this for initialization
 	void Start () {
 		inPlay = true;
-		respawnPoint = GameObject.Find("Puck RespawnPoint");
+		
 		rb = GetComponent<Rigidbody> ();
 		if (respawnPoint == null)
 		{
 			Debug.Log("There aren't any respawn points, you catastrophic dingus.");
 		}
+		willRespawn = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//GetRespawn();
+		if (willRespawn && timeOfGoal + respawnDelay < Time.time)
+		{
+			Respawn();
+			willRespawn = false;
+		}
 	}
 
 	void OnTriggerEnter (Collider col)
 	{
 		if (inPlay == true) {
-			if (col.gameObject.name == "Inner West Net" || col.gameObject.name == "Inner East Net") {
+			if (col.gameObject.CompareTag("Goal")) {
 				Debug.Log ("Goal Scored");
 				inPlay = false;
-				Respawn();
+				timeOfGoal = Time.time;
+				willRespawn = true;
+				//Respawn();
 			}
 		}
 	}
