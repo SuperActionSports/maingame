@@ -14,43 +14,61 @@ public class PaintSplatter : MonoBehaviour {
 	public Vector3 dir;
 	
 	public void Splatter(Vector3 position, Vector3 direction) {	
-		particles = psHolder.GetComponentInChildren<ParticleSystem> ();
 		c.a = 1f;
 		pos = position;
 		dir = direction;
-		direction.x = 0;
+
+		CreateParticleSystem ();
+
+		GenerateSplats ();
+	}
+
+	public void CreateParticleSystem()
+	{
+		GameObject pSystem = Instantiate (psHolder, pos, Quaternion.identity) as GameObject;
+		particles = pSystem.GetComponentInChildren<ParticleSystem>();
+		particles.startColor = c;
+		
+		Debug.Log ("Direction: " + dir);
+		pSystem.transform.rotation = Quaternion.LookRotation (dir);
+	}
+
+	public void GenerateSplats()
+	{
 		RaycastHit hit;
-		Physics.Raycast (position, direction, out hit);
-
+		Physics.Raycast (pos, dir, out hit);
+		
 		GameObject target = hit.collider.gameObject;
-		GameObject splat = null;
 
-		if (target.CompareTag("Stage")) {
+		int amountOfSplats = Random.Range (1, 4);
+		GameObject[] splats = new GameObject[amountOfSplats];
+		Debug.Log ("amountOfSplats: " + amountOfSplats);
+		
+		for (int i = 0; i < amountOfSplats; i++) 
+		{
+			float zSpot = Random.Range (hit.point.z - 1f, hit.point.z + 1f);
 			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
-			splat = Instantiate (splatter, hit.point, splatRotation) as GameObject;
-			splat.transform.localEulerAngles = new Vector3(90, 0, 0);
+			splats[i] = Instantiate (splatter, new Vector3(hit.point.x, hit.point.y, zSpot), splatRotation) as GameObject;
+
+			Debug.Log ("Hit.point: " + hit.point);
+
+			if (target.CompareTag ("Stage")) 
+			{
+				splats[i].transform.localEulerAngles = new Vector3 (90, 0, 0);
+			} 
+			else if (target.CompareTag ("Wall")) 
+			{
+				splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0);
+			}
+			
+			if (splats[i] != null) {
+				splats[i].GetComponent<SpriteRenderer> ().color = c;
+				splats[i].transform.localScale = new Vector3 (Random.Range (0.1f, 2f), Random.Range (0.1f, 2f), Random.Range (0.1f, 2f));	
+				splats[i].transform.localEulerAngles = new Vector3 (splats[i].transform.localEulerAngles.x,
+				                                                    splats[i].transform.localEulerAngles.y, 
+				                                                    Random.Range (0f, 360f));
+			}
 		}
-		else if (target.CompareTag("Wall")) {
-			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
-			splat = Instantiate (splatter, hit.point, splatRotation) as GameObject;
-			splat.transform.localEulerAngles = new Vector3(0, 0, 0);
-		}
-		GameObject pSystem = Instantiate(psHolder, position, Quaternion.identity) as GameObject;
-
-		Debug.Log ("Direction: " + direction);
-		pSystem.transform.rotation = Quaternion.LookRotation (direction);
-
-		if (splat != null) {
-			splat.GetComponent<SpriteRenderer>().color = c;
-			splat.transform.localScale = new Vector3 (Random.Range (0.1f, 2f), Random.Range (0.1f, 2f), Random.Range (0.1f, 2f));	
-			splat.transform.localEulerAngles = new Vector3(splat.transform.localEulerAngles.x,
-			                                               splat.transform.localEulerAngles.y, 
-			                                               Random.Range (0f, 360f));
-		}
-
-		//particles.startColor = c;
-		//particles.Emit (Mathf.FloorToInt (Random.Range (3f, 8f)));
-
 	}
 
 	void OnDrawGizmos()

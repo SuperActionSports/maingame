@@ -362,15 +362,6 @@
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
-<<<<<<< Updated upstream
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
- </Reference>
- <Reference Include="KDTree">
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
-=======
  <HintPath>/Users/austingrosel/Documents/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
@@ -378,7 +369,6 @@
  </Reference>
  <Reference Include="KDTree">
  <HintPath>/Users/austingrosel/Documents/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
->>>>>>> Stashed changes
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>/Applications/Unity/Unity.app/Contents/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
