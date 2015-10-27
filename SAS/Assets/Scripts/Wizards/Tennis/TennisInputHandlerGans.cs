@@ -38,6 +38,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	
 	// Update is called once per frame
 	public void CheckInput () {
+		Debug.Log ("Checking for input");
 		float moveMod = 1;
 		if (WindingUp()) 
 		{

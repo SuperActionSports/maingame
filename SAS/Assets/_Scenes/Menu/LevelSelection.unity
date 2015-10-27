@@ -163,7 +163,7 @@ MonoBehaviour:
   focusedButton: {fileID: 864728341}
   actionSticksName: Fencing
   actionStickEggName: Baeball
-  actionFuzzyEggName: LTM
+  actionFuzzyEggName: Tennis
   hockeyName: Hockey
   actionTinyEggName: Golf
 --- !u!1001 &446498599
@@ -435,7 +435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115efc1be0f4b4c169499c8ffb6e54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 0}
+  up: {fileID: 603206727}
   down: {fileID: 1620575514}
   left: {fileID: 864728341}
   right: {fileID: 712907928}
@@ -678,7 +678,7 @@ MonoBehaviour:
   level_5: {fileID: 447847261}
   back: {fileID: 1964252695}
   level_1_string: ActionSticks - Matt
-  level_2_string: Tennis_v1
+  level_2_string: nnis
   level_3_string: 
   level_4_string: StickEggTesting
   level_5_string: Hockey-Gans
@@ -1170,7 +1170,12 @@ Prefab:
       propertyPath: m_Name
       value: Action Fuzzy Egg!
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: LoadLevel_2
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1336692429 stripped
