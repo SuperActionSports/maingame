@@ -8,7 +8,7 @@ public class StatsCard : MonoBehaviour {
 	public float teamBScore;
 
 	void Start () {
-		HardResetStats ();
+		ResetStats ();
 	}
 
 	public void ResetIndividualScore()	{
@@ -28,7 +28,7 @@ public class StatsCard : MonoBehaviour {
 		teamBScore = 0;
 	}
 
-	public void HardResetStats()	{
+	public void ResetStats()	{
 		ResetIndividualScore ();
 		ResetTeamScores ();
 		ResetIndividualStats ();

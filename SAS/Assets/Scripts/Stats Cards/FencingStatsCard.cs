@@ -22,7 +22,7 @@ public class FencingStatsCard : StatsCard {
 	public float rearmed;
 	public float unarmedTime;
 	
-	public void ResetStats () {
+	public void HardResetStats () {
 		ResetStabAttempts();
 		ResetStabKills();
 		ResetStabAccuracy ();
@@ -37,6 +37,7 @@ public class FencingStatsCard : StatsCard {
 		ResetBlockSuccessRate ();
 		ResetLongestTimeUnarmed();
 		ResetShortestTimeUnarmed ();
+		ResetStats ();
 	}
 	
 	public void AddStabAttempts (){

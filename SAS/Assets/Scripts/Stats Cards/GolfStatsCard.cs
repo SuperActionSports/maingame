@@ -10,12 +10,13 @@ public class GolfStatsCard : StatsCard {
 	//public float ShortestPutt;
 	public float Accuracy;
 	
-	public void ResetStats() {
+	public void HardResetStats() {
 		ResetAttemptedPutts ();
 		ResetMadePutts ();
 		//ResetLongestPutt();
 		//ResetShortestPutt();
 		ResetAccuracy ();
+		ResetStats ();
 	}
 	
 	public void AddAttemptedPutt()	{

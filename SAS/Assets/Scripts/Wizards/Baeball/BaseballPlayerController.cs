@@ -58,6 +58,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	public float speedMagnitude;
 	[Range(20,60)]
 	public float jumpMagnitude;
+
+	public BaseballStatsCard stats;
 	// Use this for initialization
 	void Start () {
 	 	sound =  GetComponent<AudioSource>();
@@ -76,7 +78,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		impactMod = 7.5f;
         GetComponent<Renderer>().material.color = color;
 		paint = GetComponent<PaintSplatter>();
-		
+		stats.ResetStats ();
 		//paint.color = color;
     }
     
@@ -94,6 +96,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			if (transform.position.y > 1.6f)
 			{
 				anim.SetBool("Jumping",true);
+				stats.AddJump();
 			}
 			else 
 			{
@@ -145,7 +148,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			MakeDead();
 			else
 			Respawn();
-		} 
+		}
+
 	}
 
 	private void MakeDead()
@@ -158,6 +162,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
         timeOfDeath = Time.time;
+		stats.EndLifeTime ();
+		stats.AddDeath ();
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -194,6 +200,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         anim.SetBool("Alive", true);
         //Debug.Log("Length: " + respawnPoints.Length);
         transform.position = respawnPoint;
+		stats.StartLifeTime ();
     }
 	
 	private void GetAttacking()
@@ -215,6 +222,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			bat.Play ();
 		}
 		anim.SetTrigger("Attack");
+		stats.AddAttemptedHit ();
     }
 
 	public void StartAttack()

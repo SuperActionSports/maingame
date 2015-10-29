@@ -8,10 +8,11 @@ public class TennisStatsCard : StatsCard {
 	public int Contact; //Swings that hit the ball not other players
 	public float Accuracy;
 	
-	public void ResetStats() {
+	public void HardResetStats() {
 		ResetSwings ();
 		ResetContact();
 		ResetAccuracy ();
+		ResetStats ();
 	}
 	
 	public void AddSwing()	{

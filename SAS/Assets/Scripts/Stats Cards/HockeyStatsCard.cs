@@ -6,8 +6,9 @@ public class HockeyStatsCard : StatsCard {
 	/*--------------------HOCKEY--------------------*/
 	public float PuckPossession; //Increases Everytime the player touches the puck
 	
-	public void ResetStats () {
+	public void HardResetStats () {
 		ResetPuckPossession ();
+		ResetStats ();
 	}
 	
 	public void AddPuckPossession() {

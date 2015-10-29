@@ -9,11 +9,12 @@ public class BaseballStatsCard : StatsCard {
 	//public int longestHit;
 	public float ERA;
 	
-	public void ResetStats() {
+	public void HardResetStats() {
 		ResetHitsAttempted ();
 		ResetHitsMade ();
 		//ResetLongestHit ();
 		ResetERA ();
+		ResetStats ();
 	}
 	
 	public void AddAttemptedHit () {
