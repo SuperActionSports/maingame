@@ -163,8 +163,8 @@ public class StatsCard : MonoBehaviour {
 	/*--------------------GOLF--------------------*/
 	public int golf_PuttsAttempted;
 	public int golf_PuttsMade;
-	//public int golf_longestPutt;
-	//public int golf_ShortestPutt;
+	//public float golf_longestPutt;
+	//public float golf_ShortestPutt;
 	public float golf_Accuracy;
 
 	public void Golf_ResetStats() {
@@ -249,7 +249,7 @@ public class StatsCard : MonoBehaviour {
 	/*--------------------TENNIS--------------------*/
 	public int tennis_Swings;
 	public int tennis_Contact; //Swings that hit the ball not other players
-	public int tennis_Accuracy;
+	public float tennis_Accuracy;
 
 	public void Tennis_ResetStats() {
 		Tennis_ResetSwings ();
@@ -373,16 +373,16 @@ public class StatsCard : MonoBehaviour {
 	/*--------------------FENCING--------------------*/
 	public int fencing_StabAttempts;
 	public int fencing_StabKills;
-	public int fencing_StabAccuracy;
+	public float fencing_StabAccuracy;
 	public int fencing_ThrowAttempts;
 	public int fencing_ThrowKills;
-	public int fencing_ThrowAccuracy;
+	public float fencing_ThrowAccuracy;
 	public int fencing_AttackAttempts;
 	public int fencing_AttacksSuccessful;
-	public int fencing_AttackSuccessRate;
+	public float fencing_AttackSuccessRate;
 	public int fencing_BlockAttempts;
 	public int fencing_BlocksSuccessful;
-	public int fencing_BlockSuccessRate;
+	public float fencing_BlockSuccessRate;
 	public float fencing_LongestTimeUnarmed;
 	public float fencing_ShortestTimeUnarmed;
 	public float fencing_unarmed;
@@ -571,7 +571,7 @@ public class StatsCard : MonoBehaviour {
 	/*--------------------END FENCING--------------------*/
 
 	/*--------------------HOCKEY--------------------*/
-	public int hockey_PuckPossession; //Increases Everytime the player touches the puck
+	public float hockey_PuckPossession; //Increases Everytime the player touches the puck
 
 	public void Hockey_ResetStats () {
 		Hockey_ResetPuckPossession ();
