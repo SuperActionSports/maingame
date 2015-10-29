@@ -128,8 +128,13 @@
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballLauncher.cs" />
-     <Compile Include="Assets\Scripts\Stats Cards\GolfStatsCard-Deprecated.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\BaseballStatsCard.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\FencingStatsCard.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\GolfStatsCard.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\HockeyStatsCard.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\StatsCard.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\StatsCardDeprecated.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\TennisStatsCard.cs" />
      <Compile Include="Assets\Scripts\Tennis\BallMovement.cs" />
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
