@@ -4,14 +4,22 @@ using System.Collections;
 public class StatsCard : MonoBehaviour {
 
 	public int kills;
+	public int Kills{get { return kills; } }
 	public int deaths;
+	public int Deaths{get { return deaths; } }
 	public int jumps;
+	public int Jumps{get { return jumps; } }
 	public int attemptedAttacks;
+	public int AttemptedAttacks{get { return kills; } }
 	public int killStreak;
 	public int longestKillStreak;
+	public int LongestKillStreak{get { return longestKillStreak; } }
+	public float KillDeathRatio() { return ((float)(kills)/deaths); } 
 	//public float distanceRan;
 	public float longestTimeAlive;
+	public int LongestTimeAlive{get { return longestTimeAlive; } }
 	public float shortestTimeAlive;
+	public int ShortestTimeAlive{get { return shortestTimeAlive; } }
 
 	public float birth;
 	public float death;
