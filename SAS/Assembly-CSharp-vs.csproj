@@ -118,9 +118,7 @@
      <Compile Include="Assets\Scripts\Player\EquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Player\EquipmentThrow.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyEquipmentScript.cs" />
-     <Compile Include="Assets\Scripts\Player\HockeyPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\HockeyPlayerManagerSAS.cs" />
-     <Compile Include="Assets\Scripts\Player\HockeyTempPlayerController.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerControllerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInputHandlerMatt.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerManagerSASTennis.cs" />
@@ -131,6 +129,7 @@
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballLauncher.cs" />
+     <Compile Include="Assets\Scripts\Stats Cards\StatsCard.cs" />
      <Compile Include="Assets\Scripts\Tennis\BallMovement.cs" />
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
@@ -144,6 +143,8 @@
      <Compile Include="Assets\Scripts\Wizards\Golf\GolfClubScript.cs" />
      <Compile Include="Assets\Scripts\Wizards\Golf\GolfPlayerController.cs" />
      <Compile Include="Assets\Scripts\Wizards\Golf\GolfWizard.cs" />
+     <Compile Include="Assets\Scripts\Wizards\Hockey\HockeyPlayerController.cs" />
+     <Compile Include="Assets\Scripts\Wizards\Hockey\HockeyWizard.cs" />
      <Compile Include="Assets\Scripts\Wizards\Tennis\TennisControllerGans.cs" />
      <Compile Include="Assets\Scripts\Wizards\Tennis\TennisInputHandlerGans.cs" />
      <Compile Include="Assets\Scripts\Wizards\Tennis\TennisWizard.cs" />
