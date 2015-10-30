@@ -10,71 +10,65 @@ public class PaintSplatter : MonoBehaviour {
 	public GameObject psHolder;
 	public ParticleSystem particles;
 	public Color c;
-	public Vector3 pos;
-	public Vector3 dir;
 	
 	public void Splatter(Vector3 position, Vector3 direction) {	
+		// Set the color's alpha to 1 so it appears as a solid color
 		c.a = 1f;
-		pos = position;
-		dir = direction;
-
-		CreateParticleSystem ();
-
-		GenerateSplats ();
+		//dir = new Vector3(direction.x+Random.Range (-15f, 15f), direction.y-10f, direction.z+Random.Range (-15f, 15f));
+		//direction = new Vector3 (direction.x, direction.y, direction.z);
+		
+		CreateParticleSystem (position, direction);
+		GenerateSplats (position, direction);
 	}
 
-	public void CreateParticleSystem()
+	public void CreateParticleSystem(Vector3 position, Vector3 direction)
 	{
-		GameObject pSystem = Instantiate (psHolder, pos, Quaternion.identity) as GameObject;
+		GameObject pSystem = Instantiate (psHolder, position, Quaternion.identity) as GameObject;
 		particles = pSystem.GetComponentInChildren<ParticleSystem>();
 		particles.startColor = c;
 		
-		Debug.Log ("Direction: " + dir);
-		pSystem.transform.rotation = Quaternion.LookRotation (dir);
+		Debug.Log ("Direction: " + direction);
+		pSystem.transform.rotation = Quaternion.LookRotation (direction);
 	}
-
-	public void GenerateSplats()
+	
+	public void GenerateSplats(Vector3 position, Vector3 direction)
 	{
 		RaycastHit hit;
-		Physics.Raycast (pos, dir, out hit);
-		
+		Physics.Raycast (position, direction, out hit);
 		GameObject target = hit.collider.gameObject;
-
-		int amountOfSplats = Random.Range (1, 4);
+		
+		//int amountOfSplats = Random.Range (1, 4);
+		int amountOfSplats = 1;
 		GameObject[] splats = new GameObject[amountOfSplats];
 		Debug.Log ("amountOfSplats: " + amountOfSplats);
 		
-		for (int i = 0; i < amountOfSplats; i++) 
-		{
-			float zSpot = Random.Range (hit.point.z - 1f, hit.point.z + 1f);
+		for (int i = 0; i < amountOfSplats; i++)  {
+			// stop tecxture flickering by moving splats up pout of surface
+			var splatLocation = hit.point+hit.normal*.1f;
 			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
-			splats[i] = Instantiate (splatter, new Vector3(hit.point.x, hit.point.y, zSpot), splatRotation) as GameObject;
-
-			Debug.Log ("Hit.point: " + hit.point);
-
+			
+			// Instantiate paint splat
+			splats[i] = Instantiate(splatter, splatLocation, splatRotation) as GameObject;
+			
+			
 			if (target.CompareTag ("Stage")) 
 			{
 				splats[i].transform.localEulerAngles = new Vector3 (90, 0, 0);
 			} 
 			else if (target.CompareTag ("Wall")) 
 			{
-				splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0);
+				if (Mathf.Abs (hit.normal.z) > Mathf.Abs (hit.normal.x)) { splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0); }
 			}
 			
 			if (splats[i] != null) {
 				splats[i].GetComponent<SpriteRenderer> ().color = c;
-				splats[i].transform.localScale = new Vector3 (Random.Range (0.1f, 2f), Random.Range (0.1f, 2f), Random.Range (0.1f, 2f));	
+				// Set a semi-random scale and rotation of the object
+				splats[i].transform.localScale = new Vector3 (Random.Range (1f, 2f), Random.Range (1f, 2f), Random.Range (1f, 2f));	
 				splats[i].transform.localEulerAngles = new Vector3 (splats[i].transform.localEulerAngles.x,
 				                                                    splats[i].transform.localEulerAngles.y, 
 				                                                    Random.Range (0f, 360f));
 			}
 		}
 	}
-
-	void OnDrawGizmos()
-	{
-		Gizmos.color = Color.red;
-		Gizmos.DrawRay (pos, dir);
-	}
-
+	
 }
