@@ -56,9 +56,11 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
     private Animator anim;
     
     public GolfWizard wizard;
+	public GolfStatsCard stats;
 
 
 	void Start () {
+		stats = new GolfStatsCard ();
 		// Get Components and Game Objects
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
 		if (respawnPoints.Length == 0)
@@ -91,6 +93,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		// Set up Golf specific variables
 		swinging = false;
 		putting = false;
+		stats.ResetStats ();
     }
     
 
@@ -178,6 +181,8 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         anim.SetBool("Alive", false);
         device.Vibrate(10);
         timeOfDeath = Time.time;
+		stats.EndLifeTime ();
+		stats.AddDeath ();
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -224,6 +229,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         anim.SetBool("Alive", true);
         //Debug.Log("Length: " + respawnPoints.Length);
         transform.position = respawnPoint;
+		stats.StartLifeTime ();
     }
 	
 	private bool AttackButtonsDown()
@@ -268,6 +274,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	private void Attack()
     {
 		anim.SetBool("Attack", true);
+		stats.AddAttemptedAttack ();
     }
     
     private void StartAttacking()
@@ -294,6 +301,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 
 		putting = true;
 		(ball as GolfBall).beingHit = true;
+		stats.AddAttemptedPutt ();
 
 	}
 
@@ -319,7 +327,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		putting = false;
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
-		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, color);
+		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, this);
 	}
     
     private float GetXVelocity()

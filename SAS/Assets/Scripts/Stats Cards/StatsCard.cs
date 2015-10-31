@@ -3,6 +3,43 @@ using System.Collections;
 
 public class StatsCard : MonoBehaviour {
 
+	public float individualScore;
+	public float teamAScore;
+	public float teamBScore;
+
+	void Start () {
+		ResetStats ();
+	}
+
+	public void ResetIndividualScore()	{
+		individualScore = 0;
+	}
+
+	public void ResetTeamScores()	{
+		ResetTeamAScore ();
+		ResetTeamBScore ();
+	}
+
+	public void ResetTeamAScore()	{
+		teamAScore = 0;
+	}
+
+	public void ResetTeamBScore()	{
+		teamBScore = 0;
+	}
+
+	public void ResetStats()	{
+		ResetIndividualScore ();
+		ResetTeamScores ();
+		ResetIndividualStats ();
+		//Golf_ResetStats ();
+		//Tennis_ResetStats ();
+		//Baseball_ResetStats ();
+		//Fencing_ResetStats ();
+		//Hockey_ResetStats ();
+	}
+
+	/*--------------------ALL GAMES--------------------*/
 	public int kills;
 	public int deaths;
 	public int jumps;
@@ -81,14 +118,28 @@ public class StatsCard : MonoBehaviour {
 		//distanceRan = 0;
 		longestTimeAlive = 0;
 		shortestTimeAlive = 0;
+	public float kDRatio;
+
+	public void ResetIndividualStats()	{
+		ResetKills ();
+		ResetDeaths ();
+		ResetJumps ();
+		ResetAttemptedAttack ();
+		ResetlongestKillStreak ();
+		//ResetDistanceRan ();
+		ResetLongestTimeAlive ();
+		ResetShortestTimeAlive ();
+		ResetKDRatio ();
 	}
 
 	public void AddKill()	{
 		kills++;
 		killStreak++;
+		AddAttemptedAttack ();
+		CalculateKDRatio ();
 	}
 
-	public void ResetKills()	{
+	public void ResetKills() {
 		kills = 0;
 		ResetkillStreak ();
 	}
@@ -99,6 +150,7 @@ public class StatsCard : MonoBehaviour {
 			longestKillStreak = killStreak;
 		}
 		ResetkillStreak ();
+		CalculateKDRatio ();
 	}
 
 	public void ResetDeaths()	{
@@ -156,6 +208,37 @@ public class StatsCard : MonoBehaviour {
 		stats[2] = new Statistic("K/D", KillDeathRatio(), false);
 		stats[3] = new Statistic("LONGEST LIFE", LongestTimeAlive, true);
 	}
+
+	public void ResetLongestTimeAlive() {
+		longestTimeAlive = 0;
+	}
+
+	public void ResetShortestTimeAlive() {
+		shortestTimeAlive = -1;
+	}
+
+	public void CalculateKDRatio() {
+		kDRatio = (float)kills / (float)deaths;
+	}
+
+	public void ResetKDRatio() {
+		kDRatio = 0;
+	}
+
+	/*
+	public void CalculateDistanceRan() {
+		//Calculate
+	}
+	*/
+
+	/*
+	public void ResetDistanceRan() {
+		//Calculate
+	}
+	*/
+
+	/*--------------------END ALL GAMES--------------------*/
+
 }
 
 public class Statistic 
