@@ -20,7 +20,7 @@ public class BaseballStatsCard : StatsCard {
 	public void AddAttemptedHit () {
 		HitsAttempted++;
 		CalculateBattingAverage ();
-		Debug.Log ("Added attempted hit. Total attempted hits: " + HitsAttempted);
+		//Debug.Log ("Added attempted hit. Total attempted hits: " + HitsAttempted);
 	}
 	
 	public void ResetHitsAttempted() {
@@ -30,7 +30,8 @@ public class BaseballStatsCard : StatsCard {
 	public void AddMadeHit () {
 		HitsMade++;
 		AddAttemptedHit ();
-		Debug.Log ("Added made hit. Total hits made: " + HitsMade);
+		//Debug.Log ("Added made hit. Total hits made: " + HitsMade);
+		PrintStats ();
 	}
 	
 	public void ResetHitsMade() {
@@ -38,11 +39,11 @@ public class BaseballStatsCard : StatsCard {
 	}
 	
 	public void CalculateBattingAverage()	{
-		Debug.Log ("stats card before calculation: " + HitsMade + " / " + HitsAttempted);
+		//Debug.Log ("stats card before calculation: " + HitsMade + " / " + HitsAttempted);
 		if (HitsAttempted != 0) {
 			BattingAverage = (float)HitsMade / (float)HitsAttempted;
 		}
-		Debug.Log ("Current batting average: " + BattingAverage);
+		//Debug.Log ("Current batting average: " + BattingAverage);
 	}
 	
 	public void ResetBattingAverage()	{
@@ -76,6 +77,13 @@ public class BaseballStatsCard : StatsCard {
 		//Calculate
 	}
 	*/
+
+	public void PrintStats() {
+		Debug.Log ("Kills: " +kills+ " Deaths: " +deaths+ " Jumps: " +jumps+ " Attempted Attacks: " +attemptedAttacks+ 
+		           " Kill Streak: " +killStreak+ " Longest Kill Streak: " +longestKillStreak+ " Longest Time Alive: " +longestTimeAlive+ 
+		           " Shortest Time Alive: " +shortestTimeAlive+ " Kill/Death Ratio: " +kDRatio+ " Attempted Hits: " +HitsAttempted+ 
+		           " Hits Made: " +HitsMade+ " Batting Average: " +BattingAverage);
+	}
 	
 	/*--------------------END BASEBALL--------------------*/
 }

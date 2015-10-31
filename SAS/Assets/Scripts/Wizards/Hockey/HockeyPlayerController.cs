@@ -55,11 +55,13 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	private Animator anim;
 	
 	public HockeyWizard wizard;
+	public HockeyStatsCard stats;
 
 	//debug
 	public Vector3 vel;
 
 	void Start () {
+		stats = new HockeyStatsCard ();
 		// Get Components and Game Objects
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
@@ -84,7 +86,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		ResetRigidBodyConstraints();
 		walkSpeed = 10;
 		maxSpeed = 80;
-
+		stats.ResetStats ();
     }
 
 	void Update () {
@@ -142,6 +144,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	private void Attack()
 	{
 		anim.SetBool("Attack", true);
+		stats.AddAttemptedAttack ();
 	}
 	
 	private void StartAttacking()
@@ -174,6 +177,8 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		alive = false;
         rb.constraints = RigidbodyConstraints.None;
 		anim.SetBool ("Alive", false);
+		stats.EndLifeTime ();
+		stats.AddDeath ();
     }
 	
 	public void Kill()
@@ -194,6 +199,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("Alive", true);
         rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoint;
+		stats.StartLifeTime ();
     }
 
 	private float GetXVelocity() {
@@ -272,6 +278,14 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 			zLookDirection = 1;
 		}
 		return walkSpeed * zLookDirection * Time.deltaTime;
+	}
+
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Ball"))
+		{
+			stats.AddPuckPossession();
+		}
 	}
 
 }

@@ -31,6 +31,7 @@ public class GolfStatsCard : StatsCard {
 	public void AddMadePutt()	{
 		PuttsMade++;
 		AddAttemptedPutt ();
+		PrintStats ();
 	}
 	
 	public void ResetMadePutts()	{
@@ -88,7 +89,14 @@ public class GolfStatsCard : StatsCard {
 		//Calculate
 	}
 	*/
-	
+
+	public void PrintStats() {
+		Debug.Log ("Kills: " +kills+ " Deaths: " +deaths+ " Attempted Attacks: " +attemptedAttacks+ 
+		           " Kill Streak: " +killStreak+ " Longest Kill Streak: " +longestKillStreak+ " Longest Time Alive: " +longestTimeAlive+ 
+		           " Shortest Time Alive: " +shortestTimeAlive+ " Kill/Death Ratio: " +kDRatio+ " Attempted Putts: " +PuttsAttempted+ 
+		           " Putts Made: " +PuttsMade+ " Putting Accuracy: " +Accuracy);
+	}
+
 	/*--------------------END GOLF--------------------*/
 	
 }

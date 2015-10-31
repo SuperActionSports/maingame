@@ -9,7 +9,7 @@ public class GolfBall : MonoBehaviour {
 	public Vector3 vel;
 	private Rigidbody rb;
 	private Renderer rend;
-	private GameObject playerHitting;
+	private GolfPlayerController playerHitting;
 	public GolfWizard wizard;
 
 	void Start () {
@@ -49,6 +49,7 @@ public class GolfBall : MonoBehaviour {
 	void OnTriggerEnter(Collider collision) {
 		if (collision.gameObject.tag == "Goal") {
 			wizard.Celebrate(rend.material.color);
+			playerHitting.stats.AddMadePutt();
 			wizard.ResetBallAndHole();
 			collision.gameObject.transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
@@ -57,7 +58,9 @@ public class GolfBall : MonoBehaviour {
 		}
 	}
 
-	public void Putt(Vector3 force, Color c1) {
+	public void Putt(Vector3 force, GolfPlayerController player) {
+		playerHitting = player;
+		Color c1 = player.color;
 		if (beingHit) {
 			rb.AddForce (force);
 			rend.material.color = c1;
