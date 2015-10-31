@@ -34,7 +34,7 @@ public class TennisStatsCard : StatsCard {
 	
 	public void CalculateAccuracy()	{
 		if (Swings != 0) {
-			Accuracy = Contact / Swings;
+			Accuracy = (float)Contact / (float)Swings;
 		}
 	}
 	

@@ -39,7 +39,7 @@ public class GolfStatsCard : StatsCard {
 	
 	public void CalculateAccuracy()	{
 		if (PuttsAttempted != 0) {
-			Accuracy = PuttsMade / PuttsAttempted;
+			Accuracy = (float)PuttsMade / (float)PuttsAttempted;
 		}
 	}
 	

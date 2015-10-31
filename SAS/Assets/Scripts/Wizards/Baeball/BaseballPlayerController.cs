@@ -62,6 +62,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	public BaseballStatsCard stats;
 	// Use this for initialization
 	void Start () {
+		stats = new BaseballStatsCard ();
 	 	sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<BaseballCameraController>();
 		rb = GetComponent<Rigidbody>();

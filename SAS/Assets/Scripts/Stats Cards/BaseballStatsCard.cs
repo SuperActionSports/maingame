@@ -7,18 +7,20 @@ public class BaseballStatsCard : StatsCard {
 	public int HitsAttempted;
 	public int HitsMade;
 	//public int longestHit;
-	public float ERA;
+	public float BattingAverage;
 	
 	public void HardResetStats() {
 		ResetHitsAttempted ();
 		ResetHitsMade ();
 		//ResetLongestHit ();
-		ResetERA ();
+		ResetBattingAverage ();
 		ResetStats ();
 	}
 	
 	public void AddAttemptedHit () {
 		HitsAttempted++;
+		CalculateBattingAverage ();
+		Debug.Log ("Added attempted hit. Total attempted hits: " + HitsAttempted);
 	}
 	
 	public void ResetHitsAttempted() {
@@ -28,20 +30,23 @@ public class BaseballStatsCard : StatsCard {
 	public void AddMadeHit () {
 		HitsMade++;
 		AddAttemptedHit ();
+		Debug.Log ("Added made hit. Total hits made: " + HitsMade);
 	}
 	
 	public void ResetHitsMade() {
 		HitsMade = 0;
 	}
 	
-	public void CalculateERA()	{
+	public void CalculateBattingAverage()	{
+		Debug.Log ("stats card before calculation: " + HitsMade + " / " + HitsAttempted);
 		if (HitsAttempted != 0) {
-			ERA = HitsMade / HitsAttempted;
+			BattingAverage = (float)HitsMade / (float)HitsAttempted;
 		}
+		Debug.Log ("Current batting average: " + BattingAverage);
 	}
 	
-	public void ResetERA()	{
-		ERA = 0;
+	public void ResetBattingAverage()	{
+		BattingAverage = 0;
 	}
 	
 	/*

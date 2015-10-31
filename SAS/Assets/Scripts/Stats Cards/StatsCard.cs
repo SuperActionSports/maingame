@@ -139,7 +139,7 @@ public class StatsCard : MonoBehaviour {
 	}
 
 	public void CalculateKDRatio() {
-		kDRatio = kills / deaths;
+		kDRatio = (float)kills / (float)deaths;
 	}
 
 	public void ResetKDRatio() {

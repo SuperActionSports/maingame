@@ -63,7 +63,7 @@ public class FencingStatsCard : StatsCard {
 	
 	public void CalculateStabAccuracy(){
 		if (StabAttempts != 0) {
-			StabAccuracy = StabKills / StabAttempts;
+			StabAccuracy = (float)StabKills / (float)StabAttempts;
 		}
 	}
 	
@@ -94,7 +94,7 @@ public class FencingStatsCard : StatsCard {
 	
 	public void CalculateThrowAccuracy(){
 		if (ThrowAttempts != 0) {
-			ThrowAccuracy = ThrowKills / ThrowAttempts;
+			ThrowAccuracy = (float)ThrowKills / (float)ThrowAttempts;
 		}
 	}
 	
@@ -122,7 +122,7 @@ public class FencingStatsCard : StatsCard {
 	
 	public void CalculateAttackSuccessRate(){
 		if (AttackAttempts != 0) {
-			AttackSuccessRate = AttacksSuccessful / AttackAttempts;
+			AttackSuccessRate = (float)AttacksSuccessful / (float)AttackAttempts;
 		}
 	}
 	
@@ -148,7 +148,7 @@ public class FencingStatsCard : StatsCard {
 	
 	public void CalculateBlockSuccessRate(){
 		if (BlockAttempts != 0) {
-			BlockSuccessRate = BlocksSuccessful / BlockAttempts;
+			BlockSuccessRate = (float)BlocksSuccessful / (float)BlockAttempts;
 		}
 	}
 	
