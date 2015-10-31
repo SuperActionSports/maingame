@@ -68,7 +68,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &11425926
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,6 +82,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   statCard: {fileID: 137604, guid: 1de27f95bb500c7499bfcf96736ca0c1, type: 2}
   statistic: {fileID: 105384, guid: 5e5df060e9273ac408ea75027f21ea8b, type: 2}
+  masthead: {fileID: 185028}
 --- !u!114 &11433924
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -299,7 +300,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: masthead
+      value: 
+      objectReference: {fileID: 185028}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178340}

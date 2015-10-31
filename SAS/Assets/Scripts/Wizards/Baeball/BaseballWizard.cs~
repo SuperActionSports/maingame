@@ -25,7 +25,8 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	private int matchCount;					// Layla, customized games
 	public GameObject layla;
 	private GameControlLiaison liaison;
-	
+	public GameObject endGame;
+	private bool finished;
 	// Use this for initialization
 	void Start () {
 		if (layla == null) { layla = GameObject.Find("Layla");
@@ -49,11 +50,12 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		SetPlayers();
 		//Magic Number
 		pitchGap = 2;
-		gameWinTime = -1;
+		gameWinTime = 35;
 		lastPitch = Mathf.Infinity;
 		madnessMod = 5;
 		madnessTime = 57;
 		madnessGap = 5;
+		finished = false;
 	}
 	
 	
@@ -136,14 +138,29 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	}
 	// Update is called once per frame
 	void Update () {
-		if (Time.time - lastPitch >= pitchGap && (Time.time < madnessTime || Time.time > madnessGap+madnessTime)) {
-			lastPitch += pitchGap;
-			pitcher.Pitch ();
-		}
-		if (madnessTime <= Time.time && !madness)
+		if(Time.time < gameWinTime)
 		{
-			pitchGap /= madnessMod;
-			madness = true;
+			//Debug.Log(Time.time); 
+			if (Time.time - lastPitch >= pitchGap && (Time.time < madnessTime || Time.time > madnessGap+madnessTime)) {
+				lastPitch += pitchGap;
+				pitcher.Pitch ();
+			}
+			if (madnessTime <= Time.time && !madness)
+			{
+				pitchGap /= madnessMod;
+				madness = true;
+			}
+		}
+		else if (!finished)
+		{
+			DisableMovement();
+			for (int p = 0; p < players.Length; p++)
+			{
+				players[p].statCard = ((BaseballPlayerController)players[p].control).stats;
+				
+			}
+			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
+			finished = true;
 		}
 	}	
 }

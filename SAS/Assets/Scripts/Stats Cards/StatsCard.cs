@@ -28,17 +28,6 @@ public class StatsCard : MonoBehaviour {
 		teamBScore = 0;
 	}
 
-	public void ResetStats()	{
-		ResetIndividualScore ();
-		ResetTeamScores ();
-		ResetIndividualStats ();
-		//Golf_ResetStats ();
-		//Tennis_ResetStats ();
-		//Baseball_ResetStats ();
-		//Fencing_ResetStats ();
-		//Hockey_ResetStats ();
-	}
-
 	/*--------------------ALL GAMES--------------------*/
 	public int kills;
 	public int deaths;
@@ -79,7 +68,7 @@ public class StatsCard : MonoBehaviour {
 	/// Returns a ratio of kills to deaths the player accomplished
 	/// </summary>
 	public float KillDeathRatio() { 
-		return (float)kills/(float)deaths;
+		return deaths > 0 ? (float)kills/(float)deaths : (float)kills;
 		} 
 	/// <summary>
 	/// Returns the shortest amount of time a player was alive
@@ -91,17 +80,6 @@ public class StatsCard : MonoBehaviour {
 	public float LongestTimeAlive{get { return longestTimeAlive; } }
 	
 	// Use this for initialization
-	void Start () {
-		kills = 0;
-		deaths = 0;
-		jumps = 0;
-		attemptedAttacks = 0;
-		killStreak = 0;
-		longestKillStreak = 0;
-		//distanceRan = 0;
-		longestTimeAlive = 0;
-		shortestTimeAlive = 0;
-	}
 	
 	// Update is called once per frame
 	void Update () {
@@ -118,7 +96,7 @@ public class StatsCard : MonoBehaviour {
 		//distanceRan = 0;
 		longestTimeAlive = 0;
 		shortestTimeAlive = 0;
-	public float kDRatio;
+	}
 
 	public void ResetIndividualStats()	{
 		ResetKills ();
@@ -129,14 +107,14 @@ public class StatsCard : MonoBehaviour {
 		//ResetDistanceRan ();
 		ResetLongestTimeAlive ();
 		ResetShortestTimeAlive ();
-		ResetKDRatio ();
+		//ResetKDRatio ();
 	}
 
 	public void AddKill()	{
 		kills++;
 		killStreak++;
 		AddAttemptedAttack ();
-		CalculateKDRatio ();
+		//CalculateKDRatio ();
 	}
 
 	public void ResetKills() {
@@ -150,7 +128,7 @@ public class StatsCard : MonoBehaviour {
 			longestKillStreak = killStreak;
 		}
 		ResetkillStreak ();
-		CalculateKDRatio ();
+		//CalculateKDRatio ();
 	}
 
 	public void ResetDeaths()	{
@@ -199,7 +177,7 @@ public class StatsCard : MonoBehaviour {
 	/// <summary> 
 	/// Sets stats to relevant statistics and values. By default, this will set stats to Kills, Deaths, KDR, and Longest life time. 
 	///</summary>
-	public void GenerateStats()
+	virtual public void GenerateStats()
 	{
 		Debug.Log("Starting to generate statistics");
 		stats = new Statistic[4];
@@ -215,14 +193,6 @@ public class StatsCard : MonoBehaviour {
 
 	public void ResetShortestTimeAlive() {
 		shortestTimeAlive = -1;
-	}
-
-	public void CalculateKDRatio() {
-		kDRatio = (float)kills / (float)deaths;
-	}
-
-	public void ResetKDRatio() {
-		kDRatio = 0;
 	}
 
 	/*
@@ -280,5 +250,10 @@ public class Statistic
 	private float RoundFloat(float value, int places)
 	{
 		return Mathf.Round(value*(Mathf.Pow(10,places))) / Mathf.Pow(10,places);
+	}
+	
+	public string kDRatio
+	{
+		get { return "Wrong KDR, dingus."; }
 	}
 }

@@ -10,10 +10,12 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	public GameObject statistic;
 	//private int playerCount;
 	private Player[] players;
+	public GameObject masthead;
 	//player stat cards
 	
 	void Start()
 	{
+		/*
 		debugPlayers = new Player[4];
 		
 		debugPlayers[0] = new Player();
@@ -53,13 +55,13 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 		debugPlayers[3].statCard.longestTimeAlive = 31.574104829f;
 		
 		SetPlayers = debugPlayers;
+		*/
 	}
 	
 	public Player[] SetPlayers
 	{
 			set
 			{
-//			players = debugPlayers;
 			players = value;
 			CreateStatCard();
 			}
@@ -72,11 +74,12 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	/// <param name="sc">Statistic prefab</param>
 	private void CreateStatCard()
 	{
+		masthead.SetActive(true);
 		GameObject c;
 		GameObject sc;
 		for (int i = 0; i < players.Length; i++)
 		{
-			Debug.Log("Creating stat card");
+			Debug.Log("Creating stat card for player " + i + " of " + players.Length);
 			c = Instantiate(statCard, Vector3.zero, Quaternion.identity) as GameObject;
 			c.GetComponent<Image>().color = players[i].color;
 			//c.GetComponentInChildren<EndgameGUIRank>().ranking = 0;

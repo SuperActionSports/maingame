@@ -91,10 +91,10 @@ public class GolfStatsCard : StatsCard {
 	*/
 
 	public void PrintStats() {
-		Debug.Log ("Kills: " +kills+ " Deaths: " +deaths+ " Attempted Attacks: " +attemptedAttacks+ 
-		           " Kill Streak: " +killStreak+ " Longest Kill Streak: " +longestKillStreak+ " Longest Time Alive: " +longestTimeAlive+ 
-		           " Shortest Time Alive: " +shortestTimeAlive+ " Kill/Death Ratio: " +kDRatio+ " Attempted Putts: " +PuttsAttempted+ 
-		           " Putts Made: " +PuttsMade+ " Putting Accuracy: " +Accuracy);
+		//Debug.Log ("Kills: " +kills+ " Deaths: " +deaths+ " Attempted Attacks: " +attemptedAttacks+ 
+		//           " Kill Streak: " +killStreak+ " Longest Kill Streak: " +longestKillStreak+ " Longest Time Alive: " +longestTimeAlive+ 
+		//           " Shortest Time Alive: " +shortestTimeAlive+ " Kill/Death Ratio: " +kDRatio+ " Attempted Putts: " +PuttsAttempted+ 
+		//           " Putts Made: " +PuttsMade+ " Putting Accuracy: " +Accuracy);
 	}
 
 	/*--------------------END GOLF--------------------*/
