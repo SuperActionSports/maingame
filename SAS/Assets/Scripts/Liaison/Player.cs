@@ -12,6 +12,7 @@ public class PlayerL
 		public IPlayerController control;
 		public GameObject gameObject;
 		
+		
 		public PlayerL()
 		{
 			Debug.Log("New player, yo.");

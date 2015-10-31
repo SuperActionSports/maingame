@@ -66,6 +66,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 100
@@ -110,8 +116,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5cc6a2b6beecdcc42a4c7d983ae0ec04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  statName: {fileID: 158246}
-  statValue: {fileID: 191560}
+  statNamePrefab: {fileID: 158246}
+  statValuePrefab: {fileID: 191560}
 --- !u!114 &11463142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,13 +131,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
     m_FontSize: 79
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 38
-    m_MaxSize: 50
+    m_MaxSize: 43
     m_Alignment: 3
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -151,6 +163,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 0, g: .514705896, b: .514705896, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
@@ -245,6 +263,10 @@ Prefab:
       propertyPath: statValue
       value: 
       objectReference: {fileID: 191560}
+    - target: {fileID: 0}
+      propertyPath: m_FontData.m_MaxSize
+      value: 43
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 105384}

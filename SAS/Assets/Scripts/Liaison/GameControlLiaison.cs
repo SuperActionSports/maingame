@@ -477,6 +477,7 @@ public class Player
 	public Team team;
 	public IPlayerController control;
 	public GameObject gameObject;
+	public StatsCard statCard;
 	
 	public Player()
 	{

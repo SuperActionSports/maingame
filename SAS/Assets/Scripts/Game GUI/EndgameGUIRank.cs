@@ -24,7 +24,7 @@ public class EndgameGUIRank : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		ranking = (int)(Time.time % 4);
+		//ranking = (int)(Time.time % 4);
 		SetSprite(ranking);
 		UpdateSprite();
 	}
