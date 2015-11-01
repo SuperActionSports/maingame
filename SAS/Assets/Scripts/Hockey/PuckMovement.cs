@@ -47,6 +47,7 @@ public class PuckMovement : MonoBehaviour {
 				inPlay = false;
 				timeOfGoal = Time.time;
 				willRespawn = true;
+				rb.velocity *= 0.1f;
 				//Respawn();
 			}
 		}

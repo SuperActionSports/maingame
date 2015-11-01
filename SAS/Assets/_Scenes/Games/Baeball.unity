@@ -65,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 112000000, guid: daf719a636d08a142b154f438562e0c8,
     type: 2}
   m_RuntimeCPUUsage: 25
@@ -85,9 +86,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!1 &1703748
 GameObject:
   m_ObjectHideFlags: 0
@@ -1067,6 +1065,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1363,6 +1362,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1446,7 +1446,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &642136801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1464,7 +1464,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &642136802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4715,6 +4715,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -4920,15 +4921,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_NormalBias
-      value: .439999998
+      value: .330000013
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Bias
-      value: 0
+      value: .61500001
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Strength
-      value: .933000028
+      value: .791999996
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_SpotAngle
@@ -5014,15 +5015,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_NormalBias
-      value: .439999998
+      value: .330000013
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Bias
-      value: 0
+      value: .61500001
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Strength
-      value: .933000028
+      value: .791999996
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_SpotAngle
@@ -5501,15 +5502,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_NormalBias
-      value: .439999998
+      value: .330000013
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Bias
-      value: 0
+      value: .61500001
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Strength
-      value: .933000028
+      value: .791999996
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_SpotAngle
@@ -5518,6 +5519,10 @@ Prefab:
     - target: {fileID: 2300452, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_PreserveUVs
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
+      propertyPath: m_DrawHalo
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
@@ -6618,45 +6623,17 @@ Prefab:
       propertyPath: m_RootOrder
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 466624, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_LocalScale.x
-      value: .0742100924
-      objectReference: {fileID: 0}
-    - target: {fileID: 109242, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
-    - target: {fileID: 107854, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_StaticEditorFlags
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_Intensity
-      value: 6.8499999
-      objectReference: {fileID: 0}
-    - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_BounceIntensity
-      value: .699999988
-      objectReference: {fileID: 0}
-    - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_Shadows.m_NormalBias
-      value: .439999998
+      propertyPath: m_Shadows.m_Strength
+      value: .791999996
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
       propertyPath: m_Shadows.m_Bias
-      value: 0
+      value: .61500001
       objectReference: {fileID: 0}
     - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_Shadows.m_Strength
-      value: .933000028
-      objectReference: {fileID: 0}
-    - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_SpotAngle
-      value: 53
-      objectReference: {fileID: 0}
-    - target: {fileID: 10813158, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}
-      propertyPath: m_Lightmapping
-      value: 4
+      propertyPath: m_Shadows.m_NormalBias
+      value: .330000013
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3e1df8e159a7e68439cfdda1971ed7bc, type: 2}

@@ -32,8 +32,8 @@ public class HockeyCamera : MonoBehaviour {
 		cam = GetComponent<Camera>();
 		shake = false;
 		originalPosition = transform.position;
-		maxYOffset = 620;
-		minYOffset = 200;
+		maxYOffset = 8.5f;
+		minYOffset = 27;
 	}
 	
 	void Update() {
@@ -63,7 +63,6 @@ public class HockeyCamera : MonoBehaviour {
 		yoffset = maxDist;
 		yoffset *= distanceModifier;	
 
-		//yoffset -= 2;
 		yoffset = Mathf.Clamp(yoffset,minYOffset,maxYOffset);
 		if (puck != null)
 		{
