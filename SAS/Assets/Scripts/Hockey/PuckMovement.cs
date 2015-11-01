@@ -15,6 +15,7 @@ public class PuckMovement : MonoBehaviour {
 	private float timeOfGoal;
 	public float respawnDelay;
 	private bool willRespawn;
+	private GameObject lastHit = null;
 	
 	// Use this for initialization
 	void Start () {
@@ -42,6 +43,7 @@ public class PuckMovement : MonoBehaviour {
 		if (inPlay == true) {
 			if (col.gameObject.CompareTag("Goal")) {
 				Debug.Log ("Goal Scored");
+				lastHit.GetComponent<HockeyPlayerController>().GoalScored();
 				inPlay = false;
 				timeOfGoal = Time.time;
 				willRespawn = true;
@@ -70,4 +72,11 @@ public class PuckMovement : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
+	
+	public void HitPuck(GameObject p)
+	{
+		lastHit = p;
+		HockeyPlayerController hpc = lastHit.GetComponent<HockeyPlayerController>();
+		Debug.Log("HPC: " + hpc);
+	} 
 }

@@ -192,6 +192,11 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		rb.AddForce (100f * direction);
         MakeDead();    
     }
+	
+	public void GoalScored()
+	{
+		stats.AddSuccesfulGoal();
+	}
 
     public void Respawn()
     {
@@ -200,6 +205,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
         rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoint;
 		stats.StartLifeTime ();
+		wizard.FindPlayers();
     }
 
 	private float GetXVelocity() {
@@ -284,6 +290,8 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		if (other.CompareTag("Ball"))
 		{
+			Debug.Log("Hitting puck");
+			other.GetComponent<PuckMovement>().HitPuck(this.gameObject);
 			stats.AddPuckPossession();
 		}
 	}
