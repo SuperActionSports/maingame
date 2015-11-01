@@ -33,6 +33,7 @@ public class StatsCard : MonoBehaviour {
 	public int deaths;
 	public int jumps;
 	public int attemptedAttacks;
+	public float attackSuccessRate;
 	public int killStreak;
 	public int longestKillStreak;
 	//public float distanceRan;
@@ -60,6 +61,10 @@ public class StatsCard : MonoBehaviour {
 	/// Returns the number of times the player tried to attack
 	/// </summary>
 	public int AttemptedAttacks{get { return kills; } }
+	/// <summary>
+	/// Returns the success rate of all the player's attacks.
+	/// </summary>
+	public float AttackSuccessRate{ get { return attackSuccessRate; } }
 	/// <summary>
 	/// Returns the most number of kills the player got without dying
 	/// </summary>
@@ -96,6 +101,7 @@ public class StatsCard : MonoBehaviour {
 		//distanceRan = 0;
 		longestTimeAlive = 0;
 		shortestTimeAlive = 0;
+		attackSuccessRate = 0;
 	}
 
 	public void ResetIndividualStats()	{
@@ -108,13 +114,14 @@ public class StatsCard : MonoBehaviour {
 		ResetLongestTimeAlive ();
 		ResetShortestTimeAlive ();
 		//ResetKDRatio ();
+		ResetAttackSuccessRate ();
 	}
 
 	public void AddKill()	{
 		kills++;
 		killStreak++;
-		AddAttemptedAttack ();
 		//CalculateKDRatio ();
+		CalculateAttackSuccessRate ();
 	}
 
 	public void ResetKills() {
@@ -145,10 +152,19 @@ public class StatsCard : MonoBehaviour {
 
 	public void AddAttemptedAttack()	{
 		attemptedAttacks++;
+		CalculateAttackSuccessRate ();
 	}
 
 	public void ResetAttemptedAttack()	{
 		attemptedAttacks = 0;
+	}
+
+	public void CalculateAttackSuccessRate() {
+		attackSuccessRate = attemptedAttacks > 0 ? (float)kills / (float)attemptedAttacks : (float)kills;
+	}
+
+	public void ResetAttackSuccessRate() {
+		attackSuccessRate = 0;
 	}
 
 	public void ResetkillStreak()	{

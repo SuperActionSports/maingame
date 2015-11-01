@@ -30,7 +30,6 @@ public class GolfStatsCard : StatsCard {
 	
 	public void AddMadePutt()	{
 		PuttsMade++;
-		AddAttemptedPutt ();
 		PrintStats ();
 	}
 	

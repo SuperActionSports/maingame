@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RapierScript : MonoBehaviour {
 
-	public GameObject owner;
+	public PlayerControllerMatt owner;
 	public bool hasHit;
 	public SphereCollider pickUpCollider;
 	public CapsuleCollider attackCollider;
@@ -88,7 +88,7 @@ public class RapierScript : MonoBehaviour {
 		{
 			//Attacking rapier is about to make swiss cheese of a player
 			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
-			if (victim.alive && other.gameObject != owner)
+			if (victim.alive && other.gameObject != owner.gameObject)
 			{	
 //				sound.Play();
 				if (equipmentThrow.thrown)
@@ -96,6 +96,8 @@ public class RapierScript : MonoBehaviour {
 					Parry();
 				}
 				victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
+				if(owner.stats.AttackFlag) {owner.stats.AddStabKills();}
+				else {owner.stats.AddThrowKills();}
 			}
 		}
 		else if (other.CompareTag("Shield"))
@@ -106,6 +108,8 @@ public class RapierScript : MonoBehaviour {
 				//equipmentThrow.Drop();
 			}
 			Parry ();
+			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
+			victim.stats.AddBlocksSuccessful();
 		}
 		else if (!hasHit && other.CompareTag("Stage"))
 		{
@@ -144,7 +148,7 @@ public class RapierScript : MonoBehaviour {
 		}
 	}
 */	
-	public void ResetOwnership(GameObject newOwner)
+	public void ResetOwnership(PlayerControllerMatt newOwner)
 	{
 		hasHit = false;
 		owner = newOwner;

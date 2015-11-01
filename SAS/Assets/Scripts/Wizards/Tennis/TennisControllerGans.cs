@@ -36,9 +36,11 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
     private TennisInputHandlerGans input;
 
 	public TennisWizard wizard;
+	public TennisStatsCard stats;
 
 	// Use this for initialization
 	void Start () {
+		stats = new TennisStatsCard ();
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
 		rend = GetComponent<Renderer>();
@@ -64,6 +66,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		paint = GetComponent<PaintSplatter>();
 		paint.color = color;
 		hitForce = 25;
+		stats.ResetStats ();
     }
     
 	
@@ -85,6 +88,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 			if(isSwinging)
 			{
 				hasHitBall = BallCollision(other);
+				stats.AddContact();
 				if(hasHitBall)
 				{
 					isSwinging = false;
@@ -140,6 +144,8 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
              child.transform.position = t;
 
          }*/
+		stats.AddDeath ();
+		stats.EndLifeTime ();
     }
 	
 	public void Kill()
@@ -174,6 +180,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		anim.SetBool("control.alive", true);
 		//Debug.Log("Length: " + respawnPoints.Length);
 		transform.position = respawnPointsTeamA[Mathf.FloorToInt(Random.Range(0, respawnPointsTeamA.Length))].transform.position;
+		stats.StartLifeTime ();
 	}
 
 	public void Swing(float swingForce)
@@ -182,6 +189,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		anim.SetTrigger ("SwingRacquet");
 		anim.SetFloat("WindingUp",0);
 		isSwinging = true;
+		stats.AddSwing ();
 	}
 	
 	public void WindUp()
@@ -205,6 +213,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
     {
 		anim.SetTrigger("AttackRacquet");
 		isAttacking = true;
+		stats.AddAttemptedAttack ();
     }
 
 	private void StartAttack()

@@ -204,6 +204,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 				if (groundHit.collider.CompareTag("Turf"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+					control.stats.AddJump();
 				}
 			}
 		}
@@ -219,6 +220,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 				if (groundHit.collider.CompareTag("Turf"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+					control.stats.AddJump();
 				}
 			}
 		}

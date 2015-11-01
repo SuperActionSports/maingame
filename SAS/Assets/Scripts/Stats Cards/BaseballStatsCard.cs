@@ -29,7 +29,6 @@ public class BaseballStatsCard : StatsCard {
 	
 	public void AddMadeHit () {
 		HitsMade++;
-		AddAttemptedHit ();
 		//Debug.Log ("Added made hit. Total hits made: " + HitsMade);
 		//PrintStats ();
 	}

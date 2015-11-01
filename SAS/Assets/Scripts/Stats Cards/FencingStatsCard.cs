@@ -10,17 +10,15 @@ public class FencingStatsCard : StatsCard {
 	public int ThrowAttempts;
 	public int ThrowKills;
 	public float ThrowAccuracy;
-	public int AttackAttempts;
-	public int AttacksSuccessful;
-	public float AttackSuccessRate;
 	public int BlockAttempts;
 	public int BlocksSuccessful;
 	public float BlockSuccessRate;
 	public float LongestTimeUnarmed;
-	public float ShortestTimeUnarmed;
+	//public float ShortestTimeUnarmed;
 	public float unarmed;
 	public float rearmed;
 	public float unarmedTime;
+	public bool stabThrowFlag; //True is stab. False is throw.
 	
 	public void HardResetStats () {
 		ResetStabAttempts();
@@ -29,21 +27,20 @@ public class FencingStatsCard : StatsCard {
 		ResetThrowAttempts();
 		ResetThrowKills();
 		ResetThrowAccuracy ();
-		ResetAttackAttempts();
-		ResetAttacksSuccessful();
 		ResetAttackSuccessRate ();
 		ResetBlockAttempts();
 		ResetBlocksSuccessful();
 		ResetBlockSuccessRate ();
 		ResetLongestTimeUnarmed();
-		ResetShortestTimeUnarmed ();
+		//ResetShortestTimeUnarmed ();
 		ResetStats ();
 	}
 	
 	public void AddStabAttempts (){
-		AddAttackAttempts ();
+		AddAttemptedAttack ();
 		StabAttempts++;
 		CalculateStabAccuracy ();
+		SetAttackFlagToStab ();
 	}
 	
 	public void ResetStabAttempts(){
@@ -51,8 +48,7 @@ public class FencingStatsCard : StatsCard {
 	}
 	
 	public void AddStabKills(){
-		AddStabAttempts ();
-		AddAttacksSuccessful ();
+		AddKill ();
 		StabKills++;
 		CalculateStabAccuracy ();
 	}
@@ -72,9 +68,10 @@ public class FencingStatsCard : StatsCard {
 	}
 	
 	public void AddThrowAttempts(){
-		AddAttackAttempts ();
+		AddAttemptedAttack ();
 		ThrowAttempts++;
 		CalculateThrowAccuracy ();
+		SetAttackFlagToThrow ();
 	}
 	
 	public void ResetThrowAttempts(){
@@ -82,8 +79,7 @@ public class FencingStatsCard : StatsCard {
 	}
 	
 	public void AddThrowKills(){
-		AddThrowAttempts ();
-		AddAttacksSuccessful ();
+		AddKill ();
 		ThrowKills++;
 		CalculateThrowAccuracy ();
 	}
@@ -100,34 +96,6 @@ public class FencingStatsCard : StatsCard {
 	
 	public void ResetThrowAccuracy(){
 		ThrowAccuracy = 0;
-	}
-	
-	public void AddAttackAttempts(){
-		AttackAttempts++;
-		CalculateAttackSuccessRate ();
-	}
-	
-	public void ResetAttackAttempts(){
-		AttackAttempts = 0;
-	}
-	
-	public void AddAttacksSuccessful(){
-		AttacksSuccessful++;
-		CalculateAttackSuccessRate ();
-	}
-	
-	public void ResetAttacksSuccessful(){
-		AttacksSuccessful = 0;
-	}
-	
-	public void CalculateAttackSuccessRate(){
-		if (AttackAttempts != 0) {
-			AttackSuccessRate = (float)AttacksSuccessful / (float)AttackAttempts;
-		}
-	}
-	
-	public void ResetAttackSuccessRate(){
-		AttackSuccessRate = 0;
 	}
 	
 	public void AddBlockAttempts(){
@@ -157,13 +125,13 @@ public class FencingStatsCard : StatsCard {
 	}
 	
 	public void BecameUnarmed() {
-		unarmed = Time.deltaTime;
+		unarmed = Time.time;
 	}
 	
 	public void Rearmed(){
-		rearmed = Time.deltaTime;
+		rearmed = Time.time;
 		CalculateLongestTimeUnarmed ();
-		CalculateShortestTimeUnarmed ();
+		//CalculateShortestTimeUnarmed ();
 	}
 	
 	public void CalculateLongestTimeUnarmed(){
@@ -176,7 +144,18 @@ public class FencingStatsCard : StatsCard {
 	public void ResetLongestTimeUnarmed(){
 		LongestTimeUnarmed = 0;
 	}
-	
+
+	public void SetAttackFlagToStab() {
+		stabThrowFlag = true;
+	}
+
+	public void SetAttackFlagToThrow() {
+		stabThrowFlag = false;
+	}
+
+	public bool AttackFlag{ get { return stabThrowFlag; } }
+
+	/*
 	public void CalculateShortestTimeUnarmed(){
 		unarmedTime = rearmed - unarmed;
 		if (unarmedTime < ShortestTimeUnarmed)	{
@@ -187,7 +166,8 @@ public class FencingStatsCard : StatsCard {
 	public void ResetShortestTimeUnarmed(){
 		ShortestTimeUnarmed = -1;
 	}
-	
+	*/
+
 	/*
 	public float IndividualScoring()
 	{
@@ -201,6 +181,16 @@ public class FencingStatsCard : StatsCard {
 		//Calculate
 	}
 	*/
-	
+
+	override public void GenerateStats()
+	{
+		Debug.Log("Starting to generate statistics");
+		stats = new Statistic[4];
+		stats[0] = new Statistic("KILLS", kills);
+		stats[1] = new Statistic("DEATHS", deaths);
+		stats[2] = new Statistic("K/D", KillDeathRatio(), false);
+		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, false);
+	}
+
 	/*--------------------END FENCING--------------------*/
 }
