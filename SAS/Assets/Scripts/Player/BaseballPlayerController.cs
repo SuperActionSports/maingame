@@ -134,7 +134,7 @@ public class BaseballPlayerController : MonoBehaviour {
 	
 	private void GetRespawn()
 	{
-		if (Input.GetKeyDown(debugKill) || (device!= null && device.Command.WasPressed))
+		if (Input.GetKeyDown(debugKill) || (device!= null && device.Action3.WasPressed))
 		{
 			if (alive)
 			MakeDead();
