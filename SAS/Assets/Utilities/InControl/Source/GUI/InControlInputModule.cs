@@ -27,18 +27,18 @@ namespace InControl
 		public bool allowMouseInput = true;
 		public bool focusOnMouseHover = false;
 
-		InputDevice inputDevice;
-		Vector3 thisMousePosition;
-		Vector3 lastMousePosition;
-		Vector2 thisVectorState;
-		Vector2 lastVectorState;
-		bool thisSubmitState;
-		bool lastSubmitState;
-		bool thisCancelState;
-		bool lastCancelState;
-		float nextMoveRepeatTime;
-		float lastVectorPressedTime;
-		TwoAxisInputControl direction;
+		public InputDevice inputDevice;
+		public Vector3 thisMousePosition;
+		public Vector3 lastMousePosition;
+		public Vector2 thisVectorState;
+		public Vector2 lastVectorState;
+		public bool thisSubmitState;
+		public bool lastSubmitState;
+		public bool thisCancelState;
+		public bool lastCancelState;
+		public float nextMoveRepeatTime;
+		public float lastVectorPressedTime;
+		public TwoAxisInputControl direction;
 
 		public PlayerAction SubmitAction { get; set; }
 

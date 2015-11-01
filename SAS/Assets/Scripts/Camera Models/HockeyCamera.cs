@@ -28,7 +28,7 @@ public class HockeyCamera : MonoBehaviour {
 		players = GameObject.FindGameObjectsWithTag("Player");
 		positions = new Vector3[players.Length];
 		//offset = -18f;
-		debugLerp = 10;
+		debugLerp = 5;
 		cam = GetComponent<Camera>();
 		shake = false;
 		originalPosition = transform.position;

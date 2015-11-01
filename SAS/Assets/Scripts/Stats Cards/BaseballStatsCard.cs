@@ -84,8 +84,8 @@ public class BaseballStatsCard : StatsCard {
 		stats = new Statistic[4];
 		stats[0] = new Statistic("KILLS", kills);
 		stats[1] = new Statistic("DEATHS", deaths);
-		stats[2] = new Statistic("K/D", KillDeathRatio(), false);
-		stats[3] = new Statistic("BATTING AVERAGE", BattingAverage, false);
+		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[3] = new Statistic("BATTING AVERAGE", BattingAverage, Statistic.Format.ratio);
 	}
 	
 	public void PrintStats() {

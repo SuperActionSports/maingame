@@ -13,8 +13,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public GameObject winnerPlayer;			// Game, private
 	public GameObject victory;				// Game, private
 	private float victoryDuration;			// Game, private
-	private float gameWinTime;				// Layla, customized games
-	private int matchCount;					// Layla, customized games
+	
 	private GolfCameraController cam;	// Game
 	//private FencingPlayerManager inputManager;	// Layla
 	//private InputDevice[] devices;				// Layla
@@ -28,6 +27,11 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public float holeSpawnRangeX = 16;
 	public float holeSpawnRangeZ = 16;
 	public float minDistToBallFromHole = 4;
+	
+	public GameObject endGame;
+	private float gameWinTime = 30;				// Layla, customized games
+	private int matchCount;					// Layla, customized games
+	private bool finished;
 	// Use this for initialization
 	void Start () {
 		if (layla == null) { layla = GameObject.Find("Layla");
@@ -49,10 +53,24 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		SpawnBallAndHole();
 		ResetBallAndHole();
 		camScript = Camera.main.GetComponent<GolfCameraController>();
-		gameWinTime = -1;
+		finished = false;
 		victoryDuration = 3;
 	}
 	
+	void Update()
+	{
+		if (Time.time > gameWinTime && !finished)
+		{
+			DisableMovement();
+			for (int p = 0; p < players.Length; p++)
+			{
+				players[p].statCard = ((GolfPlayerController)players[p].control).stats;
+				
+			}
+			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
+			finished = true;
+		}
+	}
 	
 	private void SetPlayers()
 	{

@@ -38,10 +38,11 @@ public class GolfStatsCard : StatsCard {
 		PuttsMade = 0;
 	}
 	
-	public void CalculateAccuracy()	{
+	public float CalculateAccuracy()	{
 		if (PuttsAttempted != 0) {
 			Accuracy = (float)PuttsMade / (float)PuttsAttempted;
 		}
+		return Accuracy;
 	}
 	
 	public void ResetAccuracy()	{
@@ -89,6 +90,17 @@ public class GolfStatsCard : StatsCard {
 		//Calculate
 	}
 	*/
+	
+	override public void GenerateStats()
+	{
+		Debug.Log("Starting to generate statistics");
+		stats = new Statistic[5];
+		stats[0] = new Statistic("KILLS", kills);
+		stats[1] = new Statistic("DEATHS", deaths);
+		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[3] = new Statistic("SANK PUTTS", PuttsMade, Statistic.Format.none);
+		stats[4] = new Statistic("ACCURACY", CalculateAccuracy(),Statistic.Format.percentage);
+	}
 
 	public void PrintStats() {
 		//Debug.Log ("Kills: " +kills+ " Deaths: " +deaths+ " Attempted Attacks: " +attemptedAttacks+ 
