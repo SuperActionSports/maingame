@@ -56,6 +56,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 		
 		SetPlayers = debugPlayers;
 		*/
+		
 	}
 	
 	public Player[] SetPlayers

@@ -160,11 +160,11 @@ public class StatsCard : MonoBehaviour {
 	}
 
 	public void StartLifeTime()	{
-		birth = Time.deltaTime;
+		birth = Time.time;
 	}
 
 	public void EndLifeTime()	{
-		death = Time.deltaTime;
+		death = Time.time;
 		lifetime = death - birth;
 		if (lifetime > longestTimeAlive) {
 			longestTimeAlive = lifetime;
