@@ -1,15 +1,13 @@
 using UnityEngine;
-using UnityEngine.UI;
+
 	public class ColorSelectionButtonFocus : MonoBehaviour
 	{
 
 		GameObject colorSelection;
-		public Text text;
 		void Start()
 		{
 		//	Debug.Log ("Position of focus: " + transform.localPosition);
 			colorSelection = transform.parent.gameObject;
-			text = GetComponent<Text>();
 		}
 		void Update()
 		{
