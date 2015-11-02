@@ -37,6 +37,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
 	public TennisWizard wizard;
 	public TennisStatsCard stats;
+	public bool OriginSideNorth;
 
 	// Use this for initialization
 	void Start () {
@@ -67,6 +68,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		paint.color = color;
 		hitForce = 25;
 		stats.ResetStats ();
+		SetOriginSide ();
     }
     
 	
@@ -78,6 +80,14 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
         	input.CheckInput();
 			UpdateColor();
 		}	
+	}
+
+	void SetOriginSide() {
+		if (input.transform.position.z > 0) {
+			OriginSideNorth = true;
+		} else {
+			OriginSideNorth = false;
+		}
 	}
 
 	void OnTriggerStay(Collider other)

@@ -144,6 +144,8 @@ Transform:
   m_Children:
   - {fileID: 1556664826}
   - {fileID: 1815816755}
+  - {fileID: 1306469710}
+  - {fileID: 1905072004}
   m_Father: {fileID: 799131504}
   m_RootOrder: 1
 --- !u!1 &156485353
@@ -772,7 +774,7 @@ GameObject:
   - 23: {fileID: 958461727}
   m_Layer: 0
   m_Name: Plane (1)
-  m_TagString: Untagged
+  m_TagString: Stage
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1034,6 +1036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: 114932, guid: 94ab4aa971cb44cb1a774c3835330330, type: 2}
+  players: []
   respawnPoints:
   - {fileID: 1690378718}
   - {fileID: 360721781}
@@ -1185,6 +1188,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1885978559}
   m_RootOrder: 0
+--- !u!1 &1306469708
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1306469710}
+  - 65: {fileID: 1306469709}
+  m_Layer: 0
+  m_Name: NorthSideFloorCollider
+  m_TagString: NorthCourt
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1306469709
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306469708}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1306469710
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1306469708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.13, z: 7.11999989}
+  m_LocalScale: {x: 20.0585537, y: 1, z: 14.128932}
+  m_Children: []
+  m_Father: {fileID: 23719421}
+  m_RootOrder: 2
 --- !u!1 &1338003049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1831,6 +1874,46 @@ Transform:
   - {fileID: 156485357}
   - {fileID: 1840326214}
   m_Father: {fileID: 799131504}
+  m_RootOrder: 3
+--- !u!1 &1905072002
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1905072004}
+  - 65: {fileID: 1905072003}
+  m_Layer: 0
+  m_Name: SouthSideFloorCollider
+  m_TagString: SouthCourt
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!65 &1905072003
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1905072002}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1905072004
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1905072002}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.13, z: -7.28999996}
+  m_LocalScale: {x: 20.0585537, y: 1, z: 14.128932}
+  m_Children: []
+  m_Father: {fileID: 23719421}
   m_RootOrder: 3
 --- !u!1001 &2095831530
 Prefab:
