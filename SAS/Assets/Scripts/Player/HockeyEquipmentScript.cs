@@ -4,14 +4,21 @@ using System.Collections;
 
 public class HockeyEquipmentScript : MonoBehaviour {
     
+	private HockeyPlayerController player;
+	
+	void Update () {
+		player = transform.parent.GetComponent<HockeyPlayerController>();
+	}
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
 		{
-            HockeyTempPlayerController victim = other.GetComponentInParent<HockeyTempPlayerController>();
+            HockeyPlayerController victim = other.GetComponentInParent<HockeyPlayerController>();
             if (victim.alive)
             {
                 victim.Kill(transform.right*-200f);
+				player.stats.AddKill ();
             }
         }
     }

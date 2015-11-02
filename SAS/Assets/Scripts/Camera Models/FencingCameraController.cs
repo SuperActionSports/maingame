@@ -24,6 +24,7 @@ public class FencingCameraController : MonoBehaviour {
 	public Vector2 shakeMagnitude;
 	public float shakeIntensity;
 	public bool won;
+	public GameObject winnerPlayer;
 	
 	public float z;
 	
@@ -38,11 +39,12 @@ public class FencingCameraController : MonoBehaviour {
 		shakeLength = 0.1f;
 		shakeMagnitude = new Vector2(3f,3f);
 		shakeIntensity = 50f;
+		yOffset = 5.2f;
 		zOffset = 20f;
 		zDebugMod = 30;
 		minimumZ = -14;
-		yWinOffset = 1.76f;
-		zWinOffset = -7.34f;
+		yWinOffset = 5.2f;
+		zWinOffset = -13.06f;
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
 		won = false;
 	}
@@ -62,9 +64,13 @@ public class FencingCameraController : MonoBehaviour {
 		if (players.Length > 1)
 		{
 			//Delete this
-			averagePosition = new Vector2(0,0);
+			//averagePosition = new Vector2(0,0);
 			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
 		}	
+	}
+	else
+	{
+		FollowWinner();
 	}
 		// Camera shake code
 		if (shake) {
@@ -75,16 +81,16 @@ public class FencingCameraController : MonoBehaviour {
 	
 	public void RecountPlayers()
 	{
-		Debug.Log("Player count before: " + players.Length);
+		//Debug.Log("Player count before: " + players.Length);
 		players = GameObject.FindGameObjectsWithTag("Fencer");
-		Debug.Log("Player count after: " + players.Length);
+		//Debug.Log("Player count after: " + players.Length);
 	}
 	
 	private float GetMaximumDistance()
 	{
 		float maxDist = 0;
 		for (int i = 0; i < players.Length; i++) {
-		Debug.Log("Players length: " + players.Length);
+		//Debug.Log("Players length: " + players.Length);
 			if (players[i] != null && 
 				players[i].GetComponent<PlayerControllerMatt>().alive)
 			{
@@ -124,7 +130,6 @@ public class FencingCameraController : MonoBehaviour {
 		}	
 		x /= living;
 		y /= living;
-		
 		return new Vector2(x,y);
 	}
 	
@@ -171,9 +176,14 @@ public class FencingCameraController : MonoBehaviour {
 	
 	public void FollowWinner(GameObject winner)
 	{
-	/*
+		winnerPlayer = winner;
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
-		transform.position = (winner.transform.position + winOffset);
-		*/
+		transform.position = Vector3.Lerp(transform.position,winner.transform.position + winOffset,Time.deltaTime);
+	}
+	
+	private void FollowWinner()
+	{
+		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
+		transform.position = Vector3.Lerp(transform.position,winnerPlayer.transform.position + winOffset,Time.deltaTime*10);
 	}
 }

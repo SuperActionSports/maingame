@@ -11,30 +11,46 @@ public class PuckMovement : MonoBehaviour {
 	public bool inPlay;
 	public GameObject respawnPoint;
 	public InputDevice device {get; set;}
-
+	public FencingWizard wizard;
+	private float timeOfGoal;
+	public float respawnDelay;
+	private bool willRespawn;
+	private GameObject lastHit = null;
+	public float friction = 1;
+	
 	// Use this for initialization
 	void Start () {
 		inPlay = true;
-		respawnPoint = GameObject.Find("Puck RespawnPoint");
+		
 		rb = GetComponent<Rigidbody> ();
 		if (respawnPoint == null)
 		{
 			Debug.Log("There aren't any respawn points, you catastrophic dingus.");
 		}
+		willRespawn = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		//GetRespawn();
+		if (willRespawn && timeOfGoal + respawnDelay < Time.time)
+		{
+			Respawn();
+			willRespawn = false;
+		}
+		rb.velocity *= friction;
 	}
 
 	void OnTriggerEnter (Collider col)
 	{
 		if (inPlay == true) {
-			if (col.gameObject.name == "Inner West Net" || col.gameObject.name == "Inner East Net") {
+			if (col.gameObject.CompareTag("Goal")) {
 				Debug.Log ("Goal Scored");
+				lastHit.GetComponent<HockeyPlayerController>().GoalScored();
 				inPlay = false;
-				Respawn();
+				timeOfGoal = Time.time;
+				willRespawn = true;
+				rb.velocity *= 0.1f;
+				//Respawn();
 			}
 		}
 	}
@@ -59,4 +75,11 @@ public class PuckMovement : MonoBehaviour {
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
+	
+	public void HitPuck(GameObject p)
+	{
+		lastHit = p;
+		HockeyPlayerController hpc = lastHit.GetComponent<HockeyPlayerController>();
+		Debug.Log("HPC: " + hpc);
+	} 
 }

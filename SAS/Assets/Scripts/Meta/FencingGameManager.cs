@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using InControl;
 
 public class FencingGameManager : MonoBehaviour {
-	
+	/*
 	public GameObject playerPrefab; 		//Provided by game
 	//private GameObject[] players;
 	private PlayerControllerMatt[] controls; // Provided by Game
@@ -48,7 +48,7 @@ public class FencingGameManager : MonoBehaviour {
 	/*
 	Get a list of valid players from UserPrefs along with their device
 	Store these players into players[] and their colors into colors[]
-	*/
+	
 		frozen = false;
 		playerColors[0] = Color.cyan;
 		playerColors[1] = Color.magenta;
@@ -316,4 +316,5 @@ public class FencingGameManager : MonoBehaviour {
 		player.device = null;
 		Destroy( player.gameObject );
 	}
+	*/
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using UnityEngine;
 using System.Collections.Generic;
 using InControl;
@@ -36,7 +36,7 @@ using InControl;
 
 		List<Vector3> spawnPoints;
 
-		List<HockeyTempPlayerController> players = new List<HockeyTempPlayerController>( maxPlayers );
+		List<HockeyPlayerController> players = new List<HockeyPlayerController>( maxPlayers );
 
 		Color[] playerColors2;
 		Color[] playerColors3;
@@ -65,7 +65,7 @@ using InControl;
 			try{
 				Respawns.GetLength(0);
 			}
-			catch (NullReferenceException e)
+			catch
 			{
 				Debug.Log("You didn't set the Respawns prefab, dingus.");
 			}
@@ -97,7 +97,7 @@ using InControl;
 		}
 
 
-		HockeyTempPlayerController FindPlayerUsingDevice( InputDevice inputDevice )
+		HockeyPlayerController FindPlayerUsingDevice( InputDevice inputDevice )
 		{
 			var playerCount = players.Count;
 			for (int i = 0; i < playerCount; i++)
@@ -129,7 +129,7 @@ using InControl;
 		}
 
 
-		HockeyTempPlayerController CreatePlayer( InputDevice inputDevice )
+		HockeyPlayerController CreatePlayer( InputDevice inputDevice )
 		{
 			if (players.Count < maxPlayers)
 			{
@@ -137,10 +137,10 @@ using InControl;
 				var playerPosition = spawnPoints[0];
 				spawnPoints.RemoveAt( 0 );
 				var gameObject = (GameObject) Instantiate( playerPrefab, playerPosition, Quaternion.identity );
-				var player = gameObject.transform.GetComponentInChildren<HockeyTempPlayerController>();
+				var player = gameObject.transform.GetComponentInChildren<HockeyPlayerController>();
 				player.device = inputDevice;
 				Debug.Log("Player count: " + players.Count + " color: " + playerColors[players.Count]);
-				player.c1 = playerColors[players.Count];
+				player.color = playerColors[players.Count];
 				player.transform.parent = this.transform;
 				players.Add( player );
 
@@ -151,7 +151,7 @@ using InControl;
 		}
 
 
-		void RemovePlayer( HockeyTempPlayerController player )
+		void RemovePlayer( HockeyPlayerController player )
 		{
 			spawnPoints.Insert( 0, player.transform.position );
 			//players.Remove( player );

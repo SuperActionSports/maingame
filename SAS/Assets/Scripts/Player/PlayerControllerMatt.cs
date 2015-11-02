@@ -1,14 +1,24 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControllerMatt : MonoBehaviour {
+public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 
 	public Color color;
 	private Renderer rend;
     public Material playerMaterial;
     
     public bool armed;
-	public bool alive;	
+	public bool alive;
+//	public bool Alive
+//	{
+//		get{
+//		 return alive;
+//		 }
+//	}
+	public bool Alive()
+	{
+		return alive;	
+	}	
 	public float impactMod;
 	public bool previousFacingRight;
 	
@@ -27,11 +37,16 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private AudioSource sound;
     private Animator anim;
 	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla
-	public FencingGameManager wizard; // Game Wizard, handled by game
+	public FencingWizard wizard; // Game Wizard, handled by game
 	public int wizardNumber;
+	public bool movementAllowed;
+
+	public FencingStatsCard stats;
 
 	// Use this for initialization
 	void Start () {
+		stats = new FencingStatsCard ();
+		stats.ResetStats ();
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -69,19 +84,26 @@ public class PlayerControllerMatt : MonoBehaviour {
 //		paint = GetComponent<PaintSplatter>();
 //		paint.color = color;
 //		
-		wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
+		//wizard = GameObject.Find("FencingGameWizard").GetComponent<FencingGameManager>();
 		UpdateColor();
 		
 		//rapierScript.parent = this.gameObject;
-		rapierScript.ResetOwnership(this.gameObject);
+		rapierScript.ResetOwnership(this);
+		movementAllowed = true;
     }
     
 	// Update is called once per frame
 	void Update () {
-        if (alive)
+        if (alive && movementAllowed)
         {
             input.HandleInput();            
 		}	
+	}
+	
+	public void MovementAllowed(bool allowed)
+	{
+		movementAllowed = allowed;
+		Debug.Log("From Contrller. Movement is allowed? " + movementAllowed);
 	}
 	
 	public void setRun(float vel)
@@ -105,19 +127,25 @@ public class PlayerControllerMatt : MonoBehaviour {
 	{
 		anim.SetTrigger("Attack");
 		//rapierScript.Attack();
+		stats.AddStabAttempts ();
 	}
 			
 	private void MakeDead()
 	{
-		deathScript.Party();
+		deathScript.Party(color);
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
         cam.PlayShake(transform.position);
 		if (rapierScript != null) { rapierScript.Parry();}
         gameObject.SetActive(false);
+        Debug.Log("Finna update player count.");
         wizard.UpdatePlayerCount();
+        Debug.Log("Yeah.");
         Destroy(gameObject,3);
+		stats.EndLifeTime ();
+		stats.AddDeath ();
+
     }
     
     public void Counter()
@@ -137,7 +165,8 @@ public class PlayerControllerMatt : MonoBehaviour {
 		
 	public void ShieldOn()
 	{
-		shield.GetComponent<ShieldScript>().Activate();	
+		shield.GetComponent<ShieldScript>().Activate();
+		stats.AddBlockAttempts ();
 	}
 	
 	public void ShieldOff()
@@ -168,6 +197,8 @@ public class PlayerControllerMatt : MonoBehaviour {
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
 //        transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
+		stats.StartLifeTime ();
+
     }
     
 	public void PickUp (GameObject rapier)
@@ -177,16 +208,17 @@ public class PlayerControllerMatt : MonoBehaviour {
 		rapier.transform.localRotation = new Quaternion(270,270,0,0);
 		equipment = rapier.gameObject;
 		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
-		equipmentThrow.PickUp(this.gameObject);
+		equipmentThrow.PickUp(this);
 		rapierScript = rapier.GetComponent<RapierScript> ();
 		rapierScript.c = color;
-		rapierScript.ResetOwnership(this.gameObject);
+		rapierScript.ResetOwnership(this);
 		armed = true;
 	}
 	
 	public void ThrowRapier()
 	{
 		anim.SetTrigger("Throw");
+		stats.AddThrowAttempts ();
 	}
 	
 	public void ThrowEquipment()

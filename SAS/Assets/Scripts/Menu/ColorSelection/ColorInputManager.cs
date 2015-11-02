@@ -3,29 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 using InControl;
 	
-	// This example roughly illustrates the proper way to add multiple players from existing
-	// devices. Notice how InputManager.Devices is not used and no index into it is taken.
-	// Rather a device references are stored in each player and we use InputManager.OnDeviceDetached
-	// to know when one is detached.
-	//
-	// InputManager.Devices should be considered a pool from which devices may be chosen,
-	// not a player list. It could contain non-responsive or unsupported controllers, or there could
-	// be more connected controllers than your game supports, so that isn't a good strategy.
-	//
-	// To detect a joining player, we just check the current active device (which is the last
-	// device to provide input) for a relevant button press, check that it isn't already assigned
-	// to a player, and then create a new player with it.
-	//
-	// NOTE: Due to how Unity handles joysticks, disconnecting a single device will currently cause
-	// all devices to detach, and the remaining ones to reattach. There is no reliable workaround
-	// for this issue. As a result, a disconnecting controller essentially resets this example.
-	// In a more real world scenario, we might keep the players around and throw up some UI to let
-	// users activate controllers and pick their players again before resuming.
-	//
-	// This example could easily be extended to use bindings. The process would be very similar,
-	// just creating a new instance of your action set subclass per player and assigning the
-	// device to its Device property.
-	//
 	public class ColorInputManager : MonoBehaviour
 	{
 		public GameObject colorSelectionManagerPrefab;
@@ -48,7 +25,7 @@ using InControl;
 			try{
 				int sizeOfBtns = colorStarts.Count;
 			}
-			catch (NullReferenceException e)
+			catch
 			{
 				Debug.Log("You didn't set the Respawns prefab, dingus.");
 			}
@@ -131,7 +108,7 @@ using InControl;
 				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
 
-				Debug.Log("btn manager position: " + buttonManager.transform.position);
+				Debug.Log("Adding a new player with device: " + inputDevice);
 				layla.GetComponent<GameControlLiaison>().CreatePlayer(inputDevice);
 				return buttonManager;
 			}

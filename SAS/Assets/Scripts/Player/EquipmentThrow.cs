@@ -76,7 +76,7 @@ public class EquipmentThrow : MonoBehaviour {
 		
 	}	
 	
-	public void PickUp(GameObject newOwner)
+	public void PickUp(PlayerControllerMatt newOwner)
 	{
 		rb = transform.GetComponent<Rigidbody>();
 		DeactivateRigidbody();

@@ -198,6 +198,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 				if (groundHit.collider.CompareTag("Stage"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+					control.stats.AddJump();
 				}
 			}
 		}
@@ -217,6 +218,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 				if (groundHit.collider.CompareTag("Stage"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+					control.stats.AddJump();
 				}
 			}
 		}

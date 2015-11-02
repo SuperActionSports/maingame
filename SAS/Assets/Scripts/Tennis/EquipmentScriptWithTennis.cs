@@ -7,7 +7,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 	//public Text scoreText;
 	private int count;
 	public int speed;
-	private TennisController player;
+	private TennisControllerGans player;
 	//public Text winText;
 
 	// Use this for initialization
@@ -20,7 +20,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		player = GetComponentInParent<TennisController> ();
+		player = GetComponentInParent<TennisControllerGans> ();
 	}
 
     void OnTriggerEnter(Collider other)
@@ -35,6 +35,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 				{
 					Debug.Log("Hit detected, sending "+ (transform.right*-1));
 					victim.Kill(new Vector3 (transform.position.x * -1, transform.position.y,transform.position.z));
+					player.stats.AddKill();
 					//This causes no movement at the center of the field
 					count++;
 					SetScoreText();

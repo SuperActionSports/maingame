@@ -44,15 +44,16 @@ public class BaseballController : MonoBehaviour {
 			}
 		}
 		else if (other.gameObject.CompareTag ("Equipment")) {
-			int xHit = Mathf.FloorToInt(Random.Range(10,30));
-			xHit *= other.transform.eulerAngles.y > 0 ? -1 : 1;
+			int xForce = Mathf.FloorToInt(Random.Range(5,15));
+			xForce *= other.transform.eulerAngles.y > 0 ? -1 : 1;
 			rb.constraints = RigidbodyConstraints.None;
+			float yForce = Random.Range(2,5);
 			float zForce = 0;
 			while (Mathf.Abs(zForce) < 0.3)
 			{
-				zForce = Random.Range(-3,3);
+				zForce = Random.Range(-2,2);
 			}
-			ChangeOwnership(1, other.transform.parent.GetComponentInParent<BaseballPlayerController>().c1, new Vector3 (xHit, 10, zForce));
+			ChangeOwnership(1, other.transform.parent.GetComponentInParent<BaseballPlayerController>().color, new Vector3 (xForce, yForce, zForce));
 			
 		}
 		else if (other.gameObject.tag == "field") {

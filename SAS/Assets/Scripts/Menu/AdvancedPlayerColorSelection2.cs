@@ -15,7 +15,7 @@ public class AdvancedPlayerColorSelection2 : MonoBehaviour {
 		try {
 			numOfPlayers = PlayerPrefs.GetInt ("numOfPlayers");
 		}
-		catch (Exception e) {
+		catch {
 			Debug.Log("error loading numOfPlayers");
 		}
 		if (numOfPlayers == 2) {
