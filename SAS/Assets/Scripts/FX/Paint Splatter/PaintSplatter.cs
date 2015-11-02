@@ -4,135 +4,87 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PaintSplatter : MonoBehaviour {
-
-	public static PaintSplatter Instance;
-
+	
 	public Transform PaintSprite;
-	public Text p1score;
-	public Text p2score;
-	public Text p3score;
-	public Text p4score;
-
-	private int minSplash = 2;
-	private int maxSplash = 4;
-	private float splashRange = 2f;
-
-	private float minScale = 0;
-	private float maxScale = 2;
-
-	private bool characterHit = false;
-	public Color color;
-	private int count;
+	public GameObject[] givenPaintSprites = new GameObject[3];
+	public GameObject psHolder;
+	public ParticleSystem particles;
+	public Color c;
 	
-	public Material defaultMaterial;
-
-	// DEBUG TOOLS
-	private bool mDrawDebug;
-	private Vector3 mHitPoint;
-	private List<Ray> mRaysDebug = new List<Ray>();
-
-
-	// Use this for initialization
-	void Awake () 
-	{
-		if (Instance != null) {
-			//Debug.Log ("More than one painter has been instantiated in the scene");
-		}
-		Instance = this;
-
-		if(PaintSprite == null)
-		{
-			//Debug.Log("Missing paintSprite Prefab");
-		}
-		//int count = 0;
-		//SetCountText ();
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	//Start Futzing Here
-		if (Input.GetMouseButton (0)) 
-		{
-			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-			RaycastHit[] hits;
-
-			hits = Physics.RaycastAll(ray);
-
-			if(hits.Length > 0)
-			{
-				//Debug.Log ("hits is greater than 0: " + hits[0].collider.tag);
-				if(hits[0].collider.tag == "Player")
-				{
-					GameObject p = hits[0].collider.transform.gameObject;
-					//PlayerColorScript pcs = p.GetComponent<PlayerColorScript>();
-					//color = pcs.c;
-					Debug.Log ("Hit the character, color is " + color);
-					characterHit = true;
-				}
-				
-				
-				if(hits.Length > 1 && characterHit)
-				{
-						//Debug.Log ("Paint!");
-						Paint (hits[1].point + hits[1].normal * (splashRange/4f), color);
-						count++;
-						SetCountText();
-						characterHit = false;
-				}
-			}
-		}
+	public void Splatter(Vector3 position, Vector3 direction) {	
+		// Set the color's alpha to 1 so it appears as a solid color
+		c.a = 1f;
+		//dir = new Vector3(direction.x+Random.Range (-15f, 15f), direction.y-10f, direction.z+Random.Range (-15f, 15f));
+		//direction = new Vector3 (direction.x, direction.y, direction.z);
+		
+		CreateParticleSystem (position, direction);
+		GenerateSplats (position, direction);
 	}
 
-	public void Paint(Vector3 location, Color color)
+	public void CreateParticleSystem(Vector3 position, Vector3 direction)
 	{
-		mHitPoint = location;
-		mRaysDebug.Clear ();
-		mDrawDebug = true;
-
-		int n = -1;
-		int drops = Random.Range (minSplash, maxSplash);
+		GameObject pSystem = Instantiate (psHolder, position, Quaternion.identity) as GameObject;
+		particles = pSystem.GetComponentInChildren<ParticleSystem>();
+		particles.startColor = c;
+		
+		Debug.Log ("Direction: " + direction);
+		pSystem.transform.rotation = Quaternion.LookRotation (direction);
+	}
+	
+	public void GenerateSplats(Vector3 position, Vector3 direction)
+	{
 		RaycastHit hit;
+		Physics.Raycast (position, direction, out hit);
+		GameObject target = hit.collider.gameObject;
 
-		while (n <= drops) {
-			n++;
-			var fwd = transform.TransformDirection(Random.onUnitSphere * splashRange);
-			mRaysDebug.Add (new Ray(location, fwd));
+		GenerateTrail (position, hit.point);
+		int amountOfSplats = Random.Range (1, 4);
 
-			if(Physics.Raycast(location, fwd, out hit, splashRange)){
-				var paintSplat = GameObject.Instantiate(PaintSprite, hit.point, Quaternion.FromToRotation(Vector3.back, hit.normal)) as Transform;
-				SpriteRenderer renderer = paintSplat.GetComponent<SpriteRenderer>();
-				//renderer.material = defaultMaterial;
-				renderer.color = color;
-				var scaler = Random.Range(minScale, maxScale);
-				paintSplat.transform.localScale = new Vector3(paintSplat.transform.localScale.x * scaler,
-				                                              paintSplat.transform.localScale.y * scaler,
-				                                              paintSplat.transform.localScale.z);
+		GameObject[] splats = new GameObject[amountOfSplats];
+		Debug.Log ("amountOfSplats: " + amountOfSplats);
+		
+		for (int i = 0; i < amountOfSplats; i++)  {
+			// stop tecxture flickering by moving splats up pout of surface
+			var splatLocation = hit.point+hit.normal*.1f;
+			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
+			
+			// Instantiate paint splat
+			splats[i] = Instantiate(givenPaintSprites[Random.Range (0, givenPaintSprites.Length)], splatLocation, splatRotation) as GameObject;
 
-				var rater = Random.Range(0, 180);
-				paintSplat.transform.RotateAround(hit.point, hit.normal, rater);
-
-				Destroy(paintSplat.gameObject, 150);
-			}
-		}
-	}
-
-	void OnDrawGizmos()
-	{
-		if (mDrawDebug) {
-			Gizmos.DrawSphere (mHitPoint, 0.2f);
-			foreach(var r in mRaysDebug)
+			if (target.CompareTag ("Stage")) 
 			{
-				Gizmos.DrawRay(r);
+				splats[i].transform.localEulerAngles = new Vector3 (90, 0, 0);
+			} 
+			else if (target.CompareTag ("Wall")) 
+			{
+				if (Mathf.Abs (hit.normal.z) > Mathf.Abs (hit.normal.x)) { splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0); }
+			}
+			
+			if (splats[i] != null) {
+				splats[i].GetComponent<SpriteRenderer> ().color = c;
+				// Set a semi-random scale and rotation of the object
+				splats[i].transform.localScale = new Vector3 (Random.Range (1f, 4f), Random.Range (1f, 4f), Random.Range (1f, 4f));	
+				splats[i].transform.localEulerAngles = new Vector3 (splats[i].transform.localEulerAngles.x,
+				                                                    splats[i].transform.localEulerAngles.y, 
+				                                                    Random.Range (0f, 360f));
 			}
 		}
 	}
-
-	void SetCountText()
+	
+	public void GenerateTrail (Vector3 position, Vector3 point)
 	{
-//		p1score.text = "Score: " + count.ToString ();
-//		p2score.text = "Score: " + count.ToString ();
-//		p3score.text = "Score: " + count.ToString ();
-//		p4score.text = "Score: " + count.ToString ();
+		for(float i = 0.2f; i < point.magnitude; i = i + 0.05f)
+		{
+			Vector3 randomPoint = Vector3.Lerp(position, point, i);
+			RaycastHit hit;
+			Physics.Raycast (randomPoint, new Vector3(Random.Range (-0.5f, 0.5f), -1, 0), out hit);
+
+			var splatLocation = hit.point+hit.normal*.1f;
+			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
+
+			GameObject splat = Instantiate(givenPaintSprites[Random.Range (0, givenPaintSprites.Length)], splatLocation, splatRotation) as GameObject;
+			splat.transform.localEulerAngles = new Vector3 (90, 0, 0);
+			splat.GetComponent<SpriteRenderer> ().color = c;
+		}
 	}
 }
