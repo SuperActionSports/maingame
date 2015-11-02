@@ -188,8 +188,8 @@ public class FencingStatsCard : StatsCard {
 		stats = new Statistic[4];
 		stats[0] = new Statistic("KILLS", kills);
 		stats[1] = new Statistic("DEATHS", deaths);
-		stats[2] = new Statistic("K/D", KillDeathRatio(), false);
-		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, false);
+		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, Statistic.Format.percentage);
 	}
 
 	/*--------------------END FENCING--------------------*/
