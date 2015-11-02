@@ -4,22 +4,18 @@ using System.Collections;
 [RequireComponent(typeof(AudioSource))]
 public class BaseballLauncher : MonoBehaviour {
 
-	public float minXPow;
-	public float maxXpow;
-	public float minYPow;
-	public float maxYPow;
+	public float minXPow = -15;
+	public float maxXpow = -4;
+	public float minYPow = 6;
+	public float maxYPow = 8;
 	public Rigidbody ball ;
 	
 	void Start()
 	{
-		minXPow = -15;
-		maxXpow = -4;
-		minYPow = 6;
-		maxYPow = 8;
 	}				
 				
 	public void Pitch () {
-		Rigidbody egg = Instantiate(ball, transform.position-new Vector3(0,0,2.1f), Quaternion.identity) as Rigidbody ;
+		Rigidbody egg = Instantiate(ball, transform.position-new Vector3(0,0,0.8f), Quaternion.identity) as Rigidbody ;
 		float yPow = Random.Range(minYPow,maxYPow);
 		float xPow = Random.Range(minXPow,maxXpow);
 		//This should be relative to yPow. A higher yPow would mean a lower permissible x range. A lower yPow would necessitate a higher xPow.

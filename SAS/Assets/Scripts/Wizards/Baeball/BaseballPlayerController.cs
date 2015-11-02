@@ -53,16 +53,19 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
+	public BaseballStatsCard stats;
 
 	[Range(1,20)]
 	public float speedMagnitude;
-	[Range(20,60)]
+	[Range(1,30)]
 	public float jumpMagnitude;
 
-	public BaseballStatsCard stats;
+	
 	// Use this for initialization
 	void Start () {
+	Debug.Log("About to create new Baseball player stat card");
 		stats = new BaseballStatsCard ();
+		Debug.Log("Baseball player stat card: " + stats);
 	 	sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<BaseballCameraController>();
 		rb = GetComponent<Rigidbody>();
@@ -70,8 +73,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         equipment = transform.FindChild("BatHand").gameObject;
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
 		//rend.material.color = c;
-		speedMagnitude = 12f;
-		jumpMagnitude = 40;
+		speedMagnitude = 5f;
+		jumpMagnitude = 23.6f;
 		alive = true;
         anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
@@ -94,7 +97,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
             
             float xVel = GetXVelocity();
 			GetYVelocity();
-			if (transform.position.y > 1.6f)
+			if (transform.position.y > 1f)
 			{
 				anim.SetBool("Jumping",true);
 				stats.AddJump();

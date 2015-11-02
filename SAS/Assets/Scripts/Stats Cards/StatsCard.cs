@@ -183,8 +183,8 @@ public class StatsCard : MonoBehaviour {
 		stats = new Statistic[4];
 		stats[0] = new Statistic("KILLS", kills);
 		stats[1] = new Statistic("DEATHS", deaths);
-		stats[2] = new Statistic("K/D", KillDeathRatio(), false);
-		stats[3] = new Statistic("LONGEST LIFE", LongestTimeAlive, true);
+		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[3] = new Statistic("LONGEST LIFE", LongestTimeAlive, Statistic.Format.time);
 	}
 
 	public void ResetLongestTimeAlive() {
@@ -215,15 +215,34 @@ public class Statistic
 {
 	private string name;
 	private string value;
-	public Statistic(string name, float value, bool isTime)
+	public enum Format {none,time,ratio,percentage};
+	public Statistic(string name, float value, Format f)
 	{
 		this.name = name;
 		Debug.Log("Real KDR: " + value);
-		this.value = RoundFloat(value,2).ToString();
-		if (isTime)
-		{
-			Debug.Log ((value / 600) + (value / 60) + ":" + value % 60);
-			this.value =  string.Format("{0}:{01:00}", (int)value / 60, (int)value % 60);
+		
+		switch(f){
+			case (Format.percentage) :
+			{
+				this.value = RoundFloat(value,2).ToString();
+				this.value = value*100 + "%";
+				break;
+			}
+			case (Format.ratio):
+			{
+				this.value = RoundFloat(value,2).ToString();
+				break;
+			}
+			case (Format.time) :
+			{
+				this.value =  string.Format("{0}:{01:00}", (int)value / 60, (int)value % 60);	
+				break;
+			}
+			case (Format.none) :
+			{
+				this.value = value.ToString();
+				break;
+			}
 		}
 	}
 	public Statistic(string name, int value)

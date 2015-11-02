@@ -108,7 +108,7 @@ using InControl;
 				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
 
-//				Debug.Log("Adding a new player with device: " + inputDevice);
+				Debug.Log("Adding a new player with device: " + inputDevice);
 				layla.GetComponent<GameControlLiaison>().CreatePlayer(inputDevice);
 				return buttonManager;
 			}
