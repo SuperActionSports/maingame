@@ -154,8 +154,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -64.508194, y: 25.2303181, z: -20.7145786}
-  m_LocalScale: {x: 10, y: 1.75, z: 10}
+  m_LocalPosition: {x: 1.33523631, y: .140000001, z: 2.3775382}
+  m_LocalScale: {x: .46189487, y: .0808315948, z: .46189484}
   m_Children:
   - {fileID: 444074}
   - {fileID: 415862}
@@ -422,6 +422,7 @@ MonoBehaviour:
   respawnPoint: {x: 0, y: 0, z: 0}
   respawnTime: 0
   alive: 0
+  movementAllowed: 0
   xDirection: 0
   zDirection: 0
   xLookDirection: 0
@@ -433,6 +434,7 @@ MonoBehaviour:
   equipmentCollider: {fileID: 0}
   cam: {fileID: 0}
   wizard: {fileID: 0}
+  stats: {fileID: 0}
   vel: {x: 0, y: 0, z: 0}
 --- !u!114 &11484618
 MonoBehaviour:
@@ -511,6 +513,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: walkSpeed
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: .075000003
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

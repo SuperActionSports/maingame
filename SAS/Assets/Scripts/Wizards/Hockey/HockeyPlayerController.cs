@@ -84,9 +84,10 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		alive = true;
 		anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		walkSpeed = 10;
-		maxSpeed = 80;
+		walkSpeed = 3.5f;
+		maxSpeed = 10;
 		stats.ResetStats ();
+		Debug.Log(stats);
     }
 
 	void Update () {
@@ -98,7 +99,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 			zDirection = 0;
 			float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			rb.AddForce (2*(walkSpeed/Time.deltaTime)*(new Vector3(xVel, 0, zVel)));
+			rb.AddForce ((walkSpeed/Time.deltaTime)*(new Vector3(xVel, 0, zVel)));
 
 			// Look player in x and z directions using second stick
 //			xLookDirection = 0;
@@ -106,11 +107,6 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 //			float xLookVel = GetXLook();
 //			float zLookVel = GetZLook();
 			if (Vector2.SqrMagnitude(device.RightStick.Value) > 0.667) { transform.eulerAngles = new Vector3(0,device.RightStick.Angle-90,0); }
-			// Cap the max speed
-//			if (rb.velocity.x > maxSpeed) { rb.velocity = new Vector3(maxSpeed, 0, rb.velocity.z); }
-//			if (rb.velocity.x < -maxSpeed) { rb.velocity = new Vector3(-maxSpeed, 0, rb.velocity.z); }
-//			if (rb.velocity.z > maxSpeed) { rb.velocity = new Vector3(rb.velocity.x, 0, maxSpeed); }
-//			if (rb.velocity.z < -maxSpeed) { rb.velocity = new Vector3(rb.velocity.x, 0, -maxSpeed); }
 			rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x,-maxSpeed,maxSpeed),0,Mathf.Clamp(rb.velocity.z,-maxSpeed,maxSpeed));
 			vel = rb.velocity;
 
@@ -192,6 +188,11 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		rb.AddForce (100f * direction);
         MakeDead();    
     }
+	
+	public void GoalScored()
+	{
+		stats.AddSuccesfulGoal();
+	}
 
     public void Respawn()
     {
@@ -200,6 +201,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
         rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoint;
 		stats.StartLifeTime ();
+		wizard.FindPlayers();
     }
 
 	private float GetXVelocity() {
@@ -284,6 +286,8 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		if (other.CompareTag("Ball"))
 		{
+			Debug.Log("Hitting puck");
+			other.GetComponent<PuckMovement>().HitPuck(this.gameObject);
 			stats.AddPuckPossession();
 		}
 	}

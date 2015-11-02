@@ -13,24 +13,24 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	public GameObject winnerPlayer;			// Game, private
 	public GameObject victory;				// Game, private
 	private float victoryDuration;			// Game, private
-	private float gameWinTime;				// Layla, customized games
+	private float gameWinTime = 600;				// Layla, customized games
 	private float puckRespawnTime;
 	private int matchCount;					// Layla, customized games
-	private GolfCameraController cam;	// Game
+	private HockeyCamera cam;	// Game
 	//private FencingPlayerManager inputManager;	// Layla
 	//private InputDevice[] devices;				// Layla
-	private GolfCameraController camScript;	// Game
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	
 	public GameObject puck;
 	public GameObject puckRespawn;
 	
-	public float holeSpawnRangeX = 16;
-	public float holeSpawnRangeZ = 16;
-	public float minDistToBallFromHole = 4;
+	private bool finished = false;
+	public GameObject endGame;
+
 	// Use this for initialization
 	void Start () {
+		cam = Camera.main.GetComponent<HockeyCamera>();
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
 		liaison = layla.GetComponent<GameControlLiaison>();
@@ -49,11 +49,25 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		SetPlayers();
 		SpawnPuck();
 		ResetPuck();
-		camScript = Camera.main.GetComponent<GolfCameraController>();
-		gameWinTime = -1;
 		victoryDuration = 3;
+		cam.FindPlayers();
 	}
 	
+	void Update()
+	{
+		if (Time.time > gameWinTime && !finished)
+		{
+			DisableMovement();
+			for (int p = 0; p < players.Length; p++)
+			{
+				players[p].statCard = ((HockeyPlayerController)players[p].control).stats;
+				
+			}
+			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
+			finished = true;
+		}
+	
+	}
 	
 	private void SetPlayers()
 	{
@@ -142,10 +156,17 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		puck = GameObject.Instantiate(puck,puckRespawn.transform.position,Quaternion.identity) as GameObject;
 		puck.GetComponent<PuckMovement>().respawnDelay = 2.5f;
 		puck.GetComponent<PuckMovement>().respawnPoint = puckRespawn;
+		Debug.Log("Attempting to spawn puck");
+		cam.SeePuck(puck);
 	}
 	
 	public void ResetPuck()
 	{
+	}
+	
+	public void FindPlayers()
+	{
+		cam.FindPlayers();
 	}
 	
 	// Update is called once per frame

@@ -98,18 +98,18 @@ public class GameControlLiaison : MonoBehaviour {
 	
 	public void CreatePlayer(InputDevice device)
 	{
-		Debug.Log("Player at " + number_of_players + " is currently " + players[number_of_players]);
+		//Debug.Log("Player at " + number_of_players + " is currently " + players[number_of_players]);
 		Player p = new Player(device);
-		Debug.Log("P is " + p + " -- ");
+		//Debug.Log("P is " + p + " -- ");
 		//p.device = device;
 		players[number_of_players] = p;
 		//players[number_of_players] = new Player();
-		Debug.Log("Is now " + players[number_of_players]);
+		//Debug.Log("Is now " + players[number_of_players]);
 		//players[number_of_players].device = device;
-		Debug.Log("And their device is " + players[number_of_players].device);
+		//Debug.Log("And their device is " + players[number_of_players].device);
 		//only = device;
-		Debug.Log("Player at " + number_of_players + " - " + players[number_of_players]);
-		Debug.Log("Player at " + number_of_players + "'s color: " + players[number_of_players].color);
+		//Debug.Log("Player at " + number_of_players + " - " + players[number_of_players]);
+		//Debug.Log("Player at " + number_of_players + "'s color: " + players[number_of_players].color);
 		number_of_players++;
 	
 	}

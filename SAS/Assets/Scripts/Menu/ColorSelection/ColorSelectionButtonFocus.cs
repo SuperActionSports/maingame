@@ -1,13 +1,15 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 	public class ColorSelectionButtonFocus : MonoBehaviour
 	{
 
 		GameObject colorSelection;
+		public Text text;
 		void Start()
 		{
 		//	Debug.Log ("Position of focus: " + transform.localPosition);
 			colorSelection = transform.parent.gameObject;
+			text = GetComponent<Text>();
 		}
 		void Update()
 		{
@@ -19,7 +21,8 @@ using UnityEngine;
 
 				// Move toward same position as focused button.
 
-				transform.localPosition = Vector3.MoveTowards( transform.localPosition, focusedButton.transform.localPosition, Time.deltaTime * 3000.0f );
+				//transform.localPosition = Vector3.MoveTowards( transform.localPosition, focusedButton.transform.localPosition, Time.deltaTime * 3000.0f );
+			transform.position = Vector3.MoveTowards( transform.position, focusedButton.transform.position, Time.deltaTime * 3000.0f );
 			}
 			
 

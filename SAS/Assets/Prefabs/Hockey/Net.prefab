@@ -12,7 +12,7 @@ GameObject:
   - 64: {fileID: 6426854}
   m_Layer: 0
   m_Name: Net
-  m_TagString: Player
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -34,7 +34,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!1 &154236
 GameObject:
@@ -94,8 +94,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154236}
   m_LocalRotation: {x: 0, y: -1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: 1.95000005, y: 2.96000004, z: -5.01999998}
-  m_LocalScale: {x: .25, y: 7.1158824, z: 10.3917561}
+  m_LocalPosition: {x: 2.49000001, y: 2.96000004, z: -5.01999998}
+  m_LocalScale: {x: 1.5, y: 7.1158824, z: 10.1272449}
   m_Children: []
   m_Father: {fileID: 471942}
   m_RootOrder: 0
@@ -236,7 +236,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 12.3699999, y: 1, z: 20.2600002}
+  m_Size: {x: 20, y: 1, z: 18.5599995}
   m_Center: {x: 0, y: 7.5, z: 0}
 --- !u!65 &6533588
 BoxCollider:
@@ -260,8 +260,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.5, y: 1, z: 1}
-  m_Center: {x: -6.38000011, y: 0, z: 0}
+  m_Size: {x: -1.25999999, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!65 &6546568
 BoxCollider:
   m_ObjectHideFlags: 1
