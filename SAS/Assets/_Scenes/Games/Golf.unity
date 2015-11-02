@@ -37,6 +37,9 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
+--- !u!127 &3
+LevelGameManager:
+  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -65,7 +68,6 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 112000006, guid: 7dde8f13a1b26f94dbd9fa23441eb3b9,
     type: 2}
   m_RuntimeCPUUsage: 25
@@ -310,7 +312,7 @@ Transform:
   - {fileID: 315564093}
   - {fileID: 392026638}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!1 &152232666
 GameObject:
   m_ObjectHideFlags: 0
@@ -326,7 +328,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!220 &152232667
 LightProbeGroup:
   m_ObjectHideFlags: 0
@@ -356,7 +358,7 @@ Transform:
   m_LocalScale: {x: 16.2517719, y: 1, z: 16.7189255}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
 --- !u!1 &264311926
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,7 +415,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a2b0e5171f2e0814b921384083df0468, type: 2}
+  - {fileID: 2100000, guid: 70e5527e9d70dd84bb68b4bb8c04e337, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -537,7 +539,7 @@ Transform:
   - {fileID: 721917161}
   - {fileID: 1827646651}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1001 &511607473
 Prefab:
   m_ObjectHideFlags: 0
@@ -679,7 +681,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ForceModuleActive: 0
+  m_AllowActivationOnStandalone: 0
 --- !u!114 &671562059
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -697,7 +699,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_ForceModuleActive: 0
+  m_AllowActivationOnMobileDevice: 0
 --- !u!114 &671562060
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -723,7 +725,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
 --- !u!1 &689670877
 GameObject:
   m_ObjectHideFlags: 0
@@ -780,7 +782,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a2b0e5171f2e0814b921384083df0468, type: 2}
+  - {fileID: 2100000, guid: 70e5527e9d70dd84bb68b4bb8c04e337, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1048,7 +1050,7 @@ Transform:
   - {fileID: 1928668738}
   - {fileID: 1256270891}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
 --- !u!82 &841392749
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1065,7 +1067,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1347,7 +1348,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a2b0e5171f2e0814b921384083df0468, type: 2}
+  - {fileID: 2100000, guid: 70e5527e9d70dd84bb68b4bb8c04e337, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1582,7 +1583,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
 --- !u!114 &1049999474
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1837,7 +1838,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a2b0e5171f2e0814b921384083df0468, type: 2}
+  - {fileID: 2100000, guid: 70e5527e9d70dd84bb68b4bb8c04e337, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 1
@@ -1970,7 +1971,7 @@ RectTransform:
   m_Children:
   - {fileID: 1403876073}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2321,7 +2322,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!1 &1827646649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2410,7 +2411,7 @@ Transform:
   - {fileID: 1272132981}
   - {fileID: 1057508631}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1880567082
 GameObject:
   m_ObjectHideFlags: 0
@@ -2470,7 +2471,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!1 &1928668737
 GameObject:
   m_ObjectHideFlags: 0
@@ -2630,7 +2631,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: a2b0e5171f2e0814b921384083df0468, type: 2}
+  - {fileID: 2100000, guid: 70e5527e9d70dd84bb68b4bb8c04e337, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

@@ -16,6 +16,7 @@ public class PuckMovement : MonoBehaviour {
 	public float respawnDelay;
 	private bool willRespawn;
 	private GameObject lastHit = null;
+	public float friction = 1;
 	
 	// Use this for initialization
 	void Start () {
@@ -36,6 +37,7 @@ public class PuckMovement : MonoBehaviour {
 			Respawn();
 			willRespawn = false;
 		}
+		rb.velocity *= friction;
 	}
 
 	void OnTriggerEnter (Collider col)

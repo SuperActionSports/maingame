@@ -85,8 +85,9 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
 		walkSpeed = 3.5f;
-		maxSpeed = 20;
+		maxSpeed = 10;
 		stats.ResetStats ();
+		Debug.Log(stats);
     }
 
 	void Update () {

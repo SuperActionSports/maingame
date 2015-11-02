@@ -10,8 +10,8 @@ public class HockeyCamera : MonoBehaviour {
 	public float minCameraPos;
 	public float maxCameraPos;
 	public float yoffset;
-	private float maxYOffset;
-	private float minYOffset;
+	public float maxYOffset;
+	public float minYOffset;
 	public float zoffset;
 	[Range(1,100)]
 	public float debugLerp;
@@ -23,7 +23,9 @@ public class HockeyCamera : MonoBehaviour {
 	public float maxX;
 	public float maxZ;
 	public float distanceModifier = 2;
-	
+	Vector3 collectivePos = new Vector3();
+	public Vector2 xExtrema;
+	public Vector2 zExtrema;
 	void Start () {
 		players = GameObject.FindGameObjectsWithTag("Player");
 		positions = new Vector3[players.Length];
@@ -32,8 +34,10 @@ public class HockeyCamera : MonoBehaviour {
 		cam = GetComponent<Camera>();
 		shake = false;
 		originalPosition = transform.position;
-		maxYOffset = 8.5f;
-		minYOffset = 27;
+		xExtrema = new Vector2(-4,4);
+		zExtrema = new Vector2(5,-5);
+		maxYOffset = 27f;
+		minYOffset = 8.5f;
 	}
 	
 	void Update() {
@@ -45,28 +49,38 @@ public class HockeyCamera : MonoBehaviour {
 	void LateUpdate () {
 		float maxDist = 0;
 		
+		
 		// Collect current position of each player
 		for (int i = 0; i < players.Length; i++) 
 			{
+			collectivePos += players[i].transform.position;
 			for (int j = i; j < players.Length; j++)
 				{
-				if (Vector3.Distance(players[i].transform.position,players[j].transform.position) > maxDist)
+					if (Vector3.Distance(players[i].transform.position,players[j].transform.position) > maxDist)
+						{
+						maxDist = Vector3.Distance(players[i].transform.position,players[j].transform.position);
+						}
+					if (Vector3.Distance(puck.transform.position,players[j].transform.position) > maxDist)
 					{
-					maxDist = Vector3.Distance(players[i].transform.position,players[j].transform.position);
+						maxDist = Vector3.Distance(puck.transform.position,players[j].transform.position);
 					}
-				if (Vector3.Distance(puck.transform.position,players[j].transform.position) > maxDist)
-				{
-					maxDist = Vector3.Distance(puck.transform.position,players[j].transform.position);
-				}
 				}
 			}
-		yoffset = maxDist;
-		yoffset *= distanceModifier;	
+			collectivePos /= (players.Length * 2);
+			collectivePos += puck.transform.position;
+			collectivePos /= 2;
+			
+			//collectivePos /= 2;
+			yoffset = maxDist;
+			yoffset *= distanceModifier;	
+			//collectivePos = new Vector3(Mathf.Clamp(collectivePos.x,xExtrema.x,xExtrema.y),0,Mathf.Clamp(collectivePos.z,zExtrema.x,zExtrema.y));
 
 		yoffset = Mathf.Clamp(yoffset,minYOffset,maxYOffset);
 		if (puck != null)
 		{
-			transform.position = Vector3.Lerp(transform.position,new Vector3(puck.transform.position.x,yoffset,puck.transform.position.z),Time.deltaTime * debugLerp);
+			//transform.position = Vector3.Lerp(transform.position,new Vector3(puck.transform.position.x,yoffset,puck.transform.position.z),Time.deltaTime * debugLerp);
+			transform.position = Vector3.Lerp(transform.position,new Vector3(collectivePos.x,yoffset,collectivePos.z),Time.deltaTime * debugLerp);
+			//transform.position = Vector3.Lerp(transform.position,collectivePos,Time.deltaTime*debugLerp);
 		}
 		else
 		{
@@ -96,5 +110,11 @@ public class HockeyCamera : MonoBehaviour {
 	public void FindPlayers()
 	{
 		players = GameObject.FindGameObjectsWithTag("Player");
+	}
+	
+	void OnDrawGizmos()
+	{
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(collectivePos,1);
 	}
 }
