@@ -34,6 +34,7 @@ using InControl;
 				spawnPoints.Add(c.transform.position);
 			}
 			layla = GameObject.Find("Layla");
+			Debug.Log("Layla: " + layla);
 			
 		
 		}

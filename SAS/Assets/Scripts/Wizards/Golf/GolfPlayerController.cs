@@ -75,7 +75,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
         equipmentCollider.enabled = false;
 		paint = GetComponent<PaintSplatter> ();
-		paint.c = c1;
+		paint.c = color;
 		// Set up color variables
 		GetComponent<Renderer>().material.color = color;
 		SetColorToParent[] kids = GetComponentsInChildren<SetColorToParent>();

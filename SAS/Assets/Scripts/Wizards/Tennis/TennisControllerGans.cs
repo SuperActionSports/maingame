@@ -65,7 +65,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		respawnPointsTeamB = GameObject.FindGameObjectsWithTag ("RespawnPointTeamB");
 
 		paint = GetComponent<PaintSplatter>();
-		paint.color = color;
+		paint.c = color;
 		hitForce = 25;
 		stats.ResetStats ();
 		SetOriginSide ();
@@ -142,7 +142,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	{
 		alive = false;
 		//Need the normal of the local x axis of bat
-		paint.Paint (transform.position, paint.color);
+		//paint.Platter (transform.position, paint.color);
         GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);

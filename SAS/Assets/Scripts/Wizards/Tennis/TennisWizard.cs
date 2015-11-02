@@ -31,9 +31,17 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			respawnPointPositions[i] = respawnPoints[i].transform.position;
 		}
 	Debug.Log("Wizard is setting " + players.Length +" players.");
+	ResetExistingPlayers();
 	SetPlayers();
 	}
 	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
+	}
 	
 	private void SetPlayers()
 	{

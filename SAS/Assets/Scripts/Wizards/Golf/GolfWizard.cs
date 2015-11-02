@@ -49,12 +49,21 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		}
 		//players = liaison.players;
 		Debug.Log("Wizard is setting " + players.Length +" players.");
+		ResetExistingPlayers();
 		SetPlayers();
 		SpawnBallAndHole();
 		ResetBallAndHole();
 		camScript = Camera.main.GetComponent<GolfCameraController>();
 		finished = false;
 		victoryDuration = 3;
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
 	}
 	
 	void Update()

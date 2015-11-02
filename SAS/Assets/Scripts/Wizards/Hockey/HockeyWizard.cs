@@ -46,11 +46,21 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		}
 		//players = liaison.players;
 		Debug.Log("Wizard is setting " + players.Length +" players.");
+		ResetExistingPlayers();
 		SetPlayers();
 		SpawnPuck();
 		ResetPuck();
 		victoryDuration = 3;
-		cam.FindPlayers();
+		
+		//cam.FindPlayers();
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
 	}
 	
 	void Update()
@@ -77,6 +87,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		{
 			
 		case (1):
+			Debug.Log("Spawning one." + ShouldBeSpawned(players[0]));
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
 			break;
 		case(2):
@@ -133,8 +144,10 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	
 	private HockeyPlayerController Spawn(Vector3 position, Player player)
 	{
+		Debug.Log("Player's gameobject - " + player.gameObject + " --------------------------- ");
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
+		Debug.Log("Player's gameobject after - " + player.gameObject + " --------------------------- ");
 		HockeyPlayerController pController = p.GetComponent<HockeyPlayerController>();
 		player.control = pController;
 		pController.color = player.color;
@@ -156,7 +169,6 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		puck = GameObject.Instantiate(puck,puckRespawn.transform.position,Quaternion.identity) as GameObject;
 		puck.GetComponent<PuckMovement>().respawnDelay = 2.5f;
 		puck.GetComponent<PuckMovement>().respawnPoint = puckRespawn;
-		Debug.Log("Attempting to spawn puck");
 		cam.SeePuck(puck);
 	}
 	

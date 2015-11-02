@@ -36,7 +36,7 @@ public class CreditsButtonManager : MonoBehaviour
 		Debug.Log ("Btn: " + focusedButton.name);
 		if (focusedButton.name == "Back") 
 		{
-			Application.LoadLevel ("AdvancedMainMenuControl");
+			Application.LoadLevel ("MainMenu");
 		}
 	}
 		

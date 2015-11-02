@@ -17,6 +17,11 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		filteredDirection = new TwoAxisInputControl();
 		filteredDirection.StateThreshold = 0.5f;
 	}
+	
+	void Start()
+	{
+		Time.timeScale = 1;
+	}
 
 	void Update()
 	{

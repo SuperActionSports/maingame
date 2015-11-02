@@ -41,10 +41,19 @@ public class FencingWizard : MonoBehaviour,IWizard {
 		}
 	//players = liaison.players;
 	Debug.Log("Wizard is setting " + players.Length +" players.");
+	ResetExistingPlayers();
 	SetPlayers();
 	camScript = Camera.main.GetComponent<FencingCameraController>();
 	gameWinTime = -1;
 	victoryDuration = 3;
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
 	}
 	
 	

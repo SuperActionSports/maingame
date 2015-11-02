@@ -36,7 +36,7 @@ public class SetColorToParent : MonoBehaviour {
 	
 	public void ResetColor(Color c)
 	{
-		Debug.Log(gameObject.name + " changing my color to " + c);
+	//	Debug.Log(gameObject.name + " changing my color to " + c);
 		Renderer r = GetComponent<Renderer>();
 		r.material.color = c;
 		this.c = c;

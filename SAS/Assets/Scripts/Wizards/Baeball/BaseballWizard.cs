@@ -47,6 +47,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		//players = liaison.players;
 		Debug.Log("Wizard is setting " + players.Length +" players.");
 		respawnRate = 2.5f;
+		ResetExistingPlayers();
 		SetPlayers();
 		//Magic Number
 		pitchGap = 2;
@@ -58,6 +59,13 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		finished = false;
 	}
 	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
+	}
 	
 	private void SetPlayers()
 	{
@@ -123,8 +131,10 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	
 	private BaseballPlayerController Spawn(Vector3 position, Player player)
 	{
+		Debug.Log("Player's GO is " + player.gameObject);
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
+		Debug.Log("Player's GO is now " + player.gameObject);
 		BaseballPlayerController pController = p.GetComponent<BaseballPlayerController>();
 		player.control = pController;
 		pController.color = player.color;

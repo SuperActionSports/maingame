@@ -99,7 +99,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 			zDirection = 0;
 			float xVel = GetXVelocity();
 			float zVel = GetZVelocity();
-			rb.AddForce ((walkSpeed/Time.deltaTime)*(new Vector3(xVel, 0, zVel)));
+			if (Time.timeScale > 0) { rb.AddForce ((walkSpeed/Time.deltaTime)*(new Vector3(xVel, 0, zVel)));}
 
 			// Look player in x and z directions using second stick
 //			xLookDirection = 0;
