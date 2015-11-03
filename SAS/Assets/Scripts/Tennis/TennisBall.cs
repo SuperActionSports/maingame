@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TennisBall : MonoBehaviour {
 
+
+	//Tracking the tennis ball for the stats cards
 	public TennisControllerGans lastPlayerHit;
 	public TennisControllerGans SecondToLastPlayerHit;
 	public bool lPHOrigin;
