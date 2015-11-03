@@ -27,6 +27,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	private GameControlLiaison liaison;
 	public GameObject endGame;
 	private bool finished;
+	private float startTime;
 	// Use this for initialization
 	void Start () {
 		if (layla == null) { layla = GameObject.Find("Layla");
@@ -45,13 +46,14 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 			respawnPointPositions[i] = respawnPoints[i].transform.position;
 		}
 		//players = liaison.players;
-		Debug.Log("Wizard is setting " + players.Length +" players.");
+		Debug.Log("Wizard is setting " + players.Length + " players.");
 		respawnRate = 2.5f;
 		ResetExistingPlayers();
 		SetPlayers();
+		startTime = Time.time;
 		//Magic Number
 		pitchGap = 2;
-		gameWinTime = 35;
+		gameWinTime = 48;
 		lastPitch = Mathf.Infinity;
 		madnessMod = 5;
 		madnessTime = 57;
@@ -148,7 +150,8 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	}
 	// Update is called once per frame
 	void Update () {
-		if(Time.time < gameWinTime)
+		float currentTime = Time.time - startTime;
+		if(currentTime < gameWinTime)
 		{
 			//Debug.Log(Time.time); 
 			if (Time.time - lastPitch >= pitchGap && (Time.time < madnessTime || Time.time > madnessGap+madnessTime)) {
