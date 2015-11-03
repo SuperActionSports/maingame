@@ -116,7 +116,9 @@ public class StatsCard : MonoBehaviour {
 		//ResetKDRatio ();
 		ResetAttackSuccessRate ();
 	}
-
+	/// <summary>
+	/// Adds the kill.
+	/// </summary>
 	public void AddKill()	{
 		kills++;
 		killStreak++;
@@ -285,8 +287,12 @@ public class Statistic
 	private float RoundFloat(float value, int places)
 	{
 		return Mathf.Round(value*(Mathf.Pow(10,places))) / Mathf.Pow(10,places);
+
 	}
-	
+	/// <summary>
+	/// Gets the k D ratio.
+	/// </summary>
+	/// <value>The k D ratio.</value>
 	public string kDRatio
 	{
 		get { return "Wrong KDR, dingus."; }

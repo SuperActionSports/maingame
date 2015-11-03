@@ -41,6 +41,7 @@ public class BaseballStatsCard : StatsCard {
 		//Debug.Log ("stats card before calculation: " + HitsMade + " / " + HitsAttempted);
 		if (HitsAttempted != 0) {
 			BattingAverage = (float)HitsMade / (float)HitsAttempted;
+			Add
 		}
 		//Debug.Log ("Current batting average: " + BattingAverage);
 	}
