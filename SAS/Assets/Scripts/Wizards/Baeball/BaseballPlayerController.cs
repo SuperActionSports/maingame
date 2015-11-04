@@ -82,8 +82,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		impactMod = 7.5f;
         GetComponent<Renderer>().material.color = color;
 		paint = GetComponent<PaintSplatterProjector>();
+		paint.Initialize (color);
 		stats.ResetStats ();
-		paint.c = color;
     }
     
 	

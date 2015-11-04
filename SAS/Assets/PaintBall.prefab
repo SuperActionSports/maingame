@@ -86,11 +86,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 138716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec16dadce6df8174882e77ef3ae79e56, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e2628ec8fde2214bb5eb983dbb35242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  splatProjector: {fileID: 156798, guid: 886059b2c7dbacd49a1f7646ec255b70, type: 2}
-  color: {r: 1, g: 0, b: 0, a: 1}
+  splatProjector: {fileID: 156798, guid: d93ef6d7caf9ddd4d9494e347999527c, type: 2}
+  color: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &13521494
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -113,7 +113,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: splatProjector
       value: 
-      objectReference: {fileID: 156798, guid: 886059b2c7dbacd49a1f7646ec255b70, type: 2}
+      objectReference: {fileID: 156798, guid: d93ef6d7caf9ddd4d9494e347999527c, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 138716}
