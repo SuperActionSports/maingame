@@ -41,8 +41,12 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	public int wizardNumber;
 	public bool movementAllowed;
 
+	public FencingStatsCard stats;
+
 	// Use this for initialization
 	void Start () {
+		stats = new FencingStatsCard ();
+		stats.ResetStats ();
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -84,7 +88,7 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 		UpdateColor();
 		
 		//rapierScript.parent = this.gameObject;
-		rapierScript.ResetOwnership(this.gameObject);
+		rapierScript.ResetOwnership(this);
 		movementAllowed = true;
     }
     
@@ -122,7 +126,7 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	public void Attack()
 	{
 		anim.SetTrigger("Attack");
-		//rapierScript.Attack();
+		stats.AddStabAttempts ();
 	}
 			
 	private void MakeDead()
@@ -138,6 +142,9 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
         wizard.UpdatePlayerCount();
         Debug.Log("Yeah.");
         Destroy(gameObject,3);
+		stats.EndLifeTime ();
+		stats.AddDeath ();
+
     }
     
     public void Counter()
@@ -157,7 +164,8 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 		
 	public void ShieldOn()
 	{
-		shield.GetComponent<ShieldScript>().Activate();	
+		shield.GetComponent<ShieldScript>().Activate();
+		stats.AddBlockAttempts ();
 	}
 	
 	public void ShieldOff()
@@ -188,6 +196,8 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
         rb.velocity = new Vector3(0, 0, 0);
         anim.SetBool("Alive", true);
 //        transform.position = respawnPoints[Mathf.FloorToInt(Random.Range(0, respawnPoints.Length))].transform.position;
+		stats.StartLifeTime ();
+
     }
     
 	public void PickUp (GameObject rapier)
@@ -197,16 +207,17 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 		rapier.transform.localRotation = new Quaternion(270,270,0,0);
 		equipment = rapier.gameObject;
 		equipmentThrow = rapier.GetComponent<EquipmentThrow>();
-		equipmentThrow.PickUp(this.gameObject);
+		equipmentThrow.PickUp(this);
 		rapierScript = rapier.GetComponent<RapierScript> ();
 		rapierScript.c = color;
-		rapierScript.ResetOwnership(this.gameObject);
+		rapierScript.ResetOwnership(this);
 		armed = true;
 	}
 	
 	public void ThrowRapier()
 	{
 		anim.SetTrigger("Throw");
+		stats.AddThrowAttempts ();
 	}
 	
 	public void ThrowEquipment()

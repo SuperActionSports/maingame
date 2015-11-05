@@ -126,7 +126,6 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	public void Attack()
 	{
 		anim.SetTrigger("Attack");
-		//rapierScript.Attack();
 		stats.AddStabAttempts ();
 	}
 			

@@ -208,8 +208,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167704}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -42, y: 32.7700005, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: .714039981, y: .842000008, z: 0}
+  m_LocalScale: {x: .300000012, y: .300000012, z: .300000012}
   m_Children:
   - {fileID: 447596}
   - {fileID: 433218}
@@ -5273,6 +5273,8 @@ MonoBehaviour:
   input: {fileID: 0}
   wizard: {fileID: 0}
   wizardNumber: 0
+  movementAllowed: 0
+  stats: {fileID: 0}
 --- !u!114 &11430570
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5296,6 +5298,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trc: {r: 0, g: 0, b: 0, a: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11447296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5308,12 +5311,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintSprite: {fileID: 426486, guid: d334eee982cce4735929a011e9def078, type: 2}
-  p1score: {fileID: 0}
-  p2score: {fileID: 0}
-  p3score: {fileID: 0}
-  p4score: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  defaultMaterial: {fileID: 2100000, guid: 3442c11e97a6f2c4d9cacdafdd8774fe, type: 2}
+  givenPaintSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  psHolder: {fileID: 0}
+  particles: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11452246
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5397,6 +5401,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trc: {r: 0, g: 0, b: 0, a: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11477504
 MonoBehaviour:
   m_ObjectHideFlags: 1
