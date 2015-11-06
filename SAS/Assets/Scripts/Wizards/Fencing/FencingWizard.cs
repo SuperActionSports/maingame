@@ -118,23 +118,20 @@ public class FencingWizard : MonoBehaviour,IWizard {
 		else { return !p.control.Alive(); } 
 	}
 	
-	private PlayerControllerMatt Spawn(Vector3 position, Player player)
+	private FencingPlayerController Spawn(Vector3 position, Player player)
 	{
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
-		PlayerControllerMatt pController = p.GetComponent<PlayerControllerMatt>();
+		FencingPlayerController pController = p.GetComponent<FencingPlayerController>();
 		player.control = pController;
 		// Replace this noise with the player prefs file information
-		p.GetComponent<PlayerControllerMatt>().color = player.color;
-		p.GetComponent<PlayerControllerMatt>().wizard = this;
-//		p.GetComponent<PlayerControllerMatt>().wizardNumber = playerNumber;
+		p.GetComponent<FencingPlayerController>().color = player.color;
+		p.GetComponent<FencingPlayerController>().wizard = this;
 		
 		// Replace this with the device information from userprefs
 		p.GetComponent<PlayerInputHandlerMatt>().device = player.device;
-		//players[playerNumber] = p.GetComponent<PlayerInputHandlerMatt>();
 		
 		remainingPlayers++;
-		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return pController;
 	}
 	// Update is called once per frame
@@ -145,6 +142,7 @@ public class FencingWizard : MonoBehaviour,IWizard {
 			SetPlayers();
 			camScript.won = false;
 			camScript.RecountPlayers();
+			gameWinTime = -1;
 		}
 	}
 	

@@ -92,7 +92,7 @@ public class FencingCameraController : MonoBehaviour {
 		for (int i = 0; i < players.Length; i++) {
 		//Debug.Log("Players length: " + players.Length);
 			if (players[i] != null && 
-				players[i].GetComponent<PlayerControllerMatt>().alive)
+				players[i].GetComponent<FencingPlayerController>().Alive())
 			{
 				for (int g = i; g < players.Length; g++)
 				{
@@ -113,13 +113,13 @@ public class FencingCameraController : MonoBehaviour {
 		int living = 0;
 		Vector3[] positions = new Vector3[players.Length];
 		for (int i = 0; i < players.Length; i++) {
-			if (players[i].GetComponent<PlayerControllerMatt>() == null)
+			if (players[i].GetComponent<FencingPlayerController>() == null)
 			{
 				Debug.Log(players[i].gameObject.name + " has no Controller Component!" );
 			}
 			else {
-				PlayerControllerMatt p = players[i].GetComponent<PlayerControllerMatt>();
-				if (p.alive)
+				FencingPlayerController p = players[i].GetComponent<FencingPlayerController>();
+				if (p.Alive())
 				{
 					positions [i] = p.transform.position;
 					x += players[i].transform.position.x;
@@ -155,7 +155,7 @@ public class FencingCameraController : MonoBehaviour {
 	}
 	
 	IEnumerator Shake() {
-		
+		/*
 		float duration = 0f;
 		Vector2 xy = new Vector3(cam.transform.position.x,cam.transform.position.y);
 		Vector3 camOrigin = Camera.main.transform.position;
@@ -167,11 +167,12 @@ public class FencingCameraController : MonoBehaviour {
 			xy = new Vector2(Mathf.PerlinNoise(Time.time*shakeIntensity,0) * shakeMagnitude.x,Mathf.PerlinNoise(0,Time.time*shakeIntensity)*shakeMagnitude.y);
 			xy += oldPosition;
 			cam.transform.position = new Vector3(xy.x, xy.y, cam.transform.position.z);
-			yield return null;
+			*/
+			yield return null;/*
 		}
 		
 		cam.transform.position = Vector3.Lerp(cam.transform.position,oldPosition,Time.deltaTime * debugLerp);
-		
+		*/
 	}
 	
 	public void FollowWinner(GameObject winner)

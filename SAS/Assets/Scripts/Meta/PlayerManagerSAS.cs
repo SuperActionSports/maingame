@@ -139,7 +139,7 @@ namespace MultiplayerBasicExample
 				var player = gameObject.GetComponent<PlayerInputHandlerMatt>();
 				player.device = inputDevice;
 			//	Debug.Log("Player count: " + players.Count + " color: " + playerColors[players.Count]);
-				player.GetComponent<PlayerControllerMatt>().color = playerColors[players.Count];
+				//player.GetComponent<PlayerControllerMatt>().color = playerColors[players.Count];
 				player.transform.parent = this.transform;
 				players.Add( player );
 

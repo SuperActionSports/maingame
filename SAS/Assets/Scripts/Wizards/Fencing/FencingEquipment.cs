@@ -1,17 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FencingEquipmentScript : MonoBehaviour {
+public class FencingEquipment : MonoBehaviour {
 
-	/*
+	
 	bool Owned;
-	GameObject Owner
-	bool armed;
+	public GameObject owner;
+	public bool armed;
 	bool thrown;
-	CapsuleCollider attackCollider
-	MeshCollider RigidCollider
-	SphereCollider PickUpCollider
-	Rigidbody rb;
+	CapsuleCollider attackCollider;
+	MeshCollider rigidCollider;
+	SphereCollider pickUpCollider;
 	public float speed; 
 	private Rigidbody rb; 
 	public float timeTilGravity;
@@ -19,80 +18,150 @@ public class FencingEquipmentScript : MonoBehaviour {
 	public float directionModifier;
 	private RapierScript rapierScript;
 	private float normalThrowForce;
-	private float runThrowForce;	
-	*/
-
+	private float runThrowForce;
+	private float throwTime;
+	
 	// Use this for initialization
 	void Start () {
-	
+		pickUpCollider = GetComponent<SphereCollider>();
+		attackCollider = GetComponent<CapsuleCollider>();
+		rigidCollider  = GetComponent<MeshCollider>();
+		pickUpCollider.enabled = false;
+		attackCollider.enabled = false;
+		rigidCollider.enabled = false;		
+		
+		rb = GetComponent<Rigidbody>();
+		SetRigidbodyForEquip();
+		
+		normalThrowForce = 20;
+		runThrowForce = 30;
+		timeTilGravity = 0.5f;
+		throwTime = Mathf.Infinity;
+		thrown = false;
+		
+		armed = false;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+		if (Time.time >= throwTime + timeTilGravity)
+		{
+			Debug.Log("Throw time: " + throwTime + " Time: " + Time.time + " time til gravity: " + timeTilGravity);
+			rb.useGravity = true;
+			throwTime = Mathf.Infinity;
+		}
+	}
+		
+	public void SetRigidbodyForEquip()
+	{
+		rigidCollider.enabled = false;
+		//rb.detectCollisions = true;
+		rb.isKinematic = true;	
+		rb.useGravity = false;
+		rb.constraints = RigidbodyConstraints.FreezeAll;
 	}
 	
-	/*
-	void OnCollisionEnter(collider other)
+	public void SetRigidbodyForThrow()
 	{
-		if (other.gameObject.CompareTag("Player")
+		rigidCollider.enabled = true;
+		rb.detectCollisions = true;
+		rb.isKinematic = false;
+		rb.useGravity = false;
+		rb.constraints = RigidbodyConstraints.FreezePositionZ;
+	}
+	
+	public void SetRigidbodyForDrop()
+	{
+		rigidCollider.enabled = true;
+		rb.detectCollisions = true;
+		rb.isKinematic = false;
+		rb.useGravity = true;
+		rb.constraints = RigidbodyConstraints.FreezePositionZ;
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.CompareTag("Player"))
 		{
-			otherPlayerScript = other.GetComponent<FencingPlayerController>();
-			if (other.GameObject != owner)
+			FencingPlayerController otherPlayerScript = other.GetComponent<FencingPlayerController>();
+			if (other.gameObject != owner)
 			{
 				if (armed)
 				{
 					if (other.GetComponent<FencingPlayerController>().GetHit())
 					{
-						owner.otherPlayerScript.AddKill();
+						owner.GetComponent<FencingPlayerController>().AddKill();
 					}
-					Deflect();
+					if (thrown)
+					{
+						Deflect();
+						thrown = false;
+					}
 				}
-				else // Not dangerous, but colliding with a non-owner player, so it's a pick-up
+				else if (owner == null)// Not armed, but colliding with a non-owner player, so it's a pick-up
 				{
-					owner = otherPlayerScript.PickUp(other.gameObject);
-					color = otherPlayerScript.color;
-					ResetColor();
-					pickUpCollider.enabled = false;
+					owner = otherPlayerScript.PickUp(this.gameObject);
+					if (owner != null)
+					{
+						ResetColor(otherPlayerScript.color);
+						pickUpCollider.enabled = false;
+						transform.localPosition = new Vector3(0.5f,0,0);
+						transform.localEulerAngles = new Vector3(0,0,270);
+						SetRigidbodyForEquip();
+					}
 				}
 			}
 		}
-		else //Rapier or stage or demons
+		else if (other.gameObject.CompareTag("Stage") || other.gameObject.CompareTag("Equipment")) //Rapier or stage. Does not handle demons.
 		{
 			Deflect();
-			pickUpCollider.enabled = true;
 		}
 	}
 	
-		public void ResetColor()
+	public void ResetColor(Color c)
 	{
-		GetComponent<Renderer>().material.color = color;
-		GetComponent<TrailRenderer>().material.color = color;
+		GetComponent<Renderer>().material.color = c;
+		GetComponent<TrailRenderer>().material.color = c;
 	}
 	
 	public void StartAttack()
 	{
 		attackCollider.enabled = true;
-		dangerous = true;
+		armed = true;
 	}
 	
 	public void EndAttack()
 	{
 		attackCollider.enabled = false;
-		dangerous = false;
+		armed = false;
 	}
 	
 	public void Deflect()
 	{
-	
-		dangerous = false;
-		color = Color.black;
-		ResetColor();	
+		if (owner != null) 
+		{
+			owner.GetComponent<FencingPlayerController>().Disarm();
+		}
+		transform.parent = null;
+		owner = null;
+		armed = false;
+		ResetColor(Color.black);	
+		EndAttack();
+		SetRigidbodyForDrop();
+		pickUpCollider.enabled = true;
 	}
 	
-	public void Throw()
+	public void Throw(bool runThrow)
 	{
-		Vector3 force = runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce;
+		thrown = true;
+		transform.parent = null;
+		transform.eulerAngles = new Vector3(0,0,directionModifier > 0 ? 270 : 90);
+		Vector3 force = (runThrow ? transform.up * runThrowForce : transform.up * normalThrowForce);
+		SetRigidbodyForThrow();
+		rb.constraints = RigidbodyConstraints.FreezePositionZ;
+		throwTime = Time.time;
+		rb.AddForce(force,ForceMode.VelocityChange);
+		StartAttack();
 	}
-	*/
+	
 }

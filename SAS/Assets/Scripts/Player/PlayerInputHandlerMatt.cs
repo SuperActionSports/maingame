@@ -18,7 +18,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	public GameObject player;
 	public Rigidbody rb;
-	public PlayerControllerMatt control;  // Layla
+	public FencingPlayerController control;  // Layla
 	
 	public InputDevice device; // Layla
 	public bool deviceActive; // Deprecated after Layla is implemented
@@ -41,14 +41,14 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	void Start () {
 		facingRight = true;
 		deviceActive = device == null ? false : true;
-		speedMagnitude = 20;
-		jumpForce = 32;
+		speedMagnitude = 10;
+		jumpForce = 16;
 		sprintSpeedMod = 1.1f;
 		doubleTapDelay = 0.5f;
 		previousXVel = 0;
 		player = gameObject;
 		rb = GetComponent<Rigidbody>();
-		control = GetComponent<PlayerControllerMatt>();
+		control = GetComponent<FencingPlayerController>();
 	}
 
 	void Move(float xVel) 
@@ -86,7 +86,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 	
 	private void GetCounter()
 	{
-		if (control.armed && Input.GetKeyDown(counter) || (deviceActive && device.Action3.WasPressed))
+		if (Input.GetKeyDown(counter) || (deviceActive && device.Action3.WasPressed))
 		{
 			control.Counter();
 		}
@@ -131,7 +131,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 		//return xIsDoubleTap(vel) ? vel * speedMagnitude: vel;	
 		float vel;
 		vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput();
-		control.setRun(Mathf.Abs(vel));
+		control.SetRun(Mathf.Abs(vel));
 		return vel;
 	}
 	
@@ -198,7 +198,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 				if (groundHit.collider.CompareTag("Stage"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-					control.stats.AddJump();
+					control.Stats.AddJump();
 				}
 			}
 		}
@@ -218,7 +218,7 @@ public class PlayerInputHandlerMatt : MonoBehaviour {
 				if (groundHit.collider.CompareTag("Stage"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-					control.stats.AddJump();
+					control.Stats.AddJump();
 				}
 			}
 		}
