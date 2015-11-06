@@ -52,6 +52,7 @@ GameObject:
   - 54: {fileID: 5413294}
   - 64: {fileID: 6442262}
   - 95: {fileID: 9535952}
+  - 136: {fileID: 13692526}
   m_Layer: 0
   m_Name: HockeyPlayer
   m_TagString: Player
@@ -154,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.33523631, y: .140000001, z: 2.3775382}
+  m_LocalPosition: {x: -5.16900015, y: 1.04799998, z: -2.29200006}
   m_LocalScale: {x: .46189487, y: .0808315948, z: .46189484}
   m_Children:
   - {fileID: 444074}
@@ -499,6 +500,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!136 &13692526
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141112}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: .529999971
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 5.96046412e-08, y: 0, z: -8.94069672e-08}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1

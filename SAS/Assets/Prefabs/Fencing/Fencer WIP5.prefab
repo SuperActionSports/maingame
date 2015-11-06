@@ -596,7 +596,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
   Armed: 0
-  equipmentHand: {fileID: 0}
+  equipmentHand: {fileID: 125682}
   wizard: {fileID: 0}
   input: {fileID: 0}
   deathScript: {fileID: 0}
@@ -5277,7 +5277,6 @@ MonoBehaviour:
   armed: 0
   speed: 0
   timeTilGravity: 0
-  directionModifier: 0
 --- !u!114 &11475670
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -8693,6 +8692,10 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: equipmentHand
+      value: 
+      objectReference: {fileID: 125682}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119868}

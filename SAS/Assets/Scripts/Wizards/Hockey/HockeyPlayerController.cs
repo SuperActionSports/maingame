@@ -287,7 +287,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		if (other.CompareTag("Ball"))
 		{
 			Debug.Log("Hitting puck");
-			other.GetComponent<PuckMovement>().HitPuck(this.gameObject);
+			other.GetComponent<PuckMovement>().HitPuck(this);
 			stats.AddPuckPossession();
 		}
 	}

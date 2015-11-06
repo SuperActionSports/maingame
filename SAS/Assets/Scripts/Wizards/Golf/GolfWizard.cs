@@ -29,7 +29,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public float minDistToBallFromHole = 4;
 	
 	public GameObject endGame;
-	private float gameWinTime = 30;				// Layla, customized games
+	private float gameWinTime = Mathf.Infinity;				// Layla, customized games
 	private int matchCount;					// Layla, customized games
 	private bool finished;
 	// Use this for initialization
@@ -173,12 +173,15 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	{
 		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		
 		while(Vector3.Distance(hole.transform.position,golfBall.transform.position) < minDistToBallFromHole)
 		{
 			golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+			Debug.Log("Dang, too close. Wizard trying a new location.");
 		}
 		Debug.Log("Golfball: " + golfBall.transform.position);
 		Debug.Log("Hole: " + hole.transform.position);
+		Debug.Log("Distance: " + Vector3.Distance(hole.transform.position,golfBall.transform.position) + " should be greater than " + minDistToBallFromHole);
 	}
 	
 	void OnDrawGizmos()
