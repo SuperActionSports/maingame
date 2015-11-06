@@ -107,7 +107,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	public void ThrowEquipment()
 	{
-		equipScript.Throw(anim.GetFloat("Run")>9);
+		equipScript.Throw(anim.GetFloat("Run")>9, input.facingRight ? 1 : -1);
 		Disarm();
 	}
 	

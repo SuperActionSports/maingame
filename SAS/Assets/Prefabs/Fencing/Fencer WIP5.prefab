@@ -467,7 +467,6 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
-  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -592,15 +591,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 119868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd12511602431b54a8e6ef09a2e155d2, type: 3}
+  m_Script: {fileID: 11500000, guid: 5b3bc81cedd496b40962c0bebecff5b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  color: {r: 0, g: 1, b: .420689583, a: 0}
+  color: {r: 0, g: 0, b: 0, a: 0}
   Armed: 0
-  equipmentHand: {fileID: 125682}
+  equipmentHand: {fileID: 0}
   wizard: {fileID: 0}
   input: {fileID: 0}
-  deathScript: {fileID: 11480742}
+  deathScript: {fileID: 0}
 --- !u!114 &11439000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -5271,7 +5270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 145064}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58d2f46b1f248654893c5f4c26b415f8, type: 3}
+  m_Script: {fileID: 11500000, guid: b242c2938f9fc734983dcd27551736a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}

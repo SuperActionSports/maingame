@@ -15,7 +15,6 @@ public class FencingEquipment : MonoBehaviour {
 	private Rigidbody rb; 
 	public float timeTilGravity;
 	private float spawnTime;
-	public float directionModifier;
 	private RapierScript rapierScript;
 	private float normalThrowForce;
 	private float runThrowForce;
@@ -151,7 +150,7 @@ public class FencingEquipment : MonoBehaviour {
 		pickUpCollider.enabled = true;
 	}
 	
-	public void Throw(bool runThrow)
+	public void Throw(bool runThrow, float directionModifier)
 	{
 		thrown = true;
 		transform.parent = null;
