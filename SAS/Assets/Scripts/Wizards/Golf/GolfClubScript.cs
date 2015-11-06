@@ -7,7 +7,7 @@ public class GolfClubScript : MonoBehaviour {
 	private GolfPlayerController player;
 
 	void Update () {
-		player = transform.parent.GetComponent<GolfPlayerController>();
+		player = transform.parent.transform.parent.GetComponent<GolfPlayerController>();
 	}
 
 	void OnTriggerEnter(Collider other)

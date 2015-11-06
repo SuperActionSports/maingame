@@ -72,7 +72,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &156630
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,9 +86,9 @@ GameObject:
   - 23: {fileID: 2378800}
   - 54: {fileID: 5414450}
   - 95: {fileID: 9527696}
-  - 114: {fileID: 11411302}
   - 114: {fileID: 11414612}
   - 82: {fileID: 8266062}
+  - 114: {fileID: 11433498}
   m_Layer: 0
   m_Name: GolfPlayer
   m_TagString: Player
@@ -155,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 7.38440132, y: -2.55254507, z: -.422213078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455460}
@@ -413,25 +413,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11411302
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 156630}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724426b22431a4f5c86b763ad5e54db5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PaintSprite: {fileID: 426486, guid: d334eee982cce4735929a011e9def078, type: 2}
-  givenPaintSprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  psHolder: {fileID: 0}
-  particles: {fileID: 0}
-  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11414612
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -504,6 +485,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6e241e868452f54685b66a073c2b3d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &11433498
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff9ae78c9469eeb418e23f19a8ea4cea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 138716, guid: 24d7aac2b585a134583058ef6d712a88, type: 2}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!119 &11925892
 Projector:
   m_ObjectHideFlags: 1
@@ -518,7 +512,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: 6c7c33fc99a5f074e83f3b281522b22c, type: 2}
+  m_Material: {fileID: 2100000, guid: cdf8e1cd1326e9d44958bc8eacdbf20b, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 2304
@@ -581,7 +575,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -42,7 +42,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: 4b9a2d15935f3dd49a81efaf1c0eeb54, type: 2}
+  m_Material: {fileID: 2100000, guid: 87858bb8f85b9e749b5dc528d273fb12, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 2304
@@ -60,7 +60,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 4b9a2d15935f3dd49a81efaf1c0eeb54, type: 2}
+      objectReference: {fileID: 2100000, guid: 87858bb8f85b9e749b5dc528d273fb12, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156798}
