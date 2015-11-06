@@ -6,7 +6,7 @@ public class GARBAGEVISION : MonoBehaviour
 	//
 	// VARIABLES
 	//
-	
+	/*
 	public float turnSpeed = 4.0f;		// Speed of camera turning when mouse moves in along an axis
 	public float panSpeed = 4.0f;		// Speed of the camera when being panned
 	public float zoomSpeed = 4.0f;		// Speed of the camera going back and forth
@@ -61,5 +61,5 @@ public class GARBAGEVISION : MonoBehaviour
 			transform.RotateAround(transform.position, Vector3.up, pos.x * turnSpeed);
 		}
 		
-	}
+	}*/
 }
