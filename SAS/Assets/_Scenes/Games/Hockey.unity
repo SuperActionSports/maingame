@@ -65,7 +65,8 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
-  m_LightmapSnapshot: {fileID: 112000000, guid: 7ee6c2e891fe5dd4688733e25c906d30,
+    m_ReflectionCompression: 2
+  m_LightmapSnapshot: {fileID: 112000217, guid: b014da4e9b6235c4586523072cb7160c,
     type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -85,9 +86,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!1001 &2450046
 Prefab:
   m_ObjectHideFlags: 0
@@ -4349,7 +4347,7 @@ Transform:
   - {fileID: 397293680}
   - {fileID: 1904194133}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 13
 --- !u!220 &466605534
 LightProbeGroup:
   m_ObjectHideFlags: 0
@@ -4549,6 +4547,7 @@ ReflectionProbe:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IntensityMultiplier: 1
+  m_BlendDistance: 1
   m_HDR: 1
   m_BoxProjection: 0
   m_RenderDynamicObjects: 0
@@ -5191,7 +5190,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &952495321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5209,7 +5208,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &952495322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7535,7 +7534,7 @@ Transform:
   - {fileID: 1905517758}
   - {fileID: 601595945}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
 --- !u!220 &1997866323
 LightProbeGroup:
   m_ObjectHideFlags: 0
