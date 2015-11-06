@@ -1996,14 +1996,14 @@ AnimationClip:
   m_GenerateMotionCurves: 0
   m_Events:
   - time: .166666672
-    functionName: ShieldOn
+    functionName: StartCounter
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: .5
-    functionName: ShieldOff
+  - time: .341666669
+    functionName: EndCounter
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

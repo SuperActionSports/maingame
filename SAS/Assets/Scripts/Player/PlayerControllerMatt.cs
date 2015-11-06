@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
-
+public class PlayerControllerMatt : MonoBehaviour {
+/*
 	public Color color;
 	private Renderer rend;
     public Material playerMaterial;
@@ -126,7 +126,6 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	public void Attack()
 	{
 		anim.SetTrigger("Attack");
-		//rapierScript.Attack();
 		stats.AddStabAttempts ();
 	}
 			
@@ -273,4 +272,5 @@ public class PlayerControllerMatt : MonoBehaviour, IPlayerController {
 	{
 		return transform.FindChild("RapierHand/Rapier").gameObject;
 	}
+	*/
 }

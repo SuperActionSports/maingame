@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RapierScript : MonoBehaviour {
+public class RapierScript : MonoBehaviour {/*
 
 	public PlayerControllerMatt owner;
 	public bool hasHit;
@@ -37,7 +37,7 @@ public class RapierScript : MonoBehaviour {
 	{
 		GetComponent<CapsuleCollider>().enabled = armed;
 	}
-*/	
+
 	public bool Available()
 	{
 		return owner == null && hasHit;
@@ -90,7 +90,7 @@ public class RapierScript : MonoBehaviour {
 			PlayerControllerMatt victim = other.GetComponent<PlayerControllerMatt>();
 			if (victim.alive && other.gameObject != owner.gameObject)
 			{	
-//				sound.Play();
+				sound.Play();
 				if (equipmentThrow.thrown)
 				{ 
 					Parry();
@@ -126,7 +126,7 @@ public class RapierScript : MonoBehaviour {
 		}
 	}
 	
-/*	public void ResetOwnership()
+	public void ResetOwnership()
 	{
 		//Debug.Log("Ownership resetting");
 		if (!owned && owner != null)
@@ -147,7 +147,7 @@ public class RapierScript : MonoBehaviour {
 			ResetColor();
 		}
 	}
-*/	
+	
 	public void ResetOwnership(PlayerControllerMatt newOwner)
 	{
 		hasHit = false;
@@ -162,7 +162,7 @@ public class RapierScript : MonoBehaviour {
 	//	GetComponent<AccessoryColor>().ResetColor();
 	//	GetComponent<AccessoryColor>().ResetColor(c);
 	}
-/*
+
 	public void MakeDangerous()
 	{
 		attackCollider.enabled = true;

@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class EquipmentThrow : MonoBehaviour {
-
+/*
 	public float speed; 
 	private Rigidbody rb; 
 	public float timeTilGravity;
@@ -85,5 +85,5 @@ public class EquipmentThrow : MonoBehaviour {
 		spawnTime = Time.time;//update attack collider and owned
 		thrown = false;	
 		rapierScript.ResetOwnership(newOwner);
-	}
+	}*/
 }
