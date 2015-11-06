@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3369856}
   - 135: {fileID: 13515932}
   - 23: {fileID: 2384180}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ GameObject:
   - 136: {fileID: 13676406}
   - 82: {fileID: 8252808}
   - 54: {fileID: 5458456}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BatHand
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -53,11 +53,11 @@ GameObject:
   - 23: {fileID: 2313486}
   - 114: {fileID: 11490668}
   - 54: {fileID: 5405674}
-  - 114: {fileID: 11479586}
   - 95: {fileID: 9560558}
   - 82: {fileID: 8202332}
   - 136: {fileID: 13625726}
-  m_Layer: 0
+  - 114: {fileID: 11470180}
+  m_Layer: 11
   m_Name: PlayerBaseball
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -77,7 +77,7 @@ GameObject:
   - 33: {fileID: 3330610}
   - 114: {fileID: 11460568}
   - 136: {fileID: 13601706}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BaseballBat
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -3443,7 +3443,7 @@ MonoBehaviour:
   isSelectable: 1
   _name: Cylinder
   dontDestroyMeshOnDelete: 0
---- !u!114 &11479586
+--- !u!114 &11470180
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -3451,16 +3451,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 161116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 724426b22431a4f5c86b763ad5e54db5, type: 3}
+  m_Script: {fileID: 11500000, guid: 8735b8a21449f4a37af6d3ca15820c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintSprite: {fileID: 426486, guid: d334eee982cce4735929a011e9def078, type: 2}
-  p1score: {fileID: 0}
-  p2score: {fileID: 0}
-  p3score: {fileID: 0}
-  p4score: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  defaultMaterial: {fileID: 2100000, guid: 3442c11e97a6f2c4d9cacdafdd8774fe, type: 2}
+  ball: {fileID: 138716, guid: cad44093ab031c542aeb53b460c9184e, type: 2}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11490668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3493,9 +3488,9 @@ MonoBehaviour:
   impactMod: 0
   wizard: {fileID: 0}
   cam: {fileID: 0}
+  stats: {fileID: 0}
   speedMagnitude: 0
   jumpMagnitude: 0
-  stats: {fileID: 0}
 --- !u!135 &13515932
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -3578,7 +3573,36 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: givenPaintSprites.Array.data[0]
+      value: 
+      objectReference: {fileID: 129096, guid: d334eee982cce4735929a011e9def078, type: 2}
+    - target: {fileID: 0}
+      propertyPath: givenPaintSprites.Array.data[1]
+      value: 
+      objectReference: {fileID: 129096, guid: fedb6ea230eb84c24a549c63b2e341eb, type: 2}
+    - target: {fileID: 0}
+      propertyPath: givenPaintSprites.Array.data[2]
+      value: 
+      objectReference: {fileID: 129096, guid: 7cb8b432d37364fab8150587317fe9de, type: 2}
+    - target: {fileID: 0}
+      propertyPath: psHolder
+      value: 
+      objectReference: {fileID: 178054, guid: 58ea6cd6328f649ac8a8968774361d22, type: 2}
+    - target: {fileID: 0}
+      propertyPath: particles
+      value: 
+      objectReference: {fileID: 19877450, guid: 58ea6cd6328f649ac8a8968774361d22,
+        type: 2}
+    - target: {fileID: 0}
+      propertyPath: ball
+      value: 
+      objectReference: {fileID: 138716, guid: cad44093ab031c542aeb53b460c9184e, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 161116}

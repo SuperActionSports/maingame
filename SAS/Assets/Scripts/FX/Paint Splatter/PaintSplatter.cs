@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class PaintSplatter : MonoBehaviour {
-	
+	/*
+	 * This is for the baseball demo edit
+	 */
+
 	public Transform PaintSprite;
 	public GameObject[] givenPaintSprites = new GameObject[3];
 	public GameObject psHolder;
@@ -16,7 +19,9 @@ public class PaintSplatter : MonoBehaviour {
 		c.a = 1f;
 		//dir = new Vector3(direction.x+Random.Range (-15f, 15f), direction.y-10f, direction.z+Random.Range (-15f, 15f));
 		//direction = new Vector3 (direction.x, direction.y, direction.z);
-		
+
+		Debug.Log ("Splat!!!!");
+
 		CreateParticleSystem (position, direction);
 		GenerateSplats (position, direction);
 	}
@@ -37,37 +42,38 @@ public class PaintSplatter : MonoBehaviour {
 		Physics.Raycast (position, direction, out hit);
 		GameObject target = hit.collider.gameObject;
 
+		Debug.Log ("Target: " + target.gameObject.name);
+
 		GenerateTrail (position, hit.point);
 		int amountOfSplats = Random.Range (1, 4);
 
 		GameObject[] splats = new GameObject[amountOfSplats];
-		Debug.Log ("amountOfSplats: " + amountOfSplats);
+		//Debug.Log ("amountOfSplats: " + amountOfSplats);
 		
 		for (int i = 0; i < amountOfSplats; i++)  {
 			// stop tecxture flickering by moving splats up pout of surface
 			var splatLocation = hit.point+hit.normal*.1f;
 			var splatRotation = Quaternion.FromToRotation (Vector3.forward, hit.normal);
-			
-			// Instantiate paint splat
-			splats[i] = Instantiate(givenPaintSprites[Random.Range (0, givenPaintSprites.Length)], splatLocation, splatRotation) as GameObject;
 
-			if (target.CompareTag ("Stage")) 
+			if (target.CompareTag ("field")) 
 			{
+				// Instantiate paint splat
+				splats[i] = Instantiate(givenPaintSprites[Random.Range (0, givenPaintSprites.Length)], splatLocation, splatRotation) as GameObject;
+
 				splats[i].transform.localEulerAngles = new Vector3 (90, 0, 0);
+				if (splats[i] != null) {
+					splats[i].GetComponent<SpriteRenderer> ().color = c;
+					// Set a semi-random scale and rotation of the object
+					splats[i].transform.localScale = new Vector3 (Random.Range (1f, 4f), Random.Range (1f, 4f), Random.Range (1f, 4f));	
+					splats[i].transform.localEulerAngles = new Vector3 (splats[i].transform.localEulerAngles.x,
+					                                                    splats[i].transform.localEulerAngles.y, 
+					                                                    Random.Range (0f, 360f));
+				}
 			} 
-			else if (target.CompareTag ("Wall")) 
-			{
-				if (Mathf.Abs (hit.normal.z) > Mathf.Abs (hit.normal.x)) { splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0); }
-			}
-			
-			if (splats[i] != null) {
-				splats[i].GetComponent<SpriteRenderer> ().color = c;
-				// Set a semi-random scale and rotation of the object
-				splats[i].transform.localScale = new Vector3 (Random.Range (1f, 4f), Random.Range (1f, 4f), Random.Range (1f, 4f));	
-				splats[i].transform.localEulerAngles = new Vector3 (splats[i].transform.localEulerAngles.x,
-				                                                    splats[i].transform.localEulerAngles.y, 
-				                                                    Random.Range (0f, 360f));
-			}
+			//else if (target.CompareTag ("Wall")) 
+			//{
+			//	if (Mathf.Abs (hit.normal.z) > Mathf.Abs (hit.normal.x)) { splats[i].transform.localEulerAngles = new Vector3 (0, 0, 0); }
+			//}
 		}
 	}
 	

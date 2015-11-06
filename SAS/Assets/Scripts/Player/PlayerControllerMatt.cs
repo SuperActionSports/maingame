@@ -33,7 +33,7 @@ public class PlayerControllerMatt : MonoBehaviour {
 	private RapierScript rapierScript;
 	private ConfettiScript deathScript;
     public FencingCameraController cam;
-	private PaintSplatter paint;
+	private PaintSplatterProjector spaint;
 	private AudioSource sound;
     private Animator anim;
 	public PlayerInputHandlerMatt input; // Input manager, instructed by Layla

@@ -57,7 +57,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
     
     public GolfWizard wizard;
 	public GolfStatsCard stats;
-	private PaintSplatter paint;
+	private PaintSplatterProjector paint;
 
 
 	void Start () {
@@ -74,8 +74,9 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         anim = GetComponent <Animator>();
 		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
         equipmentCollider.enabled = false;
-		paint = GetComponent<PaintSplatter> ();
-		paint.c = color;
+		paint = GetComponent<PaintSplatterProjector> ();
+		paint.Initialize (color);
+
 		// Set up color variables
 		GetComponent<Renderer>().material.color = color;
 		SetColorToParent[] kids = GetComponentsInChildren<SetColorToParent>();
@@ -102,6 +103,9 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	void Update () {
         if (alive && movementAllowed)
         {
+			// Toggle aim arrow visibility
+			if (putting) { GetComponentInChildren<Projector>().gameObject.SetActive(true); }
+			else { GetComponentInChildren<Projector>().gameObject.SetActive(false); }
 			// Reset velocity to 0
         	rb.velocity = new Vector3(0,0,0);
 

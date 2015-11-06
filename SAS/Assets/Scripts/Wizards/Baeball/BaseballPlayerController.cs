@@ -50,7 +50,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	public BaseballWizard wizard;
 
     public BaseballCameraController cam;
-	private PaintSplatter paint;
+	private PaintSplatterProjector paint;
 	private AudioSource sound;
     private Animator anim;
 	public BaseballStatsCard stats;
@@ -81,9 +81,9 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         doubleJumpAllowed = true;
 		impactMod = 7.5f;
         GetComponent<Renderer>().material.color = color;
-		paint = GetComponent<PaintSplatter>();
+		paint = GetComponent<PaintSplatterProjector>();
+		paint.Initialize (color);
 		stats.ResetStats ();
-		//paint.color = color;
     }
     
 	
@@ -146,7 +146,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void GetRespawn()
 	{
-		if (Input.GetKeyDown(debugKill) || (device!= null && device.Command.WasPressed))
+		if (Input.GetKeyDown(debugKill) || (device!= null && device.Action3.WasPressed))
 		{
 			if (alive)
 			MakeDead();
@@ -193,7 +193,8 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
     {
 		//Magic Number
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
-        MakeDead();    
+        MakeDead();
+		paint.Splatter (transform.position, direction);
     }
 
     public void Respawn()
