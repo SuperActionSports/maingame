@@ -144,10 +144,9 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	
 	private HockeyPlayerController Spawn(Vector3 position, Player player)
 	{
-		Debug.Log("Player's gameobject - " + player.gameObject + " --------------------------- ");
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
+		p.transform.eulerAngles = new Vector3(0,0,0);
 		player.gameObject = p;
-		Debug.Log("Player's gameobject after - " + player.gameObject + " --------------------------- ");
 		HockeyPlayerController pController = p.GetComponent<HockeyPlayerController>();
 		player.control = pController;
 		pController.color = player.color;

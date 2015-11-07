@@ -22,8 +22,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156798}
-  m_LocalRotation: {x: .193382084, y: 0, z: 0, w: .981123567}
-  m_LocalPosition: {x: 1.16600001, y: 1.79499996, z: .189999998}
+  m_LocalRotation: {x: -.0121963862, y: -.750520825, z: -.0138567938, w: -.66058892}
+  m_LocalPosition: {x: -2.40779114, y: 1.69000006, z: 1.05999994}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -37,12 +37,12 @@ Projector:
   m_Enabled: 1
   serializedVersion: 2
   m_NearClipPlane: .100000001
-  m_FarClipPlane: 30
-  m_FieldOfView: 60
+  m_FarClipPlane: 10
+  m_FieldOfView: 52.1100006
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: 87858bb8f85b9e749b5dc528d273fb12, type: 2}
+  m_Material: {fileID: 2100000, guid: 12f4f56dbc34a0c4fae089d2ea073d21, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 2304
@@ -60,7 +60,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Material
       value: 
-      objectReference: {fileID: 2100000, guid: 87858bb8f85b9e749b5dc528d273fb12, type: 2}
+      objectReference: {fileID: 2100000, guid: 12f4f56dbc34a0c4fae089d2ea073d21, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156798}

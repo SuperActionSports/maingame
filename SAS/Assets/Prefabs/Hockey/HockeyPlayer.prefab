@@ -12,7 +12,7 @@ GameObject:
   - 136: {fileID: 13675924}
   - 23: {fileID: 2304810}
   - 114: {fileID: 11484618}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -31,7 +31,7 @@ GameObject:
   - 135: {fileID: 13567492}
   - 23: {fileID: 2303438}
   - 114: {fileID: 11400078}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BatHand
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -53,7 +53,8 @@ GameObject:
   - 64: {fileID: 6442262}
   - 95: {fileID: 9535952}
   - 136: {fileID: 13692526}
-  m_Layer: 0
+  - 114: {fileID: 11414578}
+  m_Layer: 11
   m_Name: HockeyPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -72,7 +73,7 @@ GameObject:
   - 136: {fileID: 13669380}
   - 23: {fileID: 2397186}
   - 114: {fileID: 11401150}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bat
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -91,7 +92,7 @@ GameObject:
   - 135: {fileID: 13530864}
   - 23: {fileID: 2372406}
   - 114: {fileID: 11415388}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Empty Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -155,7 +156,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141112}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.16900015, y: 1.04799998, z: -2.29200006}
+  m_LocalPosition: {x: 5.29077625, y: -6.19189167, z: -1.21913826}
   m_LocalScale: {x: .46189487, y: .0808315948, z: .46189484}
   m_Children:
   - {fileID: 444074}
@@ -385,6 +386,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad513b9f2e8b4dc7ad0dcc1908b8aaf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 11478544}
+--- !u!114 &11414578
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 141112}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6771e2163e37b004aa9d543b1bc1b06c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ball: {fileID: 138716, guid: 7a92050d82d75044a9599fe7eac34765, type: 2}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11415388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -432,6 +447,7 @@ MonoBehaviour:
   maxSpeed: 0
   friction: 0
   respawnPoints: []
+  equipmentHand: {fileID: 133162}
   equipmentCollider: {fileID: 0}
   cam: {fileID: 0}
   wizard: {fileID: 0}
@@ -539,6 +555,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -49,11 +49,13 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	
 	// Game Objects and Components
 	public GameObject[] respawnPoints;
+	public GameObject equipmentHand;
 	public CapsuleCollider equipmentCollider;
 	public OverheadCameraController cam;
 	private AudioSource sound;
 	private Animator anim;
 	
+	private PaintSplatterProjector paint;
 	public HockeyWizard wizard;
 	public HockeyStatsCard stats;
 
@@ -66,7 +68,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-		equipmentCollider = GetComponentsInChildren<CapsuleCollider> ()[1]; // 0 returns collider on THIS object
+		equipmentCollider = equipmentHand.GetComponentInChildren<CapsuleCollider> (); // 0 returns collider on THIS object
 		equipmentCollider.enabled = false;
 		
         if (respawnPoints.Length == 0)
@@ -84,10 +86,12 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		alive = true;
 		anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		walkSpeed = 3.5f;
-		maxSpeed = 10;
+		walkSpeed = 1.5f;
+		maxSpeed = 7;
 		stats.ResetStats ();
 		Debug.Log(stats);
+		paint = GetComponent<PaintSplatterProjector>();
+		paint.Initialize (color);
     }
 
 	void Update () {
@@ -124,7 +128,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		GetRespawn();
 	}
 
-	private void ResetRigidBodyConstraints() 
+	public void ResetRigidBodyConstraints() 
 	{
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
@@ -185,8 +189,10 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 
     public void Kill(Vector3 direction)
     {
-		rb.AddForce (100f * direction);
-        MakeDead();    
+		rb.AddForce (10f * direction);
+        MakeDead();
+        direction.z *= -1;    
+		paint.Splatter (transform.position, direction);
     }
 	
 	public void GoalScored()
@@ -200,6 +206,8 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("Alive", true);
         rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoint;
+        ResetRigidBodyConstraints();
+        transform.eulerAngles = new Vector3(0,0,0);
 		stats.StartLifeTime ();
 		wizard.FindPlayers();
     }

@@ -92,7 +92,7 @@ Transform:
   m_GameObject: {fileID: 161116}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.03999996, y: 1.5, z: .274143219}
-  m_LocalScale: {x: .300000012, y: .299999952, z: .299999952}
+  m_LocalScale: {x: .5, y: .5, z: .5}
   m_Children:
   - {fileID: 406278}
   m_Father: {fileID: 0}
@@ -304,6 +304,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -373,6 +374,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -3451,10 +3453,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 161116}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff9ae78c9469eeb418e23f19a8ea4cea, type: 3}
+  m_Script: {fileID: 11500000, guid: 6771e2163e37b004aa9d543b1bc1b06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 138716, guid: 24d7aac2b585a134583058ef6d712a88, type: 2}
+  ball: {fileID: 138716, guid: 7a92050d82d75044a9599fe7eac34765, type: 2}
   c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &11490668
 MonoBehaviour:
@@ -3602,6 +3604,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.z
+      value: .5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

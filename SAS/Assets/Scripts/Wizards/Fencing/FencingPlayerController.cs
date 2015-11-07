@@ -85,6 +85,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	/// </summary>
 	public void Attack()
 	{
+		anim.SetTrigger("Attack");
 		if (equipScript != null) 
 			{
 				stats.AddStabAttempts ();
