@@ -5363,16 +5363,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 119868}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0268ee30d9a599642afad416690d8815, type: 3}
+  m_Script: {fileID: 11500000, guid: eb59d872396650847b61fb98de5b100f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  left: 276
-  right: 275
-  up: 273
-  down: 274
-  attack: 32
+  left: 0
+  right: 0
+  up: 0
+  down: 0
+  attack: 0
   debugKill: 0
-  throwEquip: 122
+  throwEquip: 0
   counter: 0
   player: {fileID: 0}
   rb: {fileID: 0}
