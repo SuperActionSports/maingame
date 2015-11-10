@@ -12,7 +12,8 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison layla;
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
-	public int playerNumber;
+
+	private Image hand;
 
 	TwoAxisInputControl filteredDirection;
 			
@@ -25,6 +26,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	void Start()
 	{
 		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
+		hand = this.GetComponentInChildren<Image> ();
 		ColorInputManager colorInputManagerScript = playerInputManager.GetComponent<ColorInputManager> ();
 		//Debug.Log ("COlor Button Manager Position: " + transform.position);
 		int i = 0;
@@ -40,7 +42,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	
 	public void ResetNumber()
 	{
-		GetComponentInChildren<Text>().text = (playerNumber+1).ToString();
+	//	GetComponentInChildren<Text>().text = (playerNumber+1).ToString();
 	}
 
 	void Update()
@@ -83,9 +85,10 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		{
 			if (focusedButton.isColor) 
 			{	
-			//	Debug.Log("Focused button: " + focusedButton.name);
+				// Debug.Log("Focused button: " + focusedButton.name);
 				Color c = focusedButton.GetComponent<ColorSelectionButton>().GetColor();
 				c.a = 1;
+				hand.color = c;
 				layla.SetPlayerColor(device,c);
 			}
 			else{
