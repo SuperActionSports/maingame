@@ -39,12 +39,12 @@ public class FencingCameraController : MonoBehaviour {
 		shakeLength = 0.1f;
 		shakeMagnitude = new Vector2(3f,3f);
 		shakeIntensity = 50f;
-		yOffset = 5.2f;
-		zOffset = 20f;
-		zDebugMod = 30;
-		minimumZ = -14;
-		yWinOffset = 5.2f;
-		zWinOffset = -13.06f;
+		yOffset = 1;
+		zOffset = 4.3f;
+		zDebugMod = 0;
+		minimumZ = -4;
+		yWinOffset = 1.35f;
+		zWinOffset = -4;
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
 		won = false;
 	}
@@ -56,7 +56,7 @@ public class FencingCameraController : MonoBehaviour {
 		z = 0;
 		Vector2 averagePosition = GetAveragePositions();
 		z = GetMaximumDistance();
-		z /= -2.0f;
+		z /= -1.5f;
 		if (z > minimumZ) 
 		{
 			z = minimumZ;
@@ -82,7 +82,7 @@ public class FencingCameraController : MonoBehaviour {
 	public void RecountPlayers()
 	{
 		//Debug.Log("Player count before: " + players.Length);
-		players = GameObject.FindGameObjectsWithTag("Fencer");
+		players = GameObject.FindGameObjectsWithTag("Player");
 		//Debug.Log("Player count after: " + players.Length);
 	}
 	
@@ -113,19 +113,19 @@ public class FencingCameraController : MonoBehaviour {
 		int living = 0;
 		Vector3[] positions = new Vector3[players.Length];
 		for (int i = 0; i < players.Length; i++) {
-			if (players[i].GetComponent<FencingPlayerController>() == null)
+			if (players[i] == null || players[i].GetComponent<FencingPlayerController>() == null)
 			{
 				Debug.Log(players[i].gameObject.name + " has no Controller Component!" );
 			}
 			else {
-				FencingPlayerController p = players[i].GetComponent<FencingPlayerController>();
-				if (p.Alive())
-				{
-					positions [i] = p.transform.position;
-					x += players[i].transform.position.x;
-					y += players[i].transform.position.y;
-					living++;
-				}
+					FencingPlayerController p = players[i].GetComponent<FencingPlayerController>();
+					if (p.Alive())
+					{
+						positions [i] = p.transform.position;
+						x += players[i].transform.position.x;
+						y += players[i].transform.position.y;
+						living++;
+					}
 			}			
 		}	
 		x /= living;

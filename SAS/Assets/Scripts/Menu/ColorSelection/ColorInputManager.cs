@@ -106,6 +106,8 @@ using InControl;
 				var buttonManager = gameObject.GetComponent<ColorSelectionButtonManager>();
 				buttonManager.device = inputDevice;
 				buttonManager.liaison = layla;
+				buttonManager.playerNumber = colorSelectionManagers.Count;
+				buttonManager.ResetNumber();
 				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
 

@@ -16,7 +16,8 @@ public class PuckMovement : MonoBehaviour {
 	public float respawnDelay;
 	private bool willRespawn;
 	private HockeyPlayerController lastHit = null;
-	public float friction = 1;
+	public float friction = 1f;
+	public GameObject goalEffect;
 	
 	// Use this for initialization
 	void Start () {
@@ -38,6 +39,7 @@ public class PuckMovement : MonoBehaviour {
 			willRespawn = false;
 		}
 		rb.velocity *= friction;
+		transform.position = Vector3.Lerp(transform.position,new Vector3(0,0,0),Time.deltaTime/60);
 	}
 
 	void OnTriggerEnter (Collider col)
@@ -49,7 +51,8 @@ public class PuckMovement : MonoBehaviour {
 				inPlay = false;
 				timeOfGoal = Time.time;
 				willRespawn = true;
-				rb.velocity *= 0.1f;
+				rb.velocity *= 0.8f;
+				StartGoalEffect();
 				//Respawn();
 			}
 		}
@@ -80,4 +83,10 @@ public class PuckMovement : MonoBehaviour {
 	{
 		lastHit = p;
 	} 
+	
+	private void StartGoalEffect()
+	{
+		GameObject p = Instantiate(goalEffect,transform.position,Quaternion.identity) as GameObject;
+		p.GetComponent<HockeyGoalEffect>().PartyToDeath(lastHit.color);
+	}
 }

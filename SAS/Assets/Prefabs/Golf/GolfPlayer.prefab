@@ -155,7 +155,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 156630}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.38440132, y: -2.55254507, z: -.422213078}
+  m_LocalPosition: {x: 7.03999996, y: 3.38000011, z: -.422213078}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 455460}
@@ -171,7 +171,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 154432}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 2.03999996, y: 1, z: .980000019}
+  m_LocalPosition: {x: 2.51999998, y: 1, z: 2.00999999}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 488178}
@@ -493,10 +493,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 156630}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff9ae78c9469eeb418e23f19a8ea4cea, type: 3}
+  m_Script: {fileID: 11500000, guid: 6771e2163e37b004aa9d543b1bc1b06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 138716, guid: 24d7aac2b585a134583058ef6d712a88, type: 2}
+  ball: {fileID: 138716, guid: 7a92050d82d75044a9599fe7eac34765, type: 2}
   c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!119 &11925892
 Projector:
@@ -512,7 +512,7 @@ Projector:
   m_AspectRatio: 1
   m_Orthographic: 0
   m_OrthographicSize: 2
-  m_Material: {fileID: 2100000, guid: cdf8e1cd1326e9d44958bc8eacdbf20b, type: 2}
+  m_Material: {fileID: 2100000, guid: f881fdba590930545887f3915a5bba81, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
     m_Bits: 2304
@@ -576,6 +576,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: f881fdba590930545887f3915a5bba81, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.x
+      value: 2.51999998
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
