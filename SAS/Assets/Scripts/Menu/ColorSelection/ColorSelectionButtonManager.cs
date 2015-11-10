@@ -12,11 +12,8 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison layla;
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
-<<<<<<< HEAD
-	public int playerNumber;
-=======
+
 	private Image hand;
->>>>>>> AnotherBranch
 
 	TwoAxisInputControl filteredDirection;
 			
@@ -45,7 +42,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	
 	public void ResetNumber()
 	{
-		GetComponentInChildren<Text>().text = (playerNumber+1).ToString();
+	//	GetComponentInChildren<Text>().text = (playerNumber+1).ToString();
 	}
 
 	void Update()

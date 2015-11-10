@@ -74,7 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: .990999997}
-  m_Sprite: {fileID: 21300000, guid: 336e0f49ba8b642be881b2a09a5d7652, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7a3d4cf147e3e4122b919b3c8156c143, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -134,6 +134,11 @@ Prefab:
       propertyPath: m_Color.a
       value: .990999997
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7a3d4cf147e3e4122b919b3c8156c143,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 165584}
