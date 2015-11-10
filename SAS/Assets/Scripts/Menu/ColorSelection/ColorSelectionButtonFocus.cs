@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 		GameObject colorSelection;
 		public Text text;
+		
 		void Start()
 		{
 		//	Debug.Log ("Position of focus: " + transform.localPosition);
@@ -22,7 +23,7 @@ using UnityEngine.UI;
 				// Move toward same position as focused button.
 
 				//transform.localPosition = Vector3.MoveTowards( transform.localPosition, focusedButton.transform.localPosition, Time.deltaTime * 3000.0f );
-			transform.position = Vector3.MoveTowards( transform.position, focusedButton.transform.position, Time.deltaTime * 3000.0f );
+				transform.position = Vector3.MoveTowards( transform.position, new Vector3(focusedButton.transform.position.x, focusedButton.transform.position.y - 40, focusedButton.transform.position.z), Time.deltaTime * 3000.0f );
 			}
 			
 
