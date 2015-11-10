@@ -130,7 +130,9 @@ public class StatsCard : MonoBehaviour {
 	}
 
 	public void AddDeath()	{
+		Debug.Log("Receiving death");
 		deaths++;
+		Debug.Log("Deaths is now " + deaths);
 		if (killStreak > longestKillStreak) {
 			longestKillStreak = killStreak;
 		}

@@ -15,7 +15,7 @@ public class FreezeRotationAndY : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		transform.position = new Vector3(transform.parent.transform.position.x, frozenPosition.y, transform.parent.transform.position.z);
+		transform.position = new Vector3(transform.parent.transform.position.x, transform.parent.transform.position.y, transform.parent.transform.position.z);
 		transform.rotation = frozenQuaternion;
 		if (l != null)
 		{

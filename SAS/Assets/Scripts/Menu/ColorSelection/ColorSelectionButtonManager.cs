@@ -12,6 +12,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison layla;
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
+	public int playerNumber;
 
 	TwoAxisInputControl filteredDirection;
 			
@@ -35,6 +36,11 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		focusedButton.focusedUponTheNightWhenTheHorsesAreFree = true;
 		layla = liaison.GetComponent<GameControlLiaison>();
 		//colorInputManagerScript.colorStarts.RemoveAt (i);
+	}
+	
+	public void ResetNumber()
+	{
+		GetComponentInChildren<Text>().text = (playerNumber+1).ToString();
 	}
 
 	void Update()

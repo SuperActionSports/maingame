@@ -15,8 +15,9 @@ public class PuckMovement : MonoBehaviour {
 	private float timeOfGoal;
 	public float respawnDelay;
 	private bool willRespawn;
-	private GameObject lastHit = null;
-	public float friction = 1;
+	private HockeyPlayerController lastHit = null;
+	public float friction = 1f;
+	public GameObject goalEffect;
 	
 	// Use this for initialization
 	void Start () {
@@ -38,18 +39,20 @@ public class PuckMovement : MonoBehaviour {
 			willRespawn = false;
 		}
 		rb.velocity *= friction;
+		transform.position = Vector3.Lerp(transform.position,new Vector3(0,0,0),Time.deltaTime/60);
 	}
 
 	void OnTriggerEnter (Collider col)
 	{
 		if (inPlay == true) {
 			if (col.gameObject.CompareTag("Goal")) {
-				Debug.Log ("Goal Scored");
-				lastHit.GetComponent<HockeyPlayerController>().GoalScored();
+				Debug.Log ("Goal Scored, last hit: " + lastHit);
+				lastHit.GoalScored();
 				inPlay = false;
 				timeOfGoal = Time.time;
 				willRespawn = true;
-				rb.velocity *= 0.1f;
+				rb.velocity *= 0.8f;
+				StartGoalEffect();
 				//Respawn();
 			}
 		}
@@ -76,10 +79,14 @@ public class PuckMovement : MonoBehaviour {
 		transform.rotation = Quaternion.identity;
 	}
 	
-	public void HitPuck(GameObject p)
+	public void HitPuck(HockeyPlayerController p)
 	{
 		lastHit = p;
-		HockeyPlayerController hpc = lastHit.GetComponent<HockeyPlayerController>();
-		Debug.Log("HPC: " + hpc);
 	} 
+	
+	private void StartGoalEffect()
+	{
+		GameObject p = Instantiate(goalEffect,transform.position,Quaternion.identity) as GameObject;
+		p.GetComponent<HockeyGoalEffect>().PartyToDeath(lastHit.color);
+	}
 }

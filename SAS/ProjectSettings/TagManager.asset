@@ -22,6 +22,7 @@ TagManager:
   - Wizard
   - NorthCourt
   - SouthCourt
+  - KillMovement
   layers:
   - Default
   - TransparentFX
@@ -31,10 +32,10 @@ TagManager:
   - UI
   - 
   - 
-  - Baseballs
+  - Balls
   - Biscuits
   - God please
-  - 
+  - Player
   - 
   - 
   - 

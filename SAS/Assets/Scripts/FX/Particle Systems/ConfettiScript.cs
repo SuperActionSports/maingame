@@ -14,18 +14,8 @@ public class ConfettiScript : MonoBehaviour {
 	void Start () {
 		parts = GetComponentsInChildren<ParticleSystem>();
 		partRends = GetComponentsInChildren<ParticleSystemRenderer>();
-		//c = GetComponentInParent<BaseballPlayerController>().c1;
 		countdown = 10;
 		played = false;
-		//ParticleAnimator particleAnimator = transform.GetComponentInChildren<ParticleAnimator>();
-		//Color[] modifiedColors = particleAnimator.colorAnimation;
-		//modifiedColors[2] = Color.yellow;
-		//particleAnimator.colorAnimation = modifiedColors;
-		for(int i = 0; i < parts.Length; i++)
-		{
-			partRends[i].material.color = c;
-			parts[i].startColor = c;
-		}
 	}
 	
 	// Update is called once per frame
@@ -36,14 +26,7 @@ public class ConfettiScript : MonoBehaviour {
 		 }
 		 if (played)
 		 {
-		 	if (countdown <= 0)
-		 	{
-		 		Destroy(transform.gameObject);
-		 	}
-		 	else
-		 	{
-		 		countdown -= Time.deltaTime;
-		 	}
+		 	played = false;
 		 }
 	}
 	
@@ -58,14 +41,46 @@ public class ConfettiScript : MonoBehaviour {
 		played = true;
 	}
 	
-	public void Party(Color c)
-	{
+	public void Party(Color c, Vector3 pos)
+	{	transform.localPosition = new Vector3(pos.x,pos.y,pos.z);
 		for(int i = 0; i < parts.Length; i++)
 		{
 			partRends[i].material.color = c;
 			parts[i].startColor = c;
 		}
-		transform.parent = null;
+		foreach (ParticleSystem p in parts)
+		{
+			p.Play ();
+			
+		}
+		played = true;
+		//Destroy(gameObject,10);
+	}
+	
+	public void Party(Color c){
+		for(int i = 0; i < parts.Length; i++)
+		{
+			partRends[i].material.color = c;
+			parts[i].startColor = c;
+		}
+		//transform.parent = null;
+		foreach (ParticleSystem p in parts)
+		{
+			p.Play ();
+			
+		}
+		played = true;
+		//Destroy(gameObject,10);
+	}
+	
+	public void PartyToDeath(Color color, float offset){
+		Debug.Log("Party to death: " + color);
+		for(int i = 0; i < parts.Length; i++)
+		{
+			partRends[i].material.color = color;
+			parts[i].startColor = color;
+		}
+		//transform.parent = null;
 		foreach (ParticleSystem p in parts)
 		{
 			p.Play ();

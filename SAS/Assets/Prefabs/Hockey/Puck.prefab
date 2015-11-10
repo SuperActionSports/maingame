@@ -13,7 +13,7 @@ GameObject:
   - 54: {fileID: 5491220}
   - 114: {fileID: 11465008}
   - 64: {fileID: 6411628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Puck
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 104926}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.22618914, y: 1.20000005, z: .367786407}
+  m_LocalPosition: {x: 4.92689276, y: .0426829383, z: -.950702548}
   m_LocalScale: {x: .5, y: .0500000007, z: .5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,7 +107,8 @@ MonoBehaviour:
   respawnPoint: {fileID: 0}
   wizard: {fileID: 0}
   respawnDelay: 0
-  friction: 1
+  friction: .980000019
+  goalEffect: {fileID: 116362, guid: 8566d41bd2637c442b009b25caf6b4ad, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -135,6 +136,18 @@ Prefab:
       propertyPath: m_CollisionDetection
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: friction
+      value: .980000019
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: goalEffect
+      value: 
+      objectReference: {fileID: 116362, guid: 8566d41bd2637c442b009b25caf6b4ad, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 104926}
