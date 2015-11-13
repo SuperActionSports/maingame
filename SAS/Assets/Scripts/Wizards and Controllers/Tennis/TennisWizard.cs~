@@ -13,6 +13,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	public GameObject inGame;
+	public GameObject ball;
+	public GameObject valueProjector;
+	
 	// Use this for initialization
 	void Start () {
 	if (layla == null) { layla = GameObject.Find("Layla");
@@ -34,6 +37,11 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	SetPlayers();
 	UpdateStatCards();
 	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+	}
+	
+	public void BallHitWall()
+	{
+		valueProjector.GetComponent<BallValueCounter>().BallHitBrick();
 	}
 	
 	void ResetExistingPlayers()

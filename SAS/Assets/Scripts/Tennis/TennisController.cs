@@ -34,6 +34,8 @@ public class TennisController : MonoBehaviour {
     private Rigidbody rb;
     
     private TennisInputHandler input;
+    
+    public TennisStatsCard stats;
 	
 	// Use this for initialization
 	void Start () {
@@ -213,5 +215,10 @@ public class TennisController : MonoBehaviour {
 	{
 		equipmentCollider.enabled = false;
 		isAttacking = false;
+	}
+	
+	public void ScorePoints(int pts)
+	{
+		stats.Score(pts);
 	}
 }

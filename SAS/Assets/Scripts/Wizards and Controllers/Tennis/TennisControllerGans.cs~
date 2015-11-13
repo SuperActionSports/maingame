@@ -41,6 +41,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
 	// Use this for initialization
 	void Start () {
+		
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<OverheadCameraController>();
 		rend = GetComponent<Renderer>();
@@ -66,7 +67,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		paint = GetComponent<PaintSplatter>();
 		paint.c = color;
 		hitForce = 25;
-		stats.ResetStats ();
+//		stats.ResetStats ();
 		SetOriginSide ();
     }
 	public void InitializeStatCard()
