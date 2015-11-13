@@ -4903,6 +4903,7 @@ MonoBehaviour:
   winnerPlayer: {fileID: 0}
   layla: {fileID: 0}
   endGame: {fileID: 0}
+  inGame: {fileID: 0}
 --- !u!1 &899470847
 GameObject:
   m_ObjectHideFlags: 0
@@ -5943,6 +5944,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d5bbfca717389cf4cbe7ce120c42c452, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1349500825 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 102042, guid: d5bbfca717389cf4cbe7ce120c42c452, type: 2}
+  m_PrefabInternal: {fileID: 1349500824}
 --- !u!1 &1356463350
 GameObject:
   m_ObjectHideFlags: 0
@@ -5994,6 +5999,7 @@ MonoBehaviour:
   winnerPlayer: {fileID: 0}
   layla: {fileID: 1017490851}
   endGame: {fileID: 831940407}
+  inGame: {fileID: 1349500825}
 --- !u!1001 &1400527856
 Prefab:
   m_ObjectHideFlags: 0

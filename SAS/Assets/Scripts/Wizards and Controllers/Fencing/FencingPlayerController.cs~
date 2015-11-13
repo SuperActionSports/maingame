@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class FencingPlayerController : MonoBehaviour, IPlayerController {
@@ -8,7 +8,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	public bool Armed;
 	public GameObject equipmentHand;
 	GameObject Equipment;
-	FencingEquipment equipScript;
+	public FencingEquipment equipScript;
 	Animator anim;
 	private bool alive;
 	public bool Alive()
@@ -30,7 +30,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 			stats = value;
 		}
 	}
-	public PlayerInputHandlerMatt input;
+	public FencingInputHandler input;
 	public ConfettiScript deathScript;
 	private bool movementAllowed;
 	public void MovementAllowed(bool permission)
@@ -38,22 +38,26 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		movementAllowed = permission;
 	}
 	Renderer rend;
+	public Vector3 respawnPoint;
+	public GameObject rapier;
+	public GameObject deathEffect;
+	public GameObject projectorPrefab;
+	public Transform projectorPosition;
 	
 	// Use this for initialization
 	void Start () {
-		stats = new FencingStatsCard ();
-		stats.ResetStats ();
+		Debug.Log("Fencing player is creating statcard");
 		//sound =  GetComponent<AudioSource>();
 		cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent <Animator>();
 		equipScript = GetComponentInChildren<FencingEquipment>();
-		deathScript = transform.GetComponentInChildren<ConfettiScript>();
+		//deathScript = transform.GetComponentInChildren<ConfettiScript>();
 		shield = GetComponent<SphereCollider>();
 		shield.enabled = false;
 		
-		input = GetComponent<PlayerInputHandlerMatt>();
+		input = GetComponent<FencingInputHandler>();
 		input.rb = rb;
 		input.control = this;
 		input.player = gameObject;
@@ -66,6 +70,12 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		movementAllowed = true;
 		
 		ResetRigidBodyConstraints();
+	}
+	
+	public void InitializeStatCard()
+	{
+		stats = new FencingStatsCard ();
+		stats.ResetStats ();
 	}
 	
 	void Update () {
@@ -130,18 +140,42 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void MakeDead()
 	{
-		deathScript.Party(color);
+		GameObject d = Instantiate(deathEffect,transform.position,Quaternion.identity) as GameObject;
+		d.GetComponent<ConfettiScript>().PartyToDeath(color,3);
+		CreateDeathSplat();
         rb.constraints = RigidbodyConstraints.None;
         alive = false;
         cam.PlayShake(transform.position);
+        cam.RecountPlayers();
 		if (equipScript != null) { equipScript.Deflect();}
-        gameObject.SetActive(false);
+        transform.position = new Vector3 (0,0,3);
+        rb.constraints = RigidbodyConstraints.FreezeAll;
         wizard.UpdatePlayerCount();
-        Destroy(gameObject,3);
 		stats.EndLifeTime ();
 		stats.AddDeath ();
-
-    }
+	}
+	
+	private void CreateDeathSplat()
+	{
+		GameObject p = Instantiate(projectorPrefab,projectorPosition.position,projectorPosition.rotation) as GameObject;
+		Vector3 fixedProjectorPosition = new Vector3(transform.position.x,transform.position.y,-4.5f);
+		p.GetComponent<FencingPaintSplatter>().Activate(fixedProjectorPosition,color);
+	}
+	
+	public void Respawn() 
+	{
+		alive = true;
+		transform.position = respawnPoint;
+		GameObject r = Instantiate(rapier,Vector3.zero,Quaternion.identity) as GameObject;
+		r.transform.parent = equipmentHand.transform;
+		r.transform.localPosition = new Vector3(0.5f,0,0);
+		r.transform.eulerAngles = new Vector3(0,0,270);
+		r.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
+		r.GetComponent<FencingEquipment>().ResetColor(color);
+		equipScript = r.GetComponent<FencingEquipment>();
+		equipScript.owner = this.gameObject;
+		ResetRigidBodyConstraints();
+	}
     
     public void AddKill()
     {
@@ -166,6 +200,10 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	public GameObject PickUp(GameObject equip)
 	{	
+		if (equipmentHand.transform.childCount > 1)
+		{
+			Debug.Log("Something is weird. Equipscript is " + equipScript);
+		}
 		if (equipScript == null)
 		{
 			equipScript = equip.GetComponent<FencingEquipment>();

@@ -27,6 +27,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	
 	private bool finished = false;
 	public GameObject endGame;
+	public GameObject inGame;
 
 	// Use this for initialization
 	void Start () {
@@ -53,6 +54,8 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		victoryDuration = 3;
 		
 		//cam.FindPlayers();
+		UpdateStatCards();
+		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
 	}
 	
 	void ResetExistingPlayers()
@@ -76,7 +79,14 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
 		}
+	}
 	
+	private void UpdateStatCards()
+	{
+		for (int p = 0; p < players.Length; p++)
+		{
+			players[p].statCard = ((HockeyPlayerController)players[p].control).Stats;
+		}
 	}
 	
 	private void SetPlayers()
@@ -155,6 +165,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		pController.respawnPoint = position;
 		pController.respawnTime = 1.5f;
 		remainingPlayers++;
+		pController.InitializeStatCard();
 		return pController;
 	}
 	

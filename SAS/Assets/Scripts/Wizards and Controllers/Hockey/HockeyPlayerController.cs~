@@ -58,12 +58,21 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	private PaintSplatterProjector paint;
 	public HockeyWizard wizard;
 	public HockeyStatsCard stats;
+	public HockeyStatsCard Stats {
+		get
+		{
+			return stats;
+		}
+		set
+		{
+			stats = value;
+		}
+	}
 
 	//debug
 	public Vector3 vel;
 
 	void Start () {
-		stats = new HockeyStatsCard ();
 		// Get Components and Game Objects
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
@@ -86,13 +95,19 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		alive = true;
 		anim.SetBool("Alive", true);
 		ResetRigidBodyConstraints();
-		walkSpeed = 1.5f;
-		maxSpeed = 7;
+		walkSpeed = 3.5f;
+		maxSpeed = 9;
 		stats.ResetStats ();
 		Debug.Log(stats);
 		paint = GetComponent<PaintSplatterProjector>();
 		paint.Initialize (color);
+		friction = 0.95f;
     }
+	public void InitializeStatCard()
+	{
+		stats = new HockeyStatsCard ();
+		stats.ResetStats ();
+	}
 
 	void Update () {
 
@@ -109,9 +124,10 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 //			xLookDirection = 0;
 //			zLookDirection = 0;
 //			float xLookVel = GetXLook();
-//			float zLookVel = GetZLook();
+//			float zLookVel = GetZLook();f
 			if (Vector2.SqrMagnitude(device.RightStick.Value) > 0.667) { transform.eulerAngles = new Vector3(0,device.RightStick.Angle-90,0); }
 			rb.velocity = new Vector3(Mathf.Clamp(rb.velocity.x,-maxSpeed,maxSpeed),0,Mathf.Clamp(rb.velocity.z,-maxSpeed,maxSpeed));
+			rb.velocity *= friction;
 			vel = rb.velocity;
 
 			// Check if Attacking
@@ -175,7 +191,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		timeOfDeath = Time.time;
 		alive = false;
-        rb.constraints = RigidbodyConstraints.None;
+        //rb.constraints = RigidbodyConstraints.None;
 		anim.SetBool ("Alive", false);
 		stats.EndLifeTime ();
 		stats.AddDeath ();
@@ -183,16 +199,41 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	
 	public void Kill()
 	{
+		Debug.Log("Kill, no direction");
 		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
         MakeDead();
     }
 
     public void Kill(Vector3 direction)
-    {
-		rb.AddForce (10f * direction);
-        MakeDead();
-        direction.z *= -1;    
+	{
+		Vector3 rbForce = new Vector3(-direction.x,direction.y,-direction.z);
+		rbForce *= 2.5f;
+		rbForce = CorrectRBForce(rbForce);
+		Debug.Log("RbForce: " + rbForce);	
+		rb.AddForce(rbForce, ForceMode.VelocityChange);
 		paint.Splatter (transform.position, direction);
+        MakeDead();
+    }
+    
+    private Vector3 CorrectRBForce(Vector3 f)
+    {
+    	if (f.x < 0)
+    	{
+    		f.x = Mathf.Clamp(f.x,-5,-2.5f);
+    	}
+    	else
+    	{
+			f.x = Mathf.Clamp(f.x,2.5f,5);
+    	}
+    	if (f.z < 0)
+    	{
+    		f.z = Mathf.Clamp(f.z,-5,-2.5f);
+    	}
+    	else
+    	{
+			f.z = Mathf.Clamp(f.z,2.5f,5);
+    	}
+    	return f;
     }
 	
 	public void GoalScored()
@@ -203,10 +244,11 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
     public void Respawn()
     {
 		alive = true;
+		anim.SetBool ("Attack", false);
 		anim.SetBool ("Alive", true);
-        rb.velocity = new Vector3(0, 0, 0);
         transform.position = respawnPoint;
-        ResetRigidBodyConstraints();
+		ResetRigidBodyConstraints();
+		rb.velocity = new Vector3(0, 0, 0);
         transform.eulerAngles = new Vector3(0,0,0);
 		stats.StartLifeTime ();
 		wizard.FindPlayers();

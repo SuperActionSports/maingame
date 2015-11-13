@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class FencingWizard : MonoBehaviour,IWizard {
@@ -13,23 +13,25 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	public GameObject winnerPlayer;			// Game, private
 	public GameObject victory;				// Game, private
 	private float victoryDuration;			// Game, private
-	private float gameWinTime;				// Layla, customized games
+	private float roundWinTime;				// Layla, customized games
+	public float gameDuration;
+	private float gameStartTime;
 	private int matchCount;					// Layla, customized games
 	private FencingCameraController cam;	// Game
-	//private FencingPlayerManager inputManager;	// Layla
-	//private InputDevice[] devices;				// Layla
 	private FencingCameraController camScript;	// Game
 	public GameObject layla;
 	private GameControlLiaison liaison;
+	private bool finished;
+	public GameObject endGame;
+	public GameObject inGame;
 
 	// Use this for initialization
 	void Start () {
 	if (layla == null) { layla = GameObject.Find("Layla");
 	}
+	finished = false;
 	liaison = layla.GetComponent<GameControlLiaison>();
-	Debug.Log("Liaison's active players: " + liaison.numberOfActivePlayers);
 	players = new Player[liaison.numberOfActivePlayers];
-	Debug.Log("So, naturally, players' length is " + players.Length);
 	for (int p = 0; p < players.Length; p++)
 	{
 		players[p] = liaison.players[p];
@@ -40,11 +42,23 @@ public class FencingWizard : MonoBehaviour,IWizard {
 			respawnPointPositions[i] = respawnPoints[i].transform.position;
 		}
 	//players = liaison.players;
-	Debug.Log("Wizard is setting " + players.Length +" players.");
-	SetPlayers();
+	ResetExistingPlayers();
 	camScript = Camera.main.GetComponent<FencingCameraController>();
-	gameWinTime = -1;
+	SetPlayers();
+	roundWinTime = -1;
 	victoryDuration = 3;
+	gameDuration = 60;
+	gameStartTime = Time.time;
+	UpdateStatCards();
+	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
 	}
 	
 	
@@ -52,40 +66,51 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	{
 		// Set players should be SPAWN players. SpawnPlayers should reset the position of the players to one of the given respawn points, set them to active and alive, etc
 		// This should handle the device concern too. 	
+		remainingPlayers = players.Length;
 		switch(players.Length)
 		{
 		
 		case (1):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+		//	else {ResetPlayer(players[0]);}
 			break;
 		case(2):
-			Debug.Log("Spawning two");
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+		//	else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[4],players[1]);
+		//	else {ResetPlayer(players[1]);}
 			break;
 			
 		case (3):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			//else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[2],players[1]);
+		//	else {ResetPlayer(players[1]);}
 			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[4],players[2]);
+		//	else {ResetPlayer(players[2]);}
 			break;
 			
 		case(4):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+		//	else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[1],players[1]);
+		//	else {ResetPlayer(players[1]);}
 			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[3],players[2]);
+		//	else {ResetPlayer(players[2]);}
 			if (ShouldBeSpawned(players[3])) Spawn(respawnPointPositions[4],players[3]);
+		//	else {ResetPlayer(players[3]);}
 			break;
 			
 		default:
 			Debug.Log ("Invalid number of players [2,4]: " + players.Length);
 			break;
 		}
+		
+		camScript.RecountPlayers();
 	}
 	
 	public void DisableMovement()
 	{
-		Debug.Log("Disable From Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(false);
@@ -102,40 +127,64 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	
 	private bool ShouldBeSpawned(Player p)
 	{
-		if (p.control == null)
+	/*	if (p.control == null)
 		{
 			return true;	
 		}
-		else { return !p.control.Alive(); } 
+		else { return !p.control.Alive(); } */
+		return p.control == null;
 	}
 	
-	private PlayerControllerMatt Spawn(Vector3 position, Player player)
+	private FencingPlayerController Spawn(Vector3 position, Player player)
 	{
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
-		PlayerControllerMatt pController = p.GetComponent<PlayerControllerMatt>();
+		FencingPlayerController pController = p.GetComponent<FencingPlayerController>();
 		player.control = pController;
-		// Replace this noise with the player prefs file information
-		p.GetComponent<PlayerControllerMatt>().color = player.color;
-		p.GetComponent<PlayerControllerMatt>().wizard = this;
-//		p.GetComponent<PlayerControllerMatt>().wizardNumber = playerNumber;
+		pController.color = player.color;
+		pController.wizard = this;
+		pController.respawnPoint = position;
+		pController.InitializeStatCard();
+		p.GetComponent<FencingInputHandler>().device = player.device;
 		
-		// Replace this with the device information from userprefs
-		p.GetComponent<PlayerInputHandlerMatt>().device = player.device;
-		//players[playerNumber] = p.GetComponent<PlayerInputHandlerMatt>();
-		
-		remainingPlayers++;
-		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		return pController;
+	}
+	
+	private void ResetPlayers()
+	{
+		remainingPlayers = players.Length;
+		foreach (Player p in players)
+		{
+			if (!p.control.Alive()) ((FencingPlayerController)p.control).Respawn();
+		}
 	}
 	// Update is called once per frame
 	void Update () {
-//		Debug.Log("Game win time: " + gameWinTime + " + " + victoryDuration);
-		if (gameWinTime > 0 && gameWinTime + victoryDuration <= Time.time)
+		UpdateStatCards();
+		if (gameDuration > (Time.time - gameStartTime))
 		{
-			SetPlayers();
-			camScript.won = false;
-			camScript.RecountPlayers();
+			if (roundWinTime > 0 && roundWinTime + victoryDuration <= Time.time)
+			{
+				//SetPlayers();
+				ResetPlayers();
+				camScript.won = false;
+				camScript.RecountPlayers();
+				roundWinTime = -1;
+			}
+		}
+		else if (!finished)
+		{
+			DisableMovement();
+			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
+			finished = true;
+		}
+	}
+	
+	private void UpdateStatCards()
+	{
+		for (int p = 0; p < players.Length; p++)
+		{
+			players[p].statCard = ((FencingPlayerController)players[p].control).Stats;
 		}
 	}
 	
@@ -144,17 +193,14 @@ public class FencingWizard : MonoBehaviour,IWizard {
 		winner = 0;
 		for (int i = 0; i<players.Length;i++)
 		{
-			Debug.Log("Player " + i + " is alive? " + players[i].control.Alive());
 			//Debug.Log("Player " + i + " (" + controls[i].color.ToString() + ") is alive? " + controls[i].alive);
 			if (players[i].control.Alive()) 
 			{
 				winner = i;
-				Debug.Log("Winner: " + winner);
 			}
 			else 
 			{
 				remainingPlayers--;
-				Debug.Log("Remaining players: " + remainingPlayers);
 			}
 		}
 		if (remainingPlayers <2)
@@ -165,9 +211,8 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	
 	private void Victory()
 	{
-		Debug.Log("Winner! Color is " + players[winner].color);
 		victory.GetComponent<VictoryScript>().Party (players[winner].color);
-		gameWinTime = Time.time;
+		roundWinTime = Time.time;
 		camScript.won = true;
 		winnerPlayer = players[winner].gameObject;
 		if (winnerPlayer != null ) {camScript.FollowWinner(winnerPlayer);}

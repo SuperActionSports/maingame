@@ -58,12 +58,21 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	private PaintSplatterProjector paint;
 	public HockeyWizard wizard;
 	public HockeyStatsCard stats;
+	public HockeyStatsCard Stats {
+		get
+		{
+			return stats;
+		}
+		set
+		{
+			stats = value;
+		}
+	}
 
 	//debug
 	public Vector3 vel;
 
 	void Start () {
-		stats = new HockeyStatsCard ();
 		// Get Components and Game Objects
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
@@ -94,6 +103,11 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		paint.Initialize (color);
 		friction = 0.95f;
     }
+	public void InitializeStatCard()
+	{
+		stats = new HockeyStatsCard ();
+		stats.ResetStats ();
+	}
 
 	void Update () {
 

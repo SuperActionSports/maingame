@@ -46,8 +46,6 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	// Use this for initialization
 	void Start () {
-		stats = new FencingStatsCard ();
-		stats.ResetStats ();
 		//sound =  GetComponent<AudioSource>();
 		cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -71,6 +69,12 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		movementAllowed = true;
 		
 		ResetRigidBodyConstraints();
+	}
+	
+	public void InitializeStatCard()
+	{
+		stats = new FencingStatsCard ();
+		stats.ResetStats ();
 	}
 	
 	void Update () {
