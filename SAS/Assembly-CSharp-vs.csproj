@@ -115,6 +115,9 @@
      <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonFocus.cs" />
      <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButton.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonFocus.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonManager.cs" />
