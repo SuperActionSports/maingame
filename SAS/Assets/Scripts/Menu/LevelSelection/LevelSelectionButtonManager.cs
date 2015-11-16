@@ -91,7 +91,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		}
 		if (focusedButton.name == "Back") 
 		{
-			Application.LoadLevel("Color Select Update");
+			Application.LoadLevel("Color Select Cursor");
 		}
 	}
 		

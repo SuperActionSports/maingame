@@ -266,8 +266,8 @@ RectTransform:
   m_RootOrder: 2
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
-  m_AnchoredPosition: {x: 3.05175781e-05, y: -333}
-  m_SizeDelta: {x: 1657, y: 252}
+  m_AnchoredPosition: {x: 3.05175781e-05, y: -349}
+  m_SizeDelta: {x: 1657, y: 283}
   m_Pivot: {x: .5, y: .5}
 --- !u!114 &338867447
 MonoBehaviour:
@@ -294,9 +294,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Super Action Sports! takes on fencing! Stab or throw your sticks at your
-    opponents to defeat them! \n\nTip: If you lose your stick, retrieve another one
-    by simply running it over!   "
+  m_Text: 'Just your basic hockey game with more violence! Knock the puck into the
+    goal while clobbering your opponents and possibly your teammates out of the way!
+
+'
 --- !u!222 &338867448
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -356,7 +357,7 @@ GameObject:
   - 222: {fileID: 484283608}
   - 114: {fileID: 484283607}
   m_Layer: 5
-  m_Name: Layout
+  m_Name: ControllerLayout
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +374,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1015957711}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_AnchorMin: {x: .5, y: .5}
   m_AnchorMax: {x: .5, y: .5}
   m_AnchoredPosition: {x: -392, y: 59}
@@ -392,7 +393,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Sprite: {fileID: 21300000, guid: 3330e6f839c874b6fa93e02b579998c8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90d3cdc5ab8cc46388103916878178f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -634,8 +635,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 484283606}
   - {fileID: 1336341385}
+  - {fileID: 484283606}
   - {fileID: 338867446}
   - {fileID: 1415291082}
   m_Father: {fileID: 0}
@@ -933,7 +934,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   focusedButton: {fileID: 57886348}
-  levelName: FencingFixedPause
+  levelName: HockeyFixedPause
 --- !u!1001 &1701933096
 Prefab:
   m_ObjectHideFlags: 0
@@ -971,7 +972,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22466602, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 22466602, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -1019,7 +1020,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11484768, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}
       propertyPath: m_Text
-      value: Action Sticks!
+      value: Hockey!
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}

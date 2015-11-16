@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   up: {fileID: 864728341}
-  down: {fileID: 0}
-  left: {fileID: 0}
+  down: {fileID: 342625851}
+  left: {fileID: 342625851}
   right: {fileID: 1620575514}
 --- !u!1 &356127158
 GameObject:
@@ -165,9 +165,9 @@ MonoBehaviour:
   focusedButton: {fileID: 864728341}
   actionSticksName: ActionSticksInfoScreen
   actionStickEggName: ActionStickEggInfoScreen
-  actionFuzzyEggName: Tennis
-  hockeyName: Hockey
-  actionTinyEggName: Golf
+  actionFuzzyEggName: ActionFuzzyEggInfoScreen
+  hockeyName: HockeyInfoScreen
+  actionTinyEggName: ActionTinyEggInfoScreen
 --- !u!114 &356127161
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -354,7 +354,8 @@ Prefab:
       propertyPath: m_FontData.m_LineSpacing
       value: .25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &446498600 stripped
@@ -480,7 +481,8 @@ Prefab:
       propertyPath: m_FontData.m_Alignment
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &447847261 stripped
@@ -524,10 +526,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115efc1be0f4b4c169499c8ffb6e54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 0}
+  up: {fileID: 712907928}
   down: {fileID: 2036079252}
-  left: {fileID: 0}
-  right: {fileID: 0}
+  left: {fileID: 733588364}
+  right: {fileID: 712907928}
 --- !u!1001 &733588361
 Prefab:
   m_ObjectHideFlags: 0
@@ -647,7 +649,8 @@ Prefab:
       propertyPath: m_FontData.m_LineSpacing
       value: .25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &733588362 stripped
@@ -670,10 +673,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115efc1be0f4b4c169499c8ffb6e54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 0}
-  down: {fileID: 342625851}
-  left: {fileID: 0}
-  right: {fileID: 0}
+  up: {fileID: 733588364}
+  down: {fileID: 1620575514}
+  left: {fileID: 864728341}
+  right: {fileID: 712907928}
 --- !u!1001 &752785106
 Prefab:
   m_ObjectHideFlags: 0
@@ -739,10 +742,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115efc1be0f4b4c169499c8ffb6e54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 0}
+  up: {fileID: 864728341}
   down: {fileID: 342625851}
-  left: {fileID: 0}
-  right: {fileID: 0}
+  left: {fileID: 864728341}
+  right: {fileID: 733588364}
 --- !u!1001 &998732819
 Prefab:
   m_ObjectHideFlags: 0
@@ -824,9 +827,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11484768, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}
       propertyPath: m_Text
-      value: 'Press Y for info
-
-        Press a For Start'
+      value: Press A to select a game!
       objectReference: {fileID: 0}
     - target: {fileID: 11484768, guid: dac91d647e76a4f14b7b5dcf6ba2d024, type: 2}
       propertyPath: m_FontData.m_Alignment
@@ -1205,7 +1206,8 @@ Prefab:
       propertyPath: m_FontData.m_LineSpacing
       value: .25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1282653333 stripped
@@ -1329,19 +1331,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 348
+      value: 355
       objectReference: {fileID: 0}
     - target: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -398
+      value: -399
       objectReference: {fileID: 0}
     - target: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 575
       objectReference: {fileID: 0}
     - target: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 227.699997
+      value: 317
       objectReference: {fileID: 0}
     - target: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_AnchorMin.x
@@ -1409,7 +1411,8 @@ Prefab:
       propertyPath: m_Colors.m_NormalColor.b
       value: .466666698
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!224 &1336341385 stripped
@@ -1543,7 +1546,8 @@ Prefab:
       propertyPath: m_FontData.m_LineSpacing
       value: .25
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1498498847 stripped
@@ -1567,8 +1571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 115efc1be0f4b4c169499c8ffb6e54f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  up: {fileID: 0}
-  down: {fileID: 0}
+  up: {fileID: 733588364}
+  down: {fileID: 1620575514}
   left: {fileID: 342625851}
   right: {fileID: 2036079252}
 --- !u!1001 &1701933096
@@ -1859,7 +1863,8 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Back
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!114 &1964252695 stripped
@@ -1884,9 +1889,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   up: {fileID: 712907928}
-  down: {fileID: 0}
+  down: {fileID: 2036079252}
   left: {fileID: 1620575514}
-  right: {fileID: 0}
+  right: {fileID: 2036079252}
 --- !u!224 &2046270744 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036,

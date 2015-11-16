@@ -1,9 +1,13 @@
 using UnityEngine;
+using UnityEngine.UI;
 using InControl;
 
 public class PauseMenuButtonManager : MonoBehaviour
 {
 	public PauseMenuButton focusedButton;
+	public GameObject controllerLayout;
+
+	public bool layoutWasClicked;
 
 	TwoAxisInputControl filteredDirection;
 			
@@ -25,35 +29,39 @@ public class PauseMenuButtonManager : MonoBehaviour
 			Debug.Log( "!!!" );
 		}
 
-		// Move focus with directional inputs.
-		if (filteredDirection.Up.WasPressed)
-		{
-			MoveFocusTo( focusedButton.up );
-		}
+		if (!layoutWasClicked) {
+			// Move focus with directional inputs.
+			if (filteredDirection.Up.WasPressed) {
+				MoveFocusTo (focusedButton.up);
+			}
 			
-		if (filteredDirection.Down.WasPressed)
-		{
-			MoveFocusTo( focusedButton.down );
-		}
+			if (filteredDirection.Down.WasPressed) {
+				MoveFocusTo (focusedButton.down);
+			}
 			
-		if (filteredDirection.Left.WasPressed)
-		{
-			MoveFocusTo( focusedButton.left );
-		}
+			if (filteredDirection.Left.WasPressed) {
+				MoveFocusTo (focusedButton.left);
+			}
 			
-		if (filteredDirection.Right.WasPressed)
-		{
-			MoveFocusTo( focusedButton.right );
-		}
+			if (filteredDirection.Right.WasPressed) {
+				MoveFocusTo (focusedButton.right);
+			}
 			
-		if (inputDevice.Action1.WasPressed) 
-		{
-			LoadScene();
-		}
+			if (inputDevice.Action1.WasPressed) {
+				LoadScene ();
+			}
 
-		if (inputDevice.Action2.WasPressed) 
+			if (inputDevice.Action2.WasPressed) {
+				Resume ();
+			}
+		} 
+		else 
 		{
-			Resume ();
+			if(inputDevice.Command.WasPressed || inputDevice.Action2.WasPressed || inputDevice.Action1.WasPressed)
+			{
+				controllerLayout.SetActive(false);
+				layoutWasClicked = false;
+			}
 		}
 
 	}
@@ -64,6 +72,11 @@ public class PauseMenuButtonManager : MonoBehaviour
 		if (focusedButton.name == "Resume") 
 		{
 			Resume ();
+		}
+		if (focusedButton.name == "Controller Layout") 
+		{
+			controllerLayout.SetActive(true);
+			layoutWasClicked = true;
 		}
 		if (focusedButton.name == "Level Select") 
 		{
