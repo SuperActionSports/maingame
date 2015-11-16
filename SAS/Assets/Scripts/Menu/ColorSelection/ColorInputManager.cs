@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using InControl;
 	
 	public class ColorInputManager : MonoBehaviour
@@ -16,12 +17,23 @@ using InControl;
 		List<ColorSelectionButtonManager> colorSelectionManagers = new List<ColorSelectionButtonManager>( maxColorSelectors );
 
 		public List<ColorSelectionButton> colorStarts;
-	
+
+		private GameObject confirmedButton;
+		private Button colorsConfirmedButton;
+		private ColorSelectionButton colorsConfirmedSelectionButton;
+
 		void Start()
 		{
+			confirmedButton = GameObject.Find ("ColorsConfirmed");
+			
+			colorsConfirmedButton = confirmedButton.GetComponent<Button> ();
+
+			colorsConfirmedSelectionButton = confirmedButton.GetComponent<ColorSelectionButton> ();
+			
 			InputManager.OnDeviceDetached += OnDeviceDetached;
 
-			spawnPoints = new List<Vector3>();
+			spawnPoints = new List<Vector3> ();
+
 			try{
 				int sizeOfBtns = colorStarts.Count;
 			}
@@ -49,6 +61,16 @@ using InControl;
 				{
 					CreateButton(inputDevice );
 				}
+			}
+			
+			bool activeDevicesHaveSelectedColors = CheckDevicesSelection ();
+
+			if (!activeDevicesHaveSelectedColors) {
+				colorsConfirmedSelectionButton.focusedUponTheNightWhenTheHorsesAreFree = true;
+				colorsConfirmedButton.interactable = false;
+			} else {
+				colorsConfirmedButton.interactable = true;
+				colorsConfirmedSelectionButton.focusedUponTheNightWhenTheHorsesAreFree = false;
 			}
 		}
 
@@ -128,6 +150,16 @@ using InControl;
 			Destroy( c.gameObject );
 		}
 
+		bool CheckDevicesSelection ()
+		{
+			GameControlLiaison liaison = layla.GetComponent<GameControlLiaison> ();
+
+			if (liaison.number_of_players == liaison.numberOfActivePlayers) {
+				return true;
+			} else {
+				return false;
+			}
+		}
 
 		void OnGUI()
 		{

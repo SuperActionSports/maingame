@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 using InControl;
 
 public class ColorSelectionButtonManager : MonoBehaviour
@@ -12,8 +13,11 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison layla;
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
+	public List<ColorSelectionButton> colorButtons;
 
 	private Image hand;
+	private GameObject confirmedButton;
+	private Button colorsConfirmed;
 
 	TwoAxisInputControl filteredDirection;
 			
@@ -25,6 +29,8 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void Start()
 	{
+		confirmedButton = GameObject.Find ("ColorsConfirmed");
+		colorsConfirmed = confirmedButton.GetComponent<Button> ();
 		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
 		hand = this.GetComponentInChildren<Image> ();
 		ColorInputManager colorInputManagerScript = playerInputManager.GetComponent<ColorInputManager> ();
@@ -47,6 +53,9 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void Update()
 	{
+		foreach (ColorSelectionButton btn in colorButtons) {
+			btn.focusedUponTheNightWhenTheHorsesAreFree = true;
+		}
 		// Use last device which provided input.
 		//var inputDevice = InputManager.ActiveDevice;
 		filteredDirection.Filter( device.Direction, Time.deltaTime );
@@ -90,17 +99,34 @@ public class ColorSelectionButtonManager : MonoBehaviour
 				c.a = 1;
 				hand.color = c;
 				layla.SetPlayerColor(device,c);
+				if(colorButtons.Count > 0)
+				{
+					ColorSelectionButton btn = colorButtons[0];
+					btn.focusedUponTheNightWhenTheHorsesAreFree = false;
+					colorButtons.Clear();
+				}
+				colorButtons.Add(focusedButton);
 			}
-			else{
-			LoadScene();
+			else
+			{
+				LoadScene();
 			}
 		}
 		if (device.Action2.WasPressed) 
 		{
 			//Application.LoadLevel("PlayerSelectionWithController");
 			layla.ErasePlayerColor(device);
+			hand.color = Color.white;
+			if(colorButtons.Count > 0)
+			{
+				foreach(ColorSelectionButton btn in colorButtons)
+				{
+					btn.focusedUponTheNightWhenTheHorsesAreFree = false;
+				}
+
+				colorButtons.Clear();
+			}
 		}
-		
 		
 	}
 
@@ -119,7 +145,10 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree)
 		{
 			tempFocus.focusedUponTheNightWhenTheHorsesAreFree = true;
-			current.focusedUponTheNightWhenTheHorsesAreFree = false;
+			//if(!colorButtonNames.Contains(tempFocus.name))
+			//{
+				current.focusedUponTheNightWhenTheHorsesAreFree = false;
+			//}
 			return tempFocus;
 		}
 		return current;
@@ -131,22 +160,21 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		
 		while (tempFocus.focusedUponTheNightWhenTheHorsesAreFree && tempFocus.right != tempFocus)
 		{
-			//Debug.Log(tempFocus.name + " Right: " + tempFocus.focusedUponTheNightWhenTheHorsesAreFree + " && " + (tempFocus.right != tempFocus));
-		//	Debug.Log("Is tempfocus.right occupied? " + tempFocus.right.focusedUponTheNightWhenTheHorsesAreFree);
 			tempFocus = tempFocus.right;
-		//	Debug.Log("New tempFocus: " + tempFocus);
 		}
 		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree)
 		{
-			//Debug.Log("Moving to " +tempFocus);
 			tempFocus.focusedUponTheNightWhenTheHorsesAreFree = true;
-			current.focusedUponTheNightWhenTheHorsesAreFree = false;
+			//if(!colorButtonNames.Contains(tempFocus.name))
+			//{
+				current.focusedUponTheNightWhenTheHorsesAreFree = false;
+			//}
 			return tempFocus;
 		}
-		else{
-	//	Debug.Log(tempFocus.name + " is occupied? " + tempFocus.focusedUponTheNightWhenTheHorsesAreFree + " so I'm returning " + current.name);
+		else
+		{
 			return current;
-			}
+		}
 	}
 	
 	ColorSelectionButton GetAvailableDown(ColorSelectionButton current)
@@ -172,13 +200,12 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		{
 			tempFocus = tempFocus.up;
 		}
-		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree)
-		{
+		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree) {
 			tempFocus.focusedUponTheNightWhenTheHorsesAreFree = true;
 			current.focusedUponTheNightWhenTheHorsesAreFree = false;
 			return tempFocus;
 		}
-		return current;
+			return current;
 	}
 	
 			
