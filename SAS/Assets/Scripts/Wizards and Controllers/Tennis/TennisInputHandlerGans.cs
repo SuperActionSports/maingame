@@ -67,6 +67,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		if (device != null && device.RightTrigger.IsPressed)
 		{
 			swingForce += Time.deltaTime * 25f;
+			Debug.Log("Swingforce: " + swingForce);
 			control.WindUp();
 			return true;
 		}

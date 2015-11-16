@@ -4,52 +4,54 @@ using System.Collections;
 public class BallMovement : MonoBehaviour {
 
 	Vector3 position;
-	Rigidbody rb;
-	GameObject[] players;
+	//Rigidbody rb;
 	GameObject lastHitBy;
 	int count;
 	bool hasHitTurf;
-	public int bounces;
+	int value;
 	public Vector3 vel;
 	public bool hit;
-	public ParticleSystem indicator;
+	public GameObject wizard;
 
 	private Renderer tr;
 	// Use this for initialization
 	void Start () 
 	{
+		ResetValue();
 		tr = GetComponent<TrailRenderer>().GetComponent<Renderer>();
-		rb = GetComponent<Rigidbody> ();
-		players = GameObject.FindGameObjectsWithTag ("Player");
-		Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-		rb.AddForce(angle * transform.forward * 1000);
+		//rb = GetComponent<Rigidbody> ();
+		//Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
+		//rb.AddForce(angle * transform.forward * 1000);
 		hasHitTurf = false;
 		count = 0;
-		bounces = 30;
 		hit = false;
 	}
 
 	void Update()
 	{
-		vel = rb.velocity;
+		
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
 		if (collision.gameObject.tag == "Turf") {
 			count++;
-			if (count > bounces) {
-				Destroy (transform.gameObject);
-			}
-			//CheckForDoubleBounce();
+			CheckForDoubleBounce();
 		} else if (collision.gameObject.tag == "Wall") 
 		{
-			hasHitTurf = false;
-			//Destroy(transform.gameObject);		
+		//	hasHitTurf = false;
 		}
-		else 
+		else if (collision.gameObject.CompareTag("BrickWall"))
 		{
-			hasHitTurf = false;
+			if (!hasHitTurf)
+			{
+				wizard.GetComponent<TennisWizard>().BallHitWall();
+				IncreaseValue();
+			}
+		}
+		else
+		{
+			//hasHitTurf = false;
 		}
 	}
 
@@ -58,12 +60,22 @@ public class BallMovement : MonoBehaviour {
 		if (hasHitTurf) 
 		{
 			Debug.Log ("Double bounce");
-			Destroy (transform.gameObject);
+			if (lastHitBy != null) lastHitBy.GetComponent<TennisController>().ScorePoints(value);
 		} 
 		else 
 		{
 			hasHitTurf = true;
 		}
+	}
+	
+	public void ResetValue()
+	{
+		value = 1;
+	}
+	
+	public void IncreaseValue()
+	{
+		value = Mathf.Clamp(value + 1,1,10);
 	}
 	
 	public void ResetCount()
