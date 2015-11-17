@@ -57,11 +57,20 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
     
     public GolfWizard wizard;
 	public GolfStatsCard stats;
+	public GolfStatsCard Stats {
+		get
+		{
+			return stats;
+		}
+		set
+		{
+			stats = value;
+		}
+	}
 	private PaintSplatterProjector paint;
 	private Projector proj;
 
 	void Start () {
-		stats = new GolfStatsCard ();
 		// Get Components and Game Objects
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
 		if (respawnPoints.Length == 0)
@@ -100,6 +109,11 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		putting = false;
 		stats.ResetStats ();
     }
+	public void InitializeStatCard()
+	{
+		stats = new GolfStatsCard ();
+		stats.ResetStats ();
+	}
     
 
 	void Update () {

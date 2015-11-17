@@ -36,6 +36,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	private float gameWinTime = Mathf.Infinity;				// Layla, customized games
 	private int matchCount;					// Layla, customized games
 	private bool finished;
+	public GameObject inGame;
 	// Use this for initialization
 	// Woop Woop
 	int test = 5;
@@ -69,6 +70,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		camScript = Camera.main.GetComponent<GolfCameraController>();
 		finished = false;
 		victoryDuration = 3;
+		UpdateStatCards();
+		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
 	}
 	
 	void ResetExistingPlayers()
@@ -81,6 +84,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	void Update()
 	{
+		UpdateStatCards();
 		if (Time.time > gameWinTime && !finished)
 		{
 			DisableMovement();
@@ -166,6 +170,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		pController.device = player.device;
 		pController.respawnPoint = position;
 		pController.respawnTime = 1.5f;
+		pController.InitializeStatCard();
 		remainingPlayers++;
 		return pController;
 	}
@@ -222,4 +227,12 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		Gizmos.DrawWireSphere(hole.transform.position,minDistToBallFromHole);
 	}
 	// Update is called once per frame
+	
+	private void UpdateStatCards()
+	{
+		for (int p = 0; p < players.Length; p++)
+		{
+			players[p].statCard = ((GolfPlayerController)players[p].control).Stats;
+		}
+	}
 }

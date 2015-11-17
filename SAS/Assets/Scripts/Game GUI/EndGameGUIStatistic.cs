@@ -25,9 +25,6 @@ public class EndGameGUIStatistic : MonoBehaviour {
 	public void GenerateStatistic()
 	{
 		statNamePrefab.GetComponent<Text>().text = statName;
-		Debug.Log("Generating " + statName + " stat");
-		Debug.Log("Stat value: (" + statValue + ")");
-		Debug.Log(" statValuePrefab: (" + statValuePrefab + ")");
 		statValuePrefab.GetComponent<Text>().text = statValue;
 	}
 	// Use this for initialization

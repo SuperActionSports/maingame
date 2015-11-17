@@ -23,17 +23,22 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public GameObject golfBall;
 	public GameObject hole;
+	public GameObject floorPrefab;
+	public GameObject floor;
+	
 	
 	public float holeSpawnRangeX = 16;
 	public float holeSpawnRangeZ = 16;
 	public float minDistToBallFromHole = 4;
 	
 	public GameObject endGame;
-	private float gameWinTime = 30;				// Layla, customized games
+	private float gameWinTime = Mathf.Infinity;				// Layla, customized games
 	private int matchCount;					// Layla, customized games
 	private bool finished;
+	public GameObject inGame;
 	// Use this for initialization
 	void Start () {
+		floor = GameObject.Instantiate(floorPrefab,Vector3.zero,Quaternion.identity) as GameObject;
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
 		liaison = layla.GetComponent<GameControlLiaison>();
@@ -49,16 +54,28 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		}
 		//players = liaison.players;
 		Debug.Log("Wizard is setting " + players.Length +" players.");
+		ResetExistingPlayers();
 		SetPlayers();
 		SpawnBallAndHole();
 		ResetBallAndHole();
 		camScript = Camera.main.GetComponent<GolfCameraController>();
 		finished = false;
 		victoryDuration = 3;
+		UpdateStatCards();
+		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
 	}
 	
 	void Update()
 	{
+		UpdateStatCards();
 		if (Time.time > gameWinTime && !finished)
 		{
 			DisableMovement();
@@ -144,6 +161,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		pController.device = player.device;
 		pController.respawnPoint = position;
 		pController.respawnTime = 1.5f;
+		pController.InitializeStatCard();
 		remainingPlayers++;
 		return pController;
 	}
@@ -155,21 +173,27 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void SpawnBallAndHole()
 	{
-		hole = GameObject.Instantiate(hole,Vector3.down,Quaternion.identity) as GameObject;
-		golfBall = GameObject.Instantiate(golfBall,Vector3.down,Quaternion.identity) as GameObject;
+		hole = GameObject.Instantiate(hole,Vector3.up*300f,Quaternion.identity) as GameObject;
+		golfBall = GameObject.Instantiate(golfBall,Vector3.up*3f,Quaternion.identity) as GameObject;
 		golfBall.GetComponent<GolfBall>().wizard = this;
+		hole.transform.position = new Vector3(hole.transform.position.x,
+		                                      floor.GetComponent<MeshCollider>().ClosestPointOnBounds(hole.transform.position).y,
+		                                      hole.transform.position.z);
 	}
 	
 	public void ResetBallAndHole()
 	{
 		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		
 		while(Vector3.Distance(hole.transform.position,golfBall.transform.position) < minDistToBallFromHole)
 		{
 			golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+			Debug.Log("Dang, too close. Wizard trying a new location.");
 		}
 		Debug.Log("Golfball: " + golfBall.transform.position);
 		Debug.Log("Hole: " + hole.transform.position);
+		Debug.Log("Distance: " + Vector3.Distance(hole.transform.position,golfBall.transform.position) + " should be greater than " + minDistToBallFromHole);
 	}
 	
 	void OnDrawGizmos()
@@ -180,4 +204,12 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		Gizmos.DrawWireSphere(hole.transform.position,minDistToBallFromHole);
 	}
 	// Update is called once per frame
+	
+	private void UpdateStatCards()
+	{
+		for (int p = 0; p < players.Length; p++)
+		{
+			players[p].statCard = ((GolfPlayerController)players[p].control).Stats;
+		}
+	}
 }

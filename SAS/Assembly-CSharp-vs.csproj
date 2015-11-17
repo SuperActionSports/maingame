@@ -52,9 +52,6 @@
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\ProjectorSplatter.cs" />
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\Spout.cs" />
      <Compile Include="Assets\Prefabs\Golf\PerlinNoisePlane.cs" />
-     <Compile Include="Assets\Prefabs\Menu\PauseMenu\PauseMenuButton.cs" />
-     <Compile Include="Assets\Prefabs\Menu\PauseMenu\PauseMenuButtonFocus.cs" />
-     <Compile Include="Assets\Prefabs\Menu\PauseMenu\PauseMenuButtonManager.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Camera Models\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\BaseballCameraController.cs" />
@@ -66,18 +63,22 @@
      <Compile Include="Assets\Scripts\Camera Models\ICamera.cs" />
      <Compile Include="Assets\Scripts\Camera Models\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\SideScrollingCameraController.cs" />
+     <Compile Include="Assets\Scripts\FX\Flags\FlagWave.cs" />
      <Compile Include="Assets\Scripts\FX\FreezeRotationAndY.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\FencingPaintSplatter.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\PaintSplatter.cs" />
      <Compile Include="Assets\Scripts\FX\Particle Systems\ConfettiScript.cs" />
      <Compile Include="Assets\Scripts\FX\Particle Systems\VictoryScript.cs" />
      <Compile Include="Assets\Scripts\FX\SetColorToOther.cs" />
+     <Compile Include="Assets\Scripts\FX\Tennis Ball Value Counter\BallValueCounter.cs" />
      <Compile Include="Assets\Scripts\Game GUI\ColorSelectionCursor.cs" />
      <Compile Include="Assets\Scripts\Game GUI\Countdown.cs" />
      <Compile Include="Assets\Scripts\Game GUI\Cursor.cs" />
      <Compile Include="Assets\Scripts\Game GUI\EndGameGUIStatistic.cs" />
      <Compile Include="Assets\Scripts\Game GUI\EndgameGUIRank.cs" />
      <Compile Include="Assets\Scripts\Game GUI\EndgameGUIStatGenerator.cs" />
+     <Compile Include="Assets\Scripts\Game GUI\InGameGUI\InGamePlayerBoard.cs" />
+     <Compile Include="Assets\Scripts\Game GUI\InGameGUI\InGamePlayerCard.cs" />
      <Compile Include="Assets\Scripts\Game GUI\PlayerIconScript.cs" />
      <Compile Include="Assets\Scripts\Game GUI\ResetPlayerGUIs.cs" />
      <Compile Include="Assets\Scripts\GameLogic (Deprecated)\StickeggRules.cs" />
@@ -115,6 +116,9 @@
      <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonFocus.cs" />
      <Compile Include="Assets\Scripts\Menu\Credits\CreditsButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\InGameMenu.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\InfoScreen\InfoScreenButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButton.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonFocus.cs" />
      <Compile Include="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonManager.cs" />
@@ -122,6 +126,9 @@
      <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButton.cs" />
      <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButtonFocus.cs" />
      <Compile Include="Assets\Scripts\Menu\MainMenu\MainMenuButtonManager.cs" />
+     <Compile Include="Assets\Scripts\Menu\PauseMenu\PauseMenuButton.cs" />
+     <Compile Include="Assets\Scripts\Menu\PauseMenu\PauseMenuButtonFocus.cs" />
+     <Compile Include="Assets\Scripts\Menu\PauseMenu\PauseMenuButtonManager.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerInfo.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerSelection\PlayerSelectionButton.cs" />
      <Compile Include="Assets\Scripts\Menu\PlayerSelection\PlayerSelectionButtonFocus.cs" />
@@ -376,7 +383,7 @@
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\changelog.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
-     <None Include="Assets\Shaders\ProjectorAdditiveTint.shader" />
+     <None Include="Assets\Prefabs\FX\PaintSplatter\ProjectorAdditiveTint.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\Materials\Golf\Grass\Grass\Project.xml" />
      <None Include="Assets\Utilities\InControl\Readme\README.txt" />
@@ -388,9 +395,7 @@
      <None Include="Assets\Shaders\ColorSaturationBrightness.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_VertexShader.shader" />
-     <None Include="Assets\Shaders\NewProjectorAdditiveTint.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\readme.txt" />
-     <None Include="Assets\Shaders\GolfTerrainHeightSHader.shader" />
      <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
@@ -403,13 +408,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KDTree">
- <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

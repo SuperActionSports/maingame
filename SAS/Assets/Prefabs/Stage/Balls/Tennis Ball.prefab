@@ -10,13 +10,13 @@ GameObject:
   - 4: {fileID: 402210}
   - 119: {fileID: 11989344}
   - 114: {fileID: 11441558}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TennisBallProjector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &137380
 GameObject:
   m_ObjectHideFlags: 0
@@ -32,7 +32,7 @@ GameObject:
   - 135: {fileID: 13599056}
   - 75: {fileID: 7512726}
   - 96: {fileID: 9644096}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tennis Ball
   m_TagString: Ball
   m_Icon: {fileID: 0}
@@ -58,7 +58,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137380}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.45062208, y: 12, z: -1.50999999}
+  m_LocalPosition: {x: .115999997, y: 15.1199999, z: -13.54}
   m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
   m_Children:
   - {fileID: 402210}
@@ -177,10 +177,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3303ec480dda6454582f64e309dc59f7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bounces: 0
   vel: {x: 0, y: 0, z: 0}
   hit: 0
-  indicator: {fileID: 0}
+  wizard: {fileID: 0}
 --- !u!114 &11441558
 MonoBehaviour:
   m_ObjectHideFlags: 1

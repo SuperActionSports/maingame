@@ -6,7 +6,12 @@ public class HockeyStatsCard : StatsCard {
 	/*--------------------HOCKEY--------------------*/
 	public int PuckPossession = 0; //Increases Everytime the player touches the puck
 	private int succesfulGoals = 0;
+	private int random;
 	
+	public void Start() {
+		random = (int)(Random.Range (0.000f, 4.999f));
+	}
+
 	public void HardResetStats () {
 		ResetGoals();
 		ResetPuckPossession ();
@@ -66,4 +71,44 @@ public class HockeyStatsCard : StatsCard {
 	}
 	
 	/*--------------------END HOCKEY--------------------*/
+	public float TotalScore() {
+		float Pw = 0.5f;
+		float KDRw = 0.32f;
+		float KSw = 0.1f;
+		float ACCw = 0.05f;
+		float RANw = 0.03f;
+		
+		
+		float RAN;
+		switch (random) {
+		case 0:
+			RAN = jumps;
+			break;
+		case 1:
+			RAN = attemptedAttacks;
+			break;
+		case 2: 
+			RAN = attackSuccessRate;
+			break;
+		case 3:
+			RAN = longestTimeAlive;
+			break;
+		case 4:
+			RAN = shortestTimeAlive;
+			break;
+		default:
+			RAN = 0;
+			break;
+		}
+		
+		float tsP = succesfulGoals * Pw;
+		float tsKDR = kDR * KDRw;
+		float tsKS = longestKillStreak * KSw;
+		float tsACC = PuckPossession * ACCw;
+		float tsRAN = RAN * RANw;
+		
+		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
+		
+		return ts;
+	}
 }
