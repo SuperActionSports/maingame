@@ -37,9 +37,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
---- !u!127 &3
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!157 &4
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -68,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 112000000, guid: 92a403109d2510a4783c991b9b7b956c,
     type: 2}
   m_RuntimeCPUUsage: 25
@@ -178,6 +176,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 34b7a66bbb91fc74cb7a824dff7b383a, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &96579416 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191788, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}
+  m_PrefabInternal: {fileID: 1980459325}
 --- !u!1 &99965491
 GameObject:
   m_ObjectHideFlags: 0
@@ -295,6 +297,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -1855,7 +1858,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 635686431}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: -1.39928877, z: .476000011}
   m_LocalScale: {x: 15, y: .170000002, z: 3.01499176}
   m_Children: []
@@ -1937,7 +1940,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &700873090
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1955,7 +1958,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &700873091
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2430,7 +2433,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1076738847}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: -1.45928872, z: -.458000004}
   m_LocalScale: {x: 15.669301, y: .100000001, z: 3.014992}
   m_Children: []
@@ -2505,7 +2508,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1084956086}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: .707106888, w: .707106769}
   m_LocalPosition: {x: 8, y: 1, z: 0}
   m_LocalScale: {x: 9.19752121, y: .811269283, z: .971225858}
   m_Children:
@@ -2608,7 +2611,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1125006138}
-  m_LocalRotation: {x: 0, y: 0, z: .707106829, w: .707106709}
+  m_LocalRotation: {x: 0, y: 0, z: .707106888, w: .707106769}
   m_LocalPosition: {x: -8, y: 1, z: 0}
   m_LocalScale: {x: 9.19752026, y: .766243398, z: 1.07055974}
   m_Children:
@@ -4832,7 +4835,7 @@ MonoBehaviour:
   gameDuration: 45
   layla: {fileID: 0}
   endGame: {fileID: 1578907368}
-  inGame: {fileID: 0}
+  inGame: {fileID: 96579416}
 --- !u!1001 &1668559583
 Prefab:
   m_ObjectHideFlags: 0
@@ -5180,7 +5183,7 @@ Transform:
   m_PrefabParentObject: {fileID: 413728, guid: 0eee0a5265c07af43b4b7e81476f86e8, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1895940275}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

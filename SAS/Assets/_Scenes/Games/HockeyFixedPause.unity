@@ -65,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -84,9 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!43 &241445
 Mesh:
   m_ObjectHideFlags: 0
@@ -4673,7 +4671,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 246788878}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 18.2399998, z: -0}
   m_LocalScale: {x: .042260386, y: .0422603339, z: .0422603339}
   m_Children: []
@@ -5346,6 +5344,7 @@ ReflectionProbe:
     serializedVersion: 2
     m_Bits: 4294967295
   m_IntensityMultiplier: 1
+  m_BlendDistance: 1
   m_HDR: 1
   m_BoxProjection: 0
   m_RenderDynamicObjects: 0
@@ -5705,7 +5704,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 816522651}
-  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: .707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 37.2999992, z: 0}
   m_LocalScale: {x: .042260386, y: .0422603339, z: .0422603339}
   m_Children: []
@@ -5860,7 +5859,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &952495321
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5878,7 +5877,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &952495322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6330,7 +6329,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1056809393}
-  m_LocalRotation: {x: 0, y: .707105935, z: 0, w: .707107604}
+  m_LocalRotation: {x: 0, y: .707105994, z: 0, w: .707107663}
   m_LocalPosition: {x: -.000666689884, y: 1.73496103, z: .521027982}
   m_LocalScale: {x: .0588235296, y: 2.5, z: 1}
   m_Children: []
@@ -6858,7 +6857,7 @@ MonoBehaviour:
   puck: {fileID: 104926, guid: 1476e2a198c9a7343b49759bd66eae32, type: 2}
   puckRespawn: {fileID: 1151825706}
   endGame: {fileID: 890870742}
-  inGame: {fileID: 0}
+  inGame: {fileID: 1879554493}
 --- !u!1 &1254627288
 GameObject:
   m_ObjectHideFlags: 0
@@ -7559,7 +7558,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1708133564}
-  m_LocalRotation: {x: 0, y: .707105935, z: 0, w: .707107604}
+  m_LocalRotation: {x: 0, y: .707105994, z: 0, w: .707107663}
   m_LocalPosition: {x: -0, y: 1.73496103, z: -.519325018}
   m_LocalScale: {x: .0588235296, y: 2.5, z: 1}
   m_Children: []
@@ -8081,6 +8080,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1879554493 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 191788, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}
+  m_PrefabInternal: {fileID: 1879554492}
 --- !u!1 &1897190453
 GameObject:
   m_ObjectHideFlags: 0
