@@ -37,6 +37,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	private int matchCount;					// Layla, customized games
 	private bool finished;
 	// Use this for initialization
+	// Woop Woop
+	int test = 5;
 	void Start () {
 		floor = GameObject.Instantiate(floorPrefab,new Vector3(-20, 0 ,-20),Quaternion.identity) as GameObject;
 		if (layla == null) { layla = GameObject.Find("Layla");
