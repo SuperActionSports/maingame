@@ -341,7 +341,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		}
 		// Increase swing strength while button is held
 		else {
-			swingStrength += 0.25f;
+			swingStrength += 0.5f;
 		}
 	}
 
@@ -355,7 +355,8 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		putting = false;
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
-		(ball as GolfBall).Putt (60f*swingStrength*transform.forward, this);
+		Debug.Log ("I hit it this hard: " + swingStrength);
+		(ball as GolfBall).Putt (100f*swingStrength*transform.forward, this);
 	}
     
     private float GetXVelocity()

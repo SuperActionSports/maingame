@@ -5,12 +5,12 @@ PhysicMaterial:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: GolfBall
+  m_Name: GolfFloor
   dynamicFriction: .100000001
   staticFriction: .200000003
-  bounciness: .800000012
+  bounciness: 0
   frictionCombine: 0
-  bounceCombine: 2
+  bounceCombine: 1
   frictionDirection2: {x: 0, y: 0, z: 0}
   dynamicFriction2: 0
   staticFriction2: 0

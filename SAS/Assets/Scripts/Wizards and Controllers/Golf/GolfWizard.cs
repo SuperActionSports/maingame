@@ -21,7 +21,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	
-	public GameObject golfBall;
+	public GameObject[] golfBalls;
+	public GameObject golfBallPrefab;
 	public GameObject hole;
 	public GameObject floorPrefab;
 	public GameObject floor;
@@ -37,12 +38,21 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	private bool finished;
 	public GameObject inGame;
 	// Use this for initialization
+	// Woop Woop
+	int test = 5;
 	void Start () {
-		floor = GameObject.Instantiate(floorPrefab,Vector3.zero,Quaternion.identity) as GameObject;
+		floor = GameObject.Instantiate(floorPrefab,new Vector3(-20, 0 ,-20),Quaternion.identity) as GameObject;
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
 		liaison = layla.GetComponent<GameControlLiaison>();
 		players = new Player[liaison.numberOfActivePlayers];
+		if (players.Length > 1) {
+			golfBalls = new GameObject[players.Length - 1];
+			Debug.Log ("Number of balls: " + (players.Length - 1));
+		} else { 
+			golfBalls = new GameObject[1];
+			Debug.Log ("Only one player so only one ball");
+		}
 		for (int p = 0; p < players.Length; p++)
 		{
 			players[p] = liaison.players[p];
@@ -57,7 +67,6 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		ResetExistingPlayers();
 		SetPlayers();
 		SpawnBallAndHole();
-		ResetBallAndHole();
 		camScript = Camera.main.GetComponent<GolfCameraController>();
 		finished = false;
 		victoryDuration = 3;
@@ -174,23 +183,37 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public void SpawnBallAndHole()
 	{
 		hole = GameObject.Instantiate(hole,Vector3.up*300f,Quaternion.identity) as GameObject;
-		golfBall = GameObject.Instantiate(golfBall,Vector3.up*3f,Quaternion.identity) as GameObject;
-		golfBall.GetComponent<GolfBall>().wizard = this;
+		for (int i = 0; i < golfBalls.Length; i++) {
+			golfBalls[i] = GameObject.Instantiate (golfBallPrefab, Vector3.up * 3f, Quaternion.identity) as GameObject;
+			golfBalls[i].GetComponent<GolfBall> ().wizard = this;
+			ResetBallAndHole(golfBalls[i]);
+		}
+	}
+	
+	public void ResetBallAndHole(GameObject golfBall)
+	{
+		// Randomize x and z
+		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+
+		// Set y to plane position
+		
 		hole.transform.position = new Vector3(hole.transform.position.x,
 		                                      floor.GetComponent<MeshCollider>().ClosestPointOnBounds(hole.transform.position).y,
 		                                      hole.transform.position.z);
-	}
-	
-	public void ResetBallAndHole()
-	{
-		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
-		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
-		
+		golfBall.transform.position = new Vector3(golfBall.transform.position.x,
+		                                          floor.GetComponent<MeshCollider>().ClosestPointOnBounds(golfBall.transform.position).y+0.6f,
+		                                          golfBall.transform.position.z);
+
 		while(Vector3.Distance(hole.transform.position,golfBall.transform.position) < minDistToBallFromHole)
 		{
 			golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+			golfBall.transform.position = new Vector3(golfBall.transform.position.x,
+			                                          floor.GetComponent<MeshCollider>().ClosestPointOnBounds(golfBall.transform.position).y+0.6f,
+			                                          golfBall.transform.position.z);
 			Debug.Log("Dang, too close. Wizard trying a new location.");
 		}
+
 		Debug.Log("Golfball: " + golfBall.transform.position);
 		Debug.Log("Hole: " + hole.transform.position);
 		Debug.Log("Distance: " + Vector3.Distance(hole.transform.position,golfBall.transform.position) + " should be greater than " + minDistToBallFromHole);
