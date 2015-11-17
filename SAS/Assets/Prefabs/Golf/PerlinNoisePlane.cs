@@ -17,19 +17,19 @@ public class PerlinNoisePlane : MonoBehaviour {
 		noiseOrigin = new Vector2(Random.Range (0.0f, 100.0f), Random.Range (0.0f, 100.0f));
 		MeshFilter mf = GetComponent<MeshFilter>();
 		Vector3[] vertices = mf.mesh.vertices;
-		float maxCoord = transform.position.Scale.x * 10;
+		//float maxCoord = transform.position.Scale.x * 10;
 
 		for (int i = 0; i < vertices.Length; i++) 
 		{    
 			float xCoord = noiseOrigin.x + vertices[i].x  * scale;
 			float zCoord = noiseOrigin.y + vertices[i].z  * scale;
 
-			if (xCoord == maxCoord || xCoord == -maxCoord || zCoord == maxCoord || zCoord == -maxCoord) {
-				vertices[i].y = 5f;
-			}
-			else {
+	//		if (xCoord == maxCoord || xCoord == -maxCoord || zCoord == maxCoord || zCoord == -maxCoord) {
+	//			vertices[i].y = 5f;
+//			}
+//			else {
 				vertices[i].y = (Mathf.PerlinNoise (xCoord, zCoord) - 0.5f) * power;
-			}
+//			}
 		}
 		mf.mesh.vertices = vertices;
 		mf.mesh.RecalculateBounds();
