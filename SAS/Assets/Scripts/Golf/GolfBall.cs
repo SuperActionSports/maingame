@@ -5,8 +5,6 @@ public class GolfBall : MonoBehaviour {
 
 
 	public bool beingHit;
-	public float friction;
-	public Vector3 vel;
 	private Rigidbody rb;
 	private Renderer rend;
 	private GolfPlayerController playerHitting;
@@ -20,6 +18,7 @@ public class GolfBall : MonoBehaviour {
 
 	void Update () {
 		// Slow to Stop over Time
+		/*
 		float frictionX = friction;
 		float frictionZ = friction;
 		if (rb.velocity.x > 0) { 
@@ -35,9 +34,18 @@ public class GolfBall : MonoBehaviour {
 		if (rb.velocity.z <= friction && rb.velocity.z >= -friction) {
 			rb.velocity = new Vector3 (rb.velocity.x, rb.velocity.y, 0);
 		}
+		*/
 
 		// Lock Ball in Place if Someone is Putting with it
 		if (beingHit) {
+			rb.velocity = Vector3.zero;
+			rb.constraints = RigidbodyConstraints.FreezeAll;
+		} else {
+			rb.constraints = RigidbodyConstraints.None;
+		}
+
+		if (transform.position.y < -50) { 
+			transform.position = new Vector3 (transform.position.x, 5f, transform.position.z);
 			rb.velocity = Vector3.zero;
 		}
 	}
@@ -46,7 +54,7 @@ public class GolfBall : MonoBehaviour {
 		if (collision.gameObject.tag == "Goal") {
 			wizard.Celebrate(rend.material.color);
 			playerHitting.stats.AddMadePutt();
-			wizard.ResetBallAndHole();
+			wizard.ResetBallAndHole(this.gameObject);
 			collision.gameObject.transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			rb.velocity = Vector3.zero;
@@ -58,6 +66,7 @@ public class GolfBall : MonoBehaviour {
 		playerHitting = player;
 		Color c1 = player.color;
 		if (beingHit) {
+			rb.constraints = RigidbodyConstraints.None;
 			rb.AddForce (new Vector3(force.x, 0, force.z));
 			rend.material.color = c1;
 			beingHit = false;
