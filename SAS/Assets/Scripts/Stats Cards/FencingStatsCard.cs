@@ -19,7 +19,12 @@ public class FencingStatsCard : StatsCard {
 	public float rearmed;
 	public float unarmedTime;
 	public bool stabThrowFlag; //True is stab. False is throw.
+	private int random;
 	
+	public void Start() {
+		random = (int)(Random.Range (0.000f, 13.999f));
+	}
+
 	public void HardResetStats () {
 		ResetStabAttempts();
 		ResetStabKills();
@@ -192,5 +197,78 @@ public class FencingStatsCard : StatsCard {
 		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, Statistic.Format.percentage);
 	}
 
+	public float TotalScore() {
+		float Pw = 0.5f;
+		float KDRw = 0.32f;
+		float KSw = 0.1f;
+		float ACCw = 0.05f;
+		float RANw = 0.03f;
+		float RAN;
+
+		float P;
+		if (BlocksSuccessful == 0) {
+			P = kills;
+		} else {
+			P = kills * BlocksSuccessful;
+		}
+
+		switch (random) {
+		case 0:
+			RAN = jumps;
+			break;
+		case 1:
+			RAN = attemptedAttacks;
+			break;
+		case 2:
+			RAN = longestTimeAlive;
+			break;
+		case 3:
+			RAN = shortestTimeAlive;
+			break;
+		case 4:
+			RAN = StabAttempts;
+			break;
+		case 5:
+			RAN = StabKills;
+			break;
+		case 6:
+			RAN = StabAccuracy;
+			break;
+		case 7:
+			RAN = ThrowAttempts;
+			break;
+		case 8:
+			RAN = ThrowKills;
+			break;
+		case 9:
+			RAN = ThrowAccuracy;
+			break;
+		case 10:
+			RAN = BlockAttempts;
+			break;
+		case 11:
+			RAN = BlocksSuccessful;
+			break;
+		case 12:
+			RAN = BlockSuccessRate;
+			break;
+		case 13:
+			RAN = LongestTimeUnarmed;
+			break;
+		default:
+			RAN = 0;
+			break;
+		}
+		
+		float tsP = P * Pw;
+		float tsKDR = kDR * KDRw;
+		float tsKS = longestKillStreak * KSw;
+		float tsACC = attackSuccessRate * ACCw;
+		float tsRAN = RAN * RANw;
+		
+		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
+		
+		return ts;
+	}
 	/*--------------------END FENCING--------------------*/
 }

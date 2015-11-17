@@ -43,6 +43,7 @@ public class StatsCard : MonoBehaviour {
 	public float death;
 	public float lifetime;
 	public int rank;
+	public float kDR;
 	public Statistic[] stats;
 	
 	/// <summary>
@@ -120,7 +121,7 @@ public class StatsCard : MonoBehaviour {
 	public void AddKill()	{
 		kills++;
 		killStreak++;
-		//CalculateKDRatio ();
+		CalculateKDRatio ();
 		CalculateAttackSuccessRate ();
 	}
 
@@ -137,7 +138,7 @@ public class StatsCard : MonoBehaviour {
 			longestKillStreak = killStreak;
 		}
 		ResetkillStreak ();
-		//CalculateKDRatio ();
+		CalculateKDRatio ();
 	}
 
 	public void ResetDeaths()	{
@@ -189,6 +190,14 @@ public class StatsCard : MonoBehaviour {
 		}
 		if (lifetime < shortestTimeAlive)	{
 			shortestTimeAlive = lifetime;
+		}
+	}
+
+	public void CalculateKDRatio() {
+		if (deaths > 0) {
+			kDR = kills / deaths;
+		} else {
+			kDR = Kills;
 		}
 	}
 	
