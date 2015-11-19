@@ -96,6 +96,10 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
 		}
+		if (hole.transform.position.y < -100) { 
+			float newY = floor.GetComponent<PerlinNoisePlane> ().ResetHolePosition ();
+			hole.transform.position = new Vector3(hole.transform.position.x, newY, hole.transform.position.z);
+		}
 	}
 	
 	private void SetPlayers()
@@ -193,14 +197,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public void ResetBallAndHole(GameObject golfBall)
 	{
 		// Randomize x and z
-		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),-500,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
-
-		// Set y to plane position
-		
-		hole.transform.position = new Vector3(hole.transform.position.x,
-		                                      floor.GetComponent<MeshCollider>().ClosestPointOnBounds(hole.transform.position).y,
-		                                      hole.transform.position.z);
 		golfBall.transform.position = new Vector3(golfBall.transform.position.x,
 		                                          floor.GetComponent<MeshCollider>().ClosestPointOnBounds(golfBall.transform.position).y+0.6f,
 		                                          golfBall.transform.position.z);
