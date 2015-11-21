@@ -383,7 +383,7 @@
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_TransparentOverlay.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\changelog.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\DiffuseVertexColor.shader" />
-     <None Include="Assets\Prefabs\FX\PaintSplatter\ProjectorAdditiveTint.shader" />
+     <None Include="Assets\Shaders\ProjectorAdditiveTint.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_FaceHighlight.shader" />
      <None Include="Assets\Materials\Golf\Grass\Grass\Project.xml" />
      <None Include="Assets\Utilities\InControl\Readme\README.txt" />
@@ -395,7 +395,9 @@
      <None Include="Assets\Shaders\ColorSaturationBrightness.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\pc_AboutEntry_ProBuilder.txt" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\Shader\pb_VertexShader.shader" />
+     <None Include="Assets\Shaders\NewProjectorAdditiveTint.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\readme.txt" />
+     <None Include="Assets\Shaders\GolfTerrainHeightSHader.shader" />
      <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
  <Reference Include="UnityEngine.UI">
@@ -408,13 +410,13 @@
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderMeshOps-Unity5">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderMeshOps-Unity5.dll</HintPath>
  </Reference>
  <Reference Include="KDTree">
- <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
+ <HintPath>C:/Users/Tylor/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ClassesLib/KDTree.dll</HintPath>
  </Reference>
  <Reference Include="UnityEditor.iOS.Extensions.Xcode">
  <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

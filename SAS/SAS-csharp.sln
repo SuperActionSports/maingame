@@ -1,9 +1,9 @@
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2008
 
-Project("{2DB46C62-8CFB-3BD1-545D-3B5A14B4A9C5}") = "SAS", "Assembly-CSharp.csproj", "{32595AC1-684C-73C9-22A2-12C104D8B327}"
+Project("{2DB46C62-8CFB-3BD1-545D-3B5A14B4A9C5}") = "SAS", "Assembly-CSharp-vs.csproj", "{32595AC1-684C-73C9-22A2-12C104D8B327}"
 EndProject
-Project("{2DB46C62-8CFB-3BD1-545D-3B5A14B4A9C5}") = "SAS", "Assembly-CSharp-Editor.csproj", "{6388F3D6-788E-9A29-4E4E-9A05FA905BAB}"
+Project("{2DB46C62-8CFB-3BD1-545D-3B5A14B4A9C5}") = "SAS", "Assembly-CSharp-Editor-vs.csproj", "{6388F3D6-788E-9A29-4E4E-9A05FA905BAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,7 +23,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-							GlobalSection(MonoDevelopProperties) = preSolution
+								GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
