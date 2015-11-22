@@ -11,7 +11,9 @@ public class BallMovement : MonoBehaviour {
 	int value;
 	public Vector3 vel;
 	public bool hit;
-	public GameObject wizard;
+	public TennisWizard wizard;
+	public float deathTime = 4;
+	public float currentDeathTime = 0;
 
 	private Renderer tr;
 	// Use this for initialization
@@ -54,6 +56,26 @@ public class BallMovement : MonoBehaviour {
 			//hasHitTurf = false;
 		}
 	}
+	
+	void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Turf"))
+		{
+			currentDeathTime += Time.deltaTime;
+			if (currentDeathTime >= deathTime)
+			{
+				KillBall();
+			}
+		}	
+	}
+	
+	void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Turf"))
+		{
+			currentDeathTime = 0;
+		}
+	}
 
 	void CheckForDoubleBounce()
 	{
@@ -89,5 +111,11 @@ public class BallMovement : MonoBehaviour {
 		tr.material.color = hittee.GetComponent<TennisController>().c1;
 		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisController>().c1;
 		
+	}
+	
+	public void KillBall()
+	{
+		wizard.KillBall();
+		Destroy(this.gameObject);
 	}
 }

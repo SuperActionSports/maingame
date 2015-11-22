@@ -70,13 +70,16 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 //		stats.ResetStats ();
 		SetOriginSide ();
     }
+    
 	public void InitializeStatCard()
 	{
+		Debug.Log("Initializing card.");
 		stats = new TennisStatsCard ();
-		stats.ResetStats ();
+		Debug.Log("Stats card is : " + stats);
+		stats.HardResetStats ();
+		Debug.Log("Stats card is : " + stats);
 	}
     
-	
 	// Update is called once per frame
 	void Update () {
 

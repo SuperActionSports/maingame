@@ -163,6 +163,8 @@
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisBall.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncher.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncherSway.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisController.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisInputHandler.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballEquipmentScript.cs" />

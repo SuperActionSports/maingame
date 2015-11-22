@@ -15,6 +15,7 @@ public class TennisStatsCard : StatsCard {
 	}
 
 	public void HardResetStats() {
+		Debug.Log("Resetting stats in stat card");
 		ResetSwings ();
 		ResetContact();
 		ResetAccuracy ();

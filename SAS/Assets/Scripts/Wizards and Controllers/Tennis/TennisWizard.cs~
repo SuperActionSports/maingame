@@ -13,8 +13,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	public GameObject inGame;
-	public GameObject ball;
+	public TennisBallLauncher launcher;
 	public GameObject valueProjector;
+	
 	
 	// Use this for initialization
 	void Start () {
@@ -37,6 +38,8 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	SetPlayers();
 	UpdateStatCards();
 	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+	launcher.wizard = this;
+	launcher.LaunchTennisBall();
 	}
 	
 	public void BallHitWall()
@@ -136,5 +139,10 @@ public class TennisWizard : MonoBehaviour, IWizard {
 		{
 			//players[p].statCard = ((TennisPlaye)players[p].control).Stats;
 		}
+	}
+	
+	public void KillBall()
+	{
+		launcher.LaunchTennisBall();
 	}
 }
