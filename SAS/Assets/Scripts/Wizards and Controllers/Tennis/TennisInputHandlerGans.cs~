@@ -38,7 +38,6 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	
 	// Update is called once per frame
 	public void CheckInput () {
-		Debug.Log ("Checking for input");
 		float moveMod = 1;
 		if (WindingUp()) 
 		{
@@ -67,7 +66,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		if (device != null && device.RightTrigger.IsPressed)
 		{
 			swingForce += Time.deltaTime * 25f;
-			Debug.Log("Swingforce: " + swingForce);
+			
 			control.WindUp();
 			return true;
 		}

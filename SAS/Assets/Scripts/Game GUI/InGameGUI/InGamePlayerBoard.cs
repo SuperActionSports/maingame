@@ -79,7 +79,8 @@ public class InGamePlayerBoard : MonoBehaviour {
 			c = Instantiate(playerCardPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			c.GetComponent<Image>().color = players[i].color;
 			InGamePlayerCard pc = c.GetComponent<InGamePlayerCard>();
-			Debug.Log("Ingame: " + pc + "- value: " + pc.Value + "statCard: " + players[i].statCard);
+			Debug.Log("Player: " + players[i]);
+			Debug.Log("Ingame: " + pc + "- value: " + pc.Value + "statCard: " + players[i].statCard + "0x");
 			pc.Value = players[i].statCard.Kills.ToString();
 			pc.Name = "P"+(i+1);
 			cards[i] = pc;

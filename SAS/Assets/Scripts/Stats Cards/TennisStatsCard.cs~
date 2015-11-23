@@ -10,6 +10,12 @@ public class TennisStatsCard : StatsCard {
 	public int Points;
 	private int random;
 	
+	public TennisStatsCard()
+	{
+		Debug.Log("New tennis stat card.");
+		Start ();
+	}
+	
 	public void Start() {
 		random = (int)(Random.Range (0.000f, 4.999f));
 	}

@@ -69,6 +69,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		hitForce = 25;
 //		stats.ResetStats ();
 		SetOriginSide ();
+		InitializeStatCard();
     }
     
 	public void InitializeStatCard()

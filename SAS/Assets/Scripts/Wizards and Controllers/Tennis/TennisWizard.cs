@@ -122,23 +122,21 @@ public class TennisWizard : MonoBehaviour, IWizard {
 		player.gameObject = p;
 		TennisControllerGans pController = p.GetComponent<TennisControllerGans>();
 		player.control = pController;
-		// Replace this noise with the player prefs file information
 		p.GetComponent<TennisControllerGans>().color = player.color;
 		p.GetComponent<TennisControllerGans>().wizard = this;
-		// Replace this with the device information from userprefs
 		p.GetComponent<TennisInputHandlerGans>().device = player.device;
 		remainingPlayers++;
-		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		pController.InitializeStatCard();
+		Debug.Log("Wizard! Stat card is: " + p.GetComponent<TennisControllerGans>().stats + "...");
 		return pController;
 	}
 	
 	private void UpdateStatCards()
 	{
-		for (int p = 0; p < players.Length; p++)
-		{
+		//for (int p = 0; p < players.Length; p++)
+		//{
 			//players[p].statCard = ((TennisPlaye)players[p].control).Stats;
-		}
+		//}
 	}
 	
 	public void KillBall()
