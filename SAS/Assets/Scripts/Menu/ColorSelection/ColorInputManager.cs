@@ -6,7 +6,7 @@ using InControl;
 	
 	public class ColorInputManager : MonoBehaviour
 	{
-		public GameObject colorSelectionManagerPrefab;
+		public GameObject gameSelectionManagerPrefab;
 		
 		const int maxColorSelectors = 4;
 
@@ -17,6 +17,8 @@ using InControl;
 		List<ColorSelectionButtonManager> colorSelectionManagers = new List<ColorSelectionButtonManager>( maxColorSelectors );
 
 		public List<ColorSelectionButton> colorStarts;
+
+		public List<Sprite> labels;
 
 		private GameObject confirmedButton;
 		private Button colorsConfirmedButton;
@@ -59,7 +61,7 @@ using InControl;
 			{
 				if (ThereIsNoPlayerUsingDevice( inputDevice ))
 				{
-					CreateButton(inputDevice );
+					CreateGameSelectionManager(inputDevice );
 				}
 			}
 			
@@ -113,24 +115,35 @@ using InControl;
 		}
 
 
-		ColorSelectionButtonManager CreateButton( InputDevice inputDevice )
+		ColorSelectionButtonManager CreateGameSelectionManager( InputDevice inputDevice )
 		{
 			if (colorSelectionManagers.Count < maxColorSelectors)
 			{
-				// Pop a position off the list. We'll add it back if the player is removed.
-				//var playerPosition = spawnPoints[0];
-				//spawnPoints.RemoveAt( 0 );
+				Sprite playerLabelSprite = labels[0];
+				labels.RemoveAt(0);
 
-				var gameObject = (GameObject) Instantiate( colorSelectionManagerPrefab, new Vector3(0,0,0), Quaternion.identity );
-				gameObject.transform.SetParent(GameObject.Find("ColorInputManager").transform);
-				gameObject.transform.localPosition = new Vector3(0,0,0);
-				gameObject.transform.localScale = new Vector3(1,1,1);
-				var buttonManager = gameObject.GetComponent<ColorSelectionButtonManager>();
+				// Pop a position off the list. We'll add it back if the player is removed.
+				var manager = (GameObject) Instantiate( gameSelectionManagerPrefab, new Vector3(0,0,0), Quaternion.identity );
+				manager.transform.SetParent(GameObject.Find("ColorInputManager").transform);
+				manager.transform.localPosition = new Vector3(0,0,0);
+				manager.transform.localScale = new Vector3(1,1,1);
+				GameObject selectionChild = manager.transform.GetChild(0).gameObject;
+				int grandChildCount = selectionChild.transform.childCount;
+				
+				for(int i = 0; i < grandChildCount; i++)
+				{
+					if(selectionChild.transform.GetChild(i).name == "PlayerLabel")
+					{
+						GameObject playerLabelObj = selectionChild.transform.GetChild(i).gameObject;
+						Image img = playerLabelObj.GetComponent<Image>();
+						img.sprite = playerLabelSprite;
+					}
+				}
+
+				var buttonManager = manager.GetComponent<ColorSelectionButtonManager>();
 				buttonManager.device = inputDevice;
 				buttonManager.liaison = layla;
-				//buttonManager.playerNumber = colorSelectionManagers.Count;
 				buttonManager.ResetNumber();
-				//scale.c1 = Color.cyan;
 				colorSelectionManagers.Add( buttonManager );
 
 				Debug.Log("Adding a new player with device: " + inputDevice);
