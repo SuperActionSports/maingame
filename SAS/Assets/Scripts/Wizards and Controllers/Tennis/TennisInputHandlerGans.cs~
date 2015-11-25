@@ -21,7 +21,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public float magSpeedX;
 	public float magSpeedZ;
 	public Vector3 speed;
-	public float speedMagnitude;
+	public float speedMagnitude = 13;
 	public float jumpForce;
 	
 	public TennisControllerGans control;
@@ -32,7 +32,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		ResetRigidBodyConstraints();
-		speedMagnitude = 10;
+		speedMagnitude = 13;
 		jumpForce = 25;
 	}
 	

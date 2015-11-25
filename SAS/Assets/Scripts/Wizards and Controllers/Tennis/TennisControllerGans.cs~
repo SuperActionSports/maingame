@@ -48,6 +48,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		rend = GetComponent<Renderer>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
+		equipmentCollider.enabled = false;
         input = GetComponent<TennisInputHandlerGans>();
         input.control = this;
         rb = GetComponent<Rigidbody>();
@@ -56,7 +57,6 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
         anim.SetBool("Alive", true);
 		impactMod = 7.5f;
         respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-		equipmentCollider.enabled = false;
         if (respawnPoints.Length == 0)
         {
             Debug.Log("There aren't any respawn points, you catastrophic dingus.");
@@ -122,7 +122,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	private bool BallCollision(Collider other)
 	{
 		//LookAtNet();
-
+		Debug.Log("Ball has been hit");
 		Rigidbody ballRB = other.GetComponent<Rigidbody>();
 
 		ballRB.velocity = new Vector3(0,0,0);
@@ -219,12 +219,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		anim.SetFloat("WindingUp",input.GetSwingForce());
 	}
 
-	private void StartSwing()
+	public void StartSwing()
 	{
 		equipmentCollider.enabled = true; 
 	}
 
-	private void EndSwing()
+	public void EndSwing()
 	{
 		equipmentCollider.enabled = false;
 		anim.SetFloat("WindingUp",0);
@@ -238,12 +238,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		stats.AddAttemptedAttack ();
     }
 
-	private void StartAttack()
+	public void StartAttack()
 	{
 		equipmentCollider.enabled = true;
 	}
 
-	private void EndAttack()
+	public void EndAttack()
 	{
 		equipmentCollider.enabled = false;
 		isAttacking = false;

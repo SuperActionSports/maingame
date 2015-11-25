@@ -12,7 +12,7 @@ public class BallMovement : MonoBehaviour {
 	public Vector3 vel;
 	public bool hit;
 	public TennisWizard wizard;
-	public float deathTime = 4;
+	public float deathTime = 2;
 	public float currentDeathTime = 0;
 
 	private Renderer tr;
@@ -109,8 +109,8 @@ public class BallMovement : MonoBehaviour {
 	public void Hit(GameObject hittee)
 	{
 		lastHitBy = hittee;
-		tr.material.color = hittee.GetComponent<TennisController>().c1;
-		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisController>().c1;
+		tr.material.color = hittee.GetComponent<TennisControllerGans>().color;
+		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisControllerGans>().color;
 		hasHitTurf = false;
 	}
 	

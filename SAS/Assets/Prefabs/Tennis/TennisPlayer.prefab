@@ -32,9 +32,7 @@ GameObject:
   - 54: {fileID: 5448070}
   - 95: {fileID: 9584748}
   - 114: {fileID: 11490760}
-  - 114: {fileID: 11459732}
   - 135: {fileID: 13534398}
-  - 114: {fileID: 11469442}
   - 114: {fileID: 11457912}
   - 114: {fileID: 11466922}
   m_Layer: 0
@@ -107,7 +105,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114932}
   m_LocalRotation: {x: 0, y: -5.96046448e-08, z: 0, w: -1}
-  m_LocalPosition: {x: 10.3100004, y: 6.32443285, z: -4.16322517}
+  m_LocalPosition: {x: -12.3281517, y: -1.50400174, z: -12.4548073}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481346}
@@ -132,7 +130,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 121170}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: -.499999344, z: 0, w: .866025865}
   m_LocalPosition: {x: .177000001, y: -.0659999996, z: .791000009}
   m_LocalScale: {x: .349999994, y: .349999994, z: .349999994}
   m_Children: []
@@ -364,6 +362,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   color: {r: 0, g: 0, b: 0, a: 0}
   tennisBall: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+  ActiveDevice: 0
   alive: 0
   isAttacking: 0
   respawnPoints:
@@ -376,28 +375,8 @@ MonoBehaviour:
   cam: {fileID: 0}
   hitForce: 0
   wizard: {fileID: 0}
---- !u!114 &11459732
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114932}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41f4680a46cd74f5e866567ae6d6531a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  c1: {r: 1, g: 1, b: 1, a: 1}
-  tennisBall: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
-  alive: 0
-  isAttacking: 0
-  respawnPoints:
-  - {fileID: 0}
-  - {fileID: 0}
-  equipment: {fileID: 131602}
-  impactMod: 0
-  cam: {fileID: 0}
-  hitForce: 0
+  stats: {fileID: 0}
+  OriginSideNorth: 0
 --- !u!114 &11466922
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,33 +386,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e87c3001d1624848a1ca94dc6fbbcaf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  left: 0
-  right: 0
-  up: 0
-  down: 0
-  swing: 0
-  attack: 0
-  debugKill: 0
-  jump: 0
-  tennisBall: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
-  magSpeedX: 0
-  magSpeedZ: 0
-  speed: {x: 0, y: 0, z: 0}
-  speedMagnitude: 0
-  jumpForce: 0
-  control: {fileID: 0}
-  swingForce: 0
---- !u!114 &11469442
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 114932}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97b6aa1ddc31e07449c2c44e28d95145, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   left: 0
@@ -476,12 +428,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintSprite: {fileID: 426486, guid: d334eee982cce4735929a011e9def078, type: 2}
-  p1score: {fileID: 0}
-  p2score: {fileID: 0}
-  p3score: {fileID: 0}
-  p4score: {fileID: 0}
-  color: {r: 0, g: 0, b: 0, a: 0}
-  defaultMaterial: {fileID: 2100000, guid: 3442c11e97a6f2c4d9cacdafdd8774fe, type: 2}
+  givenPaintSprites:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  psHolder: {fileID: 0}
+  particles: {fileID: 0}
+  c: {r: 0, g: 0, b: 0, a: 0}
 --- !u!135 &13503456
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -514,7 +467,7 @@ SphereCollider:
   m_GameObject: {fileID: 114932}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 2
   m_Center: {x: 0, y: 0, z: 0}
@@ -527,10 +480,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 4
+  m_Radius: 1.61000001
+  m_Height: 6.15999985
   m_Direction: 1
-  m_Center: {x: -.0399999991, y: 2.27999997, z: 0}
+  m_Center: {x: -.0399999991, y: 1.91999996, z: 0}
 --- !u!136 &13606566
 CapsuleCollider:
   m_ObjectHideFlags: 1
@@ -539,7 +492,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 107344}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: .5
   m_Height: 2
   m_Direction: 1

@@ -8,7 +8,7 @@ public class FreezeRotationAndY : MonoBehaviour {
 	private Light l;
 	// Use this for initialization
 	void Start () {
-	yOffset = transform.parent.transform.position.y - transform.localPosition.y;
+	yOffset = 4 + transform.parent.transform.position.y - transform.localPosition.y ;
 	frozenQuaternion = transform.rotation;
  	l = GetComponent<Light>();
 	}
