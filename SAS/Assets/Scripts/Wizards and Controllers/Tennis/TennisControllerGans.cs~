@@ -12,6 +12,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	public GameObject tennisBall;
 	
 	public InputDevice device {get; set;}
+	public bool ActiveDevice;
 
 	public bool alive;
 	bool isSwinging;
@@ -70,6 +71,8 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 //		stats.ResetStats ();
 		SetOriginSide ();
 		InitializeStatCard();
+		
+		ActiveDevice = device != null;
     }
     
 	public void InitializeStatCard()
@@ -259,5 +262,10 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	private void UpdateColor()
 	{
 		rend.material.color = color;
+	}
+	
+	public void ScorePoints(int value)
+	{
+		stats.Score(value);
 	}
 }

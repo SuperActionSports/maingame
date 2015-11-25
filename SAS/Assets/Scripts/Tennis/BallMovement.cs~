@@ -82,7 +82,8 @@ public class BallMovement : MonoBehaviour {
 		if (hasHitTurf) 
 		{
 			Debug.Log ("Double bounce");
-			if (lastHitBy != null) lastHitBy.GetComponent<TennisController>().ScorePoints(value);
+			if (lastHitBy != null) lastHitBy.GetComponent<TennisControllerGans>().ScorePoints(value);
+			wizard.BallHitTurfTwice();
 		} 
 		else 
 		{
@@ -110,7 +111,7 @@ public class BallMovement : MonoBehaviour {
 		lastHitBy = hittee;
 		tr.material.color = hittee.GetComponent<TennisController>().c1;
 		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisController>().c1;
-		
+		hasHitTurf = false;
 	}
 	
 	public void KillBall()

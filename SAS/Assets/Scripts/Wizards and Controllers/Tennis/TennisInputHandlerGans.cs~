@@ -39,6 +39,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	// Update is called once per frame
 	public void CheckInput () {
 		float moveMod = 1;
+		if (device == null) Debug.Log("No device detected!!!");
 		if (WindingUp()) 
 		{
 			moveMod = 0.5f;
@@ -176,6 +177,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		{
 			magSpeedX = 1;
 		}
+		
 		return speedMagnitude * magSpeedX * Time.deltaTime;
 	}
 	

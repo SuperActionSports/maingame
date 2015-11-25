@@ -27,6 +27,7 @@ public class BallValueCounter : MonoBehaviour {
 			BallHitBrick();		
 			nextTrigger = false;
 		}
+		
 	}
 	
 	public void IncrementValueDisplay()
@@ -51,5 +52,6 @@ public class BallValueCounter : MonoBehaviour {
 	public void Reset()
 	{
 		currentValue = 0;
+		l.cookie = numbers[currentValue];
 	}
 }

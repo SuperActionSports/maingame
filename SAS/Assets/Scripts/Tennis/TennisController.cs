@@ -158,7 +158,7 @@ public class TennisController : MonoBehaviour {
 	
 	public void WhatIsWindUp()
 	{
-		Debug.Log(input.GetSwingForce());
+		//Debug.Log(input.GetSwingForce());
 	}
 
 	public void Serve()
