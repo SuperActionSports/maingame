@@ -12,7 +12,7 @@ public class TennisStatsCard : StatsCard {
 	
 	public TennisStatsCard()
 	{
-		Debug.Log("New tennis stat card.");
+//		Debug.Log("New tennis stat card.");
 		Start ();
 	}
 	
@@ -21,7 +21,7 @@ public class TennisStatsCard : StatsCard {
 	}
 
 	public void HardResetStats() {
-		Debug.Log("Resetting stats in stat card");
+		//Debug.Log("Resetting stats in stat card");
 		ResetSwings ();
 		ResetContact();
 		ResetAccuracy ();

@@ -40,7 +40,6 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
 	
 	launcher.wizard = this;
-	launcher.LaunchTennisBall();
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
 	}
 	
@@ -73,8 +72,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
 			break;
 		case(2):
-			Debug.Log("Spawning two");
+			Debug.Log("Spawning one");
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			Debug.Log("Spawning two");
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[3],players[1]);
 			break;
 			
@@ -99,15 +99,16 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	public void DisableMovement()
 	{
-		Debug.Log("Disable movement from Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
+			Debug.Log("Disable movement of player " + i + " from Wizard");	
 			players[i].control.MovementAllowed(false);
 		}	
 	}
 	
 	public void EnableMovement()
 	{
+		launcher.LaunchTennisBall();
 		Debug.Log("Enable movement from Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
@@ -142,11 +143,11 @@ public class TennisWizard : MonoBehaviour, IWizard {
 		player.control = pController;
 		pController.color = player.color;
 		pController.wizard = this;
+		pController.respawnPoint = position;
 		//pController.respawnPoint = position;
 		pController.InitializeStatCard();
 		p.GetComponent<TennisInputHandlerGans>().device = player.device;
-		UpdateStatCards();
-		Debug.Log("Wizard! Stat card is: " + p.GetComponent<TennisControllerGans>().stats + "...");
+		//UpdateStatCards();
 		return pController;
 	}
 	
