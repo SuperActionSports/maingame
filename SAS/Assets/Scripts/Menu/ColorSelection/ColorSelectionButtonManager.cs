@@ -13,7 +13,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison layla;
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
-	public List<ColorSelectionButton> colorButtons;
+	public List<ColorSelectionButton> colorsThatHaveBeenSelected;
 
 	private Image handImage;
 	private Image labelImage;
@@ -33,7 +33,6 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		confirmedButton = GameObject.Find ("ColorsConfirmed");
 		colorsConfirmed = confirmedButton.GetComponent<Button> ();
 		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
-
 		GameObject selectionChild = transform.GetChild (0).gameObject;
 
 		GameObject cursor = selectionChild.transform.GetChild(0).gameObject;
@@ -60,7 +59,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void Update()
 	{
-		foreach (ColorSelectionButton btn in colorButtons) {
+		foreach (ColorSelectionButton btn in colorsThatHaveBeenSelected) {
 			btn.focusedUponTheNightWhenTheHorsesAreFree = true;
 		}
 		// Use last device which provided input.
@@ -107,13 +106,13 @@ public class ColorSelectionButtonManager : MonoBehaviour
 				handImage.color = c;
 				labelImage.color = c;
 				layla.SetPlayerColor(device,c);
-				if(colorButtons.Count > 0)
+				if(colorsThatHaveBeenSelected.Count > 0)
 				{
-					ColorSelectionButton btn = colorButtons[0];
+					ColorSelectionButton btn = colorsThatHaveBeenSelected[0];
 					btn.focusedUponTheNightWhenTheHorsesAreFree = false;
-					colorButtons.Clear();
+					colorsThatHaveBeenSelected.Clear();
 				}
-				colorButtons.Add(focusedButton);
+				colorsThatHaveBeenSelected.Add(focusedButton);
 			}
 			else
 			{
@@ -126,14 +125,14 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			layla.ErasePlayerColor(device);
 			handImage.color = Color.white;
 			labelImage.color = Color.white;
-			if(colorButtons.Count > 0)
+			if(colorsThatHaveBeenSelected.Count > 0)
 			{
-				foreach(ColorSelectionButton btn in colorButtons)
+				foreach(ColorSelectionButton btn in colorsThatHaveBeenSelected)
 				{
 					btn.focusedUponTheNightWhenTheHorsesAreFree = false;
 				}
 
-				colorButtons.Clear();
+				colorsThatHaveBeenSelected.Clear();
 			}
 		}
 		
@@ -141,7 +140,10 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void LoadScene()
 	{
-		Application.LoadLevel(focusedButton.levelToLoad);
+		if (layla.number_of_players == layla.numberOfActivePlayers) 
+		{
+			Application.LoadLevel(focusedButton.levelToLoad);
+		}
 	}
 		
 	ColorSelectionButton GetAvailableLeft(ColorSelectionButton current)
@@ -208,13 +210,16 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		while (tempFocus.focusedUponTheNightWhenTheHorsesAreFree && tempFocus.up != tempFocus)
 		{
 			tempFocus = tempFocus.up;
+			Debug.Log ("Green is covered up: " + tempFocus.name);
 		}
-		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree) {
+		if (!tempFocus.focusedUponTheNightWhenTheHorsesAreFree) 
+		{
 			tempFocus.focusedUponTheNightWhenTheHorsesAreFree = true;
 			current.focusedUponTheNightWhenTheHorsesAreFree = false;
+			Debug.Log ("Returning tempFocus " + tempFocus.name);
 			return tempFocus;
 		}
-			return current;
+		return current;
 	}
 	
 			

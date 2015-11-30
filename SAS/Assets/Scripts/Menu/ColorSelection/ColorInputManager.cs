@@ -71,15 +71,15 @@ using InControl;
 				colorsConfirmedSelectionButton.focusedUponTheNightWhenTheHorsesAreFree = true;
 				colorsConfirmedButton.interactable = false;
 			} else {
-				colorsConfirmedButton.interactable = true;
 				colorsConfirmedSelectionButton.focusedUponTheNightWhenTheHorsesAreFree = false;
+				colorsConfirmedButton.interactable = true;
 			}
 		}
 
 
 		bool JoinButtonWasPressedOnDevice( InputDevice inputDevice )
 		{
-			return inputDevice.Action1.WasPressed || inputDevice.Action2.WasPressed || inputDevice.Action3.WasPressed || inputDevice.Action4.WasPressed;
+			return inputDevice.Action1.WasPressed;
 		}
 
 
@@ -171,21 +171,6 @@ using InControl;
 				return true;
 			} else {
 				return false;
-			}
-		}
-
-		void OnGUI()
-		{
-			const float h = 22.0f;
-			var y = 10.0f;
-
-			GUI.Label( new Rect( 10, y, 300, y + h ), "Active players: " + colorSelectionManagers.Count + "/" + maxColorSelectors );
-			y += h;
-
-			if (colorSelectionManagers.Count < maxColorSelectors)
-			{
-				GUI.Label( new Rect( 10, y, 300, y + h ), "Press a button to join!" );
-				y += h;
 			}
 		}
 	}
