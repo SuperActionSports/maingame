@@ -13,8 +13,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public GameObject layla;
 	private GameControlLiaison liaison;
 	public GameObject inGame;
-	public GameObject ball;
+	public TennisBallLauncher launcher;
 	public GameObject valueProjector;
+	private BallValueCounter valueCounter;
 	
 	// Use this for initialization
 	void Start () {
@@ -37,11 +38,19 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	SetPlayers();
 	UpdateStatCards();
 	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+	
+	launcher.wizard = this;
+	valueCounter = valueProjector.GetComponent<BallValueCounter>();
 	}
 	
 	public void BallHitWall()
 	{
-		valueProjector.GetComponent<BallValueCounter>().BallHitBrick();
+		valueCounter.BallHitBrick();
+	}
+	
+	public void BallHitTurfTwice()
+	{
+		valueCounter.Reset();
 	}
 	
 	void ResetExistingPlayers()
@@ -63,8 +72,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
 			break;
 		case(2):
-			Debug.Log("Spawning two");
+			Debug.Log("Spawning one");
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
+			Debug.Log("Spawning two");
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[3],players[1]);
 			break;
 			
@@ -89,15 +99,17 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	public void DisableMovement()
 	{
-		Debug.Log("Disable From Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
+			Debug.Log("Disable movement of player " + i + " from Wizard");	
 			players[i].control.MovementAllowed(false);
 		}	
 	}
 	
 	public void EnableMovement()
 	{
+		launcher.LaunchTennisBall();
+		Debug.Log("Enable movement from Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -114,19 +126,28 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	}
 	
 	private TennisControllerGans Spawn(Vector3 position, Player player)
-	{
+	{/*
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
 		TennisControllerGans pController = p.GetComponent<TennisControllerGans>();
 		player.control = pController;
-		// Replace this noise with the player prefs file information
-		p.GetComponent<TennisControllerGans>().color = player.color;
-		p.GetComponent<TennisControllerGans>().wizard = this;
-		// Replace this with the device information from userprefs
-		p.GetComponent<TennisInputHandlerGans>().device = player.device;
+		pController.color = player.color;
+		pController.wizard = this;
+		pController.device = player.device;
 		remainingPlayers++;
-		//p.GetComponent<PlayerInputHandlerMatt>().device = null; 
 		pController.InitializeStatCard();
+		*/
+		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
+		player.gameObject = p;
+		TennisControllerGans pController = p.GetComponent<TennisControllerGans>();
+		player.control = pController;
+		pController.color = player.color;
+		pController.wizard = this;
+		pController.respawnPoint = position;
+		//pController.respawnPoint = position;
+		pController.InitializeStatCard();
+		p.GetComponent<TennisInputHandlerGans>().device = player.device;
+		//UpdateStatCards();
 		return pController;
 	}
 	
@@ -134,7 +155,12 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	{
 		for (int p = 0; p < players.Length; p++)
 		{
-			//players[p].statCard = ((TennisPlaye)players[p].control).Stats;
+			players[p].statCard = ((TennisControllerGans)players[p].control).stats;
 		}
+	}
+	
+	public void KillBall()
+	{
+		launcher.LaunchTennisBall();
 	}
 }

@@ -21,7 +21,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public float magSpeedX;
 	public float magSpeedZ;
 	public Vector3 speed;
-	public float speedMagnitude;
+	public float speedMagnitude = 13;
 	public float jumpForce;
 	
 	public TennisControllerGans control;
@@ -32,14 +32,14 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	void Start () {
 		rb = GetComponent<Rigidbody>();
 		ResetRigidBodyConstraints();
-		speedMagnitude = 10;
+		speedMagnitude = 13;
 		jumpForce = 25;
 	}
 	
 	// Update is called once per frame
 	public void CheckInput () {
-		Debug.Log ("Checking for input");
 		float moveMod = 1;
+		if (device == null) Debug.Log("No device detected!!!");
 		if (WindingUp()) 
 		{
 			moveMod = 0.5f;
@@ -67,7 +67,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		if (device != null && device.RightTrigger.IsPressed)
 		{
 			swingForce += Time.deltaTime * 25f;
-			Debug.Log("Swingforce: " + swingForce);
+			
 			control.WindUp();
 			return true;
 		}
@@ -177,6 +177,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		{
 			magSpeedX = 1;
 		}
+		
 		return speedMagnitude * magSpeedX * Time.deltaTime;
 	}
 	

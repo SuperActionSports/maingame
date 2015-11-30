@@ -25,6 +25,9 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	public bool putting;
 	public bool swinging;
 	public float swingStrength;
+	public bool canRotateLeft;
+	public bool canRotateRight;
+	public bool rotatingLeft;
 
 	public InputDevice device {get; set;}
 
@@ -107,6 +110,8 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		// Set up Golf specific variables
 		swinging = false;
 		putting = false;
+		canRotateLeft = true;
+		canRotateRight = true;
 		stats.ResetStats ();
     }
 	public void InitializeStatCard()
@@ -126,15 +131,29 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         	rb.velocity = new Vector3(0,0,0);
 
 			// Update ball object and see if player is close enough to putt
-			ball = GolfBall.FindObjectOfType<GolfBall>();
-			if (ball == null) {
-				distanceToBall = 0;
-				canHitBall = false;
-			}
-			else {
-				distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
-			                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
-				canHitBall = (distanceToBall < 2);
+			if (!putting) {
+				GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
+				float distance = Mathf.Infinity; 
+				Vector3 position = transform.position; 
+
+				foreach (GameObject obj in balls)  { 
+					float currentDistance = Mathf.Sqrt(Mathf.Pow((obj.transform.position.x - position.x), 2) +
+					                                   Mathf.Pow((obj.transform.position.z - position.z), 2));
+					if (currentDistance < distance) { 
+						ball = obj.GetComponent<GolfBall>(); 
+						distance = currentDistance; 
+					} 
+				} 
+
+				if (ball == null) {
+					distanceToBall = 0;
+					canHitBall = false;
+				}
+				else {
+					distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
+				                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
+					canHitBall = (distanceToBall < 2);
+				}
 			}
 
 			// Move player in x and z directions 
@@ -155,12 +174,18 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 				// If currently aiming a putt allow the stick to rotate the character around the ball
 				if (!swinging) 
 				{ 
-					Transform sweetspot = transform.FindChild("Sweetspot");
-					sweetspot.SetParent (null);
-					transform.SetParent (sweetspot);
-					sweetspot.RotateAround (ball.transform.position, Vector3.up, walkSpeed*xVel-walkSpeed*zVel); 
-					transform.SetParent (null);
-					sweetspot.SetParent (this.transform);
+					float dir = walkSpeed*xVel-walkSpeed*zVel;
+					if ((dir < 0 && canRotateLeft) || (dir > 0 && canRotateRight)) {
+						rotatingLeft = (dir < 0);
+						if (rotatingLeft) { canRotateRight = true; }
+						else { canRotateLeft = true; }
+						Transform sweetspot = transform.FindChild("Sweetspot");
+						sweetspot.SetParent (null);
+						transform.SetParent (sweetspot);
+						sweetspot.RotateAround (ball.transform.position, Vector3.up, dir); 
+						transform.SetParent (null);
+						sweetspot.SetParent (this.transform);
+					}
 				}
 			}
 			// Check if player is attacking
@@ -176,6 +201,15 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 			Respawn();
 		}
 		GetRespawn();
+	}
+
+	public void OnCollisionEnter(Collision col) {
+		if (col.gameObject.CompareTag ("Wall")) {
+			if (putting && !swinging) {
+				if (rotatingLeft) { canRotateLeft = false; }
+				else { canRotateRight = false; }
+			}
+		}
 	}
 	
 	private void ResetRigidBodyConstraints() 
@@ -319,16 +353,14 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	}
 
 	private void StartPutting() {
-
+		putting = true;
+		ball.beingHit = true;
 		Transform sweetspot = transform.FindChild("Sweetspot");
 		sweetspot.SetParent (null);
 		transform.SetParent (sweetspot);
 		sweetspot.position = ball.transform.position;
 		transform.SetParent (null);
 		sweetspot.SetParent (this.transform);
-
-		putting = true;
-		(ball as GolfBall).beingHit = true;
 		stats.AddAttemptedPutt ();
 
 	}
@@ -356,7 +388,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
 		Debug.Log ("I hit it this hard: " + swingStrength);
-		(ball as GolfBall).Putt (100f*swingStrength*transform.forward, this);
+		ball.Putt (100f*swingStrength*transform.forward, this);
 	}
     
     private float GetXVelocity()

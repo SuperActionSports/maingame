@@ -7,24 +7,23 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	public Color color;
 	private Renderer rend;
 	
-	private GameObject[] respawnPointsTeamA;
-	private GameObject[] respawnPointsTeamB;
 	public GameObject tennisBall;
 	
 	public InputDevice device {get; set;}
+	public bool ActiveDevice;
 
 	public bool alive;
 	bool isSwinging;
 	bool hasHitBall;
 	public bool isAttacking;
 
-    public GameObject[] respawnPoints;
+    public Vector3 respawnPoint;
     public GameObject equipment;
     private CapsuleCollider equipmentCollider;
     public float impactMod;
 	private float startTime;
 
-    public OverheadCameraController cam;
+    public TennisCameraController cam;
 	private PaintSplatter paint;
 	private AudioSource sound;
     private Animator anim;
@@ -38,15 +37,23 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	public TennisWizard wizard;
 	public TennisStatsCard stats;
 	public bool OriginSideNorth;
+	public float respawnTime;
+	private float timeOfDeath;
+	public bool movementAllowed;
+	public void MovementAllowed(bool allowed)
+	{
+		movementAllowed = allowed;
+	}
 
 	// Use this for initialization
 	void Start () {
 		
 		sound =  GetComponent<AudioSource>();
-        cam = Camera.main.GetComponent<OverheadCameraController>();
+        cam = Camera.main.GetComponent<TennisCameraController>();
 		rend = GetComponent<Renderer>();
         anim = GetComponent <Animator>();
         equipmentCollider = equipment.GetComponent<CapsuleCollider>();
+		equipmentCollider.enabled = false;
         input = GetComponent<TennisInputHandlerGans>();
         input.control = this;
         rb = GetComponent<Rigidbody>();
@@ -54,37 +61,38 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		alive = true;
         anim.SetBool("Alive", true);
 		impactMod = 7.5f;
-        respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
-		equipmentCollider.enabled = false;
-        if (respawnPoints.Length == 0)
-        {
-            Debug.Log("There aren't any respawn points, you catastrophic dingus.");
-        }
         
-		respawnPointsTeamA = GameObject.FindGameObjectsWithTag ("RespawnPointTeamA");
-		respawnPointsTeamB = GameObject.FindGameObjectsWithTag ("RespawnPointTeamB");
-
 		paint = GetComponent<PaintSplatter>();
 		paint.c = color;
 		hitForce = 25;
 //		stats.ResetStats ();
 		SetOriginSide ();
+		InitializeStatCard();
+		respawnTime = 3;
+		timeOfDeath = Mathf.Infinity;
+		ActiveDevice = device != null;
     }
+    
 	public void InitializeStatCard()
 	{
 		stats = new TennisStatsCard ();
-		stats.ResetStats ();
+		stats.HardResetStats ();
 	}
     
-	
 	// Update is called once per frame
 	void Update () {
 
-        if (alive)
+		if (alive && movementAllowed)
         {
         	input.CheckInput();
 			UpdateColor();
-		}	
+		}
+		else if (Time.time >= timeOfDeath + respawnTime)
+		{
+			Respawn();
+		}
+		if (transform.position.y < -100f) { MakeDead (); Respawn (); }
+			
 	}
 
 	void SetOriginSide() {
@@ -115,14 +123,18 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	private bool BallCollision(Collider other)
 	{
 		//LookAtNet();
-
+		Debug.Log("Ball has been hit");
 		Rigidbody ballRB = other.GetComponent<Rigidbody>();
 
 		ballRB.velocity = new Vector3(0,0,0);
-		Vector2 swingForce = input.GetStickForSwing();
-		float xForce = swingForce.x * hitForce;
-		float yForce = swingForce.y * hitForce;
-		ballRB.AddForce(xForce,10,yForce,ForceMode.VelocityChange);
+		Vector2 swingAngle = input.GetStickForSwing(); 
+		if (swingAngle.magnitude < 0.4f) 
+		{
+			swingAngle = new Vector2(Mathf.Sin (transform.eulerAngles.y),Mathf.Cos(transform.eulerAngles.y));
+		}
+		float xForce = swingAngle.x * hitForce;
+		float zForce = swingAngle.y * hitForce;
+		ballRB.AddForce(xForce,10,zForce,ForceMode.VelocityChange);
 		
 		other.GetComponent<BallMovement>().ResetCount();
 		other.GetComponent<BallMovement>().Hit(this.gameObject);
@@ -146,19 +158,11 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	public void MakeDead()
 	{
 		alive = false;
-		//Need the normal of the local x axis of bat
-		//paint.Platter (transform.position, paint.color);
         GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.None;
         alive = false;
         anim.SetBool("Alive", false);
-        //cam.PlayShake(transform.position);
-        /* foreach (Transform child in transform)
-         {
-             Vector3 t = child.transform.TransformPoint(child.transform.position);
-             child.parent = null;
-             child.transform.position = t;
-
-         }*/
+		timeOfDeath = Time.time;
+        cam.PlayShake();
 		stats.AddDeath ();
 		stats.EndLifeTime ();
     }
@@ -172,8 +176,6 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
     public void Kill(Vector3 direction)
     {
-		//Magic Number
-		//sound.Play ();
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
 	}
@@ -190,11 +192,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	
 	public void Respawn()
 	{
+		GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
 		alive = true;
+		transform.rotation = Quaternion.identity;
 		rb.velocity = new Vector3(0, 0, 0);
 		anim.SetBool("control.alive", true);
-		//Debug.Log("Length: " + respawnPoints.Length);
-		transform.position = respawnPointsTeamA[Mathf.FloorToInt(Random.Range(0, respawnPointsTeamA.Length))].transform.position;
+		transform.position = respawnPoint;
 		stats.StartLifeTime ();
 	}
 
@@ -212,12 +215,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		anim.SetFloat("WindingUp",input.GetSwingForce());
 	}
 
-	private void StartSwing()
+	public void StartSwing()
 	{
 		equipmentCollider.enabled = true; 
 	}
 
-	private void EndSwing()
+	public void EndSwing()
 	{
 		equipmentCollider.enabled = false;
 		anim.SetFloat("WindingUp",0);
@@ -231,12 +234,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		stats.AddAttemptedAttack ();
     }
 
-	private void StartAttack()
+	public void StartAttack()
 	{
 		equipmentCollider.enabled = true;
 	}
 
-	private void EndAttack()
+	public void EndAttack()
 	{
 		equipmentCollider.enabled = false;
 		isAttacking = false;
@@ -247,13 +250,13 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		return alive;
 	}
 
-	public void MovementAllowed(bool val)
-	{
-		//This is temporary -Gans
-	}
-
 	private void UpdateColor()
 	{
 		rend.material.color = color;
+	}
+	
+	public void ScorePoints(int value)
+	{
+		stats.Score(value);
 	}
 }

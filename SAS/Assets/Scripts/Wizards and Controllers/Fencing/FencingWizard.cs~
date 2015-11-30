@@ -72,33 +72,23 @@ public class FencingWizard : MonoBehaviour,IWizard {
 		
 		case (1):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
-		//	else {ResetPlayer(players[0]);}
 			break;
 		case(2):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
-		//	else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[4],players[1]);
-		//	else {ResetPlayer(players[1]);}
 			break;
 			
 		case (3):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
-			//else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[2],players[1]);
-		//	else {ResetPlayer(players[1]);}
 			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[4],players[2]);
-		//	else {ResetPlayer(players[2]);}
 			break;
 			
 		case(4):
 			if (ShouldBeSpawned(players[0])) Spawn(respawnPointPositions[0],players[0]);
-		//	else {ResetPlayer(players[0]);}
 			if (ShouldBeSpawned(players[1])) Spawn(respawnPointPositions[1],players[1]);
-		//	else {ResetPlayer(players[1]);}
 			if (ShouldBeSpawned(players[2])) Spawn(respawnPointPositions[3],players[2]);
-		//	else {ResetPlayer(players[2]);}
 			if (ShouldBeSpawned(players[3])) Spawn(respawnPointPositions[4],players[3]);
-		//	else {ResetPlayer(players[3]);}
 			break;
 			
 		default:
