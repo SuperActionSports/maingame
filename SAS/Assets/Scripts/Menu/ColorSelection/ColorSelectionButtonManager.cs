@@ -75,10 +75,26 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			Debug.Log( "!!!" );
 		}
 
+		string previousButtonName = focusedButton.name;
 		// Move focus with directional inputs.
 		if (filteredDirection.Up.WasPressed)
 		{
 			focusedButton = GetAvailableUp(focusedButton);
+			Debug.Log ("prev: " + previousButtonName);
+			if(focusedButton.name == previousButtonName && (focusedButton.name == "Back" || focusedButton.name == "ColorsConfirmed"))
+			{
+				focusedButton.focusedUponTheNightWhenTheHorsesAreFree = false;
+				ColorInputManager manager = GameObject.Find ("ColorInputManager").GetComponent<ColorInputManager>();
+				foreach(ColorSelectionButton btn in manager.colorStarts)
+				{
+					if(!btn.focusedUponTheNightWhenTheHorsesAreFree)
+					{
+						focusedButton = btn;
+						focusedButton.focusedUponTheNightWhenTheHorsesAreFree = true;
+						break;
+					}
+				}
+			}
 		}
 			
 		if (filteredDirection.Down.WasPressed)
