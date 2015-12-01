@@ -11,6 +11,7 @@ using InControl;
 		public MainMenuButton left = null;
 		public MainMenuButton right = null;
 
+		public string levelToLoad;
 
 		void Start()
 		{

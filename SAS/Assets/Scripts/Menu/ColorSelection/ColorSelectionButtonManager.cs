@@ -156,10 +156,21 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void LoadScene()
 	{
-		if (layla.number_of_players == layla.numberOfActivePlayers) 
+		if (focusedButton.name == "ColorsConfirmed" && layla.number_of_players == layla.numberOfActivePlayers) 
 		{
 			Application.LoadLevel(focusedButton.levelToLoad);
 		}
+		else if (focusedButton.name == "Back") 
+		{
+			ResetPlayers();
+			Application.LoadLevel(focusedButton.levelToLoad);
+		}
+	}
+
+	void ResetPlayers()
+	{
+		layla.SetNumberOfPlayers (0);
+		layla.numberOfActivePlayers = 0;
 	}
 		
 	ColorSelectionButton GetAvailableLeft(ColorSelectionButton current)

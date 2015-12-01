@@ -63,6 +63,7 @@
      <Compile Include="Assets\Scripts\Camera Models\ICamera.cs" />
      <Compile Include="Assets\Scripts\Camera Models\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\SideScrollingCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\TennisCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Flags\FlagWave.cs" />
      <Compile Include="Assets\Scripts\FX\FreezeRotationAndY.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\FencingPaintSplatter.cs" />
@@ -164,6 +165,8 @@
      <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisBall.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncher.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncherSway.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisController.cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisInputHandler.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballEquipmentScript.cs" />
