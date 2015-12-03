@@ -252,6 +252,7 @@ public class StatsCard : MonoBehaviour {
 	float ts = tsKDR + tsKS + tsACC + tsOTHR + tsRAN;
 	
 	return ts;
+	}
 }
 
 public class Statistic 
@@ -318,6 +319,4 @@ public class Statistic
 	{
 		get { return "Wrong KDR, dingus."; }
 	}
-
-
 }

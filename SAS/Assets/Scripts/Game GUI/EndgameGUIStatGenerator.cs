@@ -11,6 +11,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	//private int playerCount;
 	private Player[] players;
 	public GameObject masthead;
+	public bool testingMode = false;
 	//player stat cards
 	
 	void Start()
