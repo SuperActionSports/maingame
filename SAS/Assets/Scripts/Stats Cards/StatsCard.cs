@@ -235,10 +235,23 @@ public class StatsCard : MonoBehaviour {
 	*/
 
 	/*--------------------END ALL GAMES--------------------*/
-
 	public virtual float TotalScore() {
-		return kills;
-	}
+	float KDRw = 0.5f;
+	float KSw = 0.32f;
+	float ACCw = 0.1f;
+	float OTHRw = 0.05f;
+	float RANw = 0.03f;
+	
+	float tsKDR = kDR * KDRw;
+	float tsKS = longestKillStreak * KSw;
+	float tsACC = attackSuccessRate * ACCw;
+	float tsOTHR = longestTimeAlive * OTHRw;
+	float tsRAN = jumps * RANw;
+	
+
+	float ts = tsKDR + tsKS + tsACC + tsOTHR + tsRAN;
+	
+	return ts;
 }
 
 public class Statistic 
