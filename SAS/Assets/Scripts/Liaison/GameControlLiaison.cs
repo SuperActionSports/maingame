@@ -489,4 +489,8 @@ public class Player
 		this.device = device;
 		Debug.Log(this + " is new. Device is " + this.device);
 	}
+
+	public void SetStatCard(StatsCard card) {
+
+	}
 }
