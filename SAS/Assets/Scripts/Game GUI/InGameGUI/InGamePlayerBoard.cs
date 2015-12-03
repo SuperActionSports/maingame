@@ -34,6 +34,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 		debugPlayers[0].statCard.deaths = 4;
 		debugPlayers[0].statCard.longestKillStreak = 3;
 		debugPlayers[0].statCard.longestTimeAlive = 74.386543682f;
+		debugPlayers[0].statCard.TotalScore();
 		
 		debugPlayers[1] = new Player();
 		debugPlayers[1].statCard = GameCard;
@@ -43,6 +44,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 		debugPlayers[1].statCard.deaths = 8;
 		debugPlayers[1].statCard.longestKillStreak = 1;
 		debugPlayers[1].statCard.longestTimeAlive = 60.265436985219f;
+		debugPlayers[1].statCard.TotalScore();
 		
 		debugPlayers[2] = new Player();
 		debugPlayers[2].statCard = GameCard;
@@ -52,6 +54,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 		debugPlayers[2].statCard.deaths = 12;
 		debugPlayers[2].statCard.longestKillStreak = 1;
 		debugPlayers[2].statCard.longestTimeAlive = 48.235365879f;
+		debugPlayers[2].statCard.TotalScore();
 		
 		debugPlayers[3] = new Player();
 		debugPlayers[3].statCard = GameCard;
@@ -61,6 +64,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 		debugPlayers[3].statCard.deaths = 35;
 		debugPlayers[3].statCard.longestKillStreak = 1;
 		debugPlayers[3].statCard.longestTimeAlive = 31.574104829f;
+		debugPlayers[3].statCard.TotalScore();
 		
 		//SetPlayers = debugPlayers;
 	}
@@ -128,7 +132,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 		for (int i = 0; i < cards.Length; i++)
 		{
 			//cards[i].Value = players[i].statCard.Kills.ToString();
-			cards[i].Value = players[i].statCard.Kills.ToString();
+			cards[i].Value = players[i].statCard.TotalScore().ToString();
 			cards[i].GenerateStatistic();
 		}
 		

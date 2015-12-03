@@ -6,7 +6,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 
 	private Player[] debugPlayers;
 	
-	public GameObject statCard;
+	public BaseballStatsCard statCard;
 	public GameObject statistic;
 	//private int playerCount;
 	private Player[] players;
@@ -15,47 +15,59 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	
 	void Start()
 	{
-		/*
-		debugPlayers = new Player[4];
-		
-		debugPlayers[0] = new Player();
-		debugPlayers[0].statCard = new StatsCard();
-		debugPlayers[0].color = Color.cyan;
-		debugPlayers[0].statCard.rank = 0;
-		debugPlayers[0].statCard.kills = 15;
-		debugPlayers[0].statCard.deaths = 4;
-		debugPlayers[0].statCard.longestKillStreak = 3;
-		debugPlayers[0].statCard.longestTimeAlive = 74.386543682f;
-		
-		debugPlayers[1] = new Player();
-		debugPlayers[1].statCard = new StatsCard();
-		debugPlayers[1].color = Color.magenta;
-		debugPlayers[1].statCard.rank = 1;
-		debugPlayers[1].statCard.kills = 10;
-		debugPlayers[1].statCard.deaths = 8;
-		debugPlayers[1].statCard.longestKillStreak = 1;
-		debugPlayers[1].statCard.longestTimeAlive = 60.265436985219f;
-		
-		debugPlayers[2] = new Player();
-		debugPlayers[2].statCard = new StatsCard();
-		debugPlayers[2].color = Color.yellow;
-		debugPlayers[2].statCard.rank = 2;
-		debugPlayers[2].statCard.kills = 8;
-		debugPlayers[2].statCard.deaths = 12;
-		debugPlayers[2].statCard.longestKillStreak = 1;
-		debugPlayers[2].statCard.longestTimeAlive = 48.235365879f;
-		
-		debugPlayers[3] = new Player();
-		debugPlayers[3].statCard = new StatsCard();
-		debugPlayers[3].color = Color.red;
-		debugPlayers[3].statCard.rank = 3;
-		debugPlayers[3].statCard.kills = 3;
-		debugPlayers[3].statCard.deaths = 35;
-		debugPlayers[3].statCard.longestKillStreak = 1;
-		debugPlayers[3].statCard.longestTimeAlive = 31.574104829f;
-		
-		SetPlayers = debugPlayers;
-		*/
+		if (testingMode)
+		{
+			debugPlayers = new Player[4];
+			
+			debugPlayers[0] = new Player();
+			debugPlayers[0].statCard = new BaseballStatsCard();
+			debugPlayers[0].color = Color.cyan;
+			debugPlayers[0].statCard.rank = 0;
+			debugPlayers[0].statCard.kills = 35;
+			debugPlayers[0].statCard.deaths = 4;
+			debugPlayers[0].statCard.longestKillStreak = 3;
+			debugPlayers[0].statCard.longestTimeAlive = 74.386543682f;
+			//debugPlayers[0].statCard.BattingAverage = .367;
+			//debugPlayers[0].statCard.HitsMade = 13;
+			debugPlayers[0].statCard.TotalScore();
+			Debug.Log ("Score: " + debugPlayers[0].statCard.TotalScore()*1000);
+
+			debugPlayers[1] = new Player();
+			debugPlayers[1].statCard = new BaseballStatsCard();
+			debugPlayers[1].color = Color.magenta;
+			debugPlayers[1].statCard.rank = 1;
+			debugPlayers[1].statCard.kills = 10;
+			debugPlayers[1].statCard.deaths = 8;
+			debugPlayers[1].statCard.longestKillStreak = 1;
+			debugPlayers[1].statCard.longestTimeAlive = 60.265436985219f;
+			debugPlayers[1].statCard.TotalScore();
+			Debug.Log ("Score: " + debugPlayers[1].statCard.TotalScore()*1000);
+
+			debugPlayers[2] = new Player();
+			debugPlayers[2].statCard = new BaseballStatsCard();
+			debugPlayers[2].color = Color.yellow;
+			debugPlayers[2].statCard.rank = 2;
+			debugPlayers[2].statCard.kills = 8;
+			debugPlayers[2].statCard.deaths = 12;
+			debugPlayers[2].statCard.longestKillStreak = 1;
+			debugPlayers[2].statCard.longestTimeAlive = 48.235365879f;
+			debugPlayers[2].statCard.TotalScore();
+			Debug.Log ("Score: " + debugPlayers[2].statCard.TotalScore()*1000);
+
+			debugPlayers[3] = new Player();
+			debugPlayers[3].statCard = new StatsCard();
+			debugPlayers[3].color = Color.red;
+			debugPlayers[3].statCard.rank = 3;
+			debugPlayers[3].statCard.kills = 3;
+			debugPlayers[3].statCard.deaths = 35;
+			debugPlayers[3].statCard.longestKillStreak = 1;
+			debugPlayers[3].statCard.longestTimeAlive = 31.574104829f;
+			debugPlayers[3].statCard.TotalScore();
+			Debug.Log ("Score: " + debugPlayers[3].statCard.TotalScore());
+
+			SetPlayers = debugPlayers;
+
+		}
 		
 	}
 	
@@ -135,6 +147,10 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	private int CycleSubtract(int original, int value, int max)
 	{
 		return (original - value) < 0 ? max + (original - value) : (original - value);
+	}
+
+	public void update() {
+		Debug.Log ("Score: " + debugPlayers[0].statCard.TotalScore());
 	}
 }
 

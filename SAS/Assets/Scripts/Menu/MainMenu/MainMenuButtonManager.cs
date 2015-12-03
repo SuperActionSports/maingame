@@ -57,7 +57,7 @@ public class MainMenuButtonManager : MonoBehaviour
 		Debug.Log ("Btn: " + focusedButton.name);
 		if (focusedButton.name == "Play") 
 		{
-			Application.LoadLevel ("Color Select Cursor");
+			Application.LoadLevel ("New Color Selection Update");
 		}
 		if (focusedButton.name == "Quit") 
 		{
