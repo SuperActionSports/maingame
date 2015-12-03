@@ -236,6 +236,9 @@ public class StatsCard : MonoBehaviour {
 
 	/*--------------------END ALL GAMES--------------------*/
 
+	public virtual float TotalScore() {
+		return kills;
+	}
 }
 
 public class Statistic 
@@ -302,4 +305,6 @@ public class Statistic
 	{
 		get { return "Wrong KDR, dingus."; }
 	}
+
+
 }

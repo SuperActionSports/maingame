@@ -197,7 +197,7 @@ public class FencingStatsCard : StatsCard {
 		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, Statistic.Format.percentage);
 	}
 
-	public float TotalScore() {
+	public override float TotalScore() {
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;

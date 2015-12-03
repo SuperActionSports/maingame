@@ -114,7 +114,7 @@ public class GolfStatsCard : StatsCard {
 	}
 
 	/*--------------------END GOLF--------------------*/
-	public float TotalScore() {
+	public override float TotalScore() {
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;
