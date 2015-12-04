@@ -250,7 +250,6 @@ public class FencingInputHandler : MonoBehaviour {
 	
 	void OnTriggerStay(Collider other)
 	{
-		Debug.Log("Triggerr");
 		if (other.CompareTag("KillMovement"))
 		{
 			Debug.Log("KillMovement");
