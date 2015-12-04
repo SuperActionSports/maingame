@@ -722,10 +722,6 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 120442, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
   m_IsPrefabParent: 0
@@ -1921,11 +1917,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d04e9b9c75a53c94081fedb2c0762ca0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shake: 0
-  shakeLength: .200000003
-  shakeMagnitude: {x: .200000003, y: .200000003, z: 0}
-  shakeIntensity: 1
-  debugLerp: 100
 --- !u!95 &972113595
 Animator:
   serializedVersion: 3

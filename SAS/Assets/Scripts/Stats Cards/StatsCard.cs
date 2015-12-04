@@ -199,8 +199,7 @@ public class StatsCard : MonoBehaviour {
 		} else {
 			kDR = Kills;
 		}
-	}
-	
+	}	
 	/// <summary> 
 	/// Sets stats to relevant statistics and values. By default, this will set stats to Kills, Deaths, KDR, and Longest life time. 
 	///</summary>
@@ -235,9 +234,25 @@ public class StatsCard : MonoBehaviour {
 	*/
 
 	/*--------------------END ALL GAMES--------------------*/
+	public virtual float TotalScore() {
+	float KDRw = 0.5f;
+	float KSw = 0.32f;
+	float ACCw = 0.1f;
+	float OTHRw = 0.05f;
+	float RANw = 0.03f;
+	
+	float tsKDR = kDR * KDRw;
+	float tsKS = longestKillStreak * KSw;
+	float tsACC = attackSuccessRate * ACCw;
+	float tsOTHR = longestTimeAlive * OTHRw;
+	float tsRAN = jumps * RANw;
+	
 
+	float ts = tsKDR + tsKS + tsACC + tsOTHR + tsRAN;
+	
+	return ts;
 }
-
+}
 public class Statistic 
 {
 	private string name;
@@ -302,4 +317,6 @@ public class Statistic
 	{
 		get { return "Wrong KDR, dingus."; }
 	}
+
+
 }
