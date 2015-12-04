@@ -481,13 +481,13 @@ public class Player
 	
 	public Player()
 	{
-		Debug.Log("New player, yo.");
+//		Debug.Log("New player, yo.");
 	}
 	
 	public Player(InputDevice device)
 	{
 		this.device = device;
-		Debug.Log(this + " is new. Device is " + this.device);
+	//	Debug.Log(this + " is new. Device is " + this.device);
 	}
 
 	public void SetStatCard(StatsCard card) {

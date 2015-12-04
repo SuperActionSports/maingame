@@ -6,7 +6,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 
 	private Player[] debugPlayers;
 	
-	public BaseballStatsCard statCard;
+	public GameObject statCard;
 	public GameObject statistic;
 	//private int playerCount;
 	private Player[] players;

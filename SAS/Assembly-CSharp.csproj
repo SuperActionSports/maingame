@@ -52,6 +52,8 @@
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\Spout.cs" />
      <Compile Include="Assets\Prefabs\Golf\PerlinNoisePlane.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
+     <Compile Include="Assets\Scripts\Audience\AudienceController.cs" />
+     <Compile Include="Assets\Scripts\Audience\TennisGolfAudienceController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\BaseballCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\CameraController.cs" />

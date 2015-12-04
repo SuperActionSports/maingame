@@ -11,7 +11,7 @@ public class BaseballStatsCard : StatsCard {
 	private int random;
 
 	public void Start() {
-		random = (int)(Random.Range (0.000f, 4.999f));
+		random = Mathf.FloorToInt(Random.Range (0.000f, 4.999f));
 	}
 
 	public void HardResetStats() {
