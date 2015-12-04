@@ -11,7 +11,9 @@ public class BallMovement : MonoBehaviour {
 	int value;
 	public Vector3 vel;
 	public bool hit;
-	public GameObject wizard;
+	public TennisWizard wizard;
+	public float deathTime = 2;
+	public float currentDeathTime = 0;
 
 	private Renderer tr;
 	// Use this for initialization
@@ -54,13 +56,34 @@ public class BallMovement : MonoBehaviour {
 			//hasHitTurf = false;
 		}
 	}
+	
+	void OnCollisionStay(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Turf"))
+		{
+			currentDeathTime += Time.deltaTime;
+			if (currentDeathTime >= deathTime)
+			{
+				KillBall();
+			}
+		}	
+	}
+	
+	void OnCollisionExit(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Turf"))
+		{
+			currentDeathTime = 0;
+		}
+	}
 
 	void CheckForDoubleBounce()
 	{
 		if (hasHitTurf) 
 		{
 			Debug.Log ("Double bounce");
-			if (lastHitBy != null) lastHitBy.GetComponent<TennisController>().ScorePoints(value);
+			if (lastHitBy != null) lastHitBy.GetComponent<TennisControllerGans>().ScorePoints(value);
+			wizard.BallHitTurfTwice();
 		} 
 		else 
 		{
@@ -86,8 +109,14 @@ public class BallMovement : MonoBehaviour {
 	public void Hit(GameObject hittee)
 	{
 		lastHitBy = hittee;
-		tr.material.color = hittee.GetComponent<TennisController>().c1;
-		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisController>().c1;
-		
+		tr.material.color = hittee.GetComponent<TennisControllerGans>().color;
+		GetComponent<TrailRenderer>().material.color = hittee.GetComponent<TennisControllerGans>().color;
+		hasHitTurf = false;
+	}
+	
+	public void KillBall()
+	{
+		wizard.KillBall();
+		Destroy(this.gameObject);
 	}
 }

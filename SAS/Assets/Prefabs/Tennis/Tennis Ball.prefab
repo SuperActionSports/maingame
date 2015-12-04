@@ -16,7 +16,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &137380
 GameObject:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 120442}
   m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 480916}
@@ -57,9 +57,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137380}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .115999997, y: 15.1199999, z: -13.54}
-  m_LocalScale: {x: .200000003, y: .200000003, z: .200000003}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
+  m_LocalPosition: {x: -.0799999982, y: 1.79999995, z: -2.26999998}
+  m_LocalScale: {x: .400000006, y: .400000006, z: .400000006}
   m_Children:
   - {fileID: 402210}
   m_Father: {fileID: 0}
@@ -117,7 +117,7 @@ ConstantForce:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 137380}
   m_Enabled: 1
-  m_Force: {x: 0, y: 100, z: 0}
+  m_Force: {x: 0, y: 110, z: 0}
   m_RelativeForce: {x: 0, y: 0, z: 0}
   m_Torque: {x: 0, y: 0, z: 0}
   m_RelativeTorque: {x: 0, y: 0, z: 0}
@@ -145,8 +145,8 @@ TrailRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Time: 1
-  m_StartWidth: .300000012
+  m_Time: .5
+  m_StartWidth: .400000006
   m_EndWidth: 0
   m_Colors:
     m_Color[0]:
@@ -180,6 +180,8 @@ MonoBehaviour:
   vel: {x: 0, y: 0, z: 0}
   hit: 0
   wizard: {fileID: 0}
+  deathTime: 4
+  currentDeathTime: 0
 --- !u!114 &11441558
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -191,6 +193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22c0d0788533a584999054d90199d01c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  yOffset: 0
 --- !u!119 &11989344
 Projector:
   m_ObjectHideFlags: 1
@@ -199,16 +202,16 @@ Projector:
   m_GameObject: {fileID: 120442}
   m_Enabled: 1
   serializedVersion: 2
-  m_NearClipPlane: 2.25
+  m_NearClipPlane: .100000001
   m_FarClipPlane: 35.7900009
-  m_FieldOfView: 28
+  m_FieldOfView: 16.6200008
   m_AspectRatio: 1
   m_Orthographic: 0
-  m_OrthographicSize: 2
+  m_OrthographicSize: 2.5
   m_Material: {fileID: 2100000, guid: 83df64563b0d3ad419e6670886caefa0, type: 2}
   m_IgnoreLayers:
     serializedVersion: 2
-    m_Bits: 2304
+    m_Bits: 6400
 --- !u!135 &13599056
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -235,6 +238,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Drag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_StartWidth
+      value: .400000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Time
+      value: .5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

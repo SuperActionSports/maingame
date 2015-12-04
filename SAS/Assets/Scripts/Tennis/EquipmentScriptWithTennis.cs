@@ -30,7 +30,7 @@ public class EquipmentScriptWithTennis : MonoBehaviour {
 		{
 			if(player.isAttacking)
 			{
-				TennisController victim = other.GetComponent<TennisController>();
+				TennisControllerGans victim = other.GetComponent<TennisControllerGans>();
 				if (victim.alive)
 				{
 					Debug.Log("Hit detected, sending "+ (transform.right*-1));

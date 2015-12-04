@@ -79,8 +79,9 @@ public class InGamePlayerBoard : MonoBehaviour {
 			c = Instantiate(playerCardPrefab, Vector3.zero, Quaternion.identity) as GameObject;
 			c.GetComponent<Image>().color = players[i].color;
 			InGamePlayerCard pc = c.GetComponent<InGamePlayerCard>();
-			Debug.Log("Ingame: " + pc + "- value: " + pc.Value + "statCard: " + players[i].statCard);
-			pc.Value = players[i].statCard.Kills.ToString();
+			Debug.Log("Player: " + players[i]);
+			Debug.Log("Ingame: " + pc + "- value: " + pc.Value + "statCard: " + players[i].statCard + "0x");
+			//pc.Value = players[i].statCard.Kills.ToString();
 			pc.Name = "P"+(i+1);
 			cards[i] = pc;
 			c.transform.parent = this.transform;
@@ -91,6 +92,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 	void Update () {
 		for (int i = 0; i < cards.Length; i++)
 		{
+			//cards[i].Value = players[i].statCard.Kills.ToString();
 			cards[i].Value = players[i].statCard.Kills.ToString();
 			cards[i].GenerateStatistic();
 		}
