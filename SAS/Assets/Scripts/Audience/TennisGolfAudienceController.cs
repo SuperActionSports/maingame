@@ -3,10 +3,11 @@ using System.Collections;
 
 public class TennisGolfAudienceController : MonoBehaviour {
 
-	public GameControlLiaison layla;
-	public TennisWizard wizard;
+	//public GameControlLiaison layla;
+	public GameObject wizard;
 	public GameObject audiencePrefabA;
 	public GameObject audiencePrefabB;
+	private TennisWizard wizardScript;
 	private GameObject[] wholeAudience;
 	private Animator[] crowdMovements;
 	private Vector3[] audienceCoordinates;
@@ -14,11 +15,12 @@ public class TennisGolfAudienceController : MonoBehaviour {
 	private int playerCount;
 	private Color[] colors;
 
-	void Start () {
-		playerCount = layla.GetNumberOfPlayers();
-
+	public void Initialize () {
+		wizardScript = wizard.GetComponent<TennisWizard> ();
+		playerCount = wizardScript.players.Length;
+		Debug.Log (playerCount);
 		colors = new Color[playerCount];
-		Player[] players = wizard.players ;
+		Player[] players = wizardScript.players ;
 		for (int i = 0; i < playerCount; i++) {
 			colors[i] = players[i].color;
 		}

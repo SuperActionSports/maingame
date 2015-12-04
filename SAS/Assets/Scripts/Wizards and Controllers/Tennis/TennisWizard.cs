@@ -16,6 +16,8 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public TennisBallLauncher launcher;
 	public GameObject valueProjector;
 	private BallValueCounter valueCounter;
+	public GameObject audience;
+	private TennisGolfAudienceController audienceScript;
 	
 	// Use this for initialization
 	void Start () {
@@ -41,6 +43,8 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	launcher.wizard = this;
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
+	audienceScript = audience.GetComponent<TennisGolfAudienceController> ();
+	audienceScript.Initialize ();
 	}
 	
 	public void BallHitWall()
@@ -51,6 +55,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public void BallHitTurfTwice()
 	{
 		valueCounter.Reset();
+		audienceScript.CrowdGoesWild ();
 	}
 	
 	void ResetExistingPlayers()
@@ -162,5 +167,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public void KillBall()
 	{
 		launcher.LaunchTennisBall();
+	}
+
+	public void PlayerDead() {
+		audienceScript.CryForBlood ();
 	}
 }
