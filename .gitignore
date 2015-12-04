@@ -21,7 +21,12 @@ sysinfo.txt
 /*.user
 /*.unityproj
 /*.booproj
- 
+*.csproj
+*.meta
+SAS/Assembly-CSharp-Editor.csproj
+SAS/Assembly-CSharp.csproj
+SAS/SAS.sln 
+
 # ============ #
 # OS generated #
 # ============ #
@@ -34,11 +39,7 @@ ehthumbs.db
 [Tt]humbs.db
 
 *.userprefs
-*.csproj
-*.meta
-*.csproj
-*.sln
-
+*.csproj   
 
 
 
