@@ -26,7 +26,9 @@ sysinfo.txt
 SAS/Assembly-CSharp-Editor.csproj
 SAS/Assembly-CSharp.csproj
 SAS/SAS.sln 
-
+SAS/Assembly-CSharp-Editor-vs.csproj
+SAS/Assembly-CSharp-Editor.csproj
+*.meta
 # ============ #
 # OS generated #
 # ============ #
@@ -37,9 +39,6 @@ SAS/SAS.sln
 Icon?
 ehthumbs.db
 [Tt]humbs.db
-
 *.userprefs
-*.csproj   
-
-
+*.csproj
 

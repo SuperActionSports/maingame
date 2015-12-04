@@ -10,6 +10,8 @@ public class LevelSelectionButtonManager : MonoBehaviour
 	public string hockeyName;
 	public string actionTinyEggName;
 
+	private GameControlLiaison liason;
+
 	TwoAxisInputControl filteredDirection;
 			
 	void Awake()
@@ -20,6 +22,8 @@ public class LevelSelectionButtonManager : MonoBehaviour
 	
 	void Start()
 	{
+		GameObject layla = GameObject.Find ("Layla");
+		liason = layla.GetComponent<GameControlLiaison> ();
 		Time.timeScale = 1;
 	}
 
@@ -91,10 +95,17 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		}
 		if (focusedButton.name == "Back") 
 		{
-			Application.LoadLevel("Color Select Cursor");
+			ResetPlayers();
+			Application.LoadLevel("New Color Select Cursor");
 		}
 	}
 		
+
+	void ResetPlayers()
+	{
+		liason.SetNumberOfPlayers (0);
+		liason.numberOfActivePlayers = 0;
+	}
 		
 	void MoveFocusTo( LevelSelectionButton newFocusedButton )
 	{
