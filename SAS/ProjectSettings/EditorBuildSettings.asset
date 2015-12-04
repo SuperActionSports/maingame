@@ -8,21 +8,21 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Menu/MainMenu.unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/ColorSelection.unity
+    path: Assets/_Scenes/Menu/ColorSelection (Deprecated).unity
   - enabled: 1
     path: Assets/_Scenes/Menu/LevelSelection.unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/PlayerSelectionWithController.unity
+    path: Assets/_Scenes/Menu/PlayerSelectionWithController (Deprecated).unity
   - enabled: 1
     path: Assets/_Scenes/Menu/Credits.unity
   - enabled: 1
-    path: Assets/_Scenes/Games/Golf.unity
+    path: Assets/_Scenes/Games/Deprecated/Golf (Deprecated).unity
   - enabled: 1
-    path: Assets/_Scenes/Games/Baeball.unity
+    path: Assets/_Scenes/Games/Deprecated/Baeball (Deprecated).unity
   - enabled: 1
-    path: Assets/_Scenes/Games/Fencing.unity
+    path: Assets/_Scenes/Games/Deprecated/Fencing (Deprecated).unity
   - enabled: 1
-    path: Assets/_Scenes/Games/Hockey.unity
+    path: Assets/_Scenes/Games/Deprecated/Hockey (Deprecated).unity
   - enabled: 1
     path: Assets/_Scenes/Games/Tennis.unity
   - enabled: 1
@@ -32,9 +32,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Testing Scenes/Particle Lab - Matt.unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/Color Select Update.unity
+    path: Assets/_Scenes/Menu/Color Select Update (Deprecated).unity
   - enabled: 1
-    path: Assets/_Scenes/Menu/Color Select Cursor.unity
+    path: Assets/_Scenes/Menu/Color Select Cursor (Deprecated).unity
   - enabled: 1
     path: Assets/_Scenes/Menu/Info Screens/ActionStickEggInfoScreen.unity
   - enabled: 1
@@ -54,4 +54,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Scenes/Games/HockeyFixedPause.unity
   - enabled: 1
-    path: Assets/_Scenes/Games/TennisFixedPause.unity
+    path: Assets/_Scenes/Games/Deprecated/TennisFixedPause (Deprecated).unity
