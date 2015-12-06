@@ -23,7 +23,7 @@ public class FencingInputHandler : MonoBehaviour {
 	public InputDevice device; // Layla
 	public bool deviceActive; // Deprecated after Layla is implemented
 	public bool facingRight;
-	
+	public bool canJump;
 	private float doubleTapCooler;
 	private float doubleTapDelay;
 	private int doubleTapCount;
@@ -40,6 +40,7 @@ public class FencingInputHandler : MonoBehaviour {
 	private bool canMoveHorizontally = true;
 
 	void Start () {
+		canJump = true;
 		facingRight = true;
 		deviceActive = device == null ? false : true;
 		speedMagnitude = 10;
@@ -214,13 +215,10 @@ public class FencingInputHandler : MonoBehaviour {
 	{
 		if (device.Action1 || device.Direction.Y > 0.9)
 		{
-			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 1f))
-			{
-				if (groundHit.collider.CompareTag("Stage") || groundHit.collider.CompareTag("Equipment"))
-				{
-					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
-					control.Stats.AddJump();
-				}
+		if (canJump) {
+				rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
+				control.Stats.AddJump();
+				canJump = false;
 			}
 		}
 		if (device.Direction.Y < 0)
@@ -247,7 +245,13 @@ public class FencingInputHandler : MonoBehaviour {
 	{
 		return speedMagnitude * device.Direction.X;
 	}
-	
+
+	void OnCollisionEnter(Collision col) {
+		if (col.gameObject.CompareTag ("Stage")) { 
+			canJump = true;
+		}
+	}
+
 	void OnTriggerStay(Collider other)
 	{
 		if (other.CompareTag("KillMovement"))

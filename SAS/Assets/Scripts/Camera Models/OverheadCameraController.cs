@@ -6,7 +6,9 @@ public class OverheadCameraController : MonoBehaviour {
 	public GameObject[] players;
 	public Vector3[] positions;
 	public float debugLerp;
+	public float minDistance;
 	public bool shake;
+
 	void Start () {
 		players = GameObject.FindGameObjectsWithTag("Player");
 		positions = new Vector3[players.Length];
@@ -54,7 +56,9 @@ public class OverheadCameraController : MonoBehaviour {
 
 		// Use (x,y) position of camera and furthest player points to set y distance.
 		y = (Mathf.Tan (Mathf.PI / 3) * maxDist);
-
+		if (y < minDistance) {
+			y = minDistance;
+		}
 		transform.position = Vector3.Lerp(transform.position,new Vector3(x,y,z),Time.deltaTime * debugLerp);
 	}
 }

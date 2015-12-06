@@ -38,8 +38,8 @@ public class PuckMovement : MonoBehaviour {
 			Respawn();
 			willRespawn = false;
 		}
-		rb.velocity *= friction;
-		if (rb.velocity.magnitude < 3) transform.position = Vector3.Lerp(transform.position,new Vector3(0,0,0),Time.deltaTime/60);
+		//rb.velocity *= friction;
+		//if (rb.velocity.magnitude < 3) transform.position = Vector3.Lerp(transform.position,new Vector3(0,0,0),Time.deltaTime/60);
 	}
 
 	void OnTriggerEnter (Collider col)

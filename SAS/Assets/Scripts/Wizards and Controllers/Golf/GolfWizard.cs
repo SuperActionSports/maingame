@@ -96,10 +96,6 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
 		}
-		if (hole.transform.position.y < -100) { 
-			float newY = floor.GetComponent<PerlinNoisePlane> ().ResetHolePosition ();
-			hole.transform.position = new Vector3(hole.transform.position.x, newY, hole.transform.position.z);
-		}
 	}
 	
 	private void SetPlayers()
@@ -186,18 +182,22 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void SpawnBallAndHole()
 	{
-		hole = GameObject.Instantiate(hole,Vector3.up*300f,Quaternion.identity) as GameObject;
+		hole = GameObject.Instantiate(hole,Vector3.up*3f,Quaternion.identity) as GameObject;
+		floor.GetComponent<PerlinNoisePlane>().hole = hole;
 		for (int i = 0; i < golfBalls.Length; i++) {
-			golfBalls[i] = GameObject.Instantiate (golfBallPrefab, Vector3.up * 3f, Quaternion.identity) as GameObject;
+			golfBalls[i] = GameObject.Instantiate (golfBallPrefab, Vector3.up * 2f, Quaternion.identity) as GameObject;
 			golfBalls[i].GetComponent<GolfBall> ().wizard = this;
-			ResetBallAndHole(golfBalls[i]);
+			ResetBallAndHole(golfBalls[i], true);
 		}
 	}
 	
-	public void ResetBallAndHole(GameObject golfBall)
+	public void ResetBallAndHole(GameObject golfBall, bool firstCall)
 	{
 		// Randomize x and z
-		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),-500,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),hole.transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
+		if (!firstCall) {
+			floor.GetComponent<PerlinNoisePlane> ().ResetHolePosition ();
+		}
 		golfBall.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		golfBall.transform.position = new Vector3(golfBall.transform.position.x,
 		                                          floor.GetComponent<MeshCollider>().ClosestPointOnBounds(golfBall.transform.position).y+0.6f,

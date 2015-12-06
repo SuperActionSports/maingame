@@ -51,10 +51,10 @@ public class GolfBall : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider collision) {
-		if (collision.gameObject.tag == "Goal") {
+		if (collision.gameObject.tag == "Goal" && rend.material.color != Color.white) {
 			wizard.Celebrate(rend.material.color);
 			playerHitting.stats.AddMadePutt();
-			wizard.ResetBallAndHole(this.gameObject);
+			wizard.ResetBallAndHole(this.gameObject, false);
 			collision.gameObject.transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			rb.velocity = Vector3.zero;

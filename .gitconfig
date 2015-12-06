@@ -1,0 +1,9 @@
+[user]
+	name = tylorlilley
+[filter "lfs"]
+	smudge = git-lfs smudge %f
+	required = true
+	clean = git-lfs clean %f
+[tylorlilley]
+	name = Tylor Lilley
+	email = tylorlilley@gmail.com
