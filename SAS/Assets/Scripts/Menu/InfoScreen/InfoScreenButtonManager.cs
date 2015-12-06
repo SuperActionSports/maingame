@@ -51,6 +51,10 @@ public class InfoScreenButtonManager : MonoBehaviour
 		{
 			LoadScene();
 		}
+		if (inputDevice.Action2.WasPressed) 
+		{
+			Application.LoadLevel ("LevelSelection");
+		}
 	}
 
 	void LoadScene()
