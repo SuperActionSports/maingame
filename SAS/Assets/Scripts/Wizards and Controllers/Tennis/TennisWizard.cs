@@ -4,6 +4,7 @@ using System.Collections;
 public class TennisWizard : MonoBehaviour, IWizard {
 
 	public GameObject playerPrefab; 		//Provided by game
+	public GameObject audiencePrefab;
 	public Player[] players;
 	private Vector3[] respawnPointPositions; // Game
 	public GameObject[] respawnPoints;		// Game
@@ -12,6 +13,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	private int matchCount;					// Layla, customized games
 	public GameObject layla;
 	private GameControlLiaison liaison;
+	private AudienceController audience;
 	public GameObject inGame;
 	public TennisBallLauncher launcher;
 	public GameObject valueProjector;
@@ -41,6 +43,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	launcher.wizard = this;
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
+	GameObject audCon = (GameObject) Instantiate(audiencePrefab, new Vector3(0,0,0), Quaternion.identity);
+	audience = audCon.GetComponent<AudienceController> ();
+	audience.Initialize ("tennis", players);
 	}
 	
 	public void BallHitWall()
