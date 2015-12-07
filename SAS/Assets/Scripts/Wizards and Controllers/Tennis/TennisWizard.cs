@@ -53,7 +53,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			DisableMovement();
 			for (int p = 0; p < players.Length; p++)
 			{
-				players[p].statCard = ((GolfPlayerController)players[p].control).stats;
+				players[p].statCard = ((TennisControllerGans)players[p].control).stats;
 				
 			}
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;

@@ -6,8 +6,8 @@ public class BaseballLauncher : MonoBehaviour {
 
 	public float minXPow = -15;
 	public float maxXpow = -4;
-	public float minYPow = 6;
-	public float maxYPow = 8;
+	public float minYPow = 4;
+	public float maxYPow = 6;
 	public Rigidbody ball;
 	public GameObject pitchPosition;
 	
