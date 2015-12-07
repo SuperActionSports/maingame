@@ -11,7 +11,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public KeyCode swing;
 	public KeyCode attack;
 	public KeyCode debugKill;
-	public KeyCode jump;
+	//public KeyCode jump;
 	public GameObject tennisBall;
 	
 	public InputDevice device;
@@ -22,7 +22,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public float magSpeedZ;
 	public Vector3 speed;
 	public float speedMagnitude = 13;
-	public float jumpForce;
+	//public float jumpForce;
 	
 	public TennisControllerGans control;
 	
@@ -33,7 +33,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		ResetRigidBodyConstraints();
 		speedMagnitude = 13;
-		jumpForce = 25;
+		//jumpForce = 25;
 	}
 	
 	// Update is called once per frame
@@ -198,7 +198,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	private void GetKeyboardYInput()
 	{
 		
-		if (Input.GetKeyDown(jump))
+		/*if (Input.GetKeyDown(jump))
 		{
 			//anim.SetTrigger("Jump");
 			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
@@ -209,13 +209,13 @@ public class TennisInputHandlerGans: MonoBehaviour {
 					control.stats.AddJump();
 				}
 			}
-		}
+		}*/
 		
 	}
 	
 	private void GetControllerYInput()
 	{
-		if (device.Action1)
+		/*if (device.Action1)
 		{
 			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
@@ -225,7 +225,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 					control.stats.AddJump();
 				}
 			}
-		}
+		}*/
 	}
 	
 	public Vector2 GetStickForSwing()

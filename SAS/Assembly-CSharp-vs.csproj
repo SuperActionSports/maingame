@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\GolfHoleScript.cs" />
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\PaintBall.cs" />
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\PaintSplatterParticles.cs" />
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\PaintSplatterProjector.cs" />
@@ -53,6 +54,7 @@
      <Compile Include="Assets\Prefabs\FX\PaintSplatter\Spout.cs" />
      <Compile Include="Assets\Prefabs\Golf\PerlinNoisePlane.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
+     <Compile Include="Assets\Scripts\Baseball\BaseballLauncher.cs" />
      <Compile Include="Assets\Scripts\Camera Models\AngeldCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\BaseballCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\CameraController.cs" />
@@ -63,6 +65,7 @@
      <Compile Include="Assets\Scripts\Camera Models\ICamera.cs" />
      <Compile Include="Assets\Scripts\Camera Models\OverheadCameraController.cs" />
      <Compile Include="Assets\Scripts\Camera Models\SideScrollingCameraController.cs" />
+     <Compile Include="Assets\Scripts\Camera Models\TennisCameraController.cs" />
      <Compile Include="Assets\Scripts\FX\Flags\FlagWave.cs" />
      <Compile Include="Assets\Scripts\FX\FreezeRotationAndY.cs" />
      <Compile Include="Assets\Scripts\FX\Paint Splatter\FencingPaintSplatter.cs" />
@@ -89,14 +92,14 @@
      <Compile Include="Assets\Scripts\Golf\GolfBall.cs" />
      <Compile Include="Assets\Scripts\Hockey\GoalScored.cs" />
      <Compile Include="Assets\Scripts\Hockey\HockeyGoalEffect.cs" />
-     <Compile Include="Assets\Scripts\Hockey\HockeyPlayerManagerSAS.cs" />
-     <Compile Include="Assets\Scripts\Hockey\NoMove.cs" />
-     <Compile Include="Assets\Scripts\Hockey\PlayerMovementJoy.cs" />
+     <Compile Include="Assets\Scripts\Hockey\HockeyPlayerManagerSAS (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Hockey\NoMove (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Hockey\PlayerMovementJoy (Deprecated).cs" />
      <Compile Include="Assets\Scripts\Hockey\PuckMovement.cs" />
-     <Compile Include="Assets\Scripts\Liaison\Do Not Use\GameControlDemo.cs" />
-     <Compile Include="Assets\Scripts\Liaison\Do Not Use\GameControlWizard.cs" />
-     <Compile Include="Assets\Scripts\Liaison\Do Not Use\LiaisonClass.cs" />
-     <Compile Include="Assets\Scripts\Liaison\Do Not Use\PlayerClass.cs" />
+     <Compile Include="Assets\Scripts\Liaison\Do Not Use (Deprecated)\GameControlDemo (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Liaison\Do Not Use (Deprecated)\GameControlWizard (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Liaison\Do Not Use (Deprecated)\LiaisonClass (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Liaison\Do Not Use (Deprecated)\PlayerClass (Deprecated).cs" />
      <Compile Include="Assets\Scripts\Liaison\GameControlLiaison.cs" />
      <Compile Include="Assets\Scripts\Liaison\Interfaces.cs" />
      <Compile Include="Assets\Scripts\Liaison\Player.cs" />
@@ -152,7 +155,6 @@
      <Compile Include="Assets\Scripts\Player (Deprecated)\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
-     <Compile Include="Assets\Scripts\SportsObjects\BaseballLauncher.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\BaseballStatsCard.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\FencingStatsCard.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\GolfStatsCard.cs" />
@@ -161,14 +163,16 @@
      <Compile Include="Assets\Scripts\Stats Cards\StatsCardDeprecated.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\TennisStatsCard.cs" />
      <Compile Include="Assets\Scripts\Tennis\BallMovement.cs" />
-     <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" />
-     <Compile Include="Assets\Scripts\Tennis\TennisAction.cs" />
+     <Compile Include="Assets\Scripts\Tennis\EquipmentScriptWithTennis (Deprecated).cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisAction (Deprecated).cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisBall.cs" />
-     <Compile Include="Assets\Scripts\Tennis\TennisController.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncher.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisBallLauncherSway.cs" />
+     <Compile Include="Assets\Scripts\Tennis\TennisController  (Deprecated).cs" />
      <Compile Include="Assets\Scripts\Tennis\TennisInputHandler.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballEquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballPlayerController.cs" />
-     <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballPlayerManagerSAS.cs" />
+     <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballPlayerManagerSAS (Deprecated).cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Baseball\BaseballWizard.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Fencing\FencingEquipment.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Fencing\FencingInputHandler.cs" />

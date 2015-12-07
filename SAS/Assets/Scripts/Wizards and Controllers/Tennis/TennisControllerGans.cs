@@ -24,7 +24,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	private float startTime;
 
     public TennisCameraController cam;
-	private PaintSplatter paint;
+	private PaintSplatterProjector paint;
 	private AudioSource sound;
     private Animator anim;
     
@@ -48,6 +48,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	// Use this for initialization
 	void Start () {
 		
+		paint = GetComponent<PaintSplatterProjector> ();
 		sound =  GetComponent<AudioSource>();
         cam = Camera.main.GetComponent<TennisCameraController>();
 		rend = GetComponent<Renderer>();
@@ -61,9 +62,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		alive = true;
         anim.SetBool("Alive", true);
 		impactMod = 7.5f;
-        
-		paint = GetComponent<PaintSplatter>();
-		paint.c = color;
+
 		hitForce = 25;
 //		stats.ResetStats ();
 		SetOriginSide ();
@@ -71,6 +70,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		respawnTime = 3;
 		timeOfDeath = Mathf.Infinity;
 		ActiveDevice = device != null;
+		paint.Initialize (color);
     }
     
 	public void InitializeStatCard()
@@ -175,7 +175,12 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
     }
 
     public void Kill(Vector3 direction)
-    {
+	{
+		Vector3 rbForce = direction * 40;
+		rbForce.x *=-1;
+		rbForce.z *= -1;
+		rb.AddForce (rbForce, ForceMode.VelocityChange);
+		paint.Splatter (transform.position, rbForce);
 		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
 	}
