@@ -33,7 +33,6 @@ public class TennisStatsCard : StatsCard {
 	
 	public void ResetPoints()
 	{
-	Debug.Log("Points reset");
 		Points = 1;
 	}
 	
@@ -68,7 +67,6 @@ public class TennisStatsCard : StatsCard {
 	{
 		Points += pts;
 		ts = Points;
-		Debug.Log("Points is now " + Points + " ts is " + ts + "*********************************");
 	}	
 	
 	/*--------------------END TENNIS--------------------*/
@@ -112,7 +110,7 @@ public class TennisStatsCard : StatsCard {
 		//Debug.Log("Tennis score: " + tsP + "(" + Points + " * " + Pw  + ") + " + tsKDR + " + " + tsKS + " + " + tsACC + " + " + tsRAN);
 		// ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
 		//ts = Points;
-		Debug.Log("For the in game gui, I return " + ts);
+		//Debug.Log("For the in game gui, I return " + ts);
 		return ts;
 	}
 }
