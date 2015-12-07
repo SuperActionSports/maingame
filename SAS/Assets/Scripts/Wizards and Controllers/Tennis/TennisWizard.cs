@@ -95,6 +95,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			Debug.Log ("Invalid number of players [2,4]: " + players.Length);
 			break;
 		}
+		UpdateStatCards();
 	}
 	
 	public void DisableMovement()
@@ -126,17 +127,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	}
 	
 	private TennisControllerGans Spawn(Vector3 position, Player player)
-	{/*
-		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
-		player.gameObject = p;
-		TennisControllerGans pController = p.GetComponent<TennisControllerGans>();
-		player.control = pController;
-		pController.color = player.color;
-		pController.wizard = this;
-		pController.device = player.device;
-		remainingPlayers++;
-		pController.InitializeStatCard();
-		*/
+	{
 		GameObject p = Instantiate(playerPrefab,position,Quaternion.identity) as GameObject;
 		player.gameObject = p;
 		TennisControllerGans pController = p.GetComponent<TennisControllerGans>();
@@ -147,7 +138,6 @@ public class TennisWizard : MonoBehaviour, IWizard {
 		//pController.respawnPoint = position;
 		pController.InitializeStatCard();
 		p.GetComponent<TennisInputHandlerGans>().device = player.device;
-		//UpdateStatCards();
 		return pController;
 	}
 	

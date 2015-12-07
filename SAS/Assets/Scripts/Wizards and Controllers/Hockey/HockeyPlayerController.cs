@@ -149,6 +149,11 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		rb.constraints = RigidbodyConstraints.FreezeRotation | RigidbodyConstraints.FreezePositionY;
 		transform.rotation = Quaternion.identity;
 	}
+	
+	public float TotalScore()
+	{
+		return stats.TotalScore();
+	}
 
 	private void GetAttacking()
 	{

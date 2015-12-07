@@ -119,6 +119,11 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		stats = new GolfStatsCard ();
 		stats.ResetStats ();
 	}
+	
+	public float TotalScore()
+	{
+		return stats.TotalScore();
+	}
     
 
 	void Update () {

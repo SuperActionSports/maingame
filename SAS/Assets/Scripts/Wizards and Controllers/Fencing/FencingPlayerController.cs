@@ -77,6 +77,11 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		//stats.HardResetStats ();
 	}
 	
+	public float TotalScore()
+	{
+		return stats.TotalScore();
+	}
+	
 	void Update () {
 		if (alive && movementAllowed)
 		{

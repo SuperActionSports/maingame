@@ -478,7 +478,10 @@ public class Player
 	public IPlayerController control;
 	public GameObject gameObject;
 	public StatsCard statCard;
-	
+	public float TotalScore()
+	{
+		return control.TotalScore();
+	}
 	public Player()
 	{
 		Debug.Log("New player, yo.");

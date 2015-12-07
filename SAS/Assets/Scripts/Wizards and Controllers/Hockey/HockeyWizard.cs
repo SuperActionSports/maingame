@@ -54,8 +54,9 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		victoryDuration = 3;
 		
 		//cam.FindPlayers();
-		UpdateStatCards();
+		
 		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+		UpdateStatCards();
 	}
 	
 	void ResetExistingPlayers()

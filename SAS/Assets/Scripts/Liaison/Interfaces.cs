@@ -6,6 +6,7 @@ public interface IPlayerController
 {
 	bool Alive();
 	void MovementAllowed(bool val);
+	float TotalScore();
 	//Color Color();
 	//IInputHandler InputHandler();
 }

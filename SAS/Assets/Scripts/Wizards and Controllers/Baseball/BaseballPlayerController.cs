@@ -157,6 +157,11 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 		Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, transform.position.y - 1.1f, transform.position.z));
 	}
 	
+	public float TotalScore()
+	{
+		return stats.TotalScore();
+	}
+	
 	private void GetRespawn()
 	{
 		if (Input.GetKeyDown(debugKill) || (device!= null && device.Action3.WasPressed))

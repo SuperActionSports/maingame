@@ -9,9 +9,11 @@ public class TennisStatsCard : StatsCard {
 	public float Accuracy;
 	public int Points;
 	private int random;
+	private float ts;
 	
 	public TennisStatsCard()
 	{
+		ts = 0;
 		HardResetStats();
 		random = (int)(Random.Range (0f, 4.999f));
 	}
@@ -26,6 +28,13 @@ public class TennisStatsCard : StatsCard {
 		ResetContact();
 		ResetAccuracy ();
 		ResetStats ();
+		ResetPoints();
+	}
+	
+	public void ResetPoints()
+	{
+	Debug.Log("Points reset");
+		Points = 1;
 	}
 	
 	public void AddSwing()	{
@@ -58,23 +67,13 @@ public class TennisStatsCard : StatsCard {
 	public void Score(int pts)
 	{
 		Points += pts;
+		ts = Points;
+		Debug.Log("Points is now " + Points + " ts is " + ts + "*********************************");
 	}	
-	/*
-	public float IndividualScoring()
-	{
-		//Calculate
-	}
-	*/
-	
-	/*
-	public float TeamScoring()
-	{
-		//Calculate
-	}
-	*/
 	
 	/*--------------------END TENNIS--------------------*/
 	public override float TotalScore() {
+		//Debug.Log("At the beginning of Total Score, Points is " + Points);
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;
@@ -104,14 +103,16 @@ public class TennisStatsCard : StatsCard {
 			break;
 		}
 		
-		float tsP = Contact * Pw;
+		float tsP = Points * Pw;
 		float tsKDR = kDR * KDRw;
 		float tsKS = longestKillStreak * KSw;
 		float tsACC = Accuracy * ACCw;
 		float tsRAN = RAN * RANw;
 		
-		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
-		
+		//Debug.Log("Tennis score: " + tsP + "(" + Points + " * " + Pw  + ") + " + tsKDR + " + " + tsKS + " + " + tsACC + " + " + tsRAN);
+		// ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
+		//ts = Points;
+		Debug.Log("For the in game gui, I return " + ts);
 		return ts;
 	}
 }

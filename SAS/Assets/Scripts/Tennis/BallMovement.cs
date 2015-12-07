@@ -21,9 +21,6 @@ public class BallMovement : MonoBehaviour {
 	{
 		ResetValue();
 		tr = GetComponent<TrailRenderer>().GetComponent<Renderer>();
-		//rb = GetComponent<Rigidbody> ();
-		//Quaternion angle = Quaternion.AngleAxis(30.0f, Vector3.right);
-		//rb.AddForce(angle * transform.forward * 1000);
 		hasHitTurf = false;
 		count = 0;
 		hit = false;
@@ -45,6 +42,7 @@ public class BallMovement : MonoBehaviour {
 		}
 		else if (collision.gameObject.CompareTag("BrickWall"))
 		{
+		Debug.Log("Ball hit wall");
 			if (!hasHitTurf)
 			{
 				wizard.GetComponent<TennisWizard>().BallHitWall();
@@ -81,8 +79,9 @@ public class BallMovement : MonoBehaviour {
 	{
 		if (hasHitTurf) 
 		{
-			Debug.Log ("Double bounce");
+		//	Debug.Log ("Double bounce");
 			if (lastHitBy != null) lastHitBy.GetComponent<TennisControllerGans>().ScorePoints(value);
+			value = 0;
 			wizard.BallHitTurfTwice();
 		} 
 		else 
@@ -93,7 +92,7 @@ public class BallMovement : MonoBehaviour {
 	
 	public void ResetValue()
 	{
-		value = 1;
+		value = 0;
 	}
 	
 	public void IncreaseValue()

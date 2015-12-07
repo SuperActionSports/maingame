@@ -96,8 +96,7 @@ public class InGamePlayerBoard : MonoBehaviour {
 	void Update () {
 		for (int i = 0; i < cards.Length; i++)
 		{
-			//cards[i].Value = players[i].statCard.Kills.ToString();
-			cards[i].Value = players[i].statCard.TotalScore().ToString();
+			cards[i].Value = players[i].TotalScore().ToString();
 			cards[i].GenerateStatistic();
 		}
 		
