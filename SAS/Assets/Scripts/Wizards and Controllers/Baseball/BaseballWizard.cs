@@ -52,10 +52,10 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		startTime = Time.time;
 		//Magic Number
 		pitchGap = 2;
-		gameWinTime = 48;
+		gameWinTime = 60;
 		lastPitch = Mathf.Infinity;
 		madnessMod = 5;
-		madnessTime = 40;
+		madnessTime = 50;
 		madnessGap = 5;
 		finished = false;
 		UpdateStatCards();
