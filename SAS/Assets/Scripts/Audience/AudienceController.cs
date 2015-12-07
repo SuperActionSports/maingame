@@ -3,13 +3,13 @@ using System.Collections;
 
 public class AudienceController : MonoBehaviour {
 
-	//public GameControlLiaison layla;
 	public GameObject audiencePrefabA;
 	public GameObject audiencePrefabB;
 	private GameObject[] wholeAudience;
 	private Animator[] crowdMovements;
 	private Vector3[] audienceCoordinates;
 	private Vector3[] audienceRotation;
+	private float scale;
 	private AudioSource[] crowdNoise;	// [0] is crowd drone sound [1] is crowd cheer
 	private string sport;
 	private int playerCount;
@@ -19,9 +19,9 @@ public class AudienceController : MonoBehaviour {
 	/// Creates appropriate audience and puts all the sounds and animations into action.  Should only be called by Wizard.
 	/// </summary>
 	/// <param name="sName">The name of the sport</param>
-	/// <param name="players">The array of player info</param>
+	/// <param name="players">The array of players</param>
 	public void Initialize (string sName, Player[] players) {
-		sport = sName.ToLower;
+		sport = sName.ToLower();
 		playerCount = players.Length;
 		colors = new Color[playerCount];
 		for (int i = 0; i < playerCount; i++) { colors [i] = players [i].color;	}
@@ -55,16 +55,23 @@ public class AudienceController : MonoBehaviour {
 			wholeAudience[i].GetComponentInChildren<Renderer>().material.color = colors[currentColor++];
 			if (currentColor + 1 > playerCount) {currentColor = 0;}
 
-			wholeAudience[i + 1] = (GameObject) Instantiate(audiencePrefabB, audienceCoordinates[i + 1], Quaternion.identity);
-			wholeAudience[i + 1].transform.Rotate(audienceRotation[i + 1]);
-			crowdMovements[i + 1] = wholeAudience[i + 1].GetComponent<Animator>();
+			i++;
+
+			wholeAudience[i] = (GameObject) Instantiate(audiencePrefabB, audienceCoordinates[i], Quaternion.identity);
+			wholeAudience[i].transform.Rotate(audienceRotation[i]);
+			crowdMovements[i] = wholeAudience[i].GetComponent<Animator>();
+
+			wholeAudience[i].GetComponentInChildren<Renderer>().material.color = colors[currentColor++];
+			if (currentColor + 1 > playerCount) {currentColor = 0;}
 		}
+
+		AdjustScale ();
 	}
 
 	/// <summary>
-	/// Activate audience movement and sound in reaction to player kill.
+	/// Activate small audience movement and sound.  For use with player kills.
 	/// </summary>
-	public void CryForBlood () {
+	public void SmallCheer () {
 		for (int i = 0; i < 72; i++) {
 			crowdMovements[i].SetTrigger("Kill");
 		}
@@ -74,9 +81,9 @@ public class AudienceController : MonoBehaviour {
 	}
 
 	/// <summary>
-	/// Activate audience movement and sound in reaction to goal scored.
+	/// Activate large audience movement and sound.  For use with goals scored.
 	/// </summary>
-	public void CrowdGoesWild () {
+	public void LargeCheer () {
 		for (int i = 0; i < 72; i++) {
 			crowdMovements[i].SetTrigger("Goal");
 		}
@@ -87,33 +94,51 @@ public class AudienceController : MonoBehaviour {
 	/// Removes all off-camera audience members to reduce load.
 	/// </summary>
 	public void DiminishCrowd () {
+		for (int i = 50; i < 100; i++) {
+			if (wholeAudience[i] != null) { wholeAudience[i].SetActive(false); }
+		}
+		if (sport == "tennis") {
+			for (int i = 11; i < 18; i++) { wholeAudience[i].SetActive(false); }
+		}
+	}
 
+	/// <summary>
+	/// Adjusts the scale of the audience members to account for differences in game stadium scaling.
+	/// </summary>
+	private void AdjustScale () {
+		foreach (GameObject member in wholeAudience) { member.transform.localScale *= scale; }
 	}
 
 	/// <summary>
 	/// Sets up array with rotation values for all the audience members in the stadium for the current event.
 	/// </summary>
 	private void LoadAudienceRotation () {
-		/*
-			if (i <= 9) { wholeAudience[i].transform.Rotate(0, 90, 0); }
-			else if (i >= 18 && i <= 27) { wholeAudience[i].transform.Rotate(0, -90, 0); }
-			else if (i >= 28 && i <= 35) { wholeAudience[i].transform.Rotate(0, 180, 0); }
-			else if (i >= 36 && i <= 45) { wholeAudience[i].transform.Rotate(0, 90, 0); }
-			else if (i >= 54 && i <= 63) { wholeAudience[i].transform.Rotate(0, -90, 0); }
-			else if (i >= 64 && i <= 71) { wholeAudience[i].transform.Rotate(0, 180, 0); }
-
-			i++;
-
-			wholeAudience[i].GetComponentInChildren<Renderer>().material.color = colors[currentColor++];
-			if (currentColor + 1 > playerCount) {currentColor = 0;}
-
-			if (i <= 9) { wholeAudience[i].transform.Rotate(0, 90, 0); }
-			else if (i >= 18 && i <= 27) { wholeAudience[i].transform.Rotate(0, -90, 0); }
-			else if (i >= 28 && i <= 35) { wholeAudience[i].transform.Rotate(0, 180, 0); }
-			else if (i >= 36 && i <= 45) { wholeAudience[i].transform.Rotate(0, 90, 0); }
-			else if (i >= 54 && i <= 63) { wholeAudience[i].transform.Rotate(0, -90, 0); }
-			else if (i >= 64 && i <= 71) { wholeAudience[i].transform.Rotate(0, 180, 0); }
-			*/
+		for (int i = 0; i < 100; i++) {
+			switch (sport) {
+			case "golf":
+			case "tennis":
+				if (i <= 9) { audienceRotation[i]= new Vector3 (0, 90, 0); } 
+				else if (i >= 10 && i <= 17) { audienceRotation[i] = new Vector3 (0, 0, 0); } 
+				else if (i >= 18 && i <= 27) { audienceRotation[i] = new Vector3 (0, -90, 0); } 
+				else if (i >= 28 && i <= 35) { audienceRotation[i] = new Vector3 (0, 180, 0); } 
+				else if (i >= 50 && i <= 59) { audienceRotation[i] = new Vector3 (0, 90, 0); } 
+				else if (i >= 60 && i <= 67) { audienceRotation[i] = new Vector3 (0, 0, 0); } 
+				else if (i >= 68 && i <= 77) { audienceRotation[i] = new Vector3 (0, -90, 0); } 
+				else if (i >= 78 && i <= 85) { audienceRotation[i] = new Vector3 (0, 180, 0); }
+				break;
+			case "hockey":
+				if (i >= 30 && i <= 49) { audienceRotation[i] = new Vector3 (0, 90, 0); }
+				else if (i >= 50 && i <= 79) { audienceRotation[i] = new Vector3 (0, 180, 0); }
+				else if (i >= 80 && i <= 99) { audienceRotation[i] = new Vector3 (0, -90, 0); }
+				break;
+			case "fencing":
+				break;
+			case "baseball":
+				break;
+			default:
+				break;
+			}
+		}
 	}
 
 	/// <summary>
@@ -122,27 +147,12 @@ public class AudienceController : MonoBehaviour {
 	private void LoadAudienceCoordinates () {
 		switch (sport)	{
 		case "golf" :
-			//	insert extra few rows of removed bleachers in tennis here since they're otherwise the same
 		case "tennis" :
 			audienceCoordinates [0] = new Vector3 (14.6f, 2.1f, 0.0f);
-			audienceCoordinates [1] = new Vector3 (16.0f, 3.6f, 0.0f);
-			audienceCoordinates [2] = new Vector3 (17.5f, 5.1f, 0.0f);
-			audienceCoordinates [3] = new Vector3 (18.9f, 6.6f, 0.0f);
-			audienceCoordinates [4] = new Vector3 (20.4f, 8.1f, 0.0f);
-			audienceCoordinates [5] = new Vector3 (21.9f, 9.6f, 0.0f);
-			audienceCoordinates [6] = new Vector3 (23.3f, 11.0f, 0.0f);
-			audienceCoordinates [7] = new Vector3 (24.8f, 12.5f, 0.0f);
-			audienceCoordinates [8] = new Vector3 (26.3f, 14.0f, 0.0f);
-			audienceCoordinates [9] = new Vector3 (27.8f, 15.5f, 0.0f);
+			for (int i = 1; i < 10; i++) { audienceCoordinates[i] = audienceCoordinates[i - 1] + new Vector3 (1.47f,1.49f,0.0f); }
 
 			audienceCoordinates [10] = new Vector3 (0.0f, 6.6f, 17.0f);
-			audienceCoordinates [11] = new Vector3 (0.0f, 8.1f, 18.5f);
-			audienceCoordinates [12] = new Vector3 (0.0f, 9.6f, 20.0f);
-			audienceCoordinates [13] = new Vector3 (0.0f, 11.0f, 21.5f);
-			audienceCoordinates [14] = new Vector3 (0.0f, 12.5f, 23.0f);
-			audienceCoordinates [15] = new Vector3 (0.0f, 14.0f, 24.5f);
-			audienceCoordinates [16] = new Vector3 (0.0f, 15.5f, 25.9f);
-			audienceCoordinates [17] = new Vector3 (0.0f, 17.0f, 27.4f);
+			for (int i = 11; i < 18; i++) { audienceCoordinates[i] = audienceCoordinates[i - 1] + new Vector3 (0.0f,1.49f,1.47f); }
 
 			for (int i = 0; i < 18; i++) {
 				int j = i + 18;
@@ -152,27 +162,43 @@ public class AudienceController : MonoBehaviour {
 			}
 
 			for (int i = 0; i < 10; i++) {
-				int j = i + 36;
+				int j = i + 50;
 				audienceCoordinates[j] = audienceCoordinates[i] + new Vector3 (7.4f, 16.3f, 0.0f);
-			}
-				
+			}				
 			for (int i = 10; i < 18; i++) {
-				int j = i + 36;
+				int j = i + 50;
 				audienceCoordinates[j] = audienceCoordinates[i] + new Vector3 (0.0f, 14.8f, 7.4f);
 			}
-
 			for (int i = 18; i < 28; i++) {
-				int j = i + 36;
+				int j = i + 50;
 				audienceCoordinates[j] = audienceCoordinates[i] + new Vector3 (-7.4f, 16.3f, 0.0f);
 			}
-
 			for (int i = 28; i < 36; i++) {
-				int j = i + 36;
+				int j = i + 50;
 				audienceCoordinates[j] = audienceCoordinates[i] + new Vector3 (0.0f, 14.8f, -7.4f);
 			}
+
+			scale = 1.0f;
 			break;
 		case "hockey" :
-			// audience coordinates for hockey go here
+			audienceCoordinates[0] = new Vector3 (0.0f, 0.25f, 4.75f);
+			for (int i = 1; i < 10; i++) { audienceCoordinates[i] = audienceCoordinates[i - 1] + new Vector3 (0.0f, 0.5f, 0.5f); }
+			for (int i = 0; i < 10; i++) {
+				audienceCoordinates[i + 10] = audienceCoordinates[i] + new Vector3 (-6.0f, 0.0f, 0.0f);
+				audienceCoordinates[i + 20] = audienceCoordinates[i] + new Vector3 (6.0f, 0.0f, 0.0f);
+			}
+
+			audienceCoordinates[30] = new Vector3 (8.5f, 0.25f, 2.5f);
+			for (int i = 31; i < 40; i++) { audienceCoordinates[i] = audienceCoordinates[i - 1] + new Vector3 (0.5f, 0.5f, 0.0f); }
+			for (int i = 30; i < 40; i++) { audienceCoordinates[i + 10] = audienceCoordinates[i] + new Vector3 (0.0f, 0.0f, -5.0f); }
+
+			for (int i = 0; i < 50; i++) {
+				audienceCoordinates[i + 50].x = audienceCoordinates[i].x * -1.0f;
+				audienceCoordinates[i + 50].y = audienceCoordinates[i].y;
+				audienceCoordinates[i + 50].z = audienceCoordinates[i].z * -1.0f;
+			}
+
+			scale = 0.5f;
 			break;
 		case "fencing" :
 			// audience coordinates for fencing go here

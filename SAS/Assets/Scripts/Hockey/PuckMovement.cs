@@ -11,7 +11,7 @@ public class PuckMovement : MonoBehaviour {
 	public bool inPlay;
 	public GameObject respawnPoint;
 	public InputDevice device {get; set;}
-	public FencingWizard wizard;
+	public HockeyWizard wizard;
 	private float timeOfGoal;
 	public float respawnDelay;
 	private bool willRespawn;
@@ -52,6 +52,7 @@ public class PuckMovement : MonoBehaviour {
 				timeOfGoal = Time.time;
 				willRespawn = true;
 				rb.velocity *= 0.8f;
+				wizard.GoalScore();
 				StartGoalEffect();
 				//Respawn();
 			}

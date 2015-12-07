@@ -56,7 +56,12 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public void BallHitTurfTwice()
 	{
 		valueCounter.Reset();
+		audience.LargeCheer();
 	}
+
+	public void PlayerKill() { audience.SmallCheer (); }
+
+	public void DiminishAudience() { audience.DiminishCrowd (); }
 	
 	void ResetExistingPlayers()
 	{

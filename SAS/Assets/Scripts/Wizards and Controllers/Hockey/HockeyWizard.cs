@@ -5,6 +5,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 
 	public GameObject playerPrefab; 		//Provided by game
 	public Player[] players;
+	public GameObject audiencePrefab;
 	private Vector3[] respawnPointPositions; // Game
 	public GameObject[] respawnPoints;		// Game
 	private int totalPlayers;				 // Layla
@@ -21,7 +22,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	//private InputDevice[] devices;				// Layla
 	public GameObject layla;
 	private GameControlLiaison liaison;
-	
+	private AudienceController audience;
 	public GameObject puck;
 	public GameObject puckRespawn;
 	
@@ -56,6 +57,10 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		//cam.FindPlayers();
 		UpdateStatCards();
 		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+
+		GameObject audCon = (GameObject) Instantiate(audiencePrefab, new Vector3(0,0,0), Quaternion.identity);
+		audience = audCon.GetComponent<AudienceController> ();
+		audience.Initialize ("hockey", players);
 	}
 	
 	void ResetExistingPlayers()
@@ -169,10 +174,9 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		return pController;
 	}
 	
-	public void Celebrate(Color c)
-	{
-		
-	}
+	public void GoalScore() { audience.LargeCheer (); }
+
+	public void PlayerKill() { audience.SmallCheer (); }
 	
 	public void SpawnPuck()
 	{

@@ -171,6 +171,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	{
 		//Magic Number
 		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+		wizard.PlayerKill ();
         MakeDead();
     }
 

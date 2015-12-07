@@ -14,7 +14,7 @@ public class BallMovement : MonoBehaviour {
 	public TennisWizard wizard;
 	public float deathTime = 2;
 	public float currentDeathTime = 0;
-
+	private bool deadBall = false;
 	private Renderer tr;
 	// Use this for initialization
 	void Start () 
@@ -79,11 +79,12 @@ public class BallMovement : MonoBehaviour {
 
 	void CheckForDoubleBounce()
 	{
-		if (hasHitTurf) 
+		if (hasHitTurf && deadBall == false) 
 		{
 			Debug.Log ("Double bounce");
 			if (lastHitBy != null) lastHitBy.GetComponent<TennisControllerGans>().ScorePoints(value);
 			wizard.BallHitTurfTwice();
+			deadBall = true;
 		} 
 		else 
 		{

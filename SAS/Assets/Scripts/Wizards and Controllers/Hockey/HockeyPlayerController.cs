@@ -201,6 +201,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		Debug.Log("Kill, no direction");
 		rb.AddForce(40, 25, 0, ForceMode.VelocityChange);
+		wizard.PlayerKill ();
         MakeDead();
     }
 
