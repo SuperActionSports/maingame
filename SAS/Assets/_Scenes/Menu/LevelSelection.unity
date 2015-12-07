@@ -356,6 +356,7 @@ Prefab:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11465448, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
+    - {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &447847260
@@ -616,7 +617,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11435174, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_Text
-      value: "\n Action FUZZY EGG!"
+      value: "\n\n Action FUZZY EGG!"
       objectReference: {fileID: 0}
     - target: {fileID: 11460620, guid: fd32782ab469d4b8b96c9f657cfd4036, type: 2}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
