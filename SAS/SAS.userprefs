@@ -1,13 +1,12 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Stats Cards\TennisStatsCard.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Wizards and Controllers/Fencing/FencingWizard.cs">
     <Files>
-      <File FileName="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Tennis\TennisControllerGans.cs" Line="95" Column="5" />
-      <File FileName="Assets\Scripts\Stats Cards\TennisStatsCard.cs" Line="76" Column="5" />
-      <File FileName="Assets\Scripts\Tennis\TennisBall.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Tennis\BallMovement.cs" Line="86" Column="91" />
-      <File FileName="Assets\Scripts\Stats Cards\StatsCard.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Wizards and Controllers/Baseball/BaseballWizard.cs" Line="55" Column="20" />
+      <File FileName="Assets/Scripts/Wizards and Controllers/Fencing/FencingWizard.cs" Line="50" Column="19" />
+      <File FileName="Assets/Scripts/Wizards and Controllers/Golf/GolfWizard.cs" Line="39" Column="27" />
+      <File FileName="Assets/Scripts/Wizards and Controllers/Hockey/HockeyWizard.cs" Line="16" Column="32" />
+      <File FileName="Assets/Scripts/Wizards and Controllers/Tennis/TennisWizard.cs" Line="32" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
