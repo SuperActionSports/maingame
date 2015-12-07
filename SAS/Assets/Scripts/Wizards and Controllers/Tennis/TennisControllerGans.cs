@@ -92,8 +92,6 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 			Respawn();
 		}
 		if (transform.position.y < -100f) { MakeDead (); Respawn (); }
-		Debug.Log("Points: " + stats.Points);	
-		Debug.Log("Total score: " + stats.TotalScore());
 	}
 	
 	public float TotalScore()
