@@ -69,11 +69,17 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		}
 	}
 
+	public GameObject puck;
+	private PuckMovement puckMovementScript;
+
 	//debug
 	public Vector3 vel;
 
 	void Start () {
 		// Get Components and Game Objects
+		puck = GameObject.FindGameObjectWithTag ("Ball");
+		puckMovementScript = puck.GetComponent<PuckMovement> ();
+
 		rb = GetComponent<Rigidbody>();
 		anim = GetComponent<Animator> ();
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
@@ -341,9 +347,13 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		if (other.CompareTag("Ball"))
 		{
-			Debug.Log("Hitting puck");
+			Debug.Log ("inPlay: " + puckMovementScript.inPlay);
 			other.GetComponent<PuckMovement>().HitPuck(this);
-			stats.AddPuckPossession();
+			if(puckMovementScript.inPlay)
+			{
+
+				stats.AddPuckPossession();
+			}
 		}
 	}
 

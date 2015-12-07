@@ -452,6 +452,7 @@ MonoBehaviour:
   cam: {fileID: 0}
   wizard: {fileID: 0}
   stats: {fileID: 0}
+  puck: {fileID: 104926, guid: 1476e2a198c9a7343b49759bd66eae32, type: 2}
   vel: {x: 0, y: 0, z: 0}
 --- !u!114 &11484618
 MonoBehaviour:
@@ -560,6 +561,10 @@ Prefab:
       propertyPath: m_Layer
       value: 11
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: puck
+      value: 
+      objectReference: {fileID: 104926, guid: 1476e2a198c9a7343b49759bd66eae32, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 141112}
