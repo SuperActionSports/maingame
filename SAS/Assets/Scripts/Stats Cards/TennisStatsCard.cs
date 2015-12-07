@@ -12,8 +12,8 @@ public class TennisStatsCard : StatsCard {
 	
 	public TennisStatsCard()
 	{
-//		Debug.Log("New tennis stat card.");
-		Start ();
+		HardResetStats();
+		random = (int)(Random.Range (0f, 4.999f));
 	}
 	
 	public void Start() {

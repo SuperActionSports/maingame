@@ -14,6 +14,12 @@ public class GolfStatsCard : StatsCard {
 	public void Start() {
 		random = (int)(Random.Range (0.000f, 4.999f));
 	}
+	
+	public GolfStatsCard()
+	{
+		HardResetStats();
+		random = (int)(Random.Range (0f, 4.999f));
+	}
 
 	public void HardResetStats() {
 		ResetAttemptedPutts ();

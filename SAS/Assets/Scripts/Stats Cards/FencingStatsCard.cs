@@ -21,8 +21,18 @@ public class FencingStatsCard : StatsCard {
 	public bool stabThrowFlag; //True is stab. False is throw.
 	private int random;
 	
-	public void Start() {
+	void Start() {
 		random = (int)(Random.Range (0.000f, 13.999f));
+		Debug.Log("Random is " + random);
+		float vavvvvvvvvv = Random.Range(0,14);
+		Debug.Log ("Random should be: " + vavvvvvvvvv + " translates to " + (int)vavvvvvvvvv);
+	}
+	
+	public FencingStatsCard()
+	{
+		HardResetStats();
+		random = (int)(Random.Range (0f, 13.999f));
+		Debug.Log("Fencing Stats Card: Random is " + random);
 	}
 
 	public void HardResetStats () {
@@ -37,8 +47,8 @@ public class FencingStatsCard : StatsCard {
 		ResetBlocksSuccessful();
 		ResetBlockSuccessRate ();
 		ResetLongestTimeUnarmed();
-		//ResetShortestTimeUnarmed ();
 		ResetStats ();
+		//random = (int)(Random.Range (0f, 13.999f));
 	}
 	
 	public void AddStabAttempts (){

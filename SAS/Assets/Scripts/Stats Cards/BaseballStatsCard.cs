@@ -13,6 +13,12 @@ public class BaseballStatsCard : StatsCard {
 	public void Start() {
 		random = (int)(Random.Range (0.000f, 4.999f));
 	}
+	
+	public BaseballStatsCard()
+	{
+		HardResetStats();
+		random = (int)(Random.Range (0f, 4.999f));
+	}
 
 	public void HardResetStats() {
 		ResetHitsAttempted ();

@@ -74,7 +74,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	public void InitializeStatCard()
 	{
 		stats = new FencingStatsCard ();
-		stats.ResetStats ();
+		//stats.HardResetStats ();
 	}
 	
 	void Update () {
