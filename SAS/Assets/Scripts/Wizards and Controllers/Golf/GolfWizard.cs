@@ -33,7 +33,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public float minDistToBallFromHole = 4;
 	
 	public GameObject endGame;
-	private float gameWinTime = Mathf.Infinity;				// Layla, customized games
+	private float gameWinTime = 60;				// Layla, customized games
 	private int matchCount;					// Layla, customized games
 	private bool finished;
 	public GameObject inGame;
