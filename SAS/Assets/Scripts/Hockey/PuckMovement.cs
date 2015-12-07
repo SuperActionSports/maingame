@@ -69,6 +69,7 @@ public class PuckMovement : MonoBehaviour {
 	public void Respawn()
 	{
 		inPlay = true;
+
 		rb.velocity = new Vector3(0, 0, 0);
 		transform.position = respawnPoint.transform.position;
 	}
