@@ -6,6 +6,7 @@ public class MainMenuButtonManager : MonoBehaviour
 	public MainMenuButton focusedButton;
 
 	TwoAxisInputControl filteredDirection;
+	public string loadLevelPath;
 			
 	void Awake()
 	{
@@ -57,7 +58,7 @@ public class MainMenuButtonManager : MonoBehaviour
 		Debug.Log ("Btn: " + focusedButton.name);
 		if (focusedButton.name == "Play") 
 		{
-			Application.LoadLevel ("New Color Selection Update");
+			Application.LoadLevel (loadLevelPath);
 		}
 		if (focusedButton.name == "Quit") 
 		{
