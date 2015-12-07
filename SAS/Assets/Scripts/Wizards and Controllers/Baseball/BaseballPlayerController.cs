@@ -64,7 +64,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 			stats = value;
 		}
 	}
-
+	private bool inNoZone = false;
 	[Range(1,20)]
 	public float speedMagnitude;
 	[Range(1,30)]
@@ -96,6 +96,21 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	{
 		stats = new BaseballStatsCard ();
 		stats.ResetStats ();
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("KillMovement"))
+		{
+			inNoZone = true;
+		}
+	}
+	void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("KillMovement"))
+		{
+			inNoZone = false;
+		}	
 	}
 	
 	// Update is called once per frame
@@ -340,6 +355,12 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 	
 	private float GetControllerXInput()
 	{
-		return speedMagnitude * device.Direction.X * Time.deltaTime * 2;
+		float xSpeed = device.Direction.X;
+		Debug.Log("xSpeed = " + xSpeed);
+		if (inNoZone && xSpeed > 0)
+		{
+			xSpeed = 0;
+		}	
+		return speedMagnitude * xSpeed * Time.deltaTime * 2;
 	}
 }

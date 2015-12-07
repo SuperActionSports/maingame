@@ -60,15 +60,6 @@ public class BaseballController : MonoBehaviour {
 			victoryEffect.Party(rend.material.color);
 			victoryEffect.gameObject.transform.parent = null;
 			gameObject.SetActive(false);
-			/*
-			if (sploded) {
-				rb.velocity = Vector3.zero ;
-			}
-			
-			else if (ownNumber == 0){
-				Destroy (gameObject) ;
-			}
-			*/
 		}
 	}
 
