@@ -30,11 +30,15 @@ public class PerlinNoisePlane : MonoBehaviour {
 		mf.mesh.RecalculateBounds();
 		mf.mesh.RecalculateNormals();
 		GetComponent<MeshCollider>().sharedMesh = mf.mesh;
-
-		ResetHolePosition ();
 	}
 
 	public void ResetHolePosition() {
-		//
+		hole.transform.position = new Vector3(transform.position.x, 2f, transform.position.z);
+		hole.GetComponent<SphereCollider>().isTrigger = false;
+		Rigidbody rb = hole.GetComponent<Rigidbody>();
+		rb.isKinematic = false;
+		rb.useGravity = true;
+		rb.velocity = Vector3.zero;
+		rb.constraints = RigidbodyConstraints.None;
 	}
 }
