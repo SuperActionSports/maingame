@@ -54,6 +54,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	public OverheadCameraController cam;
 	private AudioSource sound;
 	private Animator anim;
+	public float SwingForceMagnitude = 2.5f;
 	
 	private PaintSplatterProjector paint;
 	public HockeyWizard wizard;
@@ -218,7 +219,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
     public void Kill(Vector3 direction)
 	{
 		Vector3 rbForce = new Vector3(-direction.x,direction.y,-direction.z);
-		rbForce *= 2.5f;
+		rbForce *= SwingForceMagnitude;
 		rbForce = CorrectRBForce(rbForce);
 		Debug.Log("RbForce: " + rbForce);	
 		rb.AddForce(rbForce, ForceMode.VelocityChange);
