@@ -26,6 +26,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public GameObject hole;
 	public GameObject floorPrefab;
 	public GameObject floor;
+	private float gameStartTime;
 	
 	
 	public float holeSpawnRangeX = 16;
@@ -41,6 +42,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	// Woop Woop
 	int test = 5;
 	void Start () {
+		gameStartTime = Time.time;
 		floor = GameObject.Instantiate(floorPrefab,new Vector3(-20, 0 ,-20),Quaternion.identity) as GameObject;
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
@@ -85,7 +87,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	void Update()
 	{
 		UpdateStatCards();
-		if (Time.time > gameWinTime && !finished)
+		if (Time.time > gameStartTime + gameWinTime && !finished)
 		{
 			DisableMovement();
 			for (int p = 0; p < players.Length; p++)

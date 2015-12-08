@@ -18,7 +18,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	private BallValueCounter valueCounter;
 	private float gameStartTime;
 	public GameObject endGame;
-	private float gameWinTime = 10;				// Layla, customized games
+	private float gameWinTime = 60;				// Layla, customized games
 	private bool finished;
 
 	// Use this for initialization
