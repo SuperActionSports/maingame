@@ -6089,6 +6089,52 @@ Animator:
 Transform:
   m_PrefabParentObject: {fileID: 452338, guid: b3e05605fbb62a24cac48c96e074477e, type: 2}
   m_PrefabInternal: {fileID: 819251808}
+--- !u!1001 &1022076298
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -.0799999982
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.79999995
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -2.26999998
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: -1.62920685e-07
+      objectReference: {fileID: 0}
+    - target: {fileID: 480916, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 137380, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: d3931aeaf35564f5196f4e69603b8582, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1033340172
 GameObject:
   m_ObjectHideFlags: 0
@@ -6757,7 +6803,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22476948, guid: 110d9f32f2e494963a04b840db0b96c7, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 22476948, guid: 110d9f32f2e494963a04b840db0b96c7, type: 2}
       propertyPath: m_AnchoredPosition.x

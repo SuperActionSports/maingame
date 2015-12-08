@@ -206,6 +206,21 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 			Respawn();
 		}
 		GetRespawn();
+
+		if (putting && (transform.position.x < -20 || transform.position.x > 20 || transform.position.z < -20 || transform.position.z > 20)) {
+			float dir = 180;
+			if ((dir < 0 && canRotateLeft) || (dir > 0 && canRotateRight)) {
+				rotatingLeft = (dir < 0);
+				if (rotatingLeft) { canRotateRight = true; }
+				else { canRotateLeft = true; }
+				Transform sweetspot = transform.FindChild("Sweetspot");
+				sweetspot.SetParent (null);
+				transform.SetParent (sweetspot);
+				sweetspot.RotateAround (ball.transform.position, Vector3.up, dir); 
+				transform.SetParent (null);
+				sweetspot.SetParent (this.transform);
+			}
+		}
 	}
 
 	public void OnCollisionEnter(Collision col) {

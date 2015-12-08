@@ -21,14 +21,14 @@ public class HockeyGoalEffect : MonoBehaviour {
 	public void PartyToDeath(Color color){
 		for(int i = 0; i < parts.Length; i++)
 		{
-			partRends[i].material.color = color;
-			parts[i].startColor = color;
+			partRends[i].material.color = Color.green;
+			parts[i].startColor = Color.green;
 		}
 		//transform.parent = null;
 		foreach (ParticleSystem p in parts)
 		{
+			p.startColor = Color.green;
 			p.Play ();
-			
 		}
 		Destroy(gameObject,10);
 	}
