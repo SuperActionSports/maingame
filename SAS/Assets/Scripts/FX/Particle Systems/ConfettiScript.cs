@@ -91,7 +91,10 @@ public class ConfettiScript : MonoBehaviour {
 	}
 	
 	public void PartyToDeath(Color color){
-		//Debug.Log("Party to death: " + color);
+		parts = GetComponentsInChildren<ParticleSystem>();
+		partRends = GetComponentsInChildren<ParticleSystemRenderer>();
+		countdown = 10;
+		played = false;
 		for(int i = 0; i < parts.Length; i++)
 		{
 			partRends[i].material.color = color;
