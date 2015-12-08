@@ -63,11 +63,12 @@ public class HockeyStatsCard : StatsCard {
 	override public void GenerateStats()
 	{
 		Debug.Log("Starting to generate statistics");
-		stats = new Statistic[4];
-		stats[0] = new Statistic("KILLS", kills);
-		stats[1] = new Statistic("DEATHS", deaths);
-		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
-		stats[3] = new Statistic("GOALS", succesfulGoals, Statistic.Format.none);
+		stats = new Statistic[5];
+		stats[0] = new Statistic("POINTS", (int)TotalScore());
+		stats[1] = new Statistic("KILLS", kills);
+		stats[2] = new Statistic("DEATHS", deaths);
+		stats[3] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[4] = new Statistic("GOALS", succesfulGoals, Statistic.Format.none);
 	}
 
 	public void PrintStats() {
@@ -77,7 +78,7 @@ public class HockeyStatsCard : StatsCard {
 	}
 	
 	/*--------------------END HOCKEY--------------------*/
-	public override float TotalScore() {
+	public override int TotalScore() {
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;
@@ -115,6 +116,6 @@ public class HockeyStatsCard : StatsCard {
 		
 		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
 		
-		return ts;
+		return (int)(ts * 10);
 	}
 }

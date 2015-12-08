@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using System;
+using System.Linq;
 
 public class EndgameGUIStatGenerator : MonoBehaviour {
 
@@ -12,6 +14,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 	private Player[] players;
 	public GameObject masthead;
 	public bool testingMode = false;
+	private int[] playerScores;
 	//player stat cards
 	
 	void Start()
@@ -91,6 +94,7 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 		masthead.SetActive(true);
 		GameObject c;
 		GameObject sc;
+		playerScores = new int[players.Length];
 		for (int i = 0; i < players.Length; i++)
 		{
 			Debug.Log("Creating stat card for player " + i + " of " + players.Length);
@@ -106,9 +110,23 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 					sc.GetComponent<Image>().color = SetBrightness(s,players[i].color);
 					sc.GetComponent<EndGameGUIStatistic>().Name = players[i].statCard.stats[s].Name;
 					sc.GetComponent<EndGameGUIStatistic>().Value = players[i].statCard.stats[s].Value;
+					if (s == 0) { playerScores[i] = Int32.Parse(sc.GetComponent<EndGameGUIStatistic>().Value); }
 					sc.GetComponent<EndGameGUIStatistic>().GenerateStatistic();
 					sc.transform.parent = c.transform;
 				}
+			int[] playerInd = playerScores;
+			Array.Sort(playerInd);
+			for (int a = 0; a < players.Length; a++)
+			{
+				for (int b = 0; b < players.Length; b++)
+				{
+					if (playerScores[b] == playerInd[a])
+					{
+						players[b].statCard.rank = a;
+					}
+				}
+			}
+				
 			Debug.Log("Stat card scale: " + c.transform.localScale);
 			c.transform.parent = this.transform;
 			c.transform.localScale = new Vector3(1,1,1);

@@ -15,7 +15,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public GameObject tennisBall;
 	
 	public InputDevice device;
-	
+	private bool canMoveForward = true;
 	private Rigidbody rb;
 	public RaycastHit groundHit;
 	public float magSpeedX;
@@ -60,6 +60,16 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		//GetSwinging();
 		GetAttacking();
 		
+	}
+	
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("BrickWall")) canMoveForward = false;
+	}
+	
+	void OnTriggerExit(Collider other)
+	{
+		if (other.CompareTag("BrickWall")) canMoveForward = true;
 	}
 	
 	private bool WindingUp()
@@ -164,7 +174,14 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	
 	private float GetControllerZInput()
 	{
-		return speedMagnitude * device.Direction.Y * Time.deltaTime;
+		if (canMoveForward || (!canMoveForward && device.Direction.Y < 0))
+		{
+			return speedMagnitude * device.Direction.Y * Time.deltaTime;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 	
 	private float GetKeyboardXInput()
