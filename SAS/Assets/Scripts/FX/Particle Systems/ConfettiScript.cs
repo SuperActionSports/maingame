@@ -89,4 +89,21 @@ public class ConfettiScript : MonoBehaviour {
 		played = true;
 		Destroy(gameObject,10);
 	}
+	
+	public void PartyToDeath(Color color){
+		//Debug.Log("Party to death: " + color);
+		for(int i = 0; i < parts.Length; i++)
+		{
+			partRends[i].material.color = color;
+			parts[i].startColor = color;
+		}
+		//transform.parent = null;
+		foreach (ParticleSystem p in parts)
+		{
+			p.Play ();
+			
+		}
+		played = true;
+		Destroy(gameObject,10);
+	}
 }

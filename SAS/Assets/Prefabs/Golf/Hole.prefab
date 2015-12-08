@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 715bd003dc1c03b469bd77926f35448d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  confettiObject: {fileID: 164870, guid: 086d3ad312070874391fe62b5ab94d81, type: 2}
 --- !u!135 &13529720
 SphereCollider:
   m_ObjectHideFlags: 1
@@ -144,6 +145,10 @@ Prefab:
       propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: confettiObject
+      value: 
+      objectReference: {fileID: 164870, guid: 086d3ad312070874391fe62b5ab94d81, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 154356}

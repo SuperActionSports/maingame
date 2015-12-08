@@ -193,6 +193,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void ResetBallAndHole(GameObject golfBall, bool firstCall)
 	{
+		hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color);
 		// Randomize x and z
 		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),hole.transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		if (!firstCall) {
