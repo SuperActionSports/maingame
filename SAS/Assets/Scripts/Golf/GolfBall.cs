@@ -69,6 +69,7 @@ public class GolfBall : MonoBehaviour {
 			rb.constraints = RigidbodyConstraints.None;
 			rb.AddForce (new Vector3(force.x, 0, force.z));
 			rend.material.color = c1;
+			GetComponent<TrailRenderer> ().material.color = c1;
 			beingHit = false;
 		}
 	}

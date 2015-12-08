@@ -3,7 +3,7 @@ using System.Collections;
 using InControl;
 
 public class PuckMovement : MonoBehaviour {
-	
+
 	public KeyCode debugKill;
 	public Color c1;
 	private CapsuleCollider puckCollider;
@@ -16,13 +16,15 @@ public class PuckMovement : MonoBehaviour {
 	public float respawnDelay;
 	private bool willRespawn;
 	private HockeyPlayerController lastHit = null;
+	private HockeyPlayerController secondToLastHit = null;
 	public float friction = 1f;
 	public GameObject goalEffect;
 	
 	// Use this for initialization
 	void Start () {
 		inPlay = true;
-		
+		GetComponent<Renderer> ().material.color = Color.grey;
+		GetComponent<TrailRenderer> ().material.color = Color.grey;
 		rb = GetComponent<Rigidbody> ();
 		if (respawnPoint == null)
 		{
@@ -56,6 +58,12 @@ public class PuckMovement : MonoBehaviour {
 				//Respawn();
 			}
 		}
+		if (col.gameObject.CompareTag ("Player")) {
+			secondToLastHit = lastHit;
+			lastHit = col.gameObject.GetComponent<HockeyPlayerController>();
+			GetComponent<Renderer>().material.color = lastHit.color;
+			GetComponent<TrailRenderer>().material.color = lastHit.color;
+		}
 	}
 
 	private void GetRespawn()
@@ -69,7 +77,9 @@ public class PuckMovement : MonoBehaviour {
 	public void Respawn()
 	{
 		inPlay = true;
-
+		GetComponent<Renderer> ().material.color = Color.grey;
+		GetComponent<TrailRenderer> ().material.color = Color.grey;
+		GetComponent<TrailRenderer> ().enabled = true;
 		rb.velocity = new Vector3(0, 0, 0);
 		transform.position = respawnPoint.transform.position;
 	}
@@ -88,6 +98,7 @@ public class PuckMovement : MonoBehaviour {
 	private void StartGoalEffect()
 	{
 		GameObject p = Instantiate(goalEffect,transform.position,Quaternion.identity) as GameObject;
-		p.GetComponent<HockeyGoalEffect>().PartyToDeath(lastHit.color);
+		p.GetComponent<HockeyGoalEffect>().PartyToDeath(GetComponent<Renderer>().material.color);
+		GetComponent<TrailRenderer> ().enabled = false;
 	}
 }
