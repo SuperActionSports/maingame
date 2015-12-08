@@ -40,6 +40,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	public float respawnTime;
 	private float timeOfDeath;
 	public bool movementAllowed;
+	public float forceMod = 0.0001f;
 	public void MovementAllowed(bool allowed)
 	{
 		movementAllowed = allowed;
@@ -61,7 +62,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		rend.material.color = color;
 		alive = true;
         anim.SetBool("Alive", true);
-		impactMod = 7.5f;
+		impactMod = 1f;
 
 		hitForce = 25;
 //		stats.ResetStats ();
@@ -170,6 +171,11 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		stats.AddDeath ();
 		stats.EndLifeTime ();
     }
+    
+    public Vector3 facingDirection()
+    {
+    	return transform.eulerAngles;
+    }
 	
 	public void Kill()
 	{
@@ -180,12 +186,13 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 
     public void Kill(Vector3 direction)
 	{
-		Vector3 rbForce = direction * 40;
-		rbForce.x *=-1;
-		rbForce.z *= -1;
+		Vector3 rbForce = direction;
+		Debug.Log("Rbforce: " + rbForce);
+		//rbForce.x *=-1;
+		//rbForce.z *= -1;
 		rb.AddForce (rbForce, ForceMode.VelocityChange);
 		paint.Splatter (transform.position, rbForce);
-		rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
+		//rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
 	}
 	

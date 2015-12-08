@@ -177,6 +177,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			inGame.SetActive(false);
 			finished = true;
+			inGame.GetComponent<InGamePlayerBoard>().KillInGameBoard();
 		}
 	}
 	private void UpdateStatCards()
