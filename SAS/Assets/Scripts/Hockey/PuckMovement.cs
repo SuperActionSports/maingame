@@ -97,7 +97,9 @@ public class PuckMovement : MonoBehaviour {
 	
 	private void StartGoalEffect()
 	{
+		rb.velocity = Vector3.zero;
 		GameObject p = Instantiate(goalEffect,transform.position,Quaternion.identity) as GameObject;
+		Debug.Log("Material: " + GetComponent<Renderer>().material.color);
 		p.GetComponent<HockeyGoalEffect>().PartyToDeath(GetComponent<Renderer>().material.color);
 		GetComponent<TrailRenderer> ().enabled = false;
 	}
