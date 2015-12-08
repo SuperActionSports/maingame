@@ -180,7 +180,13 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	{
 	
 	}
-	
+
+	public void HoleCelebration(GameObject golfBall, bool firstCall) {
+		hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color);
+		ResetBallAndHole(golfBall, firstCall);
+	}
+
+
 	public void SpawnBallAndHole()
 	{
 		hole = GameObject.Instantiate(hole,Vector3.up*3f,Quaternion.identity) as GameObject;
@@ -194,7 +200,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void ResetBallAndHole(GameObject golfBall, bool firstCall)
 	{
-		hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color);
+		//Debug.Log (" --hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color): " + hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color));
+
 		// Randomize x and z
 		hole.transform.position = new Vector3(Random.Range (-holeSpawnRangeX,holeSpawnRangeX),hole.transform.position.y,Random.Range (-holeSpawnRangeZ,holeSpawnRangeZ));
 		if (!firstCall) {
@@ -214,6 +221,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			Debug.Log("Dang, too close. Wizard trying a new location.");
 		}
 
+		golfBall.GetComponent<TrailRenderer> ().material.color = Color.white;
 		Debug.Log("Golfball: " + golfBall.transform.position);
 		Debug.Log("Hole: " + hole.transform.position);
 		Debug.Log("Distance: " + Vector3.Distance(hole.transform.position,golfBall.transform.position) + " should be greater than " + minDistToBallFromHole);

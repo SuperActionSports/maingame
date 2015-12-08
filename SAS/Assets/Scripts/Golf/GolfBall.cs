@@ -54,7 +54,7 @@ public class GolfBall : MonoBehaviour {
 		if (collision.gameObject.tag == "Goal" && rend.material.color != Color.white) {
 			wizard.Celebrate(rend.material.color);
 			playerHitting.stats.AddMadePutt();
-			wizard.ResetBallAndHole(this.gameObject, false);
+			wizard.HoleCelebration(this.gameObject, false);
 			collision.gameObject.transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			transform.position = new Vector3 (Random.Range (-16f, 16f), transform.position.y, Random.Range (-16f, 16f));
 			rb.velocity = Vector3.zero;

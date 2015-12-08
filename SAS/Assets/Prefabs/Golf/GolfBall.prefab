@@ -28,7 +28,7 @@ GameObject:
   - 23: {fileID: 2337376}
   - 54: {fileID: 5499508}
   - 114: {fileID: 11419908}
-  - 96: {fileID: 9658388}
+  - 96: {fileID: 9684682}
   m_Layer: 0
   m_Name: GolfBall
   m_TagString: Ball
@@ -79,7 +79,9 @@ MeshRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -107,7 +109,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!96 &9658388
+--- !u!96 &9684682
 TrailRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -125,7 +127,9 @@ TrailRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -140,10 +144,10 @@ TrailRenderer:
       rgba: 4294967295
     m_Color[1]:
       serializedVersion: 2
-      rgba: 3238002687
+      rgba: 2164260863
     m_Color[2]:
       serializedVersion: 2
-      rgba: 3238002687
+      rgba: 1090519039
     m_Color[3]:
       serializedVersion: 2
       rgba: 1090519039
