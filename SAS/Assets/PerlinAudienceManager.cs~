@@ -1,0 +1,29 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class PerlinAudienceManager : MonoBehaviour {
+
+	PerlinAudienceController[] members;
+	// Use this for initialization
+	void Start () {
+		members = GetComponentsInChildren<PerlinAudienceController>();
+	}
+	
+	// Update is called once per frame
+	void Update () {
+		if (Input.GetKeyDown(KeyCode.S))
+		{
+			foreach (PerlinAudienceController p in members)
+			{
+				p.SmallEvent();
+			}
+		}	
+		if (Input.GetKeyDown(KeyCode.B))
+		{
+			foreach (PerlinAudienceController p in members)
+			{
+				p.BigEvent();
+			}
+		}
+	}
+}
