@@ -14,7 +14,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	public GameObject victory;				// Game, private
 	private float gameStartTime;
 	private float victoryDuration;			// Game, private
-	private float gameWinTime = 10;				// Layla, customized games
+	private float gameWinTime = 60;				// Layla, customized games
 	private float puckRespawnTime;
 	private int matchCount;					// Layla, customized games
 	private HockeyCamera cam;	// Game
