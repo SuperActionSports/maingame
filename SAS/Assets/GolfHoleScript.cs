@@ -24,8 +24,11 @@ public class GolfHoleScript : MonoBehaviour {
 			rb.constraints = RigidbodyConstraints.FreezeAll;
 			transform.position = new Vector3(transform.position.x, transform.position.y-0.4f, transform.position.z);
 		}
-		if (col.gameObject.CompareTag ("Ball")) {
-			confettiObject.GetComponent<ConfettiScript>().Party();
-		}
+	}
+	
+	public void HoleScored(Color c)
+	{
+		GameObject confetti = Instantiate(confettiObject,transform.position,Quaternion.identity) as GameObject;
+		confetti.GetComponent<ConfettiScript>().PartyToDeath(c);
 	}
 }
