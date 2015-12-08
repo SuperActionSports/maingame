@@ -178,11 +178,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 131852}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffa48424d3d7e6241b3b7face6b860c3, type: 3}
+  m_Script: {fileID: 11500000, guid: 064b66694438242e58e875627e1ac47c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audiencePrefabA: {fileID: 101020, guid: 4f2a2bde9f594134592208897d984d2a, type: 2}
-  audiencePrefabB: {fileID: 164286, guid: 3d9e9cc06422be24997eb242b99b92f0, type: 2}
+  audiencePrefabA: {fileID: 101020, guid: 5f835f6055d4a44d490246408ac46a70, type: 2}
+  audiencePrefabB: {fileID: 164286, guid: aaf2ab8a8f40649d290ec2a118261dc6, type: 2}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -193,11 +193,11 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: audiencePrefabA
       value: 
-      objectReference: {fileID: 101020, guid: 02f00612435874a57aed471a5b145a9e, type: 2}
+      objectReference: {fileID: 101020, guid: 5f835f6055d4a44d490246408ac46a70, type: 2}
     - target: {fileID: 0}
       propertyPath: audiencePrefabB
       value: 
-      objectReference: {fileID: 164286, guid: 646cfdb81049b41cc9d22e0930ab0b97, type: 2}
+      objectReference: {fileID: 164286, guid: aaf2ab8a8f40649d290ec2a118261dc6, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 131852}

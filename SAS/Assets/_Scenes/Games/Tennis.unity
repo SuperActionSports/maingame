@@ -1060,7 +1060,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1 &420251784
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1305,7 @@ Transform:
   - {fileID: 1765939279}
   - {fileID: 386040955}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
 --- !u!1001 &487818915
 Prefab:
   m_ObjectHideFlags: 0
@@ -1698,7 +1698,7 @@ RectTransform:
   - {fileID: 1432824385}
   - {fileID: 1425330623}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2113,7 +2113,7 @@ Transform:
   - {fileID: 34391490}
   - {fileID: 420251785}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
 --- !u!1 &800925356 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 199148, guid: fd08751b04cbec144a6192a1227284cf, type: 2}
@@ -3024,7 +3024,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &972113594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3764,7 +3764,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
 --- !u!1001 &1165496183
 Prefab:
   m_ObjectHideFlags: 0
@@ -6181,19 +6181,19 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22490926, guid: 16d4b185150f37e4d977dbd265926e74, type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 960
+      value: 679
       objectReference: {fileID: 0}
     - target: {fileID: 22490926, guid: 16d4b185150f37e4d977dbd265926e74, type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 540.123169
+      value: 183
       objectReference: {fileID: 0}
     - target: {fileID: 22490926, guid: 16d4b185150f37e4d977dbd265926e74, type: 2}
       propertyPath: m_SizeDelta.x
-      value: 1920
+      value: 1358
       objectReference: {fileID: 0}
     - target: {fileID: 22490926, guid: 16d4b185150f37e4d977dbd265926e74, type: 2}
       propertyPath: m_SizeDelta.y
-      value: 1080.24634
+      value: 366
       objectReference: {fileID: 0}
     - target: {fileID: 22490926, guid: 16d4b185150f37e4d977dbd265926e74, type: 2}
       propertyPath: m_AnchorMin.x
