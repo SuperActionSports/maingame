@@ -69,8 +69,18 @@ public class TennisStatsCard : StatsCard {
 		ts = Points;
 	}	
 	
+	override public void GenerateStats()
+	{
+		Debug.Log("Starting to generate statistics");
+		stats = new Statistic[4];
+		stats[0] = new Statistic("POINTS", (int)TotalScore());
+		stats[1] = new Statistic("KILLS", kills);
+		stats[2] = new Statistic("DEATHS", deaths);
+		stats[3] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+	}
+	
 	/*--------------------END TENNIS--------------------*/
-	public override float TotalScore() {
+	public override int TotalScore() {
 		//Debug.Log("At the beginning of Total Score, Points is " + Points);
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
@@ -111,6 +121,6 @@ public class TennisStatsCard : StatsCard {
 		// ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
 		//ts = Points;
 		//Debug.Log("For the in game gui, I return " + ts);
-		return ts;
+		return (int)(ts * 10);
 	}
 }

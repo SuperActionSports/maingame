@@ -234,7 +234,7 @@ public class StatsCard : MonoBehaviour {
 	*/
 
 	/*--------------------END ALL GAMES--------------------*/
-	public virtual float TotalScore() {
+	public virtual int TotalScore() {
 	float KDRw = 0.5f;
 	float KSw = 0.32f;
 	float ACCw = 0.1f;
@@ -250,7 +250,7 @@ public class StatsCard : MonoBehaviour {
 
 	float ts = tsKDR + tsKS + tsACC + tsOTHR + tsRAN;
 	
-	return ts;
+	return (int)(ts * 10);
 }
 }
 public class Statistic 

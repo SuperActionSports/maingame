@@ -105,7 +105,7 @@ public class GolfStatsCard : StatsCard {
 	{
 		Debug.Log("Starting to generate statistics");
 		stats = new Statistic[5];
-		stats[0] = new Statistic("KILLS", kills);
+		stats[0] = new Statistic("POINTS", (int)TotalScore());
 		stats[1] = new Statistic("DEATHS", deaths);
 		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
 		stats[3] = new Statistic("SANK PUTTS", PuttsMade, Statistic.Format.none);
@@ -120,7 +120,7 @@ public class GolfStatsCard : StatsCard {
 	}
 
 	/*--------------------END GOLF--------------------*/
-	public override float TotalScore() {
+	public override int TotalScore() {
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;
@@ -158,6 +158,6 @@ public class GolfStatsCard : StatsCard {
 		
 		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
 		
-		return ts;
+		return (int)(ts * 10);
 	}
 }

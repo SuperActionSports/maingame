@@ -200,14 +200,15 @@ public class FencingStatsCard : StatsCard {
 	override public void GenerateStats()
 	{
 		Debug.Log("Starting to generate statistics");
-		stats = new Statistic[4];
-		stats[0] = new Statistic("KILLS", kills);
-		stats[1] = new Statistic("DEATHS", deaths);
-		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
-		stats[3] = new Statistic("Attack Accuracy", AttackSuccessRate, Statistic.Format.percentage);
+		stats = new Statistic[5];
+		stats[0] = new Statistic("Points", (int)TotalScore());
+		stats[1] = new Statistic("KILLS", kills);
+		stats[2] = new Statistic("DEATHS", deaths);
+		stats[3] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
+		stats[4] = new Statistic("Attack Accuracy", AttackSuccessRate, Statistic.Format.percentage);
 	}
 
-	public override float TotalScore() {
+	public override int TotalScore() {
 		float Pw = 0.5f;
 		float KDRw = 0.32f;
 		float KSw = 0.1f;
@@ -278,7 +279,7 @@ public class FencingStatsCard : StatsCard {
 		
 		float ts = tsP + tsKDR + tsKS + tsACC + tsRAN;
 		
-		return ts;
+		return (int)(ts * 10);
 	}
 	/*--------------------END FENCING--------------------*/
 }

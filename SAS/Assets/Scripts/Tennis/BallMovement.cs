@@ -12,7 +12,7 @@ public class BallMovement : MonoBehaviour {
 	public Vector3 vel;
 	public bool hit;
 	public TennisWizard wizard;
-	public float deathTime = 2;
+	public float deathTime = 1;
 	public float currentDeathTime = 0;
 
 	private Renderer tr;
