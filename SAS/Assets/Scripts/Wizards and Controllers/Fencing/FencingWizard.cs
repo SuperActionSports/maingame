@@ -167,6 +167,7 @@ public class FencingWizard : MonoBehaviour,IWizard {
 			DisableMovement();
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
+			inGame.GetComponent<InGamePlayerBoard>().KillInGameBoard();
 		}
 	}
 	

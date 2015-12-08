@@ -79,6 +79,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 			}
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
+			inGame.GetComponent<InGamePlayerBoard>().KillInGameBoard();
 		}
 	}
 	

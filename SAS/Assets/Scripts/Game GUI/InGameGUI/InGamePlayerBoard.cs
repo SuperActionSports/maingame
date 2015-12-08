@@ -101,4 +101,13 @@ public class InGamePlayerBoard : MonoBehaviour {
 		}
 		
 	}
+	
+	/// <summary>
+	/// Kills the in game board, it will no longer display
+	/// </summary>
+	public void KillInGameBoard()
+	{
+		gameObject.SetActive(false);
+	}
+	
 }

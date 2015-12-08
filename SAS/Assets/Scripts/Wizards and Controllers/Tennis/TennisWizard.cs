@@ -16,8 +16,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public TennisBallLauncher launcher;
 	public GameObject valueProjector;
 	private BallValueCounter valueCounter;
+	private float gameStartTime;
 	public GameObject endGame;
-	private float gameWinTime = 60;				// Layla, customized games
+	private float gameWinTime = 10;				// Layla, customized games
 	private bool finished;
 
 	// Use this for initialization
@@ -44,11 +45,12 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	launcher.wizard = this;
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
+	gameStartTime = Time.time;
 	}
 
 	public void Update() {
 		UpdateStatCards();
-		if (Time.time > gameWinTime && !finished)
+		if (Time.time - gameStartTime > gameWinTime && !finished)
 		{
 			DisableMovement();
 			for (int p = 0; p < players.Length; p++)
@@ -58,6 +60,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			}
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;
+			inGame.GetComponent<InGamePlayerBoard>().KillInGameBoard();
 		}
 	}
 	
