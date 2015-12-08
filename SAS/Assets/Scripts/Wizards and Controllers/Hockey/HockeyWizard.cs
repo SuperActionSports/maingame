@@ -12,8 +12,9 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	private int winner;						// Shared
 	public GameObject winnerPlayer;			// Game, private
 	public GameObject victory;				// Game, private
+	private float gameStartTime;
 	private float victoryDuration;			// Game, private
-	private float gameWinTime = 60;				// Layla, customized games
+	private float gameWinTime = 10;				// Layla, customized games
 	private float puckRespawnTime;
 	private int matchCount;					// Layla, customized games
 	private HockeyCamera cam;	// Game
@@ -31,6 +32,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 
 	// Use this for initialization
 	void Start () {
+		gameStartTime = Time.time;
 		cam = Camera.main.GetComponent<HockeyCamera>();
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
@@ -69,7 +71,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	
 	void Update()
 	{
-		if (Time.time > gameWinTime && !finished)
+		if ((Time.time > gameStartTime + gameWinTime) && !finished)
 		{
 			DisableMovement();
 			for (int p = 0; p < players.Length; p++)
