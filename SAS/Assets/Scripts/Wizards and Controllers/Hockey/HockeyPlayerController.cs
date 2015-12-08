@@ -54,7 +54,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	public OverheadCameraController cam;
 	private AudioSource sound;
 	private Animator anim;
-	public float SwingForceMagnitude = 2.5f;
+	public float SwingForceMagnitude = 10.0f;
 	
 	private PaintSplatterProjector paint;
 	public HockeyWizard wizard;
@@ -104,7 +104,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		ResetRigidBodyConstraints();
 		walkSpeed = 3.5f;
 		maxSpeed = 9;
-		stats.ResetStats ();
+//		stats.ResetStats ();
 		Debug.Log(stats);
 		paint = GetComponent<PaintSplatterProjector>();
 		paint.Initialize (color);
@@ -219,7 +219,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
     public void Kill(Vector3 direction)
 	{
 		Vector3 rbForce = new Vector3(-direction.x,direction.y,-direction.z);
-		rbForce *= SwingForceMagnitude;
+		rbForce *= 10;
 		rbForce = CorrectRBForce(rbForce);
 		Debug.Log("RbForce: " + rbForce);	
 		rb.AddForce(rbForce, ForceMode.VelocityChange);
@@ -231,19 +231,19 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
     {
     	if (f.x < 0)
     	{
-    		f.x = Mathf.Clamp(f.x,-5,-2.5f);
+			f.x = Mathf.Clamp(f.x,-50,-10);
     	}
     	else
     	{
-			f.x = Mathf.Clamp(f.x,2.5f,5);
+			f.x = Mathf.Clamp(f.x,10,50);
     	}
     	if (f.z < 0)
     	{
-    		f.z = Mathf.Clamp(f.z,-5,-2.5f);
+			f.z = Mathf.Clamp(f.z,-50,-10);
     	}
     	else
     	{
-			f.z = Mathf.Clamp(f.z,2.5f,5);
+			f.z = Mathf.Clamp(f.z,10,50);
     	}
     	return f;
     }
