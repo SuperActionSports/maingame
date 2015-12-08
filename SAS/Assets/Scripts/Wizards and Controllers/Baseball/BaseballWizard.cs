@@ -158,6 +158,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 			//Debug.Log(Time.time); 
 			if (Time.time - lastPitch >= pitchGap && (Time.time < madnessTime || Time.time > madnessGap+madnessTime)) {
 				lastPitch += pitchGap;
+				Debug.Log ("Pitcher: "+pitcher);
 				pitcher.Pitch ();
 			}
 			if (madnessTime <=  Time.time - startTime && !madness)
