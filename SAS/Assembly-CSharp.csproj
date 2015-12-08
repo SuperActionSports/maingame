@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\Garbage\GARBAGESUN.cs" />
      <Compile Include="Assets\Scripts\Garbage\GARBAGEVISION.cs" />
      <Compile Include="Assets\Scripts\Golf\GolfBall.cs" />
+     <Compile Include="Assets\Scripts\Golf\GolfPlayerController.cs" />
      <Compile Include="Assets\Scripts\Hockey\GoalScored.cs" />
      <Compile Include="Assets\Scripts\Hockey\HockeyGoalEffect.cs" />
      <Compile Include="Assets\Scripts\Hockey\HockeyPlayerManagerSAS (Deprecated).cs" />
@@ -179,7 +180,6 @@
      <Compile Include="Assets\Scripts\Wizards and Controllers\Fencing\FencingPlayerController.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Fencing\FencingWizard.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Golf\GolfClubScript.cs" />
-     <Compile Include="Assets\Scripts\Wizards and Controllers\Golf\GolfPlayerController.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Golf\GolfWizard.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Hockey\HockeyEquipmentScript.cs" />
      <Compile Include="Assets\Scripts\Wizards and Controllers\Hockey\HockeyPlayerController.cs" />
@@ -404,11 +404,17 @@
      <None Include="Assets\Shaders\GolfTerrainHeightSHader.shader" />
      <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
+ <Reference Include="UnityEngine.Advertisements">
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
+ </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEngine.Analytics">
+ <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
