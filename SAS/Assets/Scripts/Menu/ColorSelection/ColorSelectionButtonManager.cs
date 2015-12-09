@@ -109,12 +109,14 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		{
 			focusedButton = GetAvailableLeft(focusedButton);
 			audioManager.PlayMoveSelection();
+
 		}
 			
 		if (filteredDirection.Right.WasPressed)
 		{
 			focusedButton = GetAvailableRight(focusedButton);
 			audioManager.PlayMoveSelection();
+
 		}
 			
 		if (device.Action1.WasPressed) 
