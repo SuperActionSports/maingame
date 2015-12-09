@@ -117,9 +117,6 @@
      <None Include="Assets\Shaders\GolfTerrainHeightSHader.shader" />
      <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEditor.Advertisements">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Advertisements/Editor/UnityEditor.Advertisements.dll</HintPath>
  </Reference>
@@ -134,9 +131,6 @@
  </Reference>
  <Reference Include="UnityEditor.Networking">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/Networking/Editor/UnityEditor.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>/Users/Mike/Repositories/Super Action Sports Repository/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>
