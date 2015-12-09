@@ -188,6 +188,10 @@ Prefab:
       propertyPath: m_Name
       value: AudienceRowGizmo (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 11401196, guid: 574bf471b12fc5140a9711b2a8d22c67, type: 2}
+      propertyPath: overLimit
+      value: 200
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 574bf471b12fc5140a9711b2a8d22c67, type: 2}
   m_IsPrefabParent: 0
