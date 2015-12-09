@@ -20,6 +20,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public GameObject endGame;
 	private float gameWinTime = 60;				// Layla, customized games
 	private bool finished;
+	private AudioSource[] audienceSounds;
 
 	// Use this for initialization
 	void Start () {
@@ -46,6 +47,8 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	launcher.wizard = this;
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
 	gameStartTime = Time.time;
+	audienceSounds = GetComponents<AudioSource>();
+	audienceSounds[0].volume = 0.5f;
 	}
 
 	public void Update() {
@@ -72,6 +75,10 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public void BallHitTurfTwice()
 	{
 		valueCounter.Reset();
+		audienceSounds[0].volume = 1.0f;
+		while (audienceSounds[0].volume > 0.5f) {
+			audienceSounds[0].volume /= 0.05f * Time.deltaTime;
+		}
 	}
 	
 	void ResetExistingPlayers()
@@ -174,4 +181,6 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	{
 		launcher.LaunchTennisBall();
 	}
+	
+	public void PlayerKilled () { audienceSounds[1].Play(); }
 }

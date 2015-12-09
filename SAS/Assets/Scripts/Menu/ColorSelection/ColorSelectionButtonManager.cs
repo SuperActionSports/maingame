@@ -21,6 +21,8 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	private Button colorsConfirmed;
 
 	TwoAxisInputControl filteredDirection;
+	
+	private AudioSource audioSources; // move selection, confirm, decline
 			
 	void Awake()
 	{
@@ -30,6 +32,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void Start()
 	{
+		
 		confirmedButton = GameObject.Find ("ColorsConfirmed");
 		colorsConfirmed = confirmedButton.GetComponent<Button> ();
 		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
@@ -49,7 +52,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		focusedButton = colorInputManagerScript.colorStarts[i];
 		focusedButton.focusedUponTheNightWhenTheHorsesAreFree = true;
 		layla = liaison.GetComponent<GameControlLiaison>();
-
+		audioSources = GetComponents<AudioSource>();
 	}
 	
 	public void ResetNumber()
@@ -100,16 +103,19 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		if (filteredDirection.Down.WasPressed)
 		{
 			focusedButton = GetAvailableDown(focusedButton);
+			audioSources[0].Play();
 		}
 			
 		if (filteredDirection.Left.WasPressed)
 		{
 			focusedButton = GetAvailableLeft(focusedButton);
+			audioSources[0].Play();
 		}
 			
 		if (filteredDirection.Right.WasPressed)
 		{
 			focusedButton = GetAvailableRight(focusedButton);
+			audioSources[0].Play();
 		}
 			
 		if (device.Action1.WasPressed) 

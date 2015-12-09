@@ -14,6 +14,7 @@ public class BallMovement : MonoBehaviour {
 	public TennisWizard wizard;
 	public float deathTime = 1;
 	public float currentDeathTime = 0;
+	private AudioSource ballSound;
 
 	private Renderer tr;
 	// Use this for initialization
@@ -24,6 +25,7 @@ public class BallMovement : MonoBehaviour {
 		hasHitTurf = false;
 		count = 0;
 		hit = false;
+		ballSound = GetComponent<AudioSource>();
 	}
 
 	void Update()
@@ -36,6 +38,7 @@ public class BallMovement : MonoBehaviour {
 		if (collision.gameObject.tag == "Turf") {
 			count++;
 			CheckForDoubleBounce();
+			ballSound.Play();
 		} else if (collision.gameObject.tag == "Wall") 
 		{
 		//	hasHitTurf = false;
@@ -48,6 +51,7 @@ public class BallMovement : MonoBehaviour {
 				wizard.GetComponent<TennisWizard>().BallHitWall();
 				IncreaseValue();
 			}
+			ballSound.Play();
 		}
 		else
 		{

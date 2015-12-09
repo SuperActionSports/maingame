@@ -11,12 +11,12 @@ public class PerlinAudienceManager : MonoBehaviour {
 	
 	void Start () {
 		audienceMemberWidth = audienceMember.transform.lossyScale.x;
-		for (int i = 0; i < audienceCount; i++)
+		/*for (int i = 0; i < audienceCount; i++)
 		{
 			Vector3 position = new Vector3(transform.position.x + (audienceMemberWidth * i) + (i/10f),transform.position.y,transform.position.z);
 			GameObject a = Instantiate(audienceMember,position,transform.rotation) as GameObject;
 			a.transform.parent = this.transform;
-		}
+		}/*
 		members = GetComponentsInChildren<PerlinAudienceController>();
 	}
 	

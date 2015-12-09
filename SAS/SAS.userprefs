@@ -1,15 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\ColorSelection\ColorSelectionButtonManager.cs">
     <Files>
-      <File FileName="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs" Line="96" Column="2" />
-      <File FileName="Assets\Scripts\Tennis\BallMovement.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Tennis\TennisInputHandlerGans.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Golf\GolfPlayerController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Golf\GolfWizard.cs" Line="1" Column="1" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Audience\AudienceController.cs">
-    <Files>
-      <File FileName="Assets\Scripts\Audience\AudienceController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs" Line="105" Column="1" />
+      <File FileName="Assets\Scripts\Tennis\BallMovement.cs" Line="28" Column="12" />
+      <File FileName="Assets\Scripts\Tennis\EquipmentScriptWithTennis.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Wizards and Controllers\Tennis\TennisControllerGans.cs" Line="170" Column="12" />
+      <File FileName="Assets\Scripts\Wizards and Controllers\Tennis\TennisWizard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menu\ColorSelection\ColorInputManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menu\ColorSelection\ColorSelectionButtonManager.cs" Line="72" Column="34" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

@@ -27,6 +27,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	private PaintSplatterProjector paint;
 	private AudioSource sound;
     private Animator anim;
+    private AudioSource[] playerSounds; // [0] racquet hit, [1] player hit
     
     public float hitForce;
     
@@ -72,6 +73,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		timeOfDeath = Mathf.Infinity;
 		ActiveDevice = device != null;
 		paint.Initialize (color);
+		playerSounds = GetComponents<AudioSource>();
     }
     
 	public void InitializeStatCard()
@@ -115,6 +117,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 			Debug.Log("Ball!");
 			if(isSwinging)
 			{
+				playerSounds[0].Play ();
 				hasHitBall = BallCollision(other);
 				stats.AddContact();
 				if(hasHitBall)
@@ -143,7 +146,9 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		
 		other.GetComponent<BallMovement>().ResetCount();
 		other.GetComponent<BallMovement>().Hit(this.gameObject);
-
+		
+		
+		
 		return true;
 	}
 
@@ -162,6 +167,8 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	
 	public void MakeDead()
 	{
+		wizard.PlayerKilled();
+		playerSounds[1].Play ();
 		alive = false;
         GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.None;
         alive = false;
