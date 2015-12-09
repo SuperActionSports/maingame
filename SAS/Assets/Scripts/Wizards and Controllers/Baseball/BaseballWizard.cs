@@ -29,8 +29,10 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	private bool finished;
 	private float startTime;
 	public GameObject inGame;
+	public BaseballAudioManager audioManager;
 	// Use this for initialization
 	void Start () {
+		audioManager = GetComponentInChildren<BaseballAudioManager>();
 		if (layla == null) { layla = GameObject.Find("Layla");
 		}
 		liaison = layla.GetComponent<GameControlLiaison>();
@@ -160,6 +162,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 				lastPitch += pitchGap;
 				Debug.Log ("Pitcher: "+pitcher);
 				pitcher.Pitch ();
+				audioManager.PlayCannonFire();
 			}
 			if (madnessTime <=  Time.time - startTime && !madness)
 			{
@@ -187,5 +190,10 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		{
 			players[p].statCard = ((BaseballPlayerController)players[p].control).Stats;
 		}
-	}	
+	}
+	
+	public void HitBall()
+	{
+		audioManager.PlayBallHit();
+	}
 }

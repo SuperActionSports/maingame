@@ -29,9 +29,12 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	private bool finished = false;
 	public GameObject endGame;
 	public GameObject inGame;
+	
+	public HockeyAudioManager audioManager;
 
 	// Use this for initialization
 	void Start () {
+		audioManager = GetComponentInChildren<HockeyAudioManager>();
 		gameStartTime = Time.time;
 		cam = Camera.main.GetComponent<HockeyCamera>();
 		if (layla == null) { layla = GameObject.Find("Layla");
@@ -173,13 +176,19 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		return pController;
 	}
 	
-	public void Celebrate(Color c)
+	public void HitPuck()
 	{
-		
+		audioManager.PlayHitPuck();
+	}
+	
+	public void GoalScored()
+	{
+		audioManager.PlayGoal();
 	}
 	
 	public void SpawnPuck()
 	{
+		
 		puck = GameObject.Instantiate(puck,puckRespawn.transform.position,Quaternion.identity) as GameObject;
 		puck.GetComponent<PuckMovement>().respawnDelay = 2.5f;
 		puck.GetComponent<PuckMovement>().respawnPoint = puckRespawn;

@@ -157,7 +157,13 @@
      <Compile Include="Assets\Scripts\Player (Deprecated)\RapierScript.cs" />
      <Compile Include="Assets\Scripts\Player (Deprecated)\SetColorToParent.cs" />
      <Compile Include="Assets\Scripts\ShieldScript.cs" />
-     <Compile Include="Assets\Scripts\Sound Managers\NewBehaviourScript.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\BaseballAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\FencingAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\FencingPlayerAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\GolfAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\GolfPlayerAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\HockeyAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\MenuAudioManager.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\BaseballStatsCard.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\FencingStatsCard.cs" />

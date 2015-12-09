@@ -47,8 +47,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	launcher.wizard = this;
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
 	gameStartTime = Time.time;
-	audienceSounds = GetComponents<AudioSource>();
-	audienceSounds[0].volume = 0.5f;
+	audienceSounds = GetComponentsInChildren<AudioSource>();
 	}
 
 	public void Update() {
@@ -74,11 +73,15 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	
 	public void BallHitTurfTwice()
 	{
-		valueCounter.Reset();
-		audienceSounds[0].volume = 1.0f;
-		while (audienceSounds[0].volume > 0.5f) {
-			audienceSounds[0].volume /= 0.05f * Time.deltaTime;
+		if (valueCounter.GreaterThanOne())
+		{
+			valueCounter.Reset();
+			audienceSounds[1].Play ();
 		}
+		//audienceSounds[0].volume = 1.0f;
+	//	while (audienceSounds[0].volume > 0.5f) {
+	//		audienceSounds[0].volume /= 0.05f * Time.deltaTime;
+	//	}
 	}
 	
 	void ResetExistingPlayers()

@@ -13,6 +13,8 @@ public class LevelSelectionButtonManager : MonoBehaviour
 	private GameControlLiaison liason;
 
 	TwoAxisInputControl filteredDirection;
+	
+	public MenuAudioManager audioManager;
 			
 	void Awake()
 	{
@@ -22,6 +24,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 	
 	void Start()
 	{
+		audioManager = GetComponentInChildren<MenuAudioManager>();
 		GameObject layla = GameObject.Find ("Layla");
 		liason = layla.GetComponent<GameControlLiaison> ();
 		Time.timeScale = 1;
@@ -43,30 +46,36 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		if (filteredDirection.Up.WasPressed)
 		{
 			MoveFocusTo( focusedButton.up );
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (filteredDirection.Down.WasPressed)
 		{
 			MoveFocusTo( focusedButton.down );
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (filteredDirection.Left.WasPressed)
 		{
 			MoveFocusTo( focusedButton.left );
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (filteredDirection.Right.WasPressed)
 		{
 			MoveFocusTo( focusedButton.right );
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (inputDevice.Action1.WasPressed) 
 		{
+			audioManager.PlayConfirm();
 			LoadScene();
 		}
 		if (inputDevice.Action2.WasPressed) 
 		{
-			//Application.LoadLevel("AdvancedPlayerColorSelection");
+			audioManager.PlayDecline();
+			Application.LoadLevel("Use This Color Selection");
 		}
 	}
 

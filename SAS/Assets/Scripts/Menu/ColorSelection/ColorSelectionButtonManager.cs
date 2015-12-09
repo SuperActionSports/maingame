@@ -22,7 +22,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	TwoAxisInputControl filteredDirection;
 	
-	private AudioSource audioSources; // move selection, confirm, decline
+	public MenuAudioManager audioManager;
 			
 	void Awake()
 	{
@@ -32,7 +32,6 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 	void Start()
 	{
-		
 		confirmedButton = GameObject.Find ("ColorsConfirmed");
 		colorsConfirmed = confirmedButton.GetComponent<Button> ();
 		GameObject playerInputManager = GameObject.Find ("ColorInputManager");
@@ -52,7 +51,6 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		focusedButton = colorInputManagerScript.colorStarts[i];
 		focusedButton.focusedUponTheNightWhenTheHorsesAreFree = true;
 		layla = liaison.GetComponent<GameControlLiaison>();
-		audioSources = GetComponents<AudioSource>();
 	}
 	
 	public void ResetNumber()
@@ -82,6 +80,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		// Move focus with directional inputs.
 		if (filteredDirection.Up.WasPressed)
 		{
+			audioManager.PlayMoveSelection();
 			focusedButton = GetAvailableUp(focusedButton);
 			Debug.Log ("prev: " + previousButtonName);
 			if(focusedButton.name == previousButtonName && (focusedButton.name == "Back" || focusedButton.name == "ColorsConfirmed"))
@@ -103,19 +102,19 @@ public class ColorSelectionButtonManager : MonoBehaviour
 		if (filteredDirection.Down.WasPressed)
 		{
 			focusedButton = GetAvailableDown(focusedButton);
-			audioSources[0].Play();
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (filteredDirection.Left.WasPressed)
 		{
 			focusedButton = GetAvailableLeft(focusedButton);
-			audioSources[0].Play();
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (filteredDirection.Right.WasPressed)
 		{
 			focusedButton = GetAvailableRight(focusedButton);
-			audioSources[0].Play();
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (device.Action1.WasPressed) 
@@ -140,6 +139,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			{
 				LoadScene();
 			}
+			audioManager.PlayConfirm();
 		}
 		if (device.Action2.WasPressed) 
 		{
@@ -156,6 +156,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 
 				colorsThatHaveBeenSelected.Clear();
 			}
+			audioManager.PlayDecline();
 		}
 		
 	}
