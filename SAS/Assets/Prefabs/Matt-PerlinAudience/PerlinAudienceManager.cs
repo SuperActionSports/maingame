@@ -8,20 +8,23 @@ public class PerlinAudienceManager : MonoBehaviour {
 	public GameObject audienceMember;
 	private float audienceMemberWidth;
 	public int audienceCount;
+	public float overLimit = 200;
+	public float lim = 0;
 	
 	void Start () {
-		audienceMemberWidth = audienceMember.transform.lossyScale.x;
+		//audienceMemberWidth = audienceMember.transform.lossyScale.x;
 		/*for (int i = 0; i < audienceCount; i++)
 		{
 			Vector3 position = new Vector3(transform.position.x + (audienceMemberWidth * i) + (i/10f),transform.position.y,transform.position.z);
 			GameObject a = Instantiate(audienceMember,position,transform.rotation) as GameObject;
 			a.transform.parent = this.transform;
-		}/*
+		}*/
 		members = GetComponentsInChildren<PerlinAudienceController>();
+		audienceCount = members.Length;
 	}
 	
 	void Update () {
-		/*
+		
 		if (Input.GetKeyDown(KeyCode.S))
 		{
 			SendSmallEvent();
@@ -33,11 +36,11 @@ public class PerlinAudienceManager : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.G))
 		{
-			Color[] c = {Color.blue,Color.green,Color.cyan};
-			int[] s = {12,40,14};
+			Color[] c = {Color.cyan,Color.magenta,Color.yellow,Color.black};
+			int[] s = {1,2,3,4};
 			ChangeCrowdColor(c,s);
 		}
-		*/
+		
 	}
 	
 	public void SendSmallEvent()
@@ -58,23 +61,38 @@ public class PerlinAudienceManager : MonoBehaviour {
 	
 	public void ChangeCrowdColor(Color[] teamColors, int[] scores)
 	{	
+		float timeStart = Time.time;
 		bool[] visitedAudience = new bool[audienceCount];
 		float totalScore = 0;  
 		foreach (int i in scores)
 		{
 			totalScore += i;
+			if (lim > overLimit)
+			{
+				Debug.Break ();
+			}
+			lim++;
 		} 
+		lim = 0;
 		float[]crowdWeights = new float[teamColors.Length]; 
 		for (int w = 0; w < scores.Length; w++)
 		{
 			crowdWeights[w] = (scores[w]/totalScore) * audienceCount;
+			if (lim > overLimit)
+			{
+				Debug.Break ();
+			}
+			lim++;
 		}
+		lim = 0;
 		int p = 0;
+		Array.Sort(crowdWeights,teamColors);
+		int count = 0;
 		for (int c = 0; c < scores.Length ; c++)
 		{
-			Array.Sort(crowdWeights,teamColors);
 			while(p < crowdWeights[c])
-			{
+			{	
+				count++;
 				int pick = (int)UnityEngine.Random.Range(0,members.Length);
 				if (!visitedAudience[pick])
 				{
@@ -85,20 +103,7 @@ public class PerlinAudienceManager : MonoBehaviour {
 				}
 			}
 		}
-		for (int va = 0; va < visitedAudience.Length; va++)
-		{
-			if (!visitedAudience[va])
-			{
-				members[va].ChangeColor(teamColors[UnityEngine.Random.Range(0, teamColors.Length)]);
-			}
-		}
-	}
-	
-	void OnDrawGizmos()
-	{
-		Gizmos.color = Color.red;
-		Vector3 center = new Vector3((((audienceMemberWidth + .1f) * audienceCount)/2) - audienceMemberWidth/2f,transform.position.y,transform.position.z);
-		Vector3 width = new Vector3(((audienceMemberWidth + .1f) * audienceCount),1,1);
-		Gizmos.DrawWireCube(center,width);
+		
+		
 	}
 }
