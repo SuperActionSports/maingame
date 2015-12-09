@@ -30,6 +30,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	private float startTime;
 	public GameObject inGame;
 	public BaseballAudioManager audioManager;
+	public PerlinAudienceManager audienceManager;
 	// Use this for initialization
 	void Start () {
 		audioManager = GetComponentInChildren<BaseballAudioManager>();

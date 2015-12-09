@@ -41,7 +41,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 5
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_LightmapsMode: 1
   m_GISettings:
     serializedVersion: 2
@@ -472,6 +472,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 799131504}
     m_Modifications:
+    - target: {fileID: 11495966, guid: 27b1dc3f07aae664592ee53037ba072e, type: 2}
+      propertyPath: culledChildren.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 435324, guid: 27b1dc3f07aae664592ee53037ba072e, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -540,9 +544,19 @@ Prefab:
       propertyPath: m_Icon
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 11495966, guid: 27b1dc3f07aae664592ee53037ba072e, type: 2}
+      propertyPath: culledChildren.Array.data[0]
+      value: 
+      objectReference: {fileID: 1650097358}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 27b1dc3f07aae664592ee53037ba072e, type: 2}
   m_IsPrefabParent: 0
+--- !u!114 &143221244 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 11495966, guid: 27b1dc3f07aae664592ee53037ba072e,
+    type: 2}
+  m_PrefabInternal: {fileID: 143221243}
+  m_Script: {fileID: 11500000, guid: 02b3c636833d5c44889722a872a07fc8, type: 3}
 --- !u!1 &159413693
 GameObject:
   m_ObjectHideFlags: 0
@@ -3432,6 +3446,7 @@ MonoBehaviour:
   launcher: {fileID: 752884892}
   valueProjector: {fileID: 800925356}
   endGame: {fileID: 1799069498}
+  audienceManager: {fileID: 143221244}
 --- !u!4 &1156793884
 Transform:
   m_ObjectHideFlags: 0
@@ -5707,6 +5722,10 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 17.3999996, y: 20.3999996}
+--- !u!1 &1650097358 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 154184, guid: 27b1dc3f07aae664592ee53037ba072e, type: 2}
+  m_PrefabInternal: {fileID: 143221243}
 --- !u!1 &1745486868
 GameObject:
   m_ObjectHideFlags: 0

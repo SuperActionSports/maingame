@@ -11875,6 +11875,7 @@ MonoBehaviour:
   audienceCount: 0
   overLimit: 200
   lim: 0
+  colors: []
 --- !u!4 &968964930 stripped
 Transform:
   m_PrefabParentObject: {fileID: 452338, guid: b3e05605fbb62a24cac48c96e074477e, type: 2}
@@ -15119,6 +15120,7 @@ MonoBehaviour:
   endGame: {fileID: 890870742}
   inGame: {fileID: 1879554493}
   audioManager: {fileID: 2042702135}
+  audienceManager: {fileID: 967558991}
 --- !u!1 &1246826156
 GameObject:
   m_ObjectHideFlags: 0

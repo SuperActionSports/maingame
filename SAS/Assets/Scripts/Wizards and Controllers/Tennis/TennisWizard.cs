@@ -21,6 +21,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	private float gameWinTime = 60;				// Layla, customized games
 	private bool finished;
 	private AudioSource[] audienceSounds;
+	public PerlinAudienceManager audienceManager;
 
 	// Use this for initialization
 	void Start () {

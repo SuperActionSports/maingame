@@ -5,11 +5,13 @@ using System;
 public class PerlinAudienceManager : MonoBehaviour {
 
 	PerlinAudienceController[] members;
+	public GameObject[] culledChildren;
 	public GameObject audienceMember;
 	private float audienceMemberWidth;
 	public int audienceCount;
 	public float overLimit = 200;
 	public float lim = 0;
+	public Color[] colors;
 	
 	void Start () {
 		//audienceMemberWidth = audienceMember.transform.lossyScale.x;
@@ -23,6 +25,15 @@ public class PerlinAudienceManager : MonoBehaviour {
 		audienceCount = members.Length;
 	}
 	
+	public void SetAudience(Player[] players)
+	{
+		colors = new Color[players.Length];
+		for (int i = 0; i < players.Length; i++)
+		{
+			colors[i] = players[i].color;
+		}
+	}
+	
 	void Update () {
 		
 		if (Input.GetKeyDown(KeyCode.S))
@@ -33,6 +44,10 @@ public class PerlinAudienceManager : MonoBehaviour {
 		{
 			SendBigEvent();
 		}
+		if (Input.GetKeyDown(KeyCode.C))
+		{
+			KillInvisibleChildren();
+		}
 
 		if (Input.GetKeyDown(KeyCode.G))
 		{
@@ -41,6 +56,18 @@ public class PerlinAudienceManager : MonoBehaviour {
 			ChangeCrowdColor(c,s);
 		}
 		
+	}
+	/// <summary>
+	/// Kills audience memebers who will never be on camera
+	/// </summary>
+	public void KillInvisibleChildren()
+	{
+		foreach (GameObject g in culledChildren)
+		{
+			g.SetActive(false);
+		}
+		members = GetComponentsInChildren<PerlinAudienceController>();
+		audienceCount = members.Length;
 	}
 	
 	public void SendSmallEvent()
@@ -57,6 +84,11 @@ public class PerlinAudienceManager : MonoBehaviour {
 		{
 			p.BigEvent();
 		}
+	}
+	
+	public void ChangeCrowdColor(int[] s)
+	{
+		ChangeCrowdColor(colors,s);
 	}
 	
 	public void ChangeCrowdColor(Color[] teamColors, int[] scores)

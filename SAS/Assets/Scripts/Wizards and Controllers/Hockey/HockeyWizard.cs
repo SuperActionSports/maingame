@@ -31,6 +31,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	public GameObject inGame;
 	
 	public HockeyAudioManager audioManager;
+	public PerlinAudienceManager audienceManager;
 
 	// Use this for initialization
 	void Start () {

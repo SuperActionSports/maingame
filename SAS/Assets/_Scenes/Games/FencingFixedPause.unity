@@ -1611,6 +1611,7 @@ MonoBehaviour:
   audienceCount: 0
   overLimit: 200
   lim: 0
+  colors: []
 --- !u!1 &251852779
 GameObject:
   m_ObjectHideFlags: 0
@@ -15229,6 +15230,7 @@ MonoBehaviour:
   layla: {fileID: 0}
   endGame: {fileID: 1578907368}
   inGame: {fileID: 96579416}
+  audienceManager: {fileID: 242810387}
 --- !u!1001 &1668559583
 Prefab:
   m_ObjectHideFlags: 0

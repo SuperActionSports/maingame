@@ -54,6 +54,7 @@
      <Compile Include="Assets\Prefabs\Golf\PerlinNoisePlane.cs" />
      <Compile Include="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceController.cs" />
      <Compile Include="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs" />
+     <Compile Include="Assets\Prefabs\Matt-PerlinAudience\WizardAudienceLiaison.cs" />
      <Compile Include="Assets\Scripts\AttackStateExit.cs" />
      <Compile Include="Assets\Scripts\Audience\AudienceController.cs" />
      <Compile Include="Assets\Scripts\Baseball\BaseballLauncher.cs" />

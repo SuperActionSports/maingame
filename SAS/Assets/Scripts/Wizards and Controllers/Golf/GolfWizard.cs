@@ -40,6 +40,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public GameObject inGame;
 	
 	public GolfAudioManager audioManager;
+	public PerlinAudienceManager audienceManager;
 	// Use this for initialization
 	// Woop Woop
 	int test = 5;
@@ -77,6 +78,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		victoryDuration = 3;
 		UpdateStatCards();
 		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+		audienceManager.SetAudience(players);
 	}
 	
 	void ResetExistingPlayers()
@@ -85,6 +87,28 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		{
 			p.control = null;
 		}
+	}
+	
+	public void SmallEvent()
+	{
+		audienceManager.SendSmallEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void BigEvent()
+	{
+		audienceManager.SendBigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void ChangeAudienceColor()
+	{
+		int[] scores = new int[players.Length];
+		for (int s = 0; s < players.Length; s++)
+		{
+			scores[s] = players[s].statCard.TotalScore();
+		}
+		audienceManager.ChangeCrowdColor(scores);
 	}
 	
 	void Update()
@@ -96,7 +120,6 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			for (int p = 0; p < players.Length; p++)
 			{
 				players[p].statCard = ((GolfPlayerController)players[p].control).stats;
-				
 			}
 			endGame.GetComponentInChildren<EndgameGUIStatGenerator>().SetPlayers = players;
 			finished = true;

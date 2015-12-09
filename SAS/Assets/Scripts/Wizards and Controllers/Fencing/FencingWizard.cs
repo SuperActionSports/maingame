@@ -24,7 +24,8 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	private bool finished;
 	public GameObject endGame;
 	public GameObject inGame;
-
+	public PerlinAudienceManager audienceManager;
+	
 	// Use this for initialization
 	void Start () {
 	if (layla == null) { layla = GameObject.Find("Layla");
