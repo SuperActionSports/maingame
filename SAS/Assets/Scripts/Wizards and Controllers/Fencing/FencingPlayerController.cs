@@ -43,9 +43,10 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	public GameObject deathEffect;
 	public GameObject projectorPrefab;
 	public Transform projectorPosition;
-	
+	public FencingPlayerAudioManager audioManager;
 	// Use this for initialization
 	void Start () {
+		audioManager = GetComponentInChildren<FencingPlayerAudioManager>();
 		//sound =  GetComponent<AudioSource>();
 		cam = Camera.main.GetComponent<FencingCameraController>();
 		rend = GetComponent<Renderer>();
@@ -103,7 +104,9 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		if (equipScript != null) 
 			{
 				stats.AddStabAttempts ();
+				audioManager.PlaySwing();
 			}
+		
 	}
 		public void AttackStart()
 	{
@@ -122,6 +125,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	public void ThrowEquipment()
 	{
+		audioManager.PlaySwing();
 		equipScript.Throw(anim.GetFloat("Run")>9, input.facingRight ? 1 : -1);
 		Disarm();
 	}
@@ -157,6 +161,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
         wizard.UpdatePlayerCount();
 		stats.EndLifeTime ();
 		stats.AddDeath ();
+		audioManager.PlayDead();
 	}
 	
 	private void CreateDeathSplat()
@@ -210,6 +215,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		}
 		if (equipScript == null)
 		{
+			audioManager.PlayEquip();
 			equipScript = equip.GetComponent<FencingEquipment>();
 			equip.transform.parent = equipmentHand.transform;
 			Armed = true;

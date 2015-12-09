@@ -31,13 +31,11 @@ public class BaseballEquipmentScript : MonoBehaviour {
 				victim.Kill (new Vector3 (transform.position.x * -1, transform.position.y, transform.position.z));
 				player.stats.AddKill ();
 				//This causes no movement at the center of the field
-				AudioSource hit = GetComponent<AudioSource> ();
-				hit.Play ();
 				count++;
 //				SetScoreText();
 			}
 		} else if (other.CompareTag ("Ball") && transform.parent.gameObject != other.transform.gameObject) {
-			player.stats.AddMadeHit();
+			player.HitBall();
 		}
 	} 
 

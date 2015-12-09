@@ -6,12 +6,19 @@ public class InfoScreenButtonManager : MonoBehaviour
 	public InfoScreenButton focusedButton;
 	public string levelName;
 
+	public MenuAudioManager audioManager;
+
 	TwoAxisInputControl filteredDirection;
 			
 	void Awake()
 	{
 		filteredDirection = new TwoAxisInputControl();
 		filteredDirection.StateThreshold = 0.5f;
+	}
+	
+	void Start()
+	{
+		audioManager = GetComponentInChildren<MenuAudioManager>();
 	}
 
 	void Update()
@@ -30,21 +37,25 @@ public class InfoScreenButtonManager : MonoBehaviour
 		if (filteredDirection.Up.WasPressed)
 		{
 			MoveFocusTo( focusedButton.up );
+			audioManager.PlayMoveSelection();
 		}
-			
+		
 		if (filteredDirection.Down.WasPressed)
 		{
 			MoveFocusTo( focusedButton.down );
+			audioManager.PlayMoveSelection();
 		}
-			
+		
 		if (filteredDirection.Left.WasPressed)
 		{
 			MoveFocusTo( focusedButton.left );
+			audioManager.PlayMoveSelection();
 		}
-			
+		
 		if (filteredDirection.Right.WasPressed)
 		{
 			MoveFocusTo( focusedButton.right );
+			audioManager.PlayMoveSelection();
 		}
 			
 		if (inputDevice.Action1.WasPressed) 
@@ -62,10 +73,12 @@ public class InfoScreenButtonManager : MonoBehaviour
 		Debug.Log ("Btn: " + focusedButton.name);
 		if (focusedButton.name == "Play") 
 		{
+			audioManager.PlayConfirm();
 			Application.LoadLevel (levelName);
 		}
 		if (focusedButton.name == "Back") 
 		{
+			audioManager.PlayDecline();
 			Application.LoadLevel("LevelSelection");
 		}
 	}

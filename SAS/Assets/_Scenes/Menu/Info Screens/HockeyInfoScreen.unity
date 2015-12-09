@@ -65,6 +65,7 @@ LightmapSettings:
     m_TextureCompression: 1
     m_FinalGather: 0
     m_FinalGatherRayCount: 1024
+    m_ReflectionCompression: 2
   m_LightmapSnapshot: {fileID: 0}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
@@ -84,9 +85,6 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!127 &5
-LevelGameManager:
-  m_ObjectHideFlags: 0
 --- !u!1001 &57886346
 Prefab:
   m_ObjectHideFlags: 0
@@ -236,6 +234,48 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22476234, guid: fd32782ab469d4b8b96c9f657cfd4036,
     type: 2}
   m_PrefabInternal: {fileID: 1788506036}
+--- !u!1001 &330690106
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1415291082}
+    m_Modifications:
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 157.148499
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 93.99086
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -.206558228
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &338867445
 GameObject:
   m_ObjectHideFlags: 0
@@ -283,6 +323,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: .909803987, g: .482352972, b: .34117648, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 22660c3800f244948abadfe89c615f8d, type: 3}
     m_FontSize: 47
@@ -394,6 +440,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 90d3cdc5ab8cc46388103916878178f7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -660,6 +712,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: a3da67d3b57eb477bafaaf2903294d34, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -802,7 +860,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1152855490}
-  m_LocalRotation: {x: .408217937, y: -.234569728, z: .109381676, w: .875426054}
+  m_LocalRotation: {x: .408217967, y: -.234569743, z: .109381683, w: .875426114}
   m_LocalPosition: {x: 0, y: 3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -837,7 +895,7 @@ MonoBehaviour:
   m_Script: {fileID: 1997211142, guid: f5f67c52d1564df4a8936ccd202a3bd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AllowActivationOnStandalone: 0
+  m_ForceModuleActive: 0
 --- !u!114 &1286928286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,7 +913,7 @@ MonoBehaviour:
   m_CancelButton: Cancel
   m_InputActionsPerSecond: 10
   m_RepeatDelay: .5
-  m_AllowActivationOnMobileDevice: 0
+  m_ForceModuleActive: 0
 --- !u!114 &1286928287
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -887,6 +945,10 @@ RectTransform:
   m_PrefabParentObject: {fileID: 22466602, guid: dac91d647e76a4f14b7b5dcf6ba2d024,
     type: 2}
   m_PrefabInternal: {fileID: 1701933096}
+--- !u!4 &1395758652 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 478874, guid: 39d9a34eb1f3d3a4a9e37a0199bfbb5e, type: 2}
+  m_PrefabInternal: {fileID: 330690106}
 --- !u!1 &1415291081
 GameObject:
   m_ObjectHideFlags: 0
@@ -916,6 +978,7 @@ RectTransform:
   - {fileID: 205266249}
   - {fileID: 316113166}
   - {fileID: 558134631}
+  - {fileID: 1395758652}
   m_Father: {fileID: 1015957711}
   m_RootOrder: 3
   m_AnchorMin: {x: .5, y: .5}
@@ -936,6 +999,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   focusedButton: {fileID: 57886348}
   levelName: HockeyFixedPause
+  audioManager: {fileID: 0}
 --- !u!1001 &1701933096
 Prefab:
   m_ObjectHideFlags: 0

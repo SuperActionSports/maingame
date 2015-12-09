@@ -229,6 +229,12 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
         MakeDead();
 		paint.Splatter (transform.position, direction);
     }
+    
+    public void HitBall()
+    {
+		stats.AddMadeHit();
+		wizard.HitBall();
+    }
 
     public void Respawn()
     {

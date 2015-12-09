@@ -54,4 +54,9 @@ public class BallValueCounter : MonoBehaviour {
 		currentValue = 0;
 		l.cookie = numbers[currentValue];
 	}
+	
+	public bool GreaterThanOne()
+	{
+		return currentValue > 0;
+	}
 }

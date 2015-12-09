@@ -117,7 +117,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 			Debug.Log("Ball!");
 			if(isSwinging)
 			{
-				playerSounds[0].Play ();
+				playerSounds[2].Play ();
 				hasHitBall = BallCollision(other);
 				stats.AddContact();
 				if(hasHitBall)

@@ -11,7 +11,7 @@ public class PuckMovement : MonoBehaviour {
 	public bool inPlay;
 	public GameObject respawnPoint;
 	public InputDevice device {get; set;}
-	public FencingWizard wizard;
+	public HockeyWizard wizard;
 	private float timeOfGoal;
 	public float respawnDelay;
 	private bool willRespawn;
@@ -22,6 +22,7 @@ public class PuckMovement : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		wizard = GameObject.Find("Hockey Wizard").GetComponent<HockeyWizard>();
 		inPlay = true;
 		GetComponent<Renderer> ().material.color = Color.grey;
 		GetComponent<TrailRenderer> ().material.color = Color.grey;
@@ -63,6 +64,7 @@ public class PuckMovement : MonoBehaviour {
 			lastHit = col.gameObject.GetComponent<HockeyPlayerController>();
 			GetComponent<Renderer>().material.color = lastHit.color;
 			GetComponent<TrailRenderer>().material.color = lastHit.color;
+			wizard.HitPuck();
 		}
 	}
 
@@ -102,5 +104,6 @@ public class PuckMovement : MonoBehaviour {
 		Debug.Log("Material: " + GetComponent<Renderer>().material.color);
 		p.GetComponent<HockeyGoalEffect>().PartyToDeath(GetComponent<Renderer>().material.color);
 		GetComponent<TrailRenderer> ().enabled = false;
+		wizard.GoalScored();
 	}
 }

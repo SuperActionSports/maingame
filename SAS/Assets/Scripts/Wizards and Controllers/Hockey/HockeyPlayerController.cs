@@ -52,7 +52,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	public GameObject equipmentHand;
 	public CapsuleCollider equipmentCollider;
 	public OverheadCameraController cam;
-	private AudioSource sound;
+	private AudioSource[] sound;
 	private Animator anim;
 	public float SwingForceMagnitude = 10.0f;
 	
@@ -109,6 +109,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		paint = GetComponent<PaintSplatterProjector>();
 		paint.Initialize (color);
 		friction = 0.95f;
+		sound = GetComponents<AudioSource>();
     }
 	public void InitializeStatCard()
 	{
@@ -173,6 +174,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	{
 		anim.SetBool("Attack", true);
 		stats.AddAttemptedAttack ();
+		sound[1].Play();
 	}
 	
 	private void StartAttacking()
@@ -207,6 +209,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("Alive", false);
 		stats.EndLifeTime ();
 		stats.AddDeath ();
+		sound[0].Play();
     }
 	
 	public void Kill()

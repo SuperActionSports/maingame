@@ -38,10 +38,13 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	private int matchCount;					// Layla, customized games
 	private bool finished;
 	public GameObject inGame;
+	
+	public GolfAudioManager audioManager;
 	// Use this for initialization
 	// Woop Woop
 	int test = 5;
 	void Start () {
+		audioManager = GetComponentInChildren<GolfAudioManager>();
 		gameStartTime = Time.time;
 		floor = GameObject.Instantiate(floorPrefab,new Vector3(-20, 0 ,-20),Quaternion.identity) as GameObject;
 		if (layla == null) { layla = GameObject.Find("Layla");
@@ -186,6 +189,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public void HoleCelebration(GameObject golfBall, bool firstCall) {
 		hole.GetComponent<GolfHoleScript>().HoleScored(golfBall.GetComponent<Renderer>().material.color);
 		ResetBallAndHole(golfBall, firstCall);
+		audioManager.PlaySankPutt();
+		audioManager.PlayCrowdCheer();
 	}
 
 
@@ -198,6 +203,11 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			golfBalls[i].GetComponent<GolfBall> ().wizard = this;
 			ResetBallAndHole(golfBalls[i], true);
 		}
+	}
+	
+	public void StruckBall()
+	{
+		audioManager.PlayStruckPutt();
 	}
 	
 	public void ResetBallAndHole(GameObject golfBall, bool firstCall)
@@ -245,4 +255,6 @@ public class GolfWizard : MonoBehaviour,IWizard {
 			players[p].statCard = ((GolfPlayerController)players[p].control).Stats;
 		}
 	}
+	
+	
 }

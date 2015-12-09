@@ -72,8 +72,10 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	}
 	private PaintSplatterProjector paint;
 	private Projector proj;
+	public GolfPlayerAudioManager playerAudio;
 
 	void Start () {
+		playerAudio = GetComponentInChildren<GolfPlayerAudioManager>();
 		// Get Components and Game Objects
 		respawnPoints = GameObject.FindGameObjectsWithTag("RespawnPoint");
 		if (respawnPoints.Length == 0)
@@ -251,6 +253,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void MakeDead()
 	{
+		playerAudio.PlayDead();
 		alive = false;
 		//Need the normal of the local x axis of bat
         rb.constraints = RigidbodyConstraints.None;
@@ -363,6 +366,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
     {
 		Debug.Log ("start attack");
 		equipmentCollider.enabled = true;
+		playerAudio.PlaySwing ();
     }
 
 	private void StopAttack()
@@ -409,6 +413,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("Swing", false);
 		Debug.Log ("I hit it this hard: " + swingStrength);
 		ball.Putt (100f*swingStrength*transform.forward, this);
+		wizard.StruckBall();
 	}
     
     private float GetXVelocity()
