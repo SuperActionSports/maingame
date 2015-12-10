@@ -1,13 +1,14 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonManager.cs">
     <Files>
-      <File FileName="Assets\Scripts\Wizards and Controllers\Golf\GolfWizard.cs" Line="10" Column="40" />
-      <File FileName="Assets\Prefabs\Matt-PerlinAudience\PerlinAudienceManager.cs" Line="61" Column="57" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Baseball\BaseballWizard.cs" Line="201" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Fencing\FencingWizard.cs" Line="216" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Hockey\HockeyWizard.cs" Line="210" Column="1" />
-      <File FileName="Assets\Scripts\Wizards and Controllers\Tennis\TennisWizard.cs" Line="190" Column="2" />
+      <File FileName="Assets\Scripts\Wizards and Controllers\Fencing\FencingWizard.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Sound Managers\ManyEffectSingleEventAudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Sound Managers\GolfAudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Sound Managers\FencingAudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Sound Managers\FencingPlayerAudioManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menu\LevelSelection\LevelSelectionButton.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\Menu\LevelSelection\LevelSelectionButtonManager.cs" Line="128" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

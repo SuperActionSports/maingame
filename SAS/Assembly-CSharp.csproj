@@ -164,6 +164,7 @@
      <Compile Include="Assets\Scripts\Sound Managers\GolfAudioManager.cs" />
      <Compile Include="Assets\Scripts\Sound Managers\GolfPlayerAudioManager.cs" />
      <Compile Include="Assets\Scripts\Sound Managers\HockeyAudioManager.cs" />
+     <Compile Include="Assets\Scripts\Sound Managers\ManyEffectSingleEventAudioManager.cs" />
      <Compile Include="Assets\Scripts\Sound Managers\MenuAudioManager.cs" />
      <Compile Include="Assets\Scripts\SportsObjects\BaseballController.cs" />
      <Compile Include="Assets\Scripts\Stats Cards\BaseballStatsCard.cs" />
@@ -414,17 +415,11 @@
      <None Include="Assets\Shaders\GolfTerrainHeightSHader.shader" />
      <None Include="Assets\Shaders\SolidColor.shader" />
      <None Include="Assets\Utilities\Modeling\ProCore\Prototype\About\Credits.txt" />
- <Reference Include="UnityEngine.Advertisements">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Advertisements/UnityEngine.Advertisements.dll</HintPath>
- </Reference>
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.Networking">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll</HintPath>
- </Reference>
- <Reference Include="UnityEngine.Analytics">
- <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/UnityAnalytics/UnityEngine.Analytics.dll</HintPath>
  </Reference>
  <Reference Include="ProBuilderCore-Unity5">
  <HintPath>C:/Users/liter_000/Documents/GitHub/maingame/SAS/Assets/Utilities/Modeling/ProCore/Prototype/Classes/ProBuilderCore-Unity5.dll</HintPath>

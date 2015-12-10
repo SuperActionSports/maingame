@@ -67,7 +67,7 @@ public class PerlinAudienceController : MonoBehaviour {
 		//Debug.Log("Using " + intervalX + ", " + intervalY + " moving to " + moveTo);
 		return new Vector3 (
 			origin.x + Random.Range(-.05f,.05f),
-			1.5f * moveTo + origin.y,
+			Random.Range(0.8f,2.5f) * moveTo + origin.y,
 			origin.z + Random.Range(-.05f,.05f)		
 			);
 	}

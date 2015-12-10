@@ -9,7 +9,8 @@ public class LevelSelectionButtonManager : MonoBehaviour
 	public string actionFuzzyEggName;
 	public string hockeyName;
 	public string actionTinyEggName;
-
+	public string colorSelectionName; 
+	
 	private GameControlLiaison liason;
 
 	TwoAxisInputControl filteredDirection;
@@ -75,7 +76,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		if (inputDevice.Action2.WasPressed) 
 		{
 			audioManager.PlayDecline();
-			Application.LoadLevel("Use This Color Selection");
+			Application.LoadLevel(colorSelectionName);
 		}
 	}
 
@@ -105,7 +106,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		if (focusedButton.name == "Back") 
 		{
 			ResetPlayers();
-			Application.LoadLevel("New Color Select Cursor");
+			Application.LoadLevel(colorSelectionName);
 		}
 	}
 		

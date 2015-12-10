@@ -4,6 +4,8 @@ using System.Collections;
 public class FencingPlayerAudioManager : MonoBehaviour {
 
 	AudioSource[] sources;
+	public ManyEffectSingleEventAudioManager deathSounds;
+	public ManyEffectSingleEventAudioManager clashSounds;
 	void Start () {
 		sources = GetComponents<AudioSource>();
 		//Dead, Swing, Clash, Equip
@@ -16,7 +18,7 @@ public class FencingPlayerAudioManager : MonoBehaviour {
 	
 	public void PlayClash()
 	{
-		sources[2].Play ();
+		clashSounds.Play();
 	}
 	
 	public void PlayEquip()
@@ -26,6 +28,6 @@ public class FencingPlayerAudioManager : MonoBehaviour {
 	
 	public void PlayDead()
 	{
-		sources[0].Play ();
+		deathSounds.Play();
 	}
 }
