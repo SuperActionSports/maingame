@@ -128,12 +128,14 @@ public class FencingEquipment : MonoBehaviour {
 	
 	public void StartAttack()
 	{
+		Debug.Log("Start attack");
 		attackCollider.enabled = true;
 		armed = true;
 	}
 	
 	public void EndAttack()
 	{
+		Debug.Log("End attack");
 		attackCollider.enabled = false;
 		armed = false;
 	}

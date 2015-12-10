@@ -198,7 +198,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 		//rbForce.x *=-1;
 		//rbForce.z *= -1;
 		rb.AddForce (rbForce, ForceMode.VelocityChange);
-		paint.Splatter (transform.position, rbForce);
+		paint.Splatter (transform.position, rbForce/2);
 		//rb.AddForce(Vector3.Cross(new Vector3(impactMod,impactMod,impactMod), direction), ForceMode.VelocityChange);
         MakeDead();    
 	}
@@ -215,7 +215,7 @@ public class TennisControllerGans : MonoBehaviour, IPlayerController {
 	
 	public void Respawn()
 	{
-		GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+		GetComponent<Rigidbody>().constraints =  RigidbodyConstraints.FreezeRotation;
 		alive = true;
 		transform.rotation = Quaternion.identity;
 		rb.velocity = new Vector3(0, 0, 0);

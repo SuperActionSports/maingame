@@ -28,6 +28,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	public bool canRotateLeft;
 	public bool canRotateRight;
 	public bool rotatingLeft;
+	public bool attacking = false;
 
 	public InputDevice device {get; set;}
 
@@ -138,7 +139,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         	rb.velocity = new Vector3(0,0,0);
 
 			// Update ball object and see if player is close enough to putt
-			if (!putting) {
+			if (!putting && !swinging && !attacking) {
 				GameObject[] balls = GameObject.FindGameObjectsWithTag("Ball");
 				float distance = Mathf.Infinity; 
 				Vector3 position = transform.position; 
@@ -160,6 +161,15 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 					distanceToBall = Mathf.Sqrt (Mathf.Pow ((ball.transform.position.x - transform.position.x), 2)
 				                                   + Mathf.Pow ((ball.transform.position.z - transform.position.z), 2));
 					canHitBall = (distanceToBall < 2);
+				}
+			}
+			
+			else
+			{
+				if (ball == null || !ball.beingHit )
+				{
+					putting = false;
+					swinging = false;
 				}
 			}
 
@@ -253,6 +263,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void MakeDead()
 	{
+		wizard.SmallEvent();
 		playerAudio.PlayDead();
 		alive = false;
 		//Need the normal of the local x axis of bat
@@ -264,6 +275,8 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		proj.gameObject.SetActive(false);
 		stats.EndLifeTime ();
 		stats.AddDeath ();
+		swinging = false;
+		putting = false;
     }
 	
 	private void CheckAnimStateForAttacking()
@@ -311,10 +324,16 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
         alive = true;
         ResetRigidBodyConstraints();
         rb.velocity = new Vector3(0, 0, 0);
-        anim.SetBool("Alive", true);
+		anim.SetBool("Alive", true);
+		anim.SetBool ("Attack", false);
+		anim.SetBool ("Swing", false);
+		anim.SetBool ("BackSwing", false);
+		anim.SetBool ("Putting", false);
         //Debug.Log("Length: " + respawnPoints.Length);
         transform.position = respawnPoint;
 		stats.StartLifeTime ();
+		putting = false;
+		swinging = false;
     }
 	
 	private bool AttackButtonsDown()
@@ -367,6 +386,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		Debug.Log ("start attack");
 		equipmentCollider.enabled = true;
 		playerAudio.PlaySwing ();
+		attacking = true;
     }
 
 	private void StopAttack()
@@ -374,19 +394,23 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		Debug.Log ("stop attack");
 		equipmentCollider.enabled = false;
 		anim.SetBool("Attack", false);
+		attacking = false;
 	}
 
 	private void StartPutting() {
-		putting = true;
-		ball.beingHit = true;
-		Transform sweetspot = transform.FindChild("Sweetspot");
-		sweetspot.SetParent (null);
-		transform.SetParent (sweetspot);
-		sweetspot.position = ball.transform.position;
-		transform.SetParent (null);
-		sweetspot.SetParent (this.transform);
-		stats.AddAttemptedPutt ();
-
+		if (!attacking)
+		{
+			swinging = false;
+			putting = true;
+			ball.beingHit = true;
+			Transform sweetspot = transform.FindChild("Sweetspot");
+			sweetspot.SetParent (null);
+			transform.SetParent (sweetspot);
+			sweetspot.position = ball.transform.position;
+			transform.SetParent (null);
+			sweetspot.SetParent (this.transform);
+			stats.AddAttemptedPutt ();
+	}	
 	}
 
 	private void BackSwing() {
@@ -412,7 +436,7 @@ public class GolfPlayerController : MonoBehaviour, IPlayerController {
 		anim.SetBool ("BackSwing", false);
 		anim.SetBool ("Swing", false);
 		Debug.Log ("I hit it this hard: " + swingStrength);
-		ball.Putt (100f*swingStrength*transform.forward, this);
+		ball.Putt (130f*swingStrength*transform.forward, this);
 		wizard.StruckBall();
 	}
     

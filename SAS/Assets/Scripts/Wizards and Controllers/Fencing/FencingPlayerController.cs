@@ -20,6 +20,8 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	public FencingWizard wizard;
 	FencingCameraController cam;
 	private FencingStatsCard stats;
+	public bool CanMoveLeft = true;
+	public bool CanMoveRight = true;
 	public FencingStatsCard Stats {
 		get
 		{
@@ -106,7 +108,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 				stats.AddStabAttempts ();
 				audioManager.PlaySwing();
 			}
-		
+		AttackStart();
 	}
 		public void AttackStart()
 	{
@@ -126,7 +128,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	public void ThrowEquipment()
 	{
 		audioManager.PlaySwing();
-		equipScript.Throw(anim.GetFloat("Run")>9, input.facingRight ? 1 : -1);
+		if (equipScript != null) equipScript.Throw(anim.GetFloat("Run")>9, input.facingRight ? 1 : -1);
 		Disarm();
 	}
 	
@@ -148,6 +150,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void MakeDead()
 	{
+		if (Random.Range(0,100) < 50) wizard.SmallEvent();
 		GameObject d = Instantiate(deathEffect,transform.position,Quaternion.identity) as GameObject;
 		d.GetComponent<ConfettiScript>().PartyToDeath(color,3);
 		CreateDeathSplat();
@@ -156,12 +159,36 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
         cam.PlayShake(transform.position);
         cam.RecountPlayers();
 		if (equipScript != null) { equipScript.Deflect();}
-        transform.position = new Vector3 (0,0,3);
+        transform.position = new Vector3 (0,0,-6);
         rb.constraints = RigidbodyConstraints.FreezeAll;
         wizard.UpdatePlayerCount();
 		stats.EndLifeTime ();
 		stats.AddDeath ();
 		audioManager.PlayDead();
+	}
+	
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("LeftNoMove"))
+		{
+			CanMoveLeft = false;
+		}
+		else if (other.CompareTag("RightNoMove"))
+		{
+			CanMoveRight = false;
+		}	
+	}
+	
+	private void OnTriggerExit(Collider other)
+	{
+			if (other.CompareTag("LeftNoMove"))
+			    {
+				CanMoveLeft = true;
+			}
+			else if (other.CompareTag("RightNoMove"))
+			         {
+				CanMoveRight = true;
+			}	
 	}
 	
 	private void CreateDeathSplat()
@@ -178,7 +205,7 @@ public class FencingPlayerController : MonoBehaviour, IPlayerController {
 		GameObject r = Instantiate(rapier,Vector3.zero,Quaternion.identity) as GameObject;
 		r.transform.parent = equipmentHand.transform;
 		r.transform.localPosition = new Vector3(0.5f,0,0);
-		r.transform.eulerAngles = new Vector3(0,0,270);
+		r.transform.eulerAngles = (transform.eulerAngles.y < 0) ? new Vector3(0,0,270) : new Vector3(0,0,90);
 		r.transform.localScale = new Vector3(0.4f,0.4f,0.4f);
 		r.GetComponent<FencingEquipment>().ResetColor(color);
 		equipScript = r.GetComponent<FencingEquipment>();

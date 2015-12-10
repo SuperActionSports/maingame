@@ -26,48 +26,48 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 			debugPlayers[0] = new Player();
 			debugPlayers[0].statCard = new BaseballStatsCard();
 			debugPlayers[0].color = Color.cyan;
-			debugPlayers[0].statCard.rank = 0;
-			debugPlayers[0].statCard.kills = 35;
+			//debugPlayers[0].statCard.rank = 0;
+			debugPlayers[0].statCard.kills = 10;
 			debugPlayers[0].statCard.deaths = 4;
 			debugPlayers[0].statCard.longestKillStreak = 3;
 			debugPlayers[0].statCard.longestTimeAlive = 74.386543682f;
 			//debugPlayers[0].statCard.BattingAverage = .367;
 			//debugPlayers[0].statCard.HitsMade = 13;
 			debugPlayers[0].statCard.TotalScore();
-			Debug.Log ("Score: " + debugPlayers[0].statCard.TotalScore()*1000);
+		//	Debug.Log ("Score: " + debugPlayers[0].statCard.TotalScore()*1000);
 
 			debugPlayers[1] = new Player();
 			debugPlayers[1].statCard = new BaseballStatsCard();
 			debugPlayers[1].color = Color.magenta;
-			debugPlayers[1].statCard.rank = 1;
-			debugPlayers[1].statCard.kills = 10;
+			//debugPlayers[1].statCard.rank = 1;
+			debugPlayers[1].statCard.kills = 35;
 			debugPlayers[1].statCard.deaths = 8;
 			debugPlayers[1].statCard.longestKillStreak = 1;
 			debugPlayers[1].statCard.longestTimeAlive = 60.265436985219f;
 			debugPlayers[1].statCard.TotalScore();
-			Debug.Log ("Score: " + debugPlayers[1].statCard.TotalScore()*1000);
+		//	Debug.Log ("Score: " + debugPlayers[1].statCard.TotalScore()*1000);
 
 			debugPlayers[2] = new Player();
 			debugPlayers[2].statCard = new BaseballStatsCard();
 			debugPlayers[2].color = Color.yellow;
-			debugPlayers[2].statCard.rank = 2;
+			//debugPlayers[2].statCard.rank = 2;
 			debugPlayers[2].statCard.kills = 8;
 			debugPlayers[2].statCard.deaths = 12;
 			debugPlayers[2].statCard.longestKillStreak = 1;
 			debugPlayers[2].statCard.longestTimeAlive = 48.235365879f;
 			debugPlayers[2].statCard.TotalScore();
-			Debug.Log ("Score: " + debugPlayers[2].statCard.TotalScore()*1000);
+		//	Debug.Log ("Score: " + debugPlayers[2].statCard.TotalScore()*1000);
 
 			debugPlayers[3] = new Player();
 			debugPlayers[3].statCard = new StatsCard();
 			debugPlayers[3].color = Color.red;
-			debugPlayers[3].statCard.rank = 3;
+			//debugPlayers[3].statCard.rank = 3;
 			debugPlayers[3].statCard.kills = 3;
 			debugPlayers[3].statCard.deaths = 35;
 			debugPlayers[3].statCard.longestKillStreak = 1;
 			debugPlayers[3].statCard.longestTimeAlive = 31.574104829f;
 			debugPlayers[3].statCard.TotalScore();
-			Debug.Log ("Score: " + debugPlayers[3].statCard.TotalScore());
+		//	Debug.Log ("Score: " + debugPlayers[3].statCard.TotalScore());
 
 			SetPlayers = debugPlayers;
 
@@ -95,28 +95,49 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 		GameObject c;
 		GameObject sc;
 		playerScores = new int[players.Length];
+
+		for (int scores = 0; scores < players.Length; scores++)
+		{
+			players[scores].statCard.GenerateStats();
+			playerScores[scores] = players[scores].statCard.TotalScore(); 
+			Debug.Log("Score: " + players[scores].statCard.TotalScore() + " stored: " + playerScores[scores]);
+		}
+		
+		Array.Sort(playerScores);
+		Array.Reverse(playerScores);
+		
+		for (int ss = 0; ss < players.Length; ss++)
+		{
+			for (int sp = 0; sp < players.Length; sp++)
+			{
+				if (players[sp].statCard.TotalScore() == playerScores[ss])
+				{
+					players[sp].statCard.rank = ss;
+				}
+			}
+		}	
+
 		for (int i = 0; i < players.Length; i++)
 		{
-			Debug.Log("Creating stat card for player " + i + " of " + players.Length);
+		//	Debug.Log("Creating stat card for player " + i + " of " + players.Length);
 			c = Instantiate(statCard, Vector3.zero, Quaternion.identity) as GameObject;
 			c.GetComponent<Image>().color = players[i].color;
-			//c.GetComponentInChildren<EndgameGUIRank>().ranking = 0;
 			players[i].statCard.GenerateStats();
+			c.GetComponentInChildren<EndgameGUIRank>().ranking = players[i].statCard.rank;
 				for (int s = 0; s < players[i].statCard.stats.Length; s++)
 				{
-					Debug.Log("Creating statistic");
+					//Debug.Log("Creating statistic");
 					sc = Instantiate(statistic, Vector3.zero, Quaternion.identity) as GameObject;
-					c.GetComponentInChildren<EndgameGUIRank>().ranking = players[i].statCard.rank;
+					//c.GetComponentInChildren<EndgameGUIRank>().ranking = players[i].statCard.rank;
 					sc.GetComponent<Image>().color = SetBrightness(s,players[i].color);
 					sc.GetComponent<EndGameGUIStatistic>().Name = players[i].statCard.stats[s].Name;
 					sc.GetComponent<EndGameGUIStatistic>().Value = players[i].statCard.stats[s].Value;
-					if (s == 0) { playerScores[i] = Int32.Parse(sc.GetComponent<EndGameGUIStatistic>().Value); }
 					sc.GetComponent<EndGameGUIStatistic>().GenerateStatistic();
 					sc.transform.parent = c.transform;
-				}
-			int[] playerInd = playerScores;
-			Array.Sort(playerInd);
-			for (int a = 0; a < players.Length; a++)
+				}			
+			//int[] playerInd = playerScores;
+			//Array.Sort(playerInd);
+			/*for (int a = 0; a < players.Length; a++)
 			{
 				for (int b = 0; b < players.Length; b++)
 				{
@@ -125,12 +146,17 @@ public class EndgameGUIStatGenerator : MonoBehaviour {
 						players[b].statCard.rank = a;
 					}
 				}
-			}
+			}*/
 				
-			Debug.Log("Stat card scale: " + c.transform.localScale);
+			//Debug.Log("Stat card scale: " + c.transform.localScale);
 			c.transform.parent = this.transform;
 			c.transform.localScale = new Vector3(1,1,1);
-		}	
+		}
+		
+	//	for (int s = 0; s < players.Length; s++)
+	//	{
+	//		players[s].statCard.rank = s;
+		//}	
 	}
 	
 	/// <summary>

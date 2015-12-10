@@ -63,6 +63,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		
 		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
 		UpdateStatCards();
+		audienceManager.SetAudience(players);
 	}
 	
 	void ResetExistingPlayers()
@@ -71,6 +72,28 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 		{
 			p.control = null;
 		}
+	}
+	
+	public void SmallEvent()
+	{
+		audienceManager.SendSmallEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void BigEvent()
+	{
+		audienceManager.SendBigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void ChangeAudienceColor()
+	{
+		int[] scores = new int[players.Length];
+		for (int s = 0; s < players.Length; s++)
+		{
+			scores[s] = players[s].statCard.TotalScore();
+		}
+		audienceManager.ChangeCrowdColor(scores);
 	}
 	
 	void Update()
@@ -144,7 +167,7 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	
 	public void EnableMovement()
 	{
-		Debug.Log("Enable From Wizard");
+		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -185,6 +208,8 @@ public class HockeyWizard : MonoBehaviour, IWizard {
 	public void GoalScored()
 	{
 		audioManager.PlayGoal();
+		BigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
 	}
 	
 	public void SpawnPuck()

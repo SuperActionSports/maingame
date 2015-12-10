@@ -14,7 +14,7 @@ public class ColorSelectionButtonManager : MonoBehaviour
 	public ColorSelectionButton confirmColors;
 	public String levelToLoad;
 	public List<ColorSelectionButton> colorsThatHaveBeenSelected;
-
+	
 	private Image handImage;
 	private Image labelImage;
 	private GameObject confirmedButton;
@@ -139,7 +139,15 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			}
 			else
 			{
-				LoadScene();
+				if(focusedButton.name == "Back")
+				{
+					ResetPlayers();
+					Application.LoadLevel("MainMenu");
+				}
+				else
+				{
+					LoadScene();
+				}
 			}
 			audioManager.PlayConfirm();
 		}
@@ -170,6 +178,12 @@ public class ColorSelectionButtonManager : MonoBehaviour
 			Application.LoadLevel(focusedButton.levelToLoad);
 		}
 	}
+	
+	void ResetPlayers()
+	{
+		layla.SetNumberOfPlayers (0);
+		layla.numberOfActivePlayers = 0;
+	}	
 		
 	ColorSelectionButton GetAvailableLeft(ColorSelectionButton current)
 	{

@@ -25,6 +25,8 @@ TagManager:
   - KillMovement
   - BrickWall
   - launcher
+  - LeftNoMove
+  - RightNoMove
   layers:
   - Default
   - TransparentFX

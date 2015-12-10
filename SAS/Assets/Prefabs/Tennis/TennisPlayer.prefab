@@ -11,7 +11,7 @@ GameObject:
   - 33: {fileID: 3397908}
   - 136: {fileID: 13606566}
   - 23: {fileID: 2311240}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Net
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -38,7 +38,8 @@ GameObject:
   - 114: {fileID: 11473764}
   - 82: {fileID: 8228770}
   - 82: {fileID: 8220392}
-  m_Layer: 0
+  - 82: {fileID: 8276920}
+  m_Layer: 11
   m_Name: TennisPlayer
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -56,7 +57,7 @@ GameObject:
   - 33: {fileID: 3397726}
   - 135: {fileID: 13503456}
   - 23: {fileID: 2379754}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Empty Hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,7 +77,7 @@ GameObject:
   - 23: {fileID: 2340998}
   - 114: {fileID: 11484530}
   - 136: {fileID: 13603570}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: BatHand
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -94,7 +95,7 @@ GameObject:
   - 33: {fileID: 3376816}
   - 136: {fileID: 13624488}
   - 23: {fileID: 2387370}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bat
   m_TagString: Equipment
   m_Icon: {fileID: 0}
@@ -108,7 +109,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 114932}
   m_LocalRotation: {x: 0, y: -5.96046448e-08, z: 0, w: -1}
-  m_LocalPosition: {x: -12.3281517, y: -1.50400174, z: -12.4548073}
+  m_LocalPosition: {x: 10.3100004, y: 6.32443285, z: -4.16322517}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 481346}
@@ -333,7 +334,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 32
   m_CollisionDetection: 0
 --- !u!82 &8220392
 AudioSource:
@@ -475,6 +476,76 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!82 &8276920
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114932}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: baaae156ccf773f4db544b22c925bde7, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!95 &9584748
 Animator:
   serializedVersion: 3
@@ -542,6 +613,7 @@ MonoBehaviour:
   magSpeedZ: 0
   speed: {x: 0, y: 0, z: 0}
   speedMagnitude: 0
+  jumpForce: 0
   control: {fileID: 0}
   swingForce: 0
 --- !u!114 &11473764
@@ -704,6 +776,14 @@ Prefab:
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 73de0918615c1d24db7e64cde3e8ed45, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Constraints
+      value: 32
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 114932}

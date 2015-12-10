@@ -173,6 +173,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void EnableMovement()
 	{
+		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -214,6 +215,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		ResetBallAndHole(golfBall, firstCall);
 		audioManager.PlaySankPutt();
 		audioManager.PlayCrowdCheer();
+		audienceManager.SendBigEvent();
 	}
 
 
@@ -222,7 +224,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		hole = GameObject.Instantiate(hole,Vector3.up*3f,Quaternion.identity) as GameObject;
 		floor.GetComponent<PerlinNoisePlane>().hole = hole;
 		for (int i = 0; i < golfBalls.Length; i++) {
-			golfBalls[i] = GameObject.Instantiate (golfBallPrefab, Vector3.up * 2f, Quaternion.identity) as GameObject;
+			golfBalls[i] = GameObject.Instantiate (golfBallPrefab, Vector3.up * 1.3f, Quaternion.identity) as GameObject;
 			golfBalls[i].GetComponent<GolfBall> ().wizard = this;
 			ResetBallAndHole(golfBalls[i], true);
 		}
@@ -257,6 +259,8 @@ public class GolfWizard : MonoBehaviour,IWizard {
 		}
 
 		golfBall.GetComponent<TrailRenderer> ().material.color = Color.white;
+		golfBall.GetComponent<Rigidbody>().velocity = Vector3.zero;
+		golfBall.transform.position = new Vector3(golfBall.transform.position.x, 1, golfBall.transform.position.z);
 		Debug.Log("Golfball: " + golfBall.transform.position);
 		Debug.Log("Hole: " + hole.transform.position);
 		Debug.Log("Distance: " + Vector3.Distance(hole.transform.position,golfBall.transform.position) + " should be greater than " + minDistToBallFromHole);

@@ -76,6 +76,7 @@ public class LevelSelectionButtonManager : MonoBehaviour
 		if (inputDevice.Action2.WasPressed) 
 		{
 			audioManager.PlayDecline();
+			ResetPlayers();
 			Application.LoadLevel(colorSelectionName);
 		}
 	}

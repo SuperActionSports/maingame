@@ -3166,7 +3166,11 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 191788, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 11455244, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}
+      propertyPath: m_Spacing
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1b08b78cef83da549aec15823afd5f72, type: 2}

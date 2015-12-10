@@ -49,6 +49,37 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	valueCounter = valueProjector.GetComponent<BallValueCounter>();
 	gameStartTime = Time.time;
 	audienceSounds = GetComponentsInChildren<AudioSource>();
+		audienceManager.SetAudience(players);
+	}
+	
+	void ResetExistingPlayers()
+	{
+		foreach (Player p in players)
+		{
+			p.control = null;
+		}
+	}
+	
+	public void SmallEvent()
+	{
+		audienceManager.SendSmallEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void BigEvent()
+	{
+		audienceManager.SendBigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void ChangeAudienceColor()
+	{
+		int[] scores = new int[players.Length];
+		for (int s = 0; s < players.Length; s++)
+		{
+			scores[s] = players[s].statCard.TotalScore();
+		}
+		audienceManager.ChangeCrowdColor(scores);
 	}
 
 	public void Update() {
@@ -79,18 +110,12 @@ public class TennisWizard : MonoBehaviour, IWizard {
 			valueCounter.Reset();
 			audienceSounds[1].Play ();
 		}
+		BigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
 		//audienceSounds[0].volume = 1.0f;
 	//	while (audienceSounds[0].volume > 0.5f) {
 	//		audienceSounds[0].volume /= 0.05f * Time.deltaTime;
 	//	}
-	}
-	
-	void ResetExistingPlayers()
-	{
-		foreach (Player p in players)
-		{
-			p.control = null;
-		}
 	}
 	
 	private void SetPlayers()
@@ -142,7 +167,7 @@ public class TennisWizard : MonoBehaviour, IWizard {
 	public void EnableMovement()
 	{
 		launcher.LaunchTennisBall();
-		Debug.Log("Enable movement from Wizard");
+		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -186,5 +211,9 @@ public class TennisWizard : MonoBehaviour, IWizard {
 		launcher.LaunchTennisBall();
 	}
 	
-	public void PlayerKilled () { audienceSounds[1].Play(); }
+	public void PlayerKilled () 
+	{
+		 audienceSounds[1].Play(); 
+		 SmallEvent();
+		}
 }

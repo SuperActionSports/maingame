@@ -22,7 +22,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	public float magSpeedZ;
 	public Vector3 speed;
 	public float speedMagnitude = 13;
-	//public float jumpForce;
+	public float jumpForce;
 	
 	public TennisControllerGans control;
 	
@@ -33,7 +33,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		rb = GetComponent<Rigidbody>();
 		ResetRigidBodyConstraints();
 		speedMagnitude = 13;
-		//jumpForce = 25;
+		jumpForce = 25;
 	}
 	
 	// Update is called once per frame
@@ -56,7 +56,7 @@ public class TennisInputHandlerGans: MonoBehaviour {
 		
 		// If input has been given change to face new input direction
 		if (newPosition != new Vector3(0,0,0)) { transform.rotation = Quaternion.LookRotation(newPosition); }
-		CheckServe();
+		//CheckServe();
 		//GetSwinging();
 		GetAttacking();
 		
@@ -231,19 +231,19 @@ public class TennisInputHandlerGans: MonoBehaviour {
 	}
 	
 	private void GetControllerYInput()
-	{
-		/*if (device.Action1)
+	{/*
+		if (device.Action1)
 		{
 			if (Physics.Raycast(transform.position, Vector3.down, out groundHit, 2f))
 			{
-				if (groundHit.collider.CompareTag("Turf"))
+				if (groundHit.collider.CompareTag("field"))
 				{
 					rb.velocity = new Vector3(rb.velocity.x, jumpForce, rb.velocity.z);
 					control.stats.AddJump();
 				}
 			}
-		}*/
-	}
+		}
+	*/}
 	
 	public Vector2 GetStickForSwing()
 	{

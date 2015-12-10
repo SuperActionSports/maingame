@@ -203,6 +203,7 @@ public class HockeyPlayerController : MonoBehaviour, IPlayerController {
 	
 	private void MakeDead()
 	{
+		wizard.SmallEvent();
 		timeOfDeath = Time.time;
 		alive = false;
         //rb.constraints = RigidbodyConstraints.None;

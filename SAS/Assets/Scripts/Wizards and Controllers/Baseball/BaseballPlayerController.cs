@@ -191,6 +191,7 @@ public class BaseballPlayerController : MonoBehaviour, IPlayerController {
 
 	private void MakeDead()
 	{
+		if (Random.Range(0,100) < 50) wizard.BigEvent();
 		alive = false;
 		//Need the normal of the local x axis of bat
        // paint.Paint(transform.position,paint.color);

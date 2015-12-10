@@ -13,21 +13,21 @@ public class FencingPlayerAudioManager : MonoBehaviour {
 	
 	public void PlaySwing()
 	{
-		sources[1].Play ();
+		//sources[1].Play ();
 	}
 	
 	public void PlayClash()
 	{
-		clashSounds.Play();
+		//clashSounds.Play();
 	}
 	
 	public void PlayEquip()
 	{
-		sources[3].Play ();
+		//sources[3].Play ();
 	}
 	
 	public void PlayDead()
 	{
-		deathSounds.Play();
+		//deathSounds.Play();
 	}
 }

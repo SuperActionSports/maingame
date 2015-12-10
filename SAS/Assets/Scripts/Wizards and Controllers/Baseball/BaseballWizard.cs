@@ -63,6 +63,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		finished = false;
 		UpdateStatCards();
 		inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+		audienceManager.SetAudience(players);
 	}
 	
 	void ResetExistingPlayers()
@@ -71,6 +72,28 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		{
 			p.control = null;
 		}
+	}
+	
+	public void SmallEvent()
+	{
+		audienceManager.SendSmallEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void BigEvent()
+	{
+		audienceManager.SendBigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void ChangeAudienceColor()
+	{
+		int[] scores = new int[players.Length];
+		for (int s = 0; s < players.Length; s++)
+		{
+			scores[s] = players[s].statCard.TotalScore();
+		}
+		audienceManager.ChangeCrowdColor(scores);
 	}
 	
 	private void SetPlayers()
@@ -119,6 +142,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	
 	public void EnableMovement()
 	{
+		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -195,6 +219,7 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 	
 	public void HitBall()
 	{
+		if (Random.Range(0,100) < 50) SmallEvent();
 		audioManager.PlayBallHit();
 	}
 }

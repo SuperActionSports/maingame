@@ -37,7 +37,6 @@ public class FencingInputHandler : MonoBehaviour {
 	public float jumpForce;
 	
 	private float magSpeedX;
-	private bool canMoveHorizontally = true;
 
 	void Start () {
 		canJump = true;
@@ -55,6 +54,10 @@ public class FencingInputHandler : MonoBehaviour {
 
 	void Move(float xVel) 
 	{
+		if ((transform.position.x > 7.3f && xVel > 0) || (transform.position.x < -7.3f && xVel < 0))
+		{
+			xVel = 0;
+		}
 		transform.position += new Vector3(xVel * Time.deltaTime,0,0);
 		if (xVel < 0 && transform.eulerAngles.y < 180)
 		{
@@ -132,7 +135,7 @@ public class FencingInputHandler : MonoBehaviour {
 		//float vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput();
 		//return xIsDoubleTap(vel) ? vel * speedMagnitude: vel;	
 		float vel = 0;
-		if (canMoveHorizontally) { vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput(); }
+		vel = !deviceActive ? GetKeyboardXInput(): GetControllerXInput(); 
 		control.SetRun(Mathf.Abs(vel));
 		return vel;
 	}
@@ -243,7 +246,14 @@ public class FencingInputHandler : MonoBehaviour {
 	
 	private float GetControllerXInput()
 	{
-		return speedMagnitude * device.Direction.X;
+		if ((device.Direction.X > 0 &&  control.CanMoveRight) || (device.Direction.X < 0 && control.CanMoveLeft))
+		{
+			return speedMagnitude * device.Direction.X;
+		}
+		else
+		{
+			return 0;
+		}
 	}
 
 	void OnCollisionEnter(Collision col) {
@@ -251,25 +261,5 @@ public class FencingInputHandler : MonoBehaviour {
 			canJump = true;
 		}
 	}
-
-	void OnTriggerStay(Collider other)
-	{
-		if (other.CompareTag("KillMovement"))
-		{
-			Debug.Log("KillMovement");
-			if ((rb.transform.position.x > 0 && rb.velocity.x > 0) || (rb.transform.position.x < 0 && rb.velocity.x < 0))
-			{	
-				canMoveHorizontally = false;
-				Debug.Log("Can't move on X");
-			}
-			else if ((rb.transform.position.x > 0 && device.Direction.X < 0) || (rb.transform.position.x < 0 && device.Direction.X > 0))
-			{ 
-				canMoveHorizontally = true; 
-				Debug.Log("Can move on X");
-			}
-		}
-		
-	}
-	
 	
 }

@@ -12,6 +12,7 @@ public class PerlinAudienceManager : MonoBehaviour {
 	public float overLimit = 200;
 	public float lim = 0;
 	public Color[] colors;
+	public int[] fans;
 	
 	void Start () {
 		//audienceMemberWidth = audienceMember.transform.lossyScale.x;
@@ -28,6 +29,7 @@ public class PerlinAudienceManager : MonoBehaviour {
 	public void SetAudience(Player[] players)
 	{
 		colors = new Color[players.Length];
+		fans = new int[players.Length];
 		for (int i = 0; i < players.Length; i++)
 		{
 			colors[i] = players[i].color;
@@ -99,22 +101,12 @@ public class PerlinAudienceManager : MonoBehaviour {
 		foreach (int i in scores)
 		{
 			totalScore += i;
-			if (lim > overLimit)
-			{
-				Debug.Break ();
-			}
-			lim++;
 		} 
 		lim = 0;
 		float[]crowdWeights = new float[teamColors.Length]; 
 		for (int w = 0; w < scores.Length; w++)
 		{
 			crowdWeights[w] = (scores[w]/totalScore) * audienceCount;
-			if (lim > overLimit)
-			{
-				Debug.Break ();
-			}
-			lim++;
 		}
 		lim = 0;
 		int p = 0;
@@ -132,6 +124,7 @@ public class PerlinAudienceManager : MonoBehaviour {
 					a.ChangeColor(teamColors[c]);
 					visitedAudience[pick] = true;	
 					p++;
+					fans[c]++;
 				}
 			}
 		}

@@ -52,6 +52,7 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	gameStartTime = Time.time;
 	UpdateStatCards();
 	inGame.GetComponent<InGamePlayerBoard>().SetPlayers = players;
+		audienceManager.SetAudience(players);
 	}
 	
 	void ResetExistingPlayers()
@@ -62,6 +63,27 @@ public class FencingWizard : MonoBehaviour,IWizard {
 		}
 	}
 	
+	public void SmallEvent()
+	{
+		audienceManager.SendSmallEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void BigEvent()
+	{
+		audienceManager.SendBigEvent();
+		if (Random.Range(0,100) < 50) ChangeAudienceColor();
+	}
+	
+	public void ChangeAudienceColor()
+	{
+		int[] scores = new int[players.Length];
+		for (int s = 0; s < players.Length; s++)
+		{
+			scores[s] = players[s].statCard.TotalScore();
+		}
+		audienceManager.ChangeCrowdColor(scores);
+	}
 	
 	private void SetPlayers()
 	{
@@ -110,6 +132,7 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	
 	public void EnableMovement()
 	{
+		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(true);
@@ -143,6 +166,8 @@ public class FencingWizard : MonoBehaviour,IWizard {
 	
 	private void ResetPlayers()
 	{
+		ChangeAudienceColor();
+		BigEvent();
 		remainingPlayers = players.Length;
 		foreach (Player p in players)
 		{
