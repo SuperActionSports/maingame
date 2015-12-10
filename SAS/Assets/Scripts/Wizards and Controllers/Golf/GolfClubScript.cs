@@ -16,6 +16,7 @@ public class GolfClubScript : MonoBehaviour {
 			GolfPlayerController victim = other.GetComponent<GolfPlayerController> ();
 			if (victim.alive) {
 				victim.Kill (transform.right);
+				player.stats.AddKill();
 			}
 		} else if (other.CompareTag ("Ball")) {
 			player.stats.AddMadePutt();

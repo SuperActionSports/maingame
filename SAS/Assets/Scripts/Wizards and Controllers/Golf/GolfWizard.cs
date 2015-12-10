@@ -14,7 +14,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	public GameObject victory;				// Game, private
 	private float victoryDuration;			// Game, private
 	
-	private GolfCameraController cam;	// Game
+	private OverheadCameraController cam;	// Game
 	//private FencingPlayerManager inputManager;	// Layla
 	//private InputDevice[] devices;				// Layla
 	private GolfCameraController camScript;	// Game
@@ -45,6 +45,7 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	// Woop Woop
 	int test = 5;
 	void Start () {
+		cam = Camera.main.GetComponent<OverheadCameraController>();
 		audioManager = GetComponentInChildren<GolfAudioManager>();
 		gameStartTime = Time.time;
 		floor = GameObject.Instantiate(floorPrefab,new Vector3(-20, 0 ,-20),Quaternion.identity) as GameObject;
@@ -164,15 +165,32 @@ public class GolfWizard : MonoBehaviour,IWizard {
 	
 	public void DisableMovement()
 	{
+		cam.FlyingIn = true;
 		Debug.Log("Disable From Wizard");
 		for (int i = 0; i < players.Length; i++)
 		{
 			players[i].control.MovementAllowed(false);
 		}	
+		FakeData();
+	}
+	
+	
+	private void FakeData()
+	{
+		Color[] colors = new Color[players.Length];
+		int[] scores = new int[players.Length];
+		for (int p = 0; p < players.Length; p++)
+		{
+			colors[p] = players[p].color;
+			scores[p] = Random.Range(5,10);
+		}
+		audienceManager.ChangeCrowdColor (colors,scores);
 	}
 	
 	public void EnableMovement()
 	{
+		cam.FlyingIn = false;
+		Camera.main.GetComponent<Animator>().enabled = false;
 		audienceManager.KillInvisibleChildren();
 		for (int i = 0; i < players.Length; i++)
 		{

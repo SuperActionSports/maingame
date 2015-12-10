@@ -138,6 +138,20 @@ public class BaseballWizard : MonoBehaviour, IWizard {
 		{
 			players[i].control.MovementAllowed(false);
 		}	
+		FakeData();
+	}
+	
+	
+	private void FakeData()
+	{
+		Color[] colors = new Color[players.Length];
+		int[] scores = new int[players.Length];
+		for (int p = 0; p < players.Length; p++)
+		{
+			colors[p] = players[p].color;
+			scores[p] = Random.Range(5,10);
+		}
+		audienceManager.ChangeCrowdColor (colors,scores);
 	}
 	
 	public void EnableMovement()

@@ -16389,6 +16389,7 @@ GameObject:
   - 124: {fileID: 1838761209}
   - 81: {fileID: 1838761208}
   - 114: {fileID: 1838761213}
+  - 95: {fileID: 1838761214}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -16491,6 +16492,24 @@ MonoBehaviour:
   won: 0
   winnerPlayer: {fileID: 0}
   z: 0
+  FlyingIn: 0
+--- !u!95 &1838761214
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1838761207}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: f23e44247ecf63c4bad69f43ef3a5ed9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &1846284413
 GameObject:
   m_ObjectHideFlags: 0

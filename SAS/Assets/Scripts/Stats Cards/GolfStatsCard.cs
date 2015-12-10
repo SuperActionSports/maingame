@@ -106,7 +106,7 @@ public class GolfStatsCard : StatsCard {
 		Debug.Log("Starting to generate statistics");
 		stats = new Statistic[5];
 		stats[0] = new Statistic("POINTS", (int)TotalScore());
-		stats[1] = new Statistic("DEATHS", deaths);
+		stats[1] = new Statistic("KILLS", Kills, Statistic.Format.none);
 		stats[2] = new Statistic("K/D", KillDeathRatio(), Statistic.Format.ratio);
 		stats[3] = new Statistic("SANK PUTTS", PuttsMade, Statistic.Format.none);
 		stats[4] = new Statistic("ACCURACY", CalculateAccuracy(),Statistic.Format.percentage);

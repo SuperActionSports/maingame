@@ -29,6 +29,7 @@ public class FencingCameraController : MonoBehaviour {
 	public float z;
 	
 	private Vector2 oldPosition;
+	public bool FlyingIn;
 	
 	void Start () {
 		RecountPlayers();
@@ -47,35 +48,39 @@ public class FencingCameraController : MonoBehaviour {
 		zWinOffset = -4;
 		winOffset = new Vector3(xWinOffset,yWinOffset,zWinOffset);
 		won = false;
+		
 	}
 	
 	// Update is called once per frame
 	void LateUpdate () {
-	if (!won)
-	{
-		z = 0;
-		Vector2 averagePosition = GetAveragePositions();
-		z = GetMaximumDistance();
-		z /= -1.5f;
-		if (z > minimumZ) 
+	if (!FlyingIn)
 		{
-			z = minimumZ;
+		if (!won)
+		{
+			z = 0;
+			Vector2 averagePosition = GetAveragePositions();
+			z = GetMaximumDistance();
+			z /= -1.5f;
+			if (z > minimumZ) 
+			{
+				z = minimumZ;
+			}
+			if (players.Length > 1)
+			{
+				//Delete this
+				//averagePosition = new Vector2(0,0);
+				transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
+			}	
 		}
-		if (players.Length > 1)
+		else
 		{
-			//Delete this
-			//averagePosition = new Vector2(0,0);
-			transform.position = Vector3.Lerp(transform.position,new Vector3(averagePosition.x+xOffset,averagePosition.y+yOffset,z),Time.deltaTime * debugLerp);
-		}	
-	}
-	else
-	{
-		FollowWinner();
-	}
-		// Camera shake code
-		if (shake) {
-			shake = false;
-			PlayShake();
+			FollowWinner();
+		}
+			// Camera shake code
+			if (shake) {
+				shake = false;
+				PlayShake();
+			}
 		}
 	}
 	

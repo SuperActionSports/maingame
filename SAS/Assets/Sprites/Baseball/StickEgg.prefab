@@ -150,7 +150,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144666}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -230,6 +230,7 @@ AudioSource:
   m_Pitch: 1
   Loop: 0
   Mute: 0
+  Spatialize: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -663,7 +664,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 200
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1716,7 +1717,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 221.199997
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -2764,7 +2765,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 333
+      scalar: 100
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3731,7 +3732,7 @@ ParticleSystem:
         rgba: 4278190335
       minMaxState: 0
     startSize:
-      scalar: 3.99000001
+      scalar: 4
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -3817,7 +3818,7 @@ ParticleSystem:
     enabled: 1
     m_Type: 0
     rate:
-      scalar: 17.1100006
+      scalar: 5
       maxCurve:
         serializedVersion: 2
         m_Curve:

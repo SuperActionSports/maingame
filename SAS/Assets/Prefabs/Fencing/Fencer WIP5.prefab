@@ -6015,6 +6015,8 @@ MonoBehaviour:
   equipmentHand: {fileID: 125682}
   equipScript: {fileID: 0}
   wizard: {fileID: 0}
+  CanMoveLeft: 1
+  CanMoveRight: 1
   input: {fileID: 0}
   deathScript: {fileID: 0}
   respawnPoint: {x: 0, y: 0, z: 0}
@@ -6161,6 +6163,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8712c67ee69571d4cbae3a2b0f121fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathSounds: {fileID: 11469312}
+  clashSounds: {fileID: 11455994}
 --- !u!114 &11498686
 MonoBehaviour:
   m_ObjectHideFlags: 1
